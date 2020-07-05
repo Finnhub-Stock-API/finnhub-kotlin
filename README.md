@@ -35,6 +35,9 @@ implementation 'com.finnhub:kotlin-client:1.0.0'
 ## Getting Started
 
 ```kotlin
+import com.finnhub.api.apis.DefaultApi
+import com.finnhub.api.infrastructure.ApiClient
+
 ApiClient.apiKey["token"] = "YOUR API KEY"
 val apiClient = DefaultApi()
 
@@ -195,5 +198,3 @@ println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
 ## License
 
 Apache License
-
-

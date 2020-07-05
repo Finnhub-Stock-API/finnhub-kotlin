@@ -31,7 +31,6 @@ dependencies {
     compile "com.squareup.moshi:moshi-kotlin:1.9.2"
     compile "com.squareup.moshi:moshi-adapters:1.9.2"
     compile "com.squareup.okhttp3:okhttp:4.2.2"
-
     testImplementation 'junit:junit:4.12'
 }
 
@@ -59,6 +58,7 @@ apply plugin: 'maven-publish'
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            from components.java
             artifact sourcesJar
             artifact javadocJar
         }
