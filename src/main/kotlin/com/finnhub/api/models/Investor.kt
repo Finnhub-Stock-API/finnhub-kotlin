@@ -34,7 +34,7 @@ data class Investor (
     val change: kotlin.Long? = null,
     /* Filing date. */
     @Json(name = "filingDate")
-    val filingDate: java.time.LocalDate? = null
+    val filingDate: kotlin.String? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

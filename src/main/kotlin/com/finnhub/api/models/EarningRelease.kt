@@ -33,7 +33,7 @@ data class EarningRelease (
     val symbol: kotlin.String? = null,
     /* Date. */
     @Json(name = "date")
-    val date: java.time.LocalDate? = null,
+    val date: kotlin.String? = null,
     /* Indicates whether the earnings is announced before market open(<code>bmo</code>), after market close(<code>amc</code>), or during market hour(<code>dmh</code>). */
     @Json(name = "hour")
     val hour: kotlin.String? = null,

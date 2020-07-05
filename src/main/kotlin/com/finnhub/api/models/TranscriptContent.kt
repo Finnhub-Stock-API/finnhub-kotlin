@@ -26,7 +26,7 @@ data class TranscriptContent (
     val name: kotlin.String? = null,
     /* Speaker's speech */
     @Json(name = "speech")
-    val speech: kotlin.Array<kotlin.String>? = null
+    val speech: kotlin.collections.List<kotlin.String>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

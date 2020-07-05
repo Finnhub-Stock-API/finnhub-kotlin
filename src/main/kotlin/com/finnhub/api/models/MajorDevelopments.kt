@@ -26,7 +26,7 @@ data class MajorDevelopments (
     val symbol: kotlin.String? = null,
     /* Array of major developments. */
     @Json(name = "majorDevelopment")
-    val majorDevelopment: kotlin.Array<kotlin.Any>? = null
+    val majorDevelopment: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

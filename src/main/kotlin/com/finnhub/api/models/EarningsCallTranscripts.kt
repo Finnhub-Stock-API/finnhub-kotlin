@@ -33,10 +33,10 @@ data class EarningsCallTranscripts (
     val symbol: kotlin.String? = null,
     /* Transcript content. */
     @Json(name = "transcript")
-    val transcript: kotlin.Array<kotlin.Any>? = null,
+    val transcript: kotlin.collections.List<kotlin.Any>? = null,
     /* Participant list */
     @Json(name = "participant")
-    val participant: kotlin.Array<kotlin.Any>? = null,
+    val participant: kotlin.collections.List<kotlin.Any>? = null,
     /* Audio link. */
     @Json(name = "audio")
     val audio: kotlin.String? = null,
@@ -48,7 +48,7 @@ data class EarningsCallTranscripts (
     val title: kotlin.String? = null,
     /* Time of the event. */
     @Json(name = "time")
-    val time: java.time.OffsetDateTime? = null,
+    val time: kotlin.String? = null,
     /* Year of earnings result in the case of earnings call transcript. */
     @Json(name = "year")
     val year: kotlin.Long? = null,

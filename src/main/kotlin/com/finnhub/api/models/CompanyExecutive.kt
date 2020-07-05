@@ -26,7 +26,7 @@ data class CompanyExecutive (
     val symbol: kotlin.String? = null,
     /* Array of company's executives and members of the Board. */
     @Json(name = "executive")
-    val executive: kotlin.Array<kotlin.Any>? = null
+    val executive: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

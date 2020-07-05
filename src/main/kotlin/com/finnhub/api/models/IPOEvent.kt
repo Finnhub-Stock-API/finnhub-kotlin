@@ -32,7 +32,7 @@ data class IPOEvent (
     val symbol: kotlin.String? = null,
     /* IPO date. */
     @Json(name = "date")
-    val date: java.time.LocalDate? = null,
+    val date: kotlin.String? = null,
     /* Exchange. */
     @Json(name = "exchange")
     val exchange: kotlin.String? = null,

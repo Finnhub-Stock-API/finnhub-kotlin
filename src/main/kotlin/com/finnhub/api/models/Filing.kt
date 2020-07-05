@@ -41,10 +41,10 @@ data class Filing (
     val form: kotlin.String? = null,
     /* Filed date <code>%Y-%m-%d %H:%M:%S</code>. */
     @Json(name = "filedDate")
-    val filedDate: java.time.OffsetDateTime? = null,
+    val filedDate: kotlin.String? = null,
     /* Accepted date <code>%Y-%m-%d %H:%M:%S</code>. */
     @Json(name = "acceptedDate")
-    val acceptedDate: java.time.OffsetDateTime? = null,
+    val acceptedDate: kotlin.String? = null,
     /* Report's URL. */
     @Json(name = "reportUrl")
     val reportUrl: kotlin.String? = null,

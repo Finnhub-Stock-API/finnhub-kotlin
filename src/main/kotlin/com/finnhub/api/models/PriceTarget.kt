@@ -42,7 +42,7 @@ data class PriceTarget (
     val targetMedian: kotlin.Float? = null,
     /* Updated time of the data */
     @Json(name = "lastUpdated")
-    val lastUpdated: java.time.OffsetDateTime? = null
+    val lastUpdated: kotlin.String? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

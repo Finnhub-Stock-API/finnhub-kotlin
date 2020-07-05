@@ -38,7 +38,7 @@ data class Estimate (
     val numberAnalysts: kotlin.Long? = null,
     /* Period. */
     @Json(name = "period")
-    val period: java.time.LocalDate? = null
+    val period: kotlin.String? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

@@ -31,7 +31,7 @@ data class EarningResult (
     val estimate: kotlin.Float? = null,
     /* Reported period. */
     @Json(name = "period")
-    val period: java.time.LocalDate? = null,
+    val period: kotlin.String? = null,
     /* Company symbol. */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null

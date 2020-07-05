@@ -48,7 +48,7 @@ data class CompanyProfile2 (
     val ticker: kotlin.String? = null,
     /* IPO date. */
     @Json(name = "ipo")
-    val ipo: java.time.LocalDate? = null,
+    val ipo: kotlin.String? = null,
     /* Market Capitalization. */
     @Json(name = "marketCapitalization")
     val marketCapitalization: kotlin.Float? = null,

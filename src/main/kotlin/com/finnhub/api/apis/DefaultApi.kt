@@ -170,14 +170,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Get company historical quarterly earnings surprise going back to 2000.
     * @param symbol Symbol of the company: AAPL. 
     * @param limit Limit number of period returned. Leave blank to get the full history. (optional)
-    * @return kotlin.Array<EarningResult>
+    * @return kotlin.collections.List<EarningResult>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyEarnings(symbol: kotlin.String, limit: kotlin.Long?) : kotlin.Array<EarningResult> {
+    fun companyEarnings(symbol: kotlin.String, limit: kotlin.Long?) : kotlin.collections.List<EarningResult> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -193,13 +193,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<EarningResult>>(
+        val localVarResponse = request<kotlin.collections.List<EarningResult>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<EarningResult>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EarningResult>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -311,14 +311,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Company symbol. 
     * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
     * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
-    * @return kotlin.Array<News>
+    * @return kotlin.collections.List<News>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyNews(symbol: kotlin.String, from: java.time.LocalDate, to: java.time.LocalDate) : kotlin.Array<News> {
+    fun companyNews(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<News> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -333,13 +333,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<News>>(
+        val localVarResponse = request<kotlin.collections.List<News>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<News>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<News>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -357,14 +357,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Peers
     * Get company peers. Return a list of peers in the same country and GICS sub-industry
     * @param symbol Symbol of the company: AAPL. 
-    * @return kotlin.Array<kotlin.String>
+    * @return kotlin.collections.List<kotlin.String>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyPeers(symbol: kotlin.String) : kotlin.Array<kotlin.String> {
+    fun companyPeers(symbol: kotlin.String) : kotlin.collections.List<kotlin.String> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -377,13 +377,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<kotlin.String>>(
+        val localVarResponse = request<kotlin.collections.List<kotlin.String>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<kotlin.String>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<kotlin.String>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -556,14 +556,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * Country Metadata
     * List all countries and metadata.
-    * @return kotlin.Array<CountryMetadata>
+    * @return kotlin.collections.List<CountryMetadata>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun country() : kotlin.Array<CountryMetadata> {
+    fun country() : kotlin.collections.List<CountryMetadata> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -573,13 +573,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<CountryMetadata>>(
+        val localVarResponse = request<kotlin.collections.List<CountryMetadata>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<CountryMetadata>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CountryMetadata>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -596,14 +596,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * COVID-19
     * Get real-time updates on the number of COVID-19 (Corona virus) cases in the US with a state-by-state breakdown. Data is sourced from CDC and reputable sources. You can also access this API &lt;a href&#x3D;\&quot;https://rapidapi.com/Finnhub/api/finnhub-real-time-covid-19\&quot; target&#x3D;\&quot;_blank\&quot; rel&#x3D;\&quot;nofollow\&quot;&gt;here&lt;/a&gt;
-    * @return kotlin.Array<CovidInfo>
+    * @return kotlin.collections.List<CovidInfo>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun covid19() : kotlin.Array<CovidInfo> {
+    fun covid19() : kotlin.collections.List<CovidInfo> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -613,13 +613,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<CovidInfo>>(
+        val localVarResponse = request<kotlin.collections.List<CovidInfo>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<CovidInfo>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CovidInfo>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -686,14 +686,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * Crypto Exchanges
     * List supported crypto exchanges
-    * @return kotlin.Array<kotlin.String>
+    * @return kotlin.collections.List<kotlin.String>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cryptoExchanges() : kotlin.Array<kotlin.String> {
+    fun cryptoExchanges() : kotlin.collections.List<kotlin.String> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -703,13 +703,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<kotlin.String>>(
+        val localVarResponse = request<kotlin.collections.List<kotlin.String>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<kotlin.String>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<kotlin.String>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -727,14 +727,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Crypto Symbol
     * List supported crypto symbols by exchange
     * @param exchange Exchange you want to get the list of symbols from. 
-    * @return kotlin.Array<CryptoSymbol>
+    * @return kotlin.collections.List<CryptoSymbol>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cryptoSymbols(exchange: kotlin.String) : kotlin.Array<CryptoSymbol> {
+    fun cryptoSymbols(exchange: kotlin.String) : kotlin.collections.List<CryptoSymbol> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -747,13 +747,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<CryptoSymbol>>(
+        val localVarResponse = request<kotlin.collections.List<CryptoSymbol>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<CryptoSymbol>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CryptoSymbol>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -781,7 +781,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun earningsCalendar(from: java.time.LocalDate?, to: java.time.LocalDate?, symbol: kotlin.String?, international: AnyType?) : EarningsCalendar {
+    fun earningsCalendar(from: kotlin.String?, to: kotlin.String?, symbol: kotlin.String?, international: kotlin.Boolean?) : EarningsCalendar {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -828,14 +828,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * Economic Code
     * List codes of supported economic data.
-    * @return kotlin.Array<EconomicCode>
+    * @return kotlin.collections.List<EconomicCode>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun economicCode() : kotlin.Array<EconomicCode> {
+    fun economicCode() : kotlin.collections.List<EconomicCode> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -845,13 +845,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<EconomicCode>>(
+        val localVarResponse = request<kotlin.collections.List<EconomicCode>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<EconomicCode>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EconomicCode>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -918,14 +918,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param form Filter by form. You can use this value &lt;code&gt;NT 10-K&lt;/code&gt; to find non-timely filings for a company. (optional)
     * @param from From date: 2020-03-15. (optional)
     * @param to To date: 2020-03-16. (optional)
-    * @return kotlin.Array<Filing>
+    * @return kotlin.collections.List<Filing>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun filings(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, form: kotlin.String?, from: java.time.LocalDate?, to: java.time.LocalDate?) : kotlin.Array<Filing> {
+    fun filings(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, form: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : kotlin.collections.List<Filing> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -955,13 +955,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<Filing>>(
+        val localVarResponse = request<kotlin.collections.List<Filing>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<Filing>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Filing>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1134,14 +1134,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * Forex Exchanges
     * List supported forex exchanges
-    * @return kotlin.Array<kotlin.String>
+    * @return kotlin.collections.List<kotlin.String>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexExchanges() : kotlin.Array<kotlin.String> {
+    fun forexExchanges() : kotlin.collections.List<kotlin.String> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1151,13 +1151,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<kotlin.String>>(
+        val localVarResponse = request<kotlin.collections.List<kotlin.String>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<kotlin.String>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<kotlin.String>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1221,14 +1221,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Forex Symbol
     * List supported forex symbols.
     * @param exchange Exchange you want to get the list of symbols from. 
-    * @return kotlin.Array<ForexSymbol>
+    * @return kotlin.collections.List<ForexSymbol>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexSymbols(exchange: kotlin.String) : kotlin.Array<ForexSymbol> {
+    fun forexSymbols(exchange: kotlin.String) : kotlin.collections.List<ForexSymbol> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1241,13 +1241,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<ForexSymbol>>(
+        val localVarResponse = request<kotlin.collections.List<ForexSymbol>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<ForexSymbol>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ForexSymbol>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1314,14 +1314,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Get latest market news.
     * @param category This parameter can be 1 of the following values &lt;code&gt;general, forex, crypto, merger&lt;/code&gt;. 
     * @param minId Use this field to get only news after this ID. Default to 0 (optional)
-    * @return kotlin.Array<News>
+    * @return kotlin.collections.List<News>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun generalNews(category: kotlin.String, minId: kotlin.String?) : kotlin.Array<News> {
+    fun generalNews(category: kotlin.String, minId: kotlin.String?) : kotlin.collections.List<News> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1337,13 +1337,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<News>>(
+        val localVarResponse = request<kotlin.collections.List<News>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<News>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<News>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1417,7 +1417,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun ipoCalendar(from: java.time.LocalDate, to: java.time.LocalDate) : IPOCalendar {
+    fun ipoCalendar(from: kotlin.String, to: kotlin.String) : IPOCalendar {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1464,7 +1464,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun majorDevelopments(symbol: kotlin.String, from: java.time.LocalDate?, to: java.time.LocalDate?) : MajorDevelopments {
+    fun majorDevelopments(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : MajorDevelopments {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1685,14 +1685,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Recommendation Trends
     * Get latest analyst recommendation trends for a company.
     * @param symbol Symbol of the company: AAPL. 
-    * @return kotlin.Array<RecommendationTrend>
+    * @return kotlin.collections.List<RecommendationTrend>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun recommendationTrends(symbol: kotlin.String) : kotlin.Array<RecommendationTrend> {
+    fun recommendationTrends(symbol: kotlin.String) : kotlin.collections.List<RecommendationTrend> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1705,13 +1705,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<RecommendationTrend>>(
+        val localVarResponse = request<kotlin.collections.List<RecommendationTrend>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<RecommendationTrend>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<RecommendationTrend>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1829,14 +1829,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Symbol. 
     * @param from YYYY-MM-DD. 
     * @param to YYYY-MM-DD. 
-    * @return kotlin.Array<Dividends>
+    * @return kotlin.collections.List<Dividends>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockDividends(symbol: kotlin.String, from: java.time.LocalDate, to: java.time.LocalDate) : kotlin.Array<Dividends> {
+    fun stockDividends(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<Dividends> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1851,13 +1851,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<Dividends>>(
+        val localVarResponse = request<kotlin.collections.List<Dividends>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<Dividends>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Dividends>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1877,14 +1877,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Symbol. 
     * @param from YYYY-MM-DD. 
     * @param to YYYY-MM-DD. 
-    * @return kotlin.Array<Split>
+    * @return kotlin.collections.List<Split>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockSplits(symbol: kotlin.String, from: java.time.LocalDate, to: java.time.LocalDate) : kotlin.Array<Split> {
+    fun stockSplits(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<Split> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1899,13 +1899,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<Split>>(
+        val localVarResponse = request<kotlin.collections.List<Split>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<Split>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Split>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1923,14 +1923,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Stock Symbol
     * List supported stocks.
     * @param exchange Exchange you want to get the list of symbols from. List of exchanges with fundamental data can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
-    * @return kotlin.Array<Stock>
+    * @return kotlin.collections.List<Stock>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockSymbols(exchange: kotlin.String) : kotlin.Array<Stock> {
+    fun stockSymbols(exchange: kotlin.String) : kotlin.collections.List<Stock> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1943,13 +1943,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<Stock>>(
+        val localVarResponse = request<kotlin.collections.List<Stock>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<Stock>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Stock>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1977,7 +1977,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockTick(symbol: kotlin.String, date: java.time.LocalDate, limit: kotlin.Long, skip: kotlin.Long) : TickData {
+    fun stockTick(symbol: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long) : TickData {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -2206,14 +2206,14 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Symbol of the company: AAPL. If left blank, the API will return latest stock upgrades/downgrades. (optional)
     * @param from From date: 2000-03-15. (optional)
     * @param to To date: 2020-03-16. (optional)
-    * @return kotlin.Array<UpgradeDowngrade>
+    * @return kotlin.collections.List<UpgradeDowngrade>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun upgradeDowngrade(symbol: kotlin.String?, from: java.time.LocalDate?, to: java.time.LocalDate?) : kotlin.Array<UpgradeDowngrade> {
+    fun upgradeDowngrade(symbol: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : kotlin.collections.List<UpgradeDowngrade> {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -2234,13 +2234,13 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
             query = localVariableQuery,
             headers = localVariableHeaders
         )
-        val localVarResponse = request<kotlin.Array<UpgradeDowngrade>>(
+        val localVarResponse = request<kotlin.collections.List<UpgradeDowngrade>>(
             localVariableConfig,
             localVariableBody
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Array<UpgradeDowngrade>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<UpgradeDowngrade>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {

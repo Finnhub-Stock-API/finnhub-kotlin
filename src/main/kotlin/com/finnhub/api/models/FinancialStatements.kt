@@ -26,7 +26,7 @@ data class FinancialStatements (
     val symbol: kotlin.String? = null,
     /* An array of map of key, value pairs containing the data for each period. */
     @Json(name = "financials")
-    val financials: kotlin.Array<kotlin.Any>? = null
+    val financials: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

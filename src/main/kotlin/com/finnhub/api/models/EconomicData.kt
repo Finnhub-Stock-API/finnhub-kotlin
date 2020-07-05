@@ -23,7 +23,7 @@ import java.io.Serializable
 data class EconomicData (
     /* Array of economic data for requested code. */
     @Json(name = "data")
-    val data: kotlin.Array<kotlin.Any>? = null,
+    val data: kotlin.collections.List<kotlin.Any>? = null,
     /* Finnhub economic code */
     @Json(name = "code")
     val code: kotlin.String? = null

@@ -26,7 +26,7 @@ data class FundOwnership (
     val symbol: kotlin.String? = null,
     /* Array of investors with detailed information about their holdings. */
     @Json(name = "ownership")
-    val ownership: kotlin.Array<kotlin.Any>? = null
+    val ownership: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

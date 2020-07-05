@@ -30,7 +30,7 @@ data class FinancialsAsReported (
     val cik: kotlin.String? = null,
     /* Array of filings. */
     @Json(name = "data")
-    val data: kotlin.Array<kotlin.Any>? = null
+    val data: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

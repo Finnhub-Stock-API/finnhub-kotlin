@@ -124,9 +124,9 @@ open class ApiClient(val baseUrl: String) {
         if (requestConfig.query["token"].isNullOrEmpty()) {
             if (apiKey["token"] != null) {
                 if (apiKeyPrefix["token"] != null) {
-                    requestConfig.query["token"] = apiKeyPrefix["token"]!! + " " + apiKey["token"]!!
+                    requestConfig.query["token"] = listOf(apiKeyPrefix["token"]!! + " " + apiKey["token"]!!)
                 } else {
-                    requestConfig.query["token"] = apiKey["token"]!!
+                    requestConfig.query["token"] = listOf(apiKey["token"]!!)
                 }
             }
         }

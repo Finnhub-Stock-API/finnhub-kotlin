@@ -22,7 +22,7 @@ import java.io.Serializable
 data class SupportResistance (
     /* Array of support and resistance levels. */
     @Json(name = "levels")
-    val levels: kotlin.Array<kotlin.Float>? = null
+    val levels: kotlin.collections.List<kotlin.Float>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

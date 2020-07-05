@@ -28,22 +28,22 @@ import java.io.Serializable
 data class StockCandles (
     /* List of open prices for returned candles. */
     @Json(name = "o")
-    val o: kotlin.Array<kotlin.Float>? = null,
+    val o: kotlin.collections.List<kotlin.Float>? = null,
     /* List of high prices for returned candles. */
     @Json(name = "h")
-    val h: kotlin.Array<kotlin.Float>? = null,
+    val h: kotlin.collections.List<kotlin.Float>? = null,
     /* List of low prices for returned candles. */
     @Json(name = "l")
-    val l: kotlin.Array<kotlin.Float>? = null,
+    val l: kotlin.collections.List<kotlin.Float>? = null,
     /* List of close prices for returned candles. */
     @Json(name = "c")
-    val c: kotlin.Array<kotlin.Float>? = null,
+    val c: kotlin.collections.List<kotlin.Float>? = null,
     /* List of volume data for returned candles. */
     @Json(name = "v")
-    val v: kotlin.Array<kotlin.Float>? = null,
+    val v: kotlin.collections.List<kotlin.Float>? = null,
     /* List of timestamp for returned candles. */
     @Json(name = "t")
-    val t: kotlin.Array<kotlin.Long>? = null,
+    val t: kotlin.collections.List<kotlin.Long>? = null,
     /* Status of the response. This field can either be ok or no_data. */
     @Json(name = "s")
     val s: kotlin.String? = null

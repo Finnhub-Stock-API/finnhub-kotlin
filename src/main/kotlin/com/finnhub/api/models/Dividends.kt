@@ -32,7 +32,7 @@ data class Dividends (
     val symbol: kotlin.String? = null,
     /* Ex-Dividend date. */
     @Json(name = "date")
-    val date: java.time.LocalDate? = null,
+    val date: kotlin.String? = null,
     /* Amount in local currency. */
     @Json(name = "amount")
     val amount: kotlin.Float? = null,
@@ -41,13 +41,13 @@ data class Dividends (
     val adjustedAmount: kotlin.Float? = null,
     /* Pay date. */
     @Json(name = "payDate")
-    val payDate: java.time.LocalDate? = null,
+    val payDate: kotlin.String? = null,
     /* Record date. */
     @Json(name = "recordDate")
-    val recordDate: java.time.LocalDate? = null,
+    val recordDate: kotlin.String? = null,
     /* Declaration date. */
     @Json(name = "declarationDate")
-    val declarationDate: java.time.LocalDate? = null,
+    val declarationDate: kotlin.String? = null,
     /* Currency. */
     @Json(name = "currency")
     val currency: kotlin.String? = null

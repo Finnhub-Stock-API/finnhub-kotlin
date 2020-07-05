@@ -22,7 +22,7 @@ import java.io.Serializable
 data class EarningsCalendar (
     /* Array of earnings release. */
     @Json(name = "earningsCalendar")
-    val earningsCalendar: kotlin.Array<kotlin.Any>? = null
+    val earningsCalendar: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

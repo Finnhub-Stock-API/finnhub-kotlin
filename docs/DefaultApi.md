@@ -158,7 +158,7 @@ Configure api_key:
 
 <a name="companyEarnings"></a>
 # **companyEarnings**
-> kotlin.Array&lt;EarningResult&gt; companyEarnings(symbol, limit)
+> kotlin.collections.List&lt;EarningResult&gt; companyEarnings(symbol, limit)
 
 Earnings Surprises
 
@@ -174,7 +174,7 @@ val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
 val limit : kotlin.Long = 789 // kotlin.Long | Limit number of period returned. Leave blank to get the full history.
 try {
-    val result : kotlin.Array<EarningResult> = apiInstance.companyEarnings(symbol, limit)
+    val result : kotlin.collections.List<EarningResult> = apiInstance.companyEarnings(symbol, limit)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#companyEarnings")
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.Array&lt;EarningResult&gt;**](EarningResult.md)
+[**kotlin.collections.List&lt;EarningResult&gt;**](EarningResult.md)
 
 ### Authorization
 
@@ -312,7 +312,7 @@ Configure api_key:
 
 <a name="companyNews"></a>
 # **companyNews**
-> kotlin.Array&lt;News&gt; companyNews(symbol, from, to)
+> kotlin.collections.List&lt;News&gt; companyNews(symbol, from, to)
 
 Company News
 
@@ -326,10 +326,10 @@ List latest company news by symbol. This endpoint is only available for North Am
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | From date <code>YYYY-MM-DD</code>.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | To date <code>YYYY-MM-DD</code>.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
 try {
-    val result : kotlin.Array<News> = apiInstance.companyNews(symbol, from, to)
+    val result : kotlin.collections.List<News> = apiInstance.companyNews(symbol, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#companyNews")
@@ -345,12 +345,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Company symbol. |
- **from** | **java.time.LocalDate**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
- **to** | **java.time.LocalDate**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
 
 ### Return type
 
-[**kotlin.Array&lt;News&gt;**](News.md)
+[**kotlin.collections.List&lt;News&gt;**](News.md)
 
 ### Authorization
 
@@ -366,7 +366,7 @@ Configure api_key:
 
 <a name="companyPeers"></a>
 # **companyPeers**
-> kotlin.Array&lt;kotlin.String&gt; companyPeers(symbol)
+> kotlin.collections.List&lt;kotlin.String&gt; companyPeers(symbol)
 
 Peers
 
@@ -381,7 +381,7 @@ Get company peers. Return a list of peers in the same country and GICS sub-indus
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
 try {
-    val result : kotlin.Array<kotlin.String> = apiInstance.companyPeers(symbol)
+    val result : kotlin.collections.List<kotlin.String> = apiInstance.companyPeers(symbol)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#companyPeers")
@@ -400,7 +400,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**kotlin.Array&lt;kotlin.String&gt;**
+**kotlin.collections.List&lt;kotlin.String&gt;**
 
 ### Authorization
 
@@ -576,7 +576,7 @@ Configure api_key:
 
 <a name="country"></a>
 # **country**
-> kotlin.Array&lt;CountryMetadata&gt; country()
+> kotlin.collections.List&lt;CountryMetadata&gt; country()
 
 Country Metadata
 
@@ -590,7 +590,7 @@ List all countries and metadata.
 
 val apiInstance = DefaultApi()
 try {
-    val result : kotlin.Array<CountryMetadata> = apiInstance.country()
+    val result : kotlin.collections.List<CountryMetadata> = apiInstance.country()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#country")
@@ -606,7 +606,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**kotlin.Array&lt;CountryMetadata&gt;**](CountryMetadata.md)
+[**kotlin.collections.List&lt;CountryMetadata&gt;**](CountryMetadata.md)
 
 ### Authorization
 
@@ -622,7 +622,7 @@ Configure api_key:
 
 <a name="covid19"></a>
 # **covid19**
-> kotlin.Array&lt;CovidInfo&gt; covid19()
+> kotlin.collections.List&lt;CovidInfo&gt; covid19()
 
 COVID-19
 
@@ -636,7 +636,7 @@ Get real-time updates on the number of COVID-19 (Corona virus) cases in the US w
 
 val apiInstance = DefaultApi()
 try {
-    val result : kotlin.Array<CovidInfo> = apiInstance.covid19()
+    val result : kotlin.collections.List<CovidInfo> = apiInstance.covid19()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#covid19")
@@ -652,7 +652,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**kotlin.Array&lt;CovidInfo&gt;**](CovidInfo.md)
+[**kotlin.collections.List&lt;CovidInfo&gt;**](CovidInfo.md)
 
 ### Authorization
 
@@ -724,7 +724,7 @@ Configure api_key:
 
 <a name="cryptoExchanges"></a>
 # **cryptoExchanges**
-> kotlin.Array&lt;kotlin.String&gt; cryptoExchanges()
+> kotlin.collections.List&lt;kotlin.String&gt; cryptoExchanges()
 
 Crypto Exchanges
 
@@ -738,7 +738,7 @@ List supported crypto exchanges
 
 val apiInstance = DefaultApi()
 try {
-    val result : kotlin.Array<kotlin.String> = apiInstance.cryptoExchanges()
+    val result : kotlin.collections.List<kotlin.String> = apiInstance.cryptoExchanges()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#cryptoExchanges")
@@ -754,7 +754,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**kotlin.Array&lt;kotlin.String&gt;**
+**kotlin.collections.List&lt;kotlin.String&gt;**
 
 ### Authorization
 
@@ -770,7 +770,7 @@ Configure api_key:
 
 <a name="cryptoSymbols"></a>
 # **cryptoSymbols**
-> kotlin.Array&lt;CryptoSymbol&gt; cryptoSymbols(exchange)
+> kotlin.collections.List&lt;CryptoSymbol&gt; cryptoSymbols(exchange)
 
 Crypto Symbol
 
@@ -785,7 +785,7 @@ List supported crypto symbols by exchange
 val apiInstance = DefaultApi()
 val exchange : kotlin.String = exchange_example // kotlin.String | Exchange you want to get the list of symbols from.
 try {
-    val result : kotlin.Array<CryptoSymbol> = apiInstance.cryptoSymbols(exchange)
+    val result : kotlin.collections.List<CryptoSymbol> = apiInstance.cryptoSymbols(exchange)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#cryptoSymbols")
@@ -804,7 +804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.Array&lt;CryptoSymbol&gt;**](CryptoSymbol.md)
+[**kotlin.collections.List&lt;CryptoSymbol&gt;**](CryptoSymbol.md)
 
 ### Authorization
 
@@ -833,10 +833,10 @@ Get historical and coming earnings release dating back to 2003. You can setup &l
 //import com.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | From date: 2020-03-15.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | To date: 2020-03-16.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
 val symbol : kotlin.String = symbol_example // kotlin.String | Filter by symbol: AAPL.
-val international : AnyType =  // AnyType | Set to <code>true</code> to include international markets. Default value is <code>false</code>
+val international : kotlin.Boolean = true // kotlin.Boolean | Set to <code>true</code> to include international markets. Default value is <code>false</code>
 try {
     val result : EarningsCalendar = apiInstance.earningsCalendar(from, to, symbol, international)
     println(result)
@@ -853,10 +853,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **from** | **java.time.LocalDate**| From date: 2020-03-15. | [optional]
- **to** | **java.time.LocalDate**| To date: 2020-03-16. | [optional]
+ **from** | **kotlin.String**| From date: 2020-03-15. | [optional]
+ **to** | **kotlin.String**| To date: 2020-03-16. | [optional]
  **symbol** | **kotlin.String**| Filter by symbol: AAPL. | [optional]
- **international** | [**AnyType**](.md)| Set to &lt;code&gt;true&lt;/code&gt; to include international markets. Default value is &lt;code&gt;false&lt;/code&gt; | [optional]
+ **international** | **kotlin.Boolean**| Set to &lt;code&gt;true&lt;/code&gt; to include international markets. Default value is &lt;code&gt;false&lt;/code&gt; | [optional]
 
 ### Return type
 
@@ -876,7 +876,7 @@ Configure api_key:
 
 <a name="economicCode"></a>
 # **economicCode**
-> kotlin.Array&lt;EconomicCode&gt; economicCode()
+> kotlin.collections.List&lt;EconomicCode&gt; economicCode()
 
 Economic Code
 
@@ -890,7 +890,7 @@ List codes of supported economic data.
 
 val apiInstance = DefaultApi()
 try {
-    val result : kotlin.Array<EconomicCode> = apiInstance.economicCode()
+    val result : kotlin.collections.List<EconomicCode> = apiInstance.economicCode()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#economicCode")
@@ -906,7 +906,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**kotlin.Array&lt;EconomicCode&gt;**](EconomicCode.md)
+[**kotlin.collections.List&lt;EconomicCode&gt;**](EconomicCode.md)
 
 ### Authorization
 
@@ -972,7 +972,7 @@ Configure api_key:
 
 <a name="filings"></a>
 # **filings**
-> kotlin.Array&lt;Filing&gt; filings(symbol, cik, accessNumber, form, from, to)
+> kotlin.collections.List&lt;Filing&gt; filings(symbol, cik, accessNumber, form, from, to)
 
 Filings
 
@@ -989,10 +989,10 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Leave <co
 val cik : kotlin.String = cik_example // kotlin.String | CIK.
 val accessNumber : kotlin.String = accessNumber_example // kotlin.String | Access number of a specific report you want to retrieve data from.
 val form : kotlin.String = form_example // kotlin.String | Filter by form. You can use this value <code>NT 10-K</code> to find non-timely filings for a company.
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | From date: 2020-03-15.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | To date: 2020-03-16.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
 try {
-    val result : kotlin.Array<Filing> = apiInstance.filings(symbol, cik, accessNumber, form, from, to)
+    val result : kotlin.collections.List<Filing> = apiInstance.filings(symbol, cik, accessNumber, form, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#filings")
@@ -1011,12 +1011,12 @@ Name | Type | Description  | Notes
  **cik** | **kotlin.String**| CIK. | [optional]
  **accessNumber** | **kotlin.String**| Access number of a specific report you want to retrieve data from. | [optional]
  **form** | **kotlin.String**| Filter by form. You can use this value &lt;code&gt;NT 10-K&lt;/code&gt; to find non-timely filings for a company. | [optional]
- **from** | **java.time.LocalDate**| From date: 2020-03-15. | [optional]
- **to** | **java.time.LocalDate**| To date: 2020-03-16. | [optional]
+ **from** | **kotlin.String**| From date: 2020-03-15. | [optional]
+ **to** | **kotlin.String**| To date: 2020-03-16. | [optional]
 
 ### Return type
 
-[**kotlin.Array&lt;Filing&gt;**](Filing.md)
+[**kotlin.collections.List&lt;Filing&gt;**](Filing.md)
 
 ### Authorization
 
@@ -1198,7 +1198,7 @@ Configure api_key:
 
 <a name="forexExchanges"></a>
 # **forexExchanges**
-> kotlin.Array&lt;kotlin.String&gt; forexExchanges()
+> kotlin.collections.List&lt;kotlin.String&gt; forexExchanges()
 
 Forex Exchanges
 
@@ -1212,7 +1212,7 @@ List supported forex exchanges
 
 val apiInstance = DefaultApi()
 try {
-    val result : kotlin.Array<kotlin.String> = apiInstance.forexExchanges()
+    val result : kotlin.collections.List<kotlin.String> = apiInstance.forexExchanges()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#forexExchanges")
@@ -1228,7 +1228,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**kotlin.Array&lt;kotlin.String&gt;**
+**kotlin.collections.List&lt;kotlin.String&gt;**
 
 ### Authorization
 
@@ -1294,7 +1294,7 @@ Configure api_key:
 
 <a name="forexSymbols"></a>
 # **forexSymbols**
-> kotlin.Array&lt;ForexSymbol&gt; forexSymbols(exchange)
+> kotlin.collections.List&lt;ForexSymbol&gt; forexSymbols(exchange)
 
 Forex Symbol
 
@@ -1309,7 +1309,7 @@ List supported forex symbols.
 val apiInstance = DefaultApi()
 val exchange : kotlin.String = exchange_example // kotlin.String | Exchange you want to get the list of symbols from.
 try {
-    val result : kotlin.Array<ForexSymbol> = apiInstance.forexSymbols(exchange)
+    val result : kotlin.collections.List<ForexSymbol> = apiInstance.forexSymbols(exchange)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#forexSymbols")
@@ -1328,7 +1328,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.Array&lt;ForexSymbol&gt;**](ForexSymbol.md)
+[**kotlin.collections.List&lt;ForexSymbol&gt;**](ForexSymbol.md)
 
 ### Authorization
 
@@ -1396,7 +1396,7 @@ Configure api_key:
 
 <a name="generalNews"></a>
 # **generalNews**
-> kotlin.Array&lt;News&gt; generalNews(category, minId)
+> kotlin.collections.List&lt;News&gt; generalNews(category, minId)
 
 General News
 
@@ -1412,7 +1412,7 @@ val apiInstance = DefaultApi()
 val category : kotlin.String = category_example // kotlin.String | This parameter can be 1 of the following values <code>general, forex, crypto, merger</code>.
 val minId : kotlin.String = minId_example // kotlin.String | Use this field to get only news after this ID. Default to 0
 try {
-    val result : kotlin.Array<News> = apiInstance.generalNews(category, minId)
+    val result : kotlin.collections.List<News> = apiInstance.generalNews(category, minId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#generalNews")
@@ -1432,7 +1432,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.Array&lt;News&gt;**](News.md)
+[**kotlin.collections.List&lt;News&gt;**](News.md)
 
 ### Authorization
 
@@ -1513,8 +1513,8 @@ Get recent and coming IPO.
 //import com.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | From date: 2020-03-15.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | To date: 2020-03-16.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
 try {
     val result : IPOCalendar = apiInstance.ipoCalendar(from, to)
     println(result)
@@ -1531,8 +1531,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **from** | **java.time.LocalDate**| From date: 2020-03-15. |
- **to** | **java.time.LocalDate**| To date: 2020-03-16. |
+ **from** | **kotlin.String**| From date: 2020-03-15. |
+ **to** | **kotlin.String**| To date: 2020-03-16. |
 
 ### Return type
 
@@ -1566,8 +1566,8 @@ List latest major developments of a company going back 20 years with 12M+ data p
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | From time: 2020-01-01.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | To time: 2020-01-05.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From time: 2020-01-01.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To time: 2020-01-05.
 try {
     val result : MajorDevelopments = apiInstance.majorDevelopments(symbol, from, to)
     println(result)
@@ -1585,8 +1585,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Company symbol. |
- **from** | **java.time.LocalDate**| From time: 2020-01-01. | [optional]
- **to** | **java.time.LocalDate**| To time: 2020-01-05. | [optional]
+ **from** | **kotlin.String**| From time: 2020-01-01. | [optional]
+ **to** | **kotlin.String**| To time: 2020-01-05. | [optional]
 
 ### Return type
 
@@ -1808,7 +1808,7 @@ Configure api_key:
 
 <a name="recommendationTrends"></a>
 # **recommendationTrends**
-> kotlin.Array&lt;RecommendationTrend&gt; recommendationTrends(symbol)
+> kotlin.collections.List&lt;RecommendationTrend&gt; recommendationTrends(symbol)
 
 Recommendation Trends
 
@@ -1823,7 +1823,7 @@ Get latest analyst recommendation trends for a company.
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
 try {
-    val result : kotlin.Array<RecommendationTrend> = apiInstance.recommendationTrends(symbol)
+    val result : kotlin.collections.List<RecommendationTrend> = apiInstance.recommendationTrends(symbol)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#recommendationTrends")
@@ -1842,7 +1842,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.Array&lt;RecommendationTrend&gt;**](RecommendationTrend.md)
+[**kotlin.collections.List&lt;RecommendationTrend&gt;**](RecommendationTrend.md)
 
 ### Authorization
 
@@ -1966,7 +1966,7 @@ Configure api_key:
 
 <a name="stockDividends"></a>
 # **stockDividends**
-> kotlin.Array&lt;Dividends&gt; stockDividends(symbol, from, to)
+> kotlin.collections.List&lt;Dividends&gt; stockDividends(symbol, from, to)
 
 Dividends
 
@@ -1980,10 +1980,10 @@ Get dividends data for common stocks going back 30 years.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | YYYY-MM-DD.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | YYYY-MM-DD.
+val from : kotlin.String = 2013-10-20 // kotlin.String | YYYY-MM-DD.
+val to : kotlin.String = 2013-10-20 // kotlin.String | YYYY-MM-DD.
 try {
-    val result : kotlin.Array<Dividends> = apiInstance.stockDividends(symbol, from, to)
+    val result : kotlin.collections.List<Dividends> = apiInstance.stockDividends(symbol, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#stockDividends")
@@ -1999,12 +1999,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol. |
- **from** | **java.time.LocalDate**| YYYY-MM-DD. |
- **to** | **java.time.LocalDate**| YYYY-MM-DD. |
+ **from** | **kotlin.String**| YYYY-MM-DD. |
+ **to** | **kotlin.String**| YYYY-MM-DD. |
 
 ### Return type
 
-[**kotlin.Array&lt;Dividends&gt;**](Dividends.md)
+[**kotlin.collections.List&lt;Dividends&gt;**](Dividends.md)
 
 ### Authorization
 
@@ -2020,7 +2020,7 @@ Configure api_key:
 
 <a name="stockSplits"></a>
 # **stockSplits**
-> kotlin.Array&lt;Split&gt; stockSplits(symbol, from, to)
+> kotlin.collections.List&lt;Split&gt; stockSplits(symbol, from, to)
 
 Splits
 
@@ -2034,10 +2034,10 @@ Get splits data for stocks.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | YYYY-MM-DD.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | YYYY-MM-DD.
+val from : kotlin.String = 2013-10-20 // kotlin.String | YYYY-MM-DD.
+val to : kotlin.String = 2013-10-20 // kotlin.String | YYYY-MM-DD.
 try {
-    val result : kotlin.Array<Split> = apiInstance.stockSplits(symbol, from, to)
+    val result : kotlin.collections.List<Split> = apiInstance.stockSplits(symbol, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#stockSplits")
@@ -2053,12 +2053,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol. |
- **from** | **java.time.LocalDate**| YYYY-MM-DD. |
- **to** | **java.time.LocalDate**| YYYY-MM-DD. |
+ **from** | **kotlin.String**| YYYY-MM-DD. |
+ **to** | **kotlin.String**| YYYY-MM-DD. |
 
 ### Return type
 
-[**kotlin.Array&lt;Split&gt;**](Split.md)
+[**kotlin.collections.List&lt;Split&gt;**](Split.md)
 
 ### Authorization
 
@@ -2074,7 +2074,7 @@ Configure api_key:
 
 <a name="stockSymbols"></a>
 # **stockSymbols**
-> kotlin.Array&lt;Stock&gt; stockSymbols(exchange)
+> kotlin.collections.List&lt;Stock&gt; stockSymbols(exchange)
 
 Stock Symbol
 
@@ -2089,7 +2089,7 @@ List supported stocks.
 val apiInstance = DefaultApi()
 val exchange : kotlin.String = exchange_example // kotlin.String | Exchange you want to get the list of symbols from. List of exchanges with fundamental data can be found <a href=\"https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp=sharing\" target=\"_blank\">here</a>.
 try {
-    val result : kotlin.Array<Stock> = apiInstance.stockSymbols(exchange)
+    val result : kotlin.collections.List<Stock> = apiInstance.stockSymbols(exchange)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#stockSymbols")
@@ -2108,7 +2108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.Array&lt;Stock&gt;**](Stock.md)
+[**kotlin.collections.List&lt;Stock&gt;**](Stock.md)
 
 ### Authorization
 
@@ -2138,7 +2138,7 @@ Tick Data
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
-val date : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | Date: 2020-04-02.
+val date : kotlin.String = 2013-10-20 // kotlin.String | Date: 2020-04-02.
 val limit : kotlin.Long = 789 // kotlin.Long | Limit number of ticks returned. Maximum value: <code>25000</code>
 val skip : kotlin.Long = 789 // kotlin.Long | Number of ticks to skip. Use this parameter to loop through the entire data.
 try {
@@ -2158,7 +2158,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol. |
- **date** | **java.time.LocalDate**| Date: 2020-04-02. |
+ **date** | **kotlin.String**| Date: 2020-04-02. |
  **limit** | **kotlin.Long**| Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; |
  **skip** | **kotlin.Long**| Number of ticks to skip. Use this parameter to loop through the entire data. |
 
@@ -2392,7 +2392,7 @@ Configure api_key:
 
 <a name="upgradeDowngrade"></a>
 # **upgradeDowngrade**
-> kotlin.Array&lt;UpgradeDowngrade&gt; upgradeDowngrade(symbol, from, to)
+> kotlin.collections.List&lt;UpgradeDowngrade&gt; upgradeDowngrade(symbol, from, to)
 
 Stock Upgrade/Downgrade
 
@@ -2406,10 +2406,10 @@ Get latest stock upgrade and downgrade.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL. If left blank, the API will return latest stock upgrades/downgrades.
-val from : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | From date: 2000-03-15.
-val to : java.time.LocalDate = 2013-10-20 // java.time.LocalDate | To date: 2020-03-16.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2000-03-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
 try {
-    val result : kotlin.Array<UpgradeDowngrade> = apiInstance.upgradeDowngrade(symbol, from, to)
+    val result : kotlin.collections.List<UpgradeDowngrade> = apiInstance.upgradeDowngrade(symbol, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#upgradeDowngrade")
@@ -2425,12 +2425,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol of the company: AAPL. If left blank, the API will return latest stock upgrades/downgrades. | [optional]
- **from** | **java.time.LocalDate**| From date: 2000-03-15. | [optional]
- **to** | **java.time.LocalDate**| To date: 2020-03-16. | [optional]
+ **from** | **kotlin.String**| From date: 2000-03-15. | [optional]
+ **to** | **kotlin.String**| To date: 2020-03-16. | [optional]
 
 ### Return type
 
-[**kotlin.Array&lt;UpgradeDowngrade&gt;**](UpgradeDowngrade.md)
+[**kotlin.collections.List&lt;UpgradeDowngrade&gt;**](UpgradeDowngrade.md)
 
 ### Authorization
 

@@ -24,7 +24,7 @@ import java.io.Serializable
 data class EarningsEstimates (
     /* List of estimates */
     @Json(name = "data")
-    val data: kotlin.Array<kotlin.Any>? = null,
+    val data: kotlin.collections.List<kotlin.Any>? = null,
     /* Frequency: annual or quarterly. */
     @Json(name = "freq")
     val freq: kotlin.String? = null,

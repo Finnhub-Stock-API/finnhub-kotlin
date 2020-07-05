@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **exchange** | **kotlin.String** | Listed exchange. |  [optional]
 **name** | **kotlin.String** | Company name. |  [optional]
 **ticker** | **kotlin.String** | Company symbol/ticker as used on the listed exchange. |  [optional]
-**ipo** | [**java.time.LocalDate**](java.time.LocalDate.md) | IPO date. |  [optional]
+**ipo** | **kotlin.String** | IPO date. |  [optional]
 **marketCapitalization** | **kotlin.Float** | Market Capitalization. |  [optional]
 **shareOutstanding** | **kotlin.Float** | Number of oustanding shares. |  [optional]
 **logo** | **kotlin.String** | Logo image. |  [optional]

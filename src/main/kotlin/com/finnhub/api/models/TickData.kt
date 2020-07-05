@@ -41,16 +41,16 @@ data class TickData (
     val total: kotlin.Long? = null,
     /* List of volume data. */
     @Json(name = "v")
-    val v: kotlin.Array<kotlin.Float>? = null,
+    val v: kotlin.collections.List<kotlin.Float>? = null,
     /* List of price data. */
     @Json(name = "p")
-    val p: kotlin.Array<kotlin.Float>? = null,
+    val p: kotlin.collections.List<kotlin.Float>? = null,
     /* List of timestamp in UNIX ms. */
     @Json(name = "t")
-    val t: kotlin.Array<kotlin.Long>? = null,
+    val t: kotlin.collections.List<kotlin.Long>? = null,
     /* List of venues/exchanges. */
     @Json(name = "x")
-    val x: kotlin.Array<kotlin.String>? = null
+    val x: kotlin.collections.List<kotlin.String>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

@@ -17,12 +17,16 @@ import java.io.Serializable
 /**
  * 
  * @param adx ADX reading
+ * @param trending Whether market is trending or going sideway
  */
 
 data class Trend (
     /* ADX reading */
     @Json(name = "adx")
-    val adx: kotlin.Float? = null
+    val adx: kotlin.Float? = null,
+    /* Whether market is trending or going sideway */
+    @Json(name = "trending")
+    val trending: kotlin.Boolean? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **state** | **kotlin.String** | State of company&#39;s headquarter. |  [optional]
 **ticker** | **kotlin.String** | Company symbol/ticker as used on the listed exchange. |  [optional]
 **weburl** | **kotlin.String** | Company website. |  [optional]
-**ipo** | [**java.time.LocalDate**](java.time.LocalDate.md) | IPO date. |  [optional]
+**ipo** | **kotlin.String** | IPO date. |  [optional]
 **marketCapitalization** | **kotlin.Float** | Market Capitalization. |  [optional]
 **shareOutstanding** | **kotlin.Float** | Number of oustanding shares. |  [optional]
 **employeeTotal** | **kotlin.Long** | Number of employee. |  [optional]

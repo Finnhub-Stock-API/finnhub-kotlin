@@ -22,7 +22,7 @@ import java.io.Serializable
 data class PatternRecognition (
     /* Array of patterns. */
     @Json(name = "points")
-    val points: kotlin.Array<kotlin.Any>? = null
+    val points: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

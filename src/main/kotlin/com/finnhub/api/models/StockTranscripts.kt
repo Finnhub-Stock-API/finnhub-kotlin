@@ -32,7 +32,7 @@ data class StockTranscripts (
     val title: kotlin.String? = null,
     /* Time of the event. */
     @Json(name = "time")
-    val time: java.time.OffsetDateTime? = null,
+    val time: kotlin.String? = null,
     /* Year of earnings result in the case of earnings call transcript. */
     @Json(name = "year")
     val year: kotlin.Long? = null,

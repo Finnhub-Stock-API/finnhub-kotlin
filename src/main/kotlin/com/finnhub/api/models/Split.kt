@@ -28,7 +28,7 @@ data class Split (
     val symbol: kotlin.String? = null,
     /* Split date. */
     @Json(name = "date")
-    val date: java.time.LocalDate? = null,
+    val date: kotlin.String? = null,
     /* From factor. */
     @Json(name = "fromFactor")
     val fromFactor: kotlin.Float? = null,

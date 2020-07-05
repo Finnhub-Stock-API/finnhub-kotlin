@@ -34,7 +34,7 @@ data class CovidInfo (
     val death: kotlin.Float? = null,
     /* Updated time. */
     @Json(name = "updated")
-    val updated: java.time.OffsetDateTime? = null
+    val updated: kotlin.String? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

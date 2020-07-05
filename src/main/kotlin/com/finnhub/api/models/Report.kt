@@ -50,16 +50,16 @@ data class Report (
     val form: kotlin.String? = null,
     /* Period start date <code>%Y-%m-%d %H:%M:%S</code>. */
     @Json(name = "startDate")
-    val startDate: java.time.OffsetDateTime? = null,
+    val startDate: kotlin.String? = null,
     /* Period end date <code>%Y-%m-%d %H:%M:%S</code>. */
     @Json(name = "endDate")
-    val endDate: java.time.OffsetDateTime? = null,
+    val endDate: kotlin.String? = null,
     /* Filed date <code>%Y-%m-%d %H:%M:%S</code>. */
     @Json(name = "filedDate")
-    val filedDate: java.time.OffsetDateTime? = null,
+    val filedDate: kotlin.String? = null,
     /* Accepted date <code>%Y-%m-%d %H:%M:%S</code>. */
     @Json(name = "acceptedDate")
-    val acceptedDate: java.time.OffsetDateTime? = null,
+    val acceptedDate: kotlin.String? = null,
     @Json(name = "report")
     val report: kotlin.Any? = null
 ) : Serializable {

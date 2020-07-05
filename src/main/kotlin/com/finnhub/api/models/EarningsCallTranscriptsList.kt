@@ -26,7 +26,7 @@ data class EarningsCallTranscriptsList (
     val symbol: kotlin.String? = null,
     /* Array of transcripts' metadata */
     @Json(name = "transcripts")
-    val transcripts: kotlin.Array<kotlin.Any>? = null
+    val transcripts: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

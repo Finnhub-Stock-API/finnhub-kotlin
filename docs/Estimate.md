@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **revenueHigh** | **kotlin.Long** | Highest estimate. |  [optional]
 **revenueLow** | **kotlin.Long** | Lowest estimate. |  [optional]
 **numberAnalysts** | **kotlin.Long** | Number of Analysts. |  [optional]
-**period** | [**java.time.LocalDate**](java.time.LocalDate.md) | Period. |  [optional]
+**period** | **kotlin.String** | Period. |  [optional]
 
 
 

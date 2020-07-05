@@ -22,7 +22,7 @@ import java.io.Serializable
 data class IPOCalendar (
     /* Array of IPO events. */
     @Json(name = "ipoCalendar")
-    val ipoCalendar: kotlin.Array<kotlin.Any>? = null
+    val ipoCalendar: kotlin.collections.List<kotlin.Any>? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

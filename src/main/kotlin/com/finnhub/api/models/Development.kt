@@ -28,7 +28,7 @@ data class Development (
     val symbol: kotlin.String? = null,
     /* Published time in <code>YYYY-MM-DD HH:MM:SS</code> format. */
     @Json(name = "datetime")
-    val datetime: java.time.OffsetDateTime? = null,
+    val datetime: kotlin.String? = null,
     /* Development headline. */
     @Json(name = "headline")
     val headline: kotlin.String? = null,
