@@ -8,8 +8,18 @@
 ## Installation
 
 Install package
-```sh
-// TODO
+
+```
+# For maven
+<dependency>
+  <groupId>com.finnhub</groupId>
+  <artifactId>kotlin-client</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+
+# For gradle
+implementation 'com.finnhub:kotlin-client:1.0.0'
 ```
 
 ## Getting Started

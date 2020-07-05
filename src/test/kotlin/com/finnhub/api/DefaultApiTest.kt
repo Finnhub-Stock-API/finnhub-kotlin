@@ -2,11 +2,13 @@ package com.finnhub.api
 
 import com.finnhub.api.apis.DefaultApi
 import com.finnhub.api.infrastructure.ApiClient
+import org.junit.Ignore
 import org.junit.Test
 
 class DefaultApiTest {
 
     @Test
+    @Ignore
     fun commonApi() {
         ApiClient.apiKey["token"] = "YOUR API KEY"
         val apiClient = DefaultApi()
