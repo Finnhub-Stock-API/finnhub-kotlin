@@ -22,6 +22,10 @@ Method | HTTP request | Description
 [**earningsCalendar**](DefaultApi.md#earningsCalendar) | **GET** /calendar/earnings | Earnings Calendar
 [**economicCode**](DefaultApi.md#economicCode) | **GET** /economic/code | Economic Code
 [**economicData**](DefaultApi.md#economicData) | **GET** /economic | Economic Data
+[**etfsCountryExposure**](DefaultApi.md#etfsCountryExposure) | **GET** /etf/country | ETFs Country Exposure
+[**etfsHoldings**](DefaultApi.md#etfsHoldings) | **GET** /etf/holdings | ETFs Holdings
+[**etfsIndustryExposure**](DefaultApi.md#etfsIndustryExposure) | **GET** /etf/sector | ETFs Industry Exposure
+[**etfsProfile**](DefaultApi.md#etfsProfile) | **GET** /etf/profile | ETFs Profile
 [**filings**](DefaultApi.md#filings) | **GET** /stock/filings | Filings
 [**financials**](DefaultApi.md#financials) | **GET** /stock/financials | Financial Statements
 [**financialsReported**](DefaultApi.md#financialsReported) | **GET** /stock/financials-reported | Financials As Reported
@@ -31,6 +35,8 @@ Method | HTTP request | Description
 [**forexSymbols**](DefaultApi.md#forexSymbols) | **GET** /forex/symbol | Forex Symbol
 [**fundOwnership**](DefaultApi.md#fundOwnership) | **GET** /stock/fund-ownership | Fund Ownership
 [**generalNews**](DefaultApi.md#generalNews) | **GET** /news | General News
+[**indicesConstituents**](DefaultApi.md#indicesConstituents) | **GET** /index/constituents | Indices Constituents
+[**indicesHistoricalConstituents**](DefaultApi.md#indicesHistoricalConstituents) | **GET** /index/historical-constituents | Indices Historical Constituents
 [**investorsOwnership**](DefaultApi.md#investorsOwnership) | **GET** /stock/investor-ownership | Investors Ownership
 [**ipoCalendar**](DefaultApi.md#ipoCalendar) | **GET** /calendar/ipo | IPO Calendar
 [**majorDevelopments**](DefaultApi.md#majorDevelopments) | **GET** /major-development | Major Developments
@@ -39,6 +45,7 @@ Method | HTTP request | Description
 [**priceTarget**](DefaultApi.md#priceTarget) | **GET** /stock/price-target | Price Target
 [**quote**](DefaultApi.md#quote) | **GET** /quote | Quote
 [**recommendationTrends**](DefaultApi.md#recommendationTrends) | **GET** /stock/recommendation | Recommendation Trends
+[**similarityIndex**](DefaultApi.md#similarityIndex) | **GET** /stock/similarity-index | Similarity Index
 [**stockBidask**](DefaultApi.md#stockBidask) | **GET** /stock/bidask | Last Bid-Ask
 [**stockCandles**](DefaultApi.md#stockCandles) | **GET** /stock/candle | Stock Candles
 [**stockDividends**](DefaultApi.md#stockDividends) | **GET** /stock/dividend | Dividends
@@ -970,6 +977,206 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="etfsCountryExposure"></a>
+# **etfsCountryExposure**
+> ETFsCountryExposure etfsCountryExposure(symbol)
+
+ETFs Country Exposure
+
+Get ETF country exposure data.
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
+try {
+    val result : ETFsCountryExposure = apiInstance.etfsCountryExposure(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#etfsCountryExposure")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#etfsCountryExposure")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| ETF symbol. |
+
+### Return type
+
+[**ETFsCountryExposure**](ETFsCountryExposure.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="etfsHoldings"></a>
+# **etfsHoldings**
+> ETFsHoldings etfsHoldings(symbol)
+
+ETFs Holdings
+
+Get current ETF holdings.
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
+try {
+    val result : ETFsHoldings = apiInstance.etfsHoldings(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#etfsHoldings")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#etfsHoldings")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| ETF symbol. |
+
+### Return type
+
+[**ETFsHoldings**](ETFsHoldings.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="etfsIndustryExposure"></a>
+# **etfsIndustryExposure**
+> ETFsIndustryExposure etfsIndustryExposure(symbol)
+
+ETFs Industry Exposure
+
+Get ETF industry exposure data.
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
+try {
+    val result : ETFsIndustryExposure = apiInstance.etfsIndustryExposure(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#etfsIndustryExposure")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#etfsIndustryExposure")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| ETF symbol. |
+
+### Return type
+
+[**ETFsIndustryExposure**](ETFsIndustryExposure.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="etfsProfile"></a>
+# **etfsProfile**
+> ETFsProfile etfsProfile(symbol)
+
+ETFs Profile
+
+Get ETF profile information. Currently support all US ETFs.
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
+try {
+    val result : ETFsProfile = apiInstance.etfsProfile(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#etfsProfile")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#etfsProfile")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| ETF symbol. |
+
+### Return type
+
+[**ETFsProfile**](ETFsProfile.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="filings"></a>
 # **filings**
 > kotlin.collections.List&lt;Filing&gt; filings(symbol, cik, accessNumber, form, from, to)
@@ -1446,6 +1653,106 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="indicesConstituents"></a>
+# **indicesConstituents**
+> IndicesConstituents indicesConstituents(symbol)
+
+Indices Constituents
+
+Get a list of index&#39;s constituents. Currently support &lt;code&gt;^GSPC (S&amp;P 500)&lt;/code&gt;, &lt;code&gt;^NDX (Nasdaq 100)&lt;/code&gt;, &lt;code&gt;^DJI (Dow Jones)&lt;/code&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | symbol
+try {
+    val result : IndicesConstituents = apiInstance.indicesConstituents(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#indicesConstituents")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#indicesConstituents")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| symbol |
+
+### Return type
+
+[**IndicesConstituents**](IndicesConstituents.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="indicesHistoricalConstituents"></a>
+# **indicesHistoricalConstituents**
+> IndicesHistoricalConstituents indicesHistoricalConstituents(symbol)
+
+Indices Historical Constituents
+
+Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC (S&amp;P 500)&lt;/code&gt;, &lt;code&gt;^NDX (Nasdaq 100)&lt;/code&gt;, &lt;code&gt;^DJI (Dow Jones)&lt;/code&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | symbol
+try {
+    val result : IndicesHistoricalConstituents = apiInstance.indicesHistoricalConstituents(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#indicesHistoricalConstituents")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#indicesHistoricalConstituents")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| symbol |
+
+### Return type
+
+[**IndicesHistoricalConstituents**](IndicesHistoricalConstituents.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="investorsOwnership"></a>
 # **investorsOwnership**
 > InvestorsOwnership investorsOwnership(symbol, limit)
@@ -1856,6 +2163,60 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="similarityIndex"></a>
+# **similarityIndex**
+> SimilarityIndex similarityIndex(symbol, cik, freq)
+
+Similarity Index
+
+&lt;p&gt;Calculate the textual difference between a company&#39;s 10-K / 10-Q reports and the same type of report in the previous year using Cosine Similarity. For example, this endpoint compares 2019&#39;s 10-K with 2018&#39;s 10-K. Companies breaking from its routines in disclosure of financial condition and risk analysis section can signal a significant change in the company&#39;s stock price in the upcoming 4 quarters.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import com.finnhub.api.infrastructure.*
+//import com.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Required if cik is empty
+val cik : kotlin.String = cik_example // kotlin.String | CIK. Required if symbol is empty
+val freq : kotlin.String = freq_example // kotlin.String | <code>annual</code> or <code>quarterly</code>. Default to <code>annual</code>
+try {
+    val result : SimilarityIndex = apiInstance.similarityIndex(symbol, cik, freq)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#similarityIndex")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#similarityIndex")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. Required if cik is empty | [optional]
+ **cik** | **kotlin.String**| CIK. Required if symbol is empty | [optional]
+ **freq** | **kotlin.String**| &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt; | [optional]
+
+### Return type
+
+[**SimilarityIndex**](SimilarityIndex.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="stockBidask"></a>
 # **stockBidask**
 > LastBidMinusAsk stockBidask(symbol)
@@ -2078,7 +2439,7 @@ Configure api_key:
 
 Stock Symbol
 
-List supported stocks.
+List supported stocks. A list of supported CFD Indices can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1BAbIXBgl405fj0oHeEyRFEu8mW4QD1PhvtaBATLoR14/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
 
 ### Example
 ```kotlin

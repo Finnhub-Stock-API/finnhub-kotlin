@@ -64,7 +64,7 @@ data class CompanyProfile (
     val cusip: kotlin.String? = null,
     /* Sedol number. */
     @Json(name = "sedol")
-    val sedol: kotlin.Long? = null,
+    val sedol: kotlin.String? = null,
     /* Company business summary. */
     @Json(name = "description")
     val description: kotlin.String? = null,

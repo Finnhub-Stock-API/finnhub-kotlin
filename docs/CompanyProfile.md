@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **country** | **kotlin.String** | Country of company&#39;s headquarter. |  [optional]
 **currency** | **kotlin.String** | Currency used in company filings. |  [optional]
 **cusip** | **kotlin.String** | CUSIP number. |  [optional]
-**sedol** | **kotlin.Long** | Sedol number. |  [optional]
+**sedol** | **kotlin.String** | Sedol number. |  [optional]
 **description** | **kotlin.String** | Company business summary. |  [optional]
 **exchange** | **kotlin.String** | Listed exchange. |  [optional]
 **ggroup** | **kotlin.String** | GICS industry group. |  [optional]

@@ -19,6 +19,8 @@ import java.io.Serializable
  * @param description Symbol description
  * @param displaySymbol Display symbol name.
  * @param symbol Unique symbol used to identify this symbol used in <code>/stock/candle</code> endpoint.
+ * @param type Security type.
+ * @param currency Price's currency. This might be different from the reporting currency of fundamental data.
  */
 
 data class Stock (
@@ -30,7 +32,13 @@ data class Stock (
     val displaySymbol: kotlin.String? = null,
     /* Unique symbol used to identify this symbol used in <code>/stock/candle</code> endpoint. */
     @Json(name = "symbol")
-    val symbol: kotlin.String? = null
+    val symbol: kotlin.String? = null,
+    /* Security type. */
+    @Json(name = "type")
+    val type: kotlin.String? = null,
+    /* Price's currency. This might be different from the reporting currency of fundamental data. */
+    @Json(name = "currency")
+    val currency: kotlin.String? = null
 ) : Serializable {
 	companion object {
 		private const val serialVersionUID: Long = 123

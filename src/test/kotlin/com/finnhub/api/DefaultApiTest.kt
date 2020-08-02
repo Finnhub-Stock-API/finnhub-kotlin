@@ -165,5 +165,23 @@ class DefaultApiTest {
 
         // Tick Data
         println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
+
+        // Indices Constituents
+        println(apiClient.indicesConstituents("^GSPC"))
+
+        // Indices Historical Constituents
+        println(apiClient.indicesHistoricalConstituents("^GSPC"))
+
+        // ETFs Profile
+        println(apiClient.etfsProfile("SPY"))
+
+        // ETFs Holdings
+        println(apiClient.etfsHoldings("SPY"))
+
+        // ETFs Industry Exposure
+        println(apiClient.etfsIndustryExposure("SPY"))
+
+        // ETFs Country Exposure
+        println(apiClient.etfsCountryExposure("SPY"))
     }
 }
