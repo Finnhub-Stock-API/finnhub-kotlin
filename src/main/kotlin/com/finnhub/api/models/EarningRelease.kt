@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Symbol.
@@ -27,38 +28,34 @@ import java.io.Serializable
  * @param revenueActual Revenue actual.
  */
 
+@Serializable
 data class EarningRelease (
     /* Symbol. */
-    @Json(name = "symbol")
+    @SerialName("symbol")
     val symbol: kotlin.String? = null,
     /* Date. */
-    @Json(name = "date")
+    @SerialName("date")
     val date: kotlin.String? = null,
     /* Indicates whether the earnings is announced before market open(<code>bmo</code>), after market close(<code>amc</code>), or during market hour(<code>dmh</code>). */
-    @Json(name = "hour")
+    @SerialName("hour")
     val hour: kotlin.String? = null,
     /* Earnings year. */
-    @Json(name = "year")
+    @SerialName("year")
     val year: kotlin.Long? = null,
     /* Earnings quarter. */
-    @Json(name = "quarter")
+    @SerialName("quarter")
     val quarter: kotlin.Long? = null,
     /* EPS estimate. */
-    @Json(name = "epsEstimate")
+    @SerialName("epsEstimate")
     val epsEstimate: kotlin.Float? = null,
     /* EPS actual. */
-    @Json(name = "epsActual")
+    @SerialName("epsActual")
     val epsActual: kotlin.Float? = null,
     /* Revenue estimate. */
-    @Json(name = "revenueEstimate")
+    @SerialName("revenueEstimate")
     val revenueEstimate: kotlin.Long? = null,
     /* Revenue actual. */
-    @Json(name = "revenueActual")
+    @SerialName("revenueActual")
     val revenueActual: kotlin.Long? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
+)
 

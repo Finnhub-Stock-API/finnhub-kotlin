@@ -11,9 +11,9 @@
 */
 package com.finnhub.api.models
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param name Investor's name.
@@ -22,23 +22,19 @@ import java.io.Serializable
  * @param filingDate Filing date.
  */
 
+@Serializable
 data class Investor (
     /* Investor's name. */
-    @Json(name = "name")
+    @SerialName("name")
     val name: kotlin.String? = null,
     /* Number of shares held by the investor. */
-    @Json(name = "share")
+    @SerialName("share")
     val share: kotlin.Long? = null,
     /* Number of share changed (net buy or sell) from the last period. */
-    @Json(name = "change")
+    @SerialName("change")
     val change: kotlin.Long? = null,
     /* Filing date. */
-    @Json(name = "filingDate")
+    @SerialName("filingDate")
     val filingDate: kotlin.String? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
+)
 

@@ -11,26 +11,25 @@
 */
 package com.finnhub.api.models
 
-import com.finnhub.api.models.Indicator
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param count 
  * @param signal Aggregate Signal
  */
 
+@Serializable
 data class TechnicalAnalysis (
-    @Json(name = "count")
+    @SerialName("count")
     val count: Indicator? = null,
     /* Aggregate Signal */
-    @Json(name = "signal")
-    val signal: kotlin.String? = null
-) : Serializable {
+    @SerialName("signal")
+    val signal: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

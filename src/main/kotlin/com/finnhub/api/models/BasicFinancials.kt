@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Symbol of the company.
@@ -21,19 +22,19 @@ import java.io.Serializable
  * @param metric 
  */
 
+@Serializable
 data class BasicFinancials (
     /* Symbol of the company. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Metric type. */
-    @Json(name = "metricType")
-    val metricType: kotlin.String? = null,
-    @Json(name = "metric")
-    val metric: kotlin.Any? = null
-) : Serializable {
+    @SerialName("metricType")
+    val metricType: String? = null,
+    @SerialName("metric")
+    val metric: Metric? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

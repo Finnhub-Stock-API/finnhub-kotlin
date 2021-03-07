@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param name Executive name
@@ -25,32 +26,31 @@ import java.io.Serializable
  * @param currency Compensation currency
  */
 
+@Serializable
 data class Company (
     /* Executive name */
-    @Json(name = "name")
-    val name: kotlin.String? = null,
+    @SerialName("name")
+    val name: String? = null,
     /* Age */
-    @Json(name = "age")
-    val age: kotlin.Long? = null,
+    @SerialName("age")
+    val age: Long? = null,
     /* Title */
-    @Json(name = "title")
-    val title: kotlin.String? = null,
+    @SerialName("title")
+    val title: String? = null,
     /* Year appointed */
-    @Json(name = "since")
-    val since: kotlin.String? = null,
+    @SerialName("since")
+    val since: String? = null,
     /* Sex */
-    @Json(name = "sex")
-    val sex: kotlin.String? = null,
+    @SerialName("sex")
+    val sex: String? = null,
     /* Total compensation */
-    @Json(name = "compensation")
-    val compensation: kotlin.Long? = null,
+    @SerialName("compensation")
+    val compensation: Long? = null,
     /* Compensation currency */
-    @Json(name = "currency")
-    val currency: kotlin.String? = null
-) : Serializable {
+    @SerialName("currency")
+    val currency: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
+    }
 }
 

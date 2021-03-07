@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param accessNumber Access number.
@@ -26,35 +27,35 @@ import java.io.Serializable
  * @param filingUrl Filing's URL.
  */
 
+@Serializable
 data class Filing (
     /* Access number. */
-    @Json(name = "accessNumber")
-    val accessNumber: kotlin.String? = null,
+    @SerialName("accessNumber")
+    val accessNumber: String? = null,
     /* Symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* CIK. */
-    @Json(name = "cik")
-    val cik: kotlin.String? = null,
+    @SerialName("cik")
+    val cik: String? = null,
     /* Form type. */
-    @Json(name = "form")
-    val form: kotlin.String? = null,
+    @SerialName("form")
+    val form: String? = null,
     /* Filed date <code>%Y-%m-%d %H:%M:%S</code>. */
-    @Json(name = "filedDate")
-    val filedDate: kotlin.String? = null,
+    @SerialName("filedDate")
+    val filedDate: String? = null,
     /* Accepted date <code>%Y-%m-%d %H:%M:%S</code>. */
-    @Json(name = "acceptedDate")
-    val acceptedDate: kotlin.String? = null,
+    @SerialName("acceptedDate")
+    val acceptedDate: String? = null,
     /* Report's URL. */
-    @Json(name = "reportUrl")
-    val reportUrl: kotlin.String? = null,
+    @SerialName("reportUrl")
+    val reportUrl: String? = null,
     /* Filing's URL. */
-    @Json(name = "filingUrl")
-    val filingUrl: kotlin.String? = null
-) : Serializable {
+    @SerialName("filingUrl")
+    val filingUrl: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

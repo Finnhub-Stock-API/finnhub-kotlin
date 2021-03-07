@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param s Symbol.
@@ -26,35 +27,35 @@ import java.io.Serializable
  * @param x List of venues/exchanges.
  */
 
+@Serializable
 data class TickData (
     /* Symbol. */
-    @Json(name = "s")
-    val s: kotlin.String? = null,
+    @SerialName("s")
+    val s: String? = null,
     /* Number of ticks skipped. */
-    @Json(name = "skip")
-    val skip: kotlin.Long? = null,
+    @SerialName("skip")
+    val skip: Long? = null,
     /* Number of ticks returned. If <code>count</code> < <code>limit</code>, all data for that date has been returned. */
-    @Json(name = "count")
-    val count: kotlin.Long? = null,
+    @SerialName("count")
+    val count: Long? = null,
     /* Total number of ticks for that date. */
-    @Json(name = "total")
-    val total: kotlin.Long? = null,
+    @SerialName("total")
+    val total: Long? = null,
     /* List of volume data. */
-    @Json(name = "v")
-    val v: kotlin.collections.List<kotlin.Float>? = null,
+    @SerialName("v")
+    val v: List<Float>? = null,
     /* List of price data. */
-    @Json(name = "p")
-    val p: kotlin.collections.List<kotlin.Float>? = null,
+    @SerialName("p")
+    val p: List<Float>? = null,
     /* List of timestamp in UNIX ms. */
-    @Json(name = "t")
-    val t: kotlin.collections.List<kotlin.Long>? = null,
+    @SerialName("t")
+    val t: List<Long>? = null,
     /* List of venues/exchanges. */
-    @Json(name = "x")
-    val x: kotlin.collections.List<kotlin.String>? = null
-) : Serializable {
+    @SerialName("x")
+    val x: List<String>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Company symbol.
@@ -24,29 +25,29 @@ import java.io.Serializable
  * @param action Action can take any of the following values: <code>up(upgrade), down(downgrade), main(maintains), init(initiate), reit(reiterate)</code>.
  */
 
+@Serializable
 data class UpgradeDowngrade (
     /* Company symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Upgrade/downgrade time in UNIX timestamp. */
-    @Json(name = "gradeTime")
-    val gradeTime: kotlin.Long? = null,
+    @SerialName("gradeTime")
+    val gradeTime: Long? = null,
     /* From grade. */
-    @Json(name = "fromGrade")
-    val fromGrade: kotlin.String? = null,
+    @SerialName("fromGrade")
+    val fromGrade: String? = null,
     /* To grade. */
-    @Json(name = "toGrade")
-    val toGrade: kotlin.String? = null,
+    @SerialName("toGrade")
+    val toGrade: String? = null,
     /* Company/analyst who did the upgrade/downgrade. */
-    @Json(name = "company")
-    val company: kotlin.String? = null,
+    @SerialName("company")
+    val company: String? = null,
     /* Action can take any of the following values: <code>up(upgrade), down(downgrade), main(maintains), init(initiate), reit(reiterate)</code>. */
-    @Json(name = "action")
-    val action: kotlin.String? = null
-) : Serializable {
+    @SerialName("action")
+    val action: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

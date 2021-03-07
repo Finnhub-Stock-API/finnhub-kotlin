@@ -11,26 +11,20 @@
 */
 package com.finnhub.api.models
 
-
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
 /**
  * 
  * @param industry Industry
  * @param exposure Percent of exposure.
  */
 
+@kotlinx.serialization.Serializable
 data class ETFSectorExposureData (
     /* Industry */
-    @Json(name = "industry")
+    @SerialName("industry")
     val industry: kotlin.String? = null,
     /* Percent of exposure. */
-    @Json(name = "exposure")
+    @SerialName("exposure")
     val exposure: kotlin.String? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
+)
 

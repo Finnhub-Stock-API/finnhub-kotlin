@@ -12,8 +12,10 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param accessNumber Access number.
@@ -29,43 +31,43 @@ import java.io.Serializable
  * @param report 
  */
 
+@Serializable
 data class Report (
     /* Access number. */
-    @Json(name = "accessNumber")
-    val accessNumber: kotlin.String? = null,
+    @SerialName("accessNumber")
+    val accessNumber: String? = null,
     /* Symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* CIK. */
-    @Json(name = "cik")
-    val cik: kotlin.String? = null,
+    @SerialName("cik")
+    val cik: String? = null,
     /* Year. */
-    @Json(name = "year")
-    val year: kotlin.Long? = null,
+    @SerialName("year")
+    val year: Long? = null,
     /* Quarter. */
-    @Json(name = "quarter")
-    val quarter: kotlin.Long? = null,
+    @SerialName("quarter")
+    val quarter: Long? = null,
     /* Form type. */
-    @Json(name = "form")
-    val form: kotlin.String? = null,
+    @SerialName("form")
+    val form: String? = null,
     /* Period start date <code>%Y-%m-%d %H:%M:%S</code>. */
-    @Json(name = "startDate")
-    val startDate: kotlin.String? = null,
+    @SerialName("startDate")
+    val startDate: String? = null,
     /* Period end date <code>%Y-%m-%d %H:%M:%S</code>. */
-    @Json(name = "endDate")
-    val endDate: kotlin.String? = null,
+    @SerialName("endDate")
+    val endDate: String? = null,
     /* Filed date <code>%Y-%m-%d %H:%M:%S</code>. */
-    @Json(name = "filedDate")
-    val filedDate: kotlin.String? = null,
+    @SerialName("filedDate")
+    val filedDate: String? = null,
     /* Accepted date <code>%Y-%m-%d %H:%M:%S</code>. */
-    @Json(name = "acceptedDate")
-    val acceptedDate: kotlin.String? = null,
-    @Json(name = "report")
-    val report: kotlin.Any? = null
-) : Serializable {
+    @SerialName("acceptedDate")
+    val acceptedDate: String? = null,
+    @SerialName("report")
+    val report: JsonObject? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

@@ -11,11 +11,9 @@
 */
 package com.finnhub.api.models
 
-import com.finnhub.api.models.CompanyNewsStatistics
-import com.finnhub.api.models.Sentiment
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param buzz 
@@ -26,27 +24,27 @@ import java.io.Serializable
  * @param symbol Requested symbol.
  */
 
+@Serializable
 data class NewsSentiment (
-    @Json(name = "buzz")
+    @SerialName("buzz")
     val buzz: CompanyNewsStatistics? = null,
     /* News score. */
-    @Json(name = "companyNewsScore")
-    val companyNewsScore: kotlin.Float? = null,
+    @SerialName("companyNewsScore")
+    val companyNewsScore: Float? = null,
     /* Sector average bullish percent. */
-    @Json(name = "sectorAverageBullishPercent")
-    val sectorAverageBullishPercent: kotlin.Float? = null,
+    @SerialName("sectorAverageBullishPercent")
+    val sectorAverageBullishPercent: Float? = null,
     /* Sectore average score. */
-    @Json(name = "sectorAverageNewsScore")
-    val sectorAverageNewsScore: kotlin.Float? = null,
-    @Json(name = "sentiment")
+    @SerialName("sectorAverageNewsScore")
+    val sectorAverageNewsScore: Float? = null,
+    @SerialName("sentiment")
     val sentiment: Sentiment? = null,
     /* Requested symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null
-) : Serializable {
+    @SerialName("symbol")
+    val symbol: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

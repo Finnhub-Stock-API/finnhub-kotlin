@@ -12,8 +12,10 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param symbol Symbol.
@@ -21,20 +23,20 @@ import java.io.Serializable
  * @param similarity Array of filings with its cosine similarity compared to the same report of the previous year.
  */
 
+@Serializable
 data class SimilarityIndex (
     /* Symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* CIK. */
-    @Json(name = "cik")
-    val cik: kotlin.String? = null,
+    @SerialName("cik")
+    val cik: String? = null,
     /* Array of filings with its cosine similarity compared to the same report of the previous year. */
-    @Json(name = "similarity")
-    val similarity: kotlin.collections.List<kotlin.Any>? = null
-) : Serializable {
+    @SerialName("similarity")
+    val similarity: List<JsonObject>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

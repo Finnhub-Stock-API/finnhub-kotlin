@@ -1,31 +1,22 @@
 package com.finnhub.api.infrastructure
 
-import okhttp3.Credentials
-import okhttp3.OkHttpClient
-import okhttp3.RequestBody
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.JsonObject
+import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.FormBody
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import okhttp3.ResponseBody
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.Request
-import okhttp3.Headers
-import okhttp3.MultipartBody
 import java.io.File
 import java.net.URLConnection
-import java.util.Date
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.OffsetDateTime
-import java.time.OffsetTime
+import java.time.*
+import java.util.*
 
 open class ApiClient(val baseUrl: String) {
     companion object {
         protected const val ContentType = "Content-Type"
         protected const val Accept = "Accept"
-        protected const val Authorization = "Authorization"
         protected const val JsonMediaType = "application/json"
         protected const val FormDataMediaType = "multipart/form-data"
         protected const val FormUrlEncMediaType = "application/x-www-form-urlencoded"
@@ -33,9 +24,6 @@ open class ApiClient(val baseUrl: String) {
 
         val apiKey: MutableMap<String, String> = mutableMapOf()
         val apiKeyPrefix: MutableMap<String, String> = mutableMapOf()
-        var username: String? = null
-        var password: String? = null
-        var accessToken: String? = null
 
         @JvmStatic
         val client: OkHttpClient by lazy {
@@ -98,7 +86,7 @@ open class ApiClient(val baseUrl: String) {
                     }
                 }.build()
             }
-            mediaType == JsonMediaType -> Serializer.moshi.adapter(T::class.java).toJson(content).toRequestBody(
+            mediaType == JsonMediaType -> Serializer.json.encodeToString(content).toRequestBody(
                 mediaType.toMediaTypeOrNull()
             )
             mediaType == XmlMediaType -> throw UnsupportedOperationException("xml not currently supported.")
@@ -115,7 +103,7 @@ open class ApiClient(val baseUrl: String) {
             return null
         }
         return when(mediaType) {
-            JsonMediaType -> Serializer.moshi.adapter(T::class.java).fromJson(bodyContent)
+            JsonMediaType -> Serializer.json.decodeFromString<T>(bodyContent)
             else ->  throw UnsupportedOperationException("responseBody currently only supports JSON body.")
         }
     }
@@ -132,7 +120,7 @@ open class ApiClient(val baseUrl: String) {
         }
     }
 
-    protected inline fun <reified T: Any?> request(requestConfig: RequestConfig, body : Any? = null): ApiInfrastructureResponse<T?> {
+    protected inline fun <reified T: Any?> request(requestConfig: RequestConfig, body : JsonObject? = null): ApiInfrastructureResponse<T?> {
         val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         // take authMethod from operation
@@ -215,22 +203,12 @@ open class ApiClient(val baseUrl: String) {
     }
 
     protected fun parameterToString(value: Any?): String {
-        when (value) {
-            null -> {
-                return ""
-            }
-            is Array<*> -> {
-                return toMultiValue(value, "csv").toString()
-            }
-            is Iterable<*> -> {
-                return toMultiValue(value, "csv").toString()
-            }
-            is OffsetDateTime, is OffsetTime, is LocalDateTime, is LocalDate, is LocalTime, is Date -> {
-                return parseDateToQueryString<Any>(value)
-            }
-            else -> {
-                return value.toString()
-            }
+        return when (value) {
+            null -> ""
+            is Array<*> -> toMultiValue(value, "csv").toString()
+            is Iterable<*> -> toMultiValue(value, "csv").toString()
+            is OffsetDateTime, is OffsetTime, is LocalDateTime, is LocalDate, is LocalTime, is Date -> parseDateToQueryString(value)
+            else -> value.toString()
         }
     }
 
@@ -241,6 +219,6 @@ open class ApiClient(val baseUrl: String) {
         formatter. It also easily allows to provide a simple way to define a custom date format pattern
         inside a gson/moshi adapter.
         */
-        return Serializer.moshi.adapter(T::class.java).toJson(value).replace("\"", "")
+        return Serializer.json.encodeToString(value).replace("\"", "")
     }
 }

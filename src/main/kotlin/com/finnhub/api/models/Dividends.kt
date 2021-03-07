@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Symbol.
@@ -26,35 +27,35 @@ import java.io.Serializable
  * @param currency Currency.
  */
 
+@Serializable
 data class Dividends (
     /* Symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Ex-Dividend date. */
-    @Json(name = "date")
-    val date: kotlin.String? = null,
+    @SerialName("date")
+    val date: String? = null,
     /* Amount in local currency. */
-    @Json(name = "amount")
-    val amount: kotlin.Float? = null,
+    @SerialName("amount")
+    val amount: Float? = null,
     /* Adjusted dividend. */
-    @Json(name = "adjustedAmount")
-    val adjustedAmount: kotlin.Float? = null,
+    @SerialName("adjustedAmount")
+    val adjustedAmount: Float? = null,
     /* Pay date. */
-    @Json(name = "payDate")
-    val payDate: kotlin.String? = null,
+    @SerialName("payDate")
+    val payDate: String? = null,
     /* Record date. */
-    @Json(name = "recordDate")
-    val recordDate: kotlin.String? = null,
+    @SerialName("recordDate")
+    val recordDate: String? = null,
     /* Declaration date. */
-    @Json(name = "declarationDate")
-    val declarationDate: kotlin.String? = null,
+    @SerialName("declarationDate")
+    val declarationDate: String? = null,
     /* Currency. */
-    @Json(name = "currency")
-    val currency: kotlin.String? = null
-) : Serializable {
+    @SerialName("currency")
+    val currency: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

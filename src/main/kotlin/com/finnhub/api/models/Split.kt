@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Symbol.
@@ -22,23 +23,23 @@ import java.io.Serializable
  * @param toFactor To factor.
  */
 
+@Serializable
 data class Split (
     /* Symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Split date. */
-    @Json(name = "date")
-    val date: kotlin.String? = null,
+    @SerialName("date")
+    val date: String? = null,
     /* From factor. */
-    @Json(name = "fromFactor")
-    val fromFactor: kotlin.Float? = null,
+    @SerialName("fromFactor")
+    val fromFactor: Float? = null,
     /* To factor. */
-    @Json(name = "toFactor")
-    val toFactor: kotlin.Float? = null
-) : Serializable {
+    @SerialName("toFactor")
+    val toFactor: Float? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param revenueAvg Average revenue estimates.
@@ -23,23 +24,24 @@ import java.io.Serializable
  * @param period Period.
  */
 
+@Serializable
 data class Estimate (
     /* Average revenue estimates. */
-    @Json(name = "revenueAvg")
-    val revenueAvg: kotlin.Long? = null,
+    @SerialName("revenueAvg")
+    val revenueAvg: Long? = null,
     /* Highest estimate. */
-    @Json(name = "revenueHigh")
-    val revenueHigh: kotlin.Long? = null,
+    @SerialName("revenueHigh")
+    val revenueHigh: Long? = null,
     /* Lowest estimate. */
-    @Json(name = "revenueLow")
-    val revenueLow: kotlin.Long? = null,
+    @SerialName("revenueLow")
+    val revenueLow: Long? = null,
     /* Number of Analysts. */
-    @Json(name = "numberAnalysts")
-    val numberAnalysts: kotlin.Long? = null,
+    @SerialName("numberAnalysts")
+    val numberAnalysts: Long? = null,
     /* Period. */
-    @Json(name = "period")
-    val period: kotlin.String? = null
-) : Serializable {
+    @SerialName("period")
+    val period: String? = null
+) {
 	companion object {
 		private const val serialVersionUID: Long = 123
 	}

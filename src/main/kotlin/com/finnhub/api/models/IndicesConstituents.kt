@@ -12,25 +12,26 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Index's symbol.
  * @param constituents Array of constituents.
  */
 
+@Serializable
 data class IndicesConstituents (
     /* Index's symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Array of constituents. */
-    @Json(name = "constituents")
-    val constituents: kotlin.collections.List<kotlin.String>? = null
-) : Serializable {
+    @SerialName("constituents")
+    val constituents: List<String>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 
