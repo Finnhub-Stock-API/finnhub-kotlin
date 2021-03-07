@@ -12,25 +12,27 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param symbol Company symbol.
  * @param majorDevelopment Array of major developments.
  */
 
+@Serializable
 data class MajorDevelopments (
     /* Company symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Array of major developments. */
-    @Json(name = "majorDevelopment")
-    val majorDevelopment: kotlin.collections.List<kotlin.Any>? = null
-) : Serializable {
+    @SerialName("majorDevelopment")
+    val majorDevelopment: List<JsonObject>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

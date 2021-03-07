@@ -2,18 +2,20 @@ package com.finnhub.api
 
 import com.finnhub.api.apis.DefaultApi
 import com.finnhub.api.infrastructure.ApiClient
-import org.junit.Ignore
 import org.junit.Test
 
 class DefaultApiTest {
 
-    @Test
-    @Ignore
-    fun commonApi() {
-        ApiClient.apiKey["token"] = "YOUR API KEY"
-        val apiClient = DefaultApi()
 
-        // Technical Indicator
+    private val apiClient: DefaultApi
+
+    init {
+        ApiClient.apiKey["token"] = "sandbox_c124g8n48v6p2grlmca0"
+        apiClient = DefaultApi()
+    }
+
+    @Test
+    fun technicalIndicator() {
         println(apiClient.technicalIndicator(
             symbol = "AAPL",
             resolution = "D",
@@ -22,56 +24,87 @@ class DefaultApiTest {
             indicator = "sma",
             indicatorFields = mapOf<String, Any>("timeperiod" to 3)
         ))
+    }
 
-        // Stock candles
+    @Test
+    fun stockCandles() {
         println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249, null))
+    }
 
-        // Aggregate Indicators
+    @Test
+    fun aggregateIndicator() {
         println(apiClient.aggregateIndicator("AAPL", "D"))
+    }
 
-        // Basic financials
+    @Test
+    fun basicFinancials() {
         println(apiClient.companyBasicFinancials("AAPL", "margin"))
+    }
 
-        // Earnings surprises
+    @Test
+    fun companyEarnings() {
         println(apiClient.companyEarnings("TSLA", limit = 5))
+    }
 
-        // EPS estimates
+    @Test
+    fun companyEpsEstimates() {
         println(apiClient.companyEpsEstimates("AMZN", freq = "quarterly"))
+    }
 
-        // Company Executives
+    @Test
+    fun companyExecutive() {
         println(apiClient.companyExecutive("AAPL"))
+    }
 
-        // Company News
-        // Need to use from instead of from to avoid conflict
+    @Test
+    fun companyNews() {
         println(apiClient.companyNews("AAPL", from = "2020-06-01", to = "2020-06-10"))
+    }
 
-        // Company Peers
+    @Test
+    fun companyPeers() {
         println(apiClient.companyPeers("AAPL"))
+    }
 
-        // Company Profile
+    @Test
+    fun companyProfile() {
         println(apiClient.companyProfile(symbol = "AAPL", isin = null, cusip = null))
         println(apiClient.companyProfile(isin = "US0378331005", symbol = null, cusip = null))
         println(apiClient.companyProfile(cusip = "037833100", symbol = null, isin = null))
+    }
 
-        // Company Profile 2
+    @Test
+    fun companyProfile2() {
         println(apiClient.companyProfile2(symbol = "AAPL", isin = null, cusip = null))
+    }
 
-        // Revenue Estimates
+    @Test
+    fun companyRevenueEstimates() {
         println(apiClient.companyRevenueEstimates("TSLA", freq = "quarterly"))
+    }
 
-        // List country
+    @Test
+    fun country() {
         println(apiClient.country())
+    }
 
-        // Crypto Exchange
+    @Test
+    fun cryptoExchange() {
         println(apiClient.cryptoExchanges())
+    }
 
-        // Crypto symbols
+    @Test
+    fun cryptoSymbols() {
         println(apiClient.cryptoSymbols("BINANCE"))
+    }
 
-        // Economic data
+    @Test
+    fun economicData() {
         println(apiClient.economicData("MA-USA-656880"))
+    }
 
-        // Filings
+    @Test
+    fun filings() {
         println(apiClient.filings(
             symbol = "AAPL",
             from = "2020-01-01",
@@ -80,108 +113,174 @@ class DefaultApiTest {
             cik = null,
             form = null
         ))
+    }
 
-        // Financials
+    @Test
+    fun financials() {
         println(apiClient.financials("AAPL", "bs", "annual"))
+    }
 
-        // Financials as reported
+    @Test
+    fun financialsReported() {
         println(apiClient.financialsReported(symbol = "AAPL", freq = "annual", accessNumber = null, cik = null))
+    }
 
-        // Forex exchanges
+    @Test
+    fun forexExchanges() {
         println(apiClient.forexExchanges())
+    }
 
-        // Forex all pairs
+    @Test
+    fun forexRates() {
         println(apiClient.forexRates(base = "USD"))
+    }
 
-        // Forex symbols
+    @Test
+    fun forexSymbols() {
         println(apiClient.forexSymbols("OANDA"))
+    }
 
-        // Fund Ownership
+    @Test
+    fun fundOwnership() {
         println(apiClient.fundOwnership("AMZN", limit = 5))
+    }
 
-        // General news
+    @Test
+    fun generalNews() {
         println(apiClient.generalNews("forex", minId = "0"))
+    }
 
-        // Investors ownership
+    @Test
+    fun investorsOwnership() {
         println(apiClient.investorsOwnership("AAPL", limit = 5))
+    }
 
-        // IPO calendar
+    @Test
+    fun ipoCalendar() {
         println(apiClient.ipoCalendar(from = "2020-05-01", to = "2020-06-01"))
+    }
 
-        // Major developments
+    @Test
+    fun majorDevelopments() {
         println(apiClient.majorDevelopments("AAPL", from = "2020-01-01", to = "2020-12-31"))
+    }
 
-        // Pattern recognition
+    @Test
+    fun patternRecognition() {
         println(apiClient.patternRecognition("AAPL", "D"))
+    }
 
-        // Price target
+    @Test
+    fun priceTarget() {
         println(apiClient.priceTarget("AAPL"))
+    }
 
-        // Quote
+    @Test
+    fun quote() {
         println(apiClient.quote("AAPL"))
+    }
 
-        // Recommendation trends
+    @Test
+    fun recommendationTrends() {
         println(apiClient.recommendationTrends("AAPL"))
+    }
 
-        // Stock dividends
+    @Test
+    fun stockDividends() {
         println(apiClient.stockDividends("KO", from = "2019-01-01", to = "2020-01-01"))
+    }
 
-        // Stock symbols
+    @Test
+    fun stockSymbols() {
         println(apiClient.stockSymbols("US"))
+    }
 
-        // Transcripts
+    @Test
+    fun transcripts() {
         println(apiClient.transcripts("AAPL_162777"))
+    }
 
-        // Transcripts list
+    @Test
+    fun transcriptsList() {
         println(apiClient.transcriptsList("AAPL"))
+    }
 
-        // Earnings Calendar
+    @Test
+    fun earningsCalendar() {
         println(apiClient.earningsCalendar(from = "2020-06-10", to = "2020-06-30", symbol = "", international = false))
+    }
 
-        // Covid-19
+    @Test
+    fun covid19() {
         println(apiClient.covid19())
+    }
 
-        // Upgrade downgrade
+    @Test
+    fun upgradeDowngrade() {
         println(apiClient.upgradeDowngrade(symbol = "AAPL", from = "2020-01-01", to = "2020-06-30"))
+    }
 
-        // Economic code
+    @Test
+    fun economicCode() {
         println(apiClient.economicCode())
+    }
 
-        // Support resistance
+    @Test
+    fun supportResistance() {
         println(apiClient.supportResistance("AAPL", "D"))
+    }
 
-        // Stock splits
+    @Test
+    fun stockSplits() {
         println(apiClient.stockSplits(
             symbol = "AAPL",
             from = "2000-01-01",
             to = "2020-01-01")
         )
+    }
 
-        // Forex candles
+    @Test
+    fun forexCandles() {
         println(apiClient.forexCandles("OANDA:EUR_USD", "D", 1590988249, 1591852249))
+    }
 
-        // Crypto Candles
+    @Test
+    fun cryptoCandles() {
         println(apiClient.cryptoCandles("BINANCE:BTCUSDT", "D", 1590988249, 1591852249))
+    }
 
-        // Tick Data
+    @Test
+    fun stockTick() {
         println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
+    }
 
-        // Indices Constituents
+    @Test
+    fun indicesConstituents() {
         println(apiClient.indicesConstituents("^GSPC"))
+    }
 
-        // Indices Historical Constituents
+    @Test
+    fun indicesHistoricalConstituents() {
         println(apiClient.indicesHistoricalConstituents("^GSPC"))
+    }
 
-        // ETFs Profile
+    @Test
+    fun etfsProfile() {
         println(apiClient.etfsProfile("SPY"))
+    }
 
-        // ETFs Holdings
+    @Test
+    fun etfsHoldings() {
         println(apiClient.etfsHoldings("SPY"))
+    }
 
-        // ETFs Industry Exposure
+    @Test
+    fun etfsIndustryExposure() {
         println(apiClient.etfsIndustryExposure("SPY"))
+    }
 
-        // ETFs Country Exposure
+    @Test
+    fun etfsCountryExposure() {
         println(apiClient.etfsCountryExposure("SPY"))
     }
 }

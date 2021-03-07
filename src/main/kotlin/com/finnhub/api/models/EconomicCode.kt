@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param code Finnhub economic code used to get historical data
@@ -22,23 +23,23 @@ import java.io.Serializable
  * @param unit Unit
  */
 
+@Serializable
 data class EconomicCode (
     /* Finnhub economic code used to get historical data */
-    @Json(name = "code")
-    val code: kotlin.String? = null,
+    @SerialName("code")
+    val code: String? = null,
     /* Country */
-    @Json(name = "country")
-    val country: kotlin.String? = null,
+    @SerialName("country")
+    val country: String? = null,
     /* Indicator name */
-    @Json(name = "name")
-    val name: kotlin.String? = null,
+    @SerialName("name")
+    val name: String? = null,
     /* Unit */
-    @Json(name = "unit")
-    val unit: kotlin.String? = null
-) : Serializable {
+    @SerialName("unit")
+    val unit: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

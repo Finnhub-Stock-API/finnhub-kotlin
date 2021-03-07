@@ -12,25 +12,27 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param symbol Symbol of the company.
  * @param ownership Array of investors with detailed information about their holdings.
  */
 
+@Serializable
 data class InvestorsOwnership (
     /* Symbol of the company. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Array of investors with detailed information about their holdings. */
-    @Json(name = "ownership")
-    val ownership: kotlin.collections.List<kotlin.Any>? = null
-) : Serializable {
+    @SerialName("ownership")
+    val ownership: List<JsonObject>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

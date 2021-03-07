@@ -11,9 +11,9 @@
 */
 package com.finnhub.api.models
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param symbol Symbol
@@ -21,20 +21,16 @@ import java.io.Serializable
  * @param date Date of joining or leaving the index.
  */
 
+@Serializable
 data class IndexHistoricalConstituent (
     /* Symbol */
-    @Json(name = "symbol")
+    @SerialName("symbol")
     val symbol: kotlin.String? = null,
     /* <code>add</code> or <code>remove</code>. */
-    @Json(name = "action")
+    @SerialName("action")
     val action: kotlin.String? = null,
     /* Date of joining or leaving the index. */
-    @Json(name = "date")
+    @SerialName("date")
     val date: kotlin.String? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
+)
 

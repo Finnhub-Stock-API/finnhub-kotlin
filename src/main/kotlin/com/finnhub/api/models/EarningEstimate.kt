@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param epsAvg Average EPS estimates.
@@ -23,26 +24,21 @@ import java.io.Serializable
  * @param period Period.
  */
 
+@Serializable
 data class EarningEstimate (
     /* Average EPS estimates. */
-    @Json(name = "epsAvg")
+    @SerialName("epsAvg")
     val epsAvg: kotlin.Float? = null,
     /* Highest estimate. */
-    @Json(name = "epsHigh")
+    @SerialName("epsHigh")
     val epsHigh: kotlin.Float? = null,
     /* Lowest estimate. */
-    @Json(name = "epsLow")
+    @SerialName("epsLow")
     val epsLow: kotlin.Float? = null,
     /* Number of Analysts. */
-    @Json(name = "numberAnalysts")
+    @SerialName("numberAnalysts")
     val numberAnalysts: kotlin.Long? = null,
     /* Period. */
-    @Json(name = "period")
+    @SerialName("period")
     val period: kotlin.String? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
-
+)

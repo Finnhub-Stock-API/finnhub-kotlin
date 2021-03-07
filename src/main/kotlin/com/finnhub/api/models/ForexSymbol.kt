@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param description Symbol description
@@ -21,20 +22,20 @@ import java.io.Serializable
  * @param symbol Unique symbol used to identify this symbol used in <code>/forex/candle</code> endpoint.
  */
 
+@Serializable
 data class ForexSymbol (
     /* Symbol description */
-    @Json(name = "description")
-    val description: kotlin.String? = null,
+    @SerialName("description")
+    val description: String? = null,
     /* Display symbol name. */
-    @Json(name = "displaySymbol")
-    val displaySymbol: kotlin.String? = null,
+    @SerialName("displaySymbol")
+    val displaySymbol: String? = null,
     /* Unique symbol used to identify this symbol used in <code>/forex/candle</code> endpoint. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null
-) : Serializable {
+    @SerialName("symbol")
+    val symbol: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

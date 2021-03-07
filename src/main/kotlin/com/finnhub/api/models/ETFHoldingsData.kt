@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param symbol Symbol description
@@ -21,17 +22,18 @@ import java.io.Serializable
  * @param percent Portfolio's percent
  */
 
+@Serializable
 data class ETFHoldingsData (
     /* Symbol description */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Number of shares owned by the ETF. */
-    @Json(name = "share")
-    val share: kotlin.Float? = null,
+    @SerialName("share")
+    val share: Float? = null,
     /* Portfolio's percent */
-    @Json(name = "percent")
-    val percent: kotlin.Float? = null
-) : Serializable {
+    @SerialName("percent")
+    val percent: Float? = null
+) {
 	companion object {
 		private const val serialVersionUID: Long = 123
 	}

@@ -12,8 +12,10 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param symbol Company symbol.
@@ -27,38 +29,38 @@ import java.io.Serializable
  * @param quarter Quarter of earnings result in the case of earnings call transcript.
  */
 
+@Serializable
 data class EarningsCallTranscripts (
     /* Company symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Transcript content. */
-    @Json(name = "transcript")
-    val transcript: kotlin.collections.List<kotlin.Any>? = null,
+    @SerialName("transcript")
+    val transcript: List<JsonObject>? = null,
     /* Participant list */
-    @Json(name = "participant")
-    val participant: kotlin.collections.List<kotlin.Any>? = null,
+    @SerialName("participant")
+    val participant: List<JsonObject>? = null,
     /* Audio link. */
-    @Json(name = "audio")
-    val audio: kotlin.String? = null,
+    @SerialName("audio")
+    val audio: String? = null,
     /* Transcript's ID. */
-    @Json(name = "id")
-    val id: kotlin.String? = null,
+    @SerialName("id")
+    val id: String? = null,
     /* Title. */
-    @Json(name = "title")
-    val title: kotlin.String? = null,
+    @SerialName("title")
+    val title: String? = null,
     /* Time of the event. */
-    @Json(name = "time")
-    val time: kotlin.String? = null,
+    @SerialName("time")
+    val time: String? = null,
     /* Year of earnings result in the case of earnings call transcript. */
-    @Json(name = "year")
-    val year: kotlin.Long? = null,
+    @SerialName("year")
+    val year: Long? = null,
     /* Quarter of earnings result in the case of earnings call transcript. */
-    @Json(name = "quarter")
-    val quarter: kotlin.Long? = null
-) : Serializable {
+    @SerialName("quarter")
+    val quarter: Long? = null
+) {
 	companion object {
 		private const val serialVersionUID: Long = 123
 	}
-
 }
 

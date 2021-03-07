@@ -12,24 +12,26 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param base Base currency.
  * @param quote 
  */
 
+@Serializable
 data class Forexrates (
     /* Base currency. */
-    @Json(name = "base")
-    val base: kotlin.String? = null,
-    @Json(name = "quote")
-    val quote: kotlin.Any? = null
-) : Serializable {
+    @SerialName("base")
+    val base: String? = null,
+    @SerialName("quote")
+    val quote: JsonObject? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 
