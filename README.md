@@ -2,8 +2,8 @@
 
 ## Requires
 
-* Kotlin 1.3.41
-* Gradle 4.9
+- Kotlin 1.3.41
+- Gradle 4.9
 
 ## Installation
 
@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>com.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,7 +29,7 @@ For Maven
 For Gradle
 
 ```
-implementation 'com.finnhub:kotlin-client:1.1.0'
+implementation 'com.finnhub:kotlin-client:1.2.0'
 ```
 
 ## Getting Started
