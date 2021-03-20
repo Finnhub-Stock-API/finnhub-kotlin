@@ -12,20 +12,22 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param points Array of patterns.
  */
 
+@Serializable
 data class PatternRecognition (
     /* Array of patterns. */
-    @Json(name = "points")
-    val points: kotlin.collections.List<kotlin.Any>? = null
-) : Serializable {
+    @SerialName("points")
+    val points: List<JsonObject>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
 	}
 
 }

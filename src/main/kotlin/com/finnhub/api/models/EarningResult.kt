@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param actual Actual earning result.
@@ -22,23 +23,23 @@ import java.io.Serializable
  * @param symbol Company symbol.
  */
 
+@Serializable
 data class EarningResult (
     /* Actual earning result. */
-    @Json(name = "actual")
-    val actual: kotlin.Float? = null,
+    @SerialName("actual")
+    val actual: Float? = null,
     /* Estimated earning. */
-    @Json(name = "estimate")
-    val estimate: kotlin.Float? = null,
+    @SerialName("estimate")
+    val estimate: Float? = null,
     /* Reported period. */
-    @Json(name = "period")
-    val period: kotlin.String? = null,
+    @SerialName("period")
+    val period: String? = null,
     /* Company symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null
-) : Serializable {
+    @SerialName("symbol")
+    val symbol: String? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

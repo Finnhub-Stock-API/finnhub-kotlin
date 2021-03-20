@@ -11,9 +11,9 @@
 */
 package com.finnhub.api.models
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param id Transcript's ID used to get the <a href=\"#transcripts\">full transcript</a>.
@@ -23,26 +23,22 @@ import java.io.Serializable
  * @param quarter Quarter of earnings result in the case of earnings call transcript.
  */
 
+@Serializable
 data class StockTranscripts (
     /* Transcript's ID used to get the <a href=\"#transcripts\">full transcript</a>. */
-    @Json(name = "id")
+    @SerialName("id")
     val id: kotlin.String? = null,
     /* Title. */
-    @Json(name = "title")
+    @SerialName("title")
     val title: kotlin.String? = null,
     /* Time of the event. */
-    @Json(name = "time")
+    @SerialName("time")
     val time: kotlin.String? = null,
     /* Year of earnings result in the case of earnings call transcript. */
-    @Json(name = "year")
+    @SerialName("year")
     val year: kotlin.Long? = null,
     /* Quarter of earnings result in the case of earnings call transcript. */
-    @Json(name = "quarter")
+    @SerialName("quarter")
     val quarter: kotlin.Long? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
+)
 

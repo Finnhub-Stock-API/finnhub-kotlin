@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param articlesInLastWeek 
@@ -21,20 +22,20 @@ import java.io.Serializable
  * @param weeklyAverage 
  */
 
+@Serializable
 data class CompanyNewsStatistics (
     /*  */
-    @Json(name = "articlesInLastWeek")
-    val articlesInLastWeek: kotlin.Long? = null,
+    @SerialName("articlesInLastWeek")
+    val articlesInLastWeek: Long? = null,
     /*  */
-    @Json(name = "buzz")
-    val buzz: kotlin.Float? = null,
+    @SerialName("buzz")
+    val buzz: Float? = null,
     /*  */
-    @Json(name = "weeklyAverage")
-    val weeklyAverage: kotlin.Float? = null
-) : Serializable {
+    @SerialName("weeklyAverage")
+    val weeklyAverage: Float? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

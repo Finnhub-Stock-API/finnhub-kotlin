@@ -12,20 +12,21 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param levels Array of support and resistance levels.
  */
 
+@Serializable
 data class SupportResistance (
     /* Array of support and resistance levels. */
-    @Json(name = "levels")
-    val levels: kotlin.collections.List<kotlin.Float>? = null
-) : Serializable {
+    @SerialName("levels")
+    val levels: List<Float>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
 	}
 
 }

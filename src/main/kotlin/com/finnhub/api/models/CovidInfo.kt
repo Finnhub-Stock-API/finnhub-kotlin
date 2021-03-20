@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param state State.
@@ -22,20 +23,21 @@ import java.io.Serializable
  * @param updated Updated time.
  */
 
+@Serializable
 data class CovidInfo (
     /* State. */
-    @Json(name = "state")
-    val state: kotlin.String? = null,
+    @SerialName("state")
+    val state: String? = null,
     /* Number of confirmed cases. */
-    @Json(name = "case")
-    val case: kotlin.Float? = null,
+    @SerialName("case")
+    val case: Float? = null,
     /* Number of confirmed deaths. */
-    @Json(name = "death")
-    val death: kotlin.Float? = null,
+    @SerialName("death")
+    val death: Float? = null,
     /* Updated time. */
-    @Json(name = "updated")
-    val updated: kotlin.String? = null
-) : Serializable {
+    @SerialName("updated")
+    val updated: String? = null
+) {
 	companion object {
 		private const val serialVersionUID: Long = 123
 	}

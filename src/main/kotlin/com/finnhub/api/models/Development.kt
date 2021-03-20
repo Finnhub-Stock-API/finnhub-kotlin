@@ -11,9 +11,9 @@
 */
 package com.finnhub.api.models
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param symbol Company symbol.
@@ -22,23 +22,19 @@ import java.io.Serializable
  * @param description Development description.
  */
 
+@Serializable
 data class Development (
     /* Company symbol. */
-    @Json(name = "symbol")
+    @SerialName("symbol")
     val symbol: kotlin.String? = null,
     /* Published time in <code>YYYY-MM-DD HH:MM:SS</code> format. */
-    @Json(name = "datetime")
+    @SerialName("datetime")
     val datetime: kotlin.String? = null,
     /* Development headline. */
-    @Json(name = "headline")
+    @SerialName("headline")
     val headline: kotlin.String? = null,
     /* Development description. */
-    @Json(name = "description")
+    @SerialName("description")
     val description: kotlin.String? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
+)
 

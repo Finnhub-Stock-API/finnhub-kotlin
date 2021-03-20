@@ -12,8 +12,9 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * 
  * @param buy Number of buy signals
@@ -21,20 +22,20 @@ import java.io.Serializable
  * @param sell Number of sell signals
  */
 
+@Serializable
 data class Indicator (
     /* Number of buy signals */
-    @Json(name = "buy")
-    val buy: kotlin.Long? = null,
+    @SerialName("buy")
+    val buy: Long? = null,
     /* Number of neutral signals */
-    @Json(name = "neutral")
-    val neutral: kotlin.Long? = null,
+    @SerialName("neutral")
+    val neutral: Long? = null,
     /* Number of sell signals */
-    @Json(name = "sell")
-    val sell: kotlin.Long? = null
-) : Serializable {
+    @SerialName("sell")
+    val sell: Long? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    }
 
 }
 

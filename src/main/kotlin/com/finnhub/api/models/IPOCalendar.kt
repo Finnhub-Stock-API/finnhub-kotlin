@@ -12,20 +12,22 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param ipoCalendar Array of IPO events.
  */
 
+@Serializable
 data class IPOCalendar (
     /* Array of IPO events. */
-    @Json(name = "ipoCalendar")
-    val ipoCalendar: kotlin.collections.List<kotlin.Any>? = null
-) : Serializable {
+    @SerialName("ipoCalendar")
+    val ipoCalendar: List<JsonObject>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
 	}
 
 }

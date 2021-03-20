@@ -11,9 +11,9 @@
 */
 package com.finnhub.api.models
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import java.io.Serializable
 /**
  * 
  * @param actual Actual release
@@ -26,35 +26,30 @@ import java.io.Serializable
  * @param time Release time
  */
 
+@Serializable
 data class EconomicEvent (
     /* Actual release */
-    @Json(name = "actual")
+    @SerialName("actual")
     val actual: kotlin.Float? = null,
     /* Previous release */
-    @Json(name = "prev")
+    @SerialName("prev")
     val prev: kotlin.Float? = null,
     /* Country */
-    @Json(name = "country")
+    @SerialName("country")
     val country: kotlin.String? = null,
     /* Unit */
-    @Json(name = "unit")
+    @SerialName("unit")
     val unit: kotlin.String? = null,
     /* Estimate */
-    @Json(name = "estimate")
+    @SerialName("estimate")
     val estimate: kotlin.Float? = null,
     /* Event */
-    @Json(name = "event")
+    @SerialName("event")
     val event: kotlin.String? = null,
     /* Impact level */
-    @Json(name = "impact")
+    @SerialName("impact")
     val impact: kotlin.String? = null,
     /* Release time */
-    @Json(name = "time")
+    @SerialName("time")
     val time: kotlin.String? = null
-) : Serializable {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
-}
-
+)

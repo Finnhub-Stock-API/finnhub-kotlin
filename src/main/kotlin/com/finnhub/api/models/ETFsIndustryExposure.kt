@@ -12,25 +12,26 @@
 package com.finnhub.api.models
 
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+
 /**
  * 
  * @param symbol ETF symbol.
  * @param sectorExposure Array of industries and exposure levels.
  */
 
+@Serializable
 data class ETFsIndustryExposure (
     /* ETF symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    @SerialName("symbol")
+    val symbol: String? = null,
     /* Array of industries and exposure levels. */
-    @Json(name = "sectorExposure")
-    val sectorExposure: kotlin.collections.List<kotlin.Any>? = null
-) : Serializable {
+    @SerialName("sectorExposure")
+    val sectorExposure: List<JsonObject>? = null
+) {
 	companion object {
-		private const val serialVersionUID: Long = 123
-	}
-
+    }
 }
 
