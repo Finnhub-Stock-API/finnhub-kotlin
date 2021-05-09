@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./gradlew :clean :build :bintrayUpload
+./gradlew :clean :build :publish

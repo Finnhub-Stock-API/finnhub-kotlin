@@ -70,8 +70,8 @@ Get aggregate signal of multiple technical indicators such as MACD, RSI, Moving 
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | symbol
@@ -122,8 +122,8 @@ Get company basic financials such as margin, P/E ratio, 52-week high/low etc.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -174,8 +174,8 @@ Get company historical quarterly earnings surprise going back to 2000.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -226,8 +226,8 @@ Get company&#39;s EPS estimates.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -278,8 +278,8 @@ Get a list of company&#39;s executives and members of the Board.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -328,8 +328,8 @@ List latest company news by symbol. This endpoint is only available for North Am
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
@@ -382,8 +382,8 @@ Get company peers. Return a list of peers in the same country and GICS sub-indus
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -432,8 +432,8 @@ Get general information of a company. You can query by symbol, ISIN or CUSIP
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL e.g.
@@ -486,8 +486,8 @@ Get general information of a company. You can query by symbol, ISIN or CUSIP. Th
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL e.g.
@@ -540,8 +540,8 @@ Get company&#39;s revenue estimates.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -592,8 +592,8 @@ List all countries and metadata.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 try {
@@ -638,8 +638,8 @@ Get real-time updates on the number of COVID-19 (Corona virus) cases in the US w
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 try {
@@ -684,8 +684,8 @@ Get candlestick data for crypto symbols.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Use symbol returned in <code>/crypto/symbol</code> endpoint for this field.
@@ -740,8 +740,8 @@ List supported crypto exchanges
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 try {
@@ -786,8 +786,8 @@ List supported crypto symbols by exchange
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val exchange : kotlin.String = exchange_example // kotlin.String | Exchange you want to get the list of symbols from.
@@ -836,8 +836,8 @@ Get historical and coming earnings release dating back to 2003. You can setup &l
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
@@ -892,8 +892,8 @@ List codes of supported economic data.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 try {
@@ -938,8 +938,8 @@ Get economic data.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val code : kotlin.String = code_example // kotlin.String | Economic code.
@@ -988,8 +988,8 @@ Get ETF country exposure data.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
@@ -1038,8 +1038,8 @@ Get current ETF holdings.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
@@ -1088,8 +1088,8 @@ Get ETF industry exposure data.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
@@ -1138,8 +1138,8 @@ Get ETF profile information. Currently support all US ETFs.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
@@ -1188,8 +1188,8 @@ List company&#39;s filing. Limit to 250 documents at a time. This data is availa
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Leave <code>symbol</code>,<code>cik</code> and <code>accessNumber</code> empty to list latest filings.
@@ -1248,8 +1248,8 @@ Get standardized balance sheet, income statement and cash flow for global compan
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -1302,8 +1302,8 @@ Get financials as reported. This data is available for bulk download on &lt;a hr
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
@@ -1358,8 +1358,8 @@ Get candlestick data for forex symbols.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Use symbol returned in <code>/forex/symbol</code> endpoint for this field.
@@ -1414,8 +1414,8 @@ List supported forex exchanges
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 try {
@@ -1460,8 +1460,8 @@ Get rates for all forex pairs. Ideal for currency conversion
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val base : kotlin.String = base_example // kotlin.String | Base currency. Default to EUR.
@@ -1510,8 +1510,8 @@ List supported forex symbols.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val exchange : kotlin.String = exchange_example // kotlin.String | Exchange you want to get the list of symbols from.
@@ -1560,8 +1560,8 @@ Get a full list fund and institutional investors of a company in descending orde
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -1612,8 +1612,8 @@ Get latest market news.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val category : kotlin.String = category_example // kotlin.String | This parameter can be 1 of the following values <code>general, forex, crypto, merger</code>.
@@ -1664,8 +1664,8 @@ Get a list of index&#39;s constituents. Currently support &lt;code&gt;^GSPC (S&a
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | symbol
@@ -1714,8 +1714,8 @@ Get full history of index&#39;s constituents including symbols and dates of join
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | symbol
@@ -1764,8 +1764,8 @@ Get a full list of shareholders/investors of a company in descending order of th
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -1816,8 +1816,8 @@ Get recent and coming IPO.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
@@ -1868,8 +1868,8 @@ List latest major developments of a company going back 20 years with 12M+ data p
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
@@ -1922,8 +1922,8 @@ Get company&#39;s news sentiment and statistics. This endpoint is only available
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
@@ -1972,8 +1972,8 @@ Run pattern recognition algorithm on a symbol. Support double top/bottom, triple
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol
@@ -2024,8 +2024,8 @@ Get latest price target consensus.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -2074,8 +2074,8 @@ Quote
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol
@@ -2124,8 +2124,8 @@ Get latest analyst recommendation trends for a company.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
@@ -2174,8 +2174,8 @@ Similarity Index
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Required if cik is empty
@@ -2228,8 +2228,8 @@ Get last bid/ask data for US stocks.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
@@ -2278,8 +2278,8 @@ Stock Candles
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
@@ -2336,8 +2336,8 @@ Get dividends data for common stocks going back 30 years.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
@@ -2390,8 +2390,8 @@ Get splits data for stocks.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
@@ -2444,8 +2444,8 @@ List supported stocks. A list of supported CFD Indices can be found &lt;a href&#
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val exchange : kotlin.String = exchange_example // kotlin.String | Exchange you want to get the list of symbols from. List of exchanges with fundamental data can be found <a href=\"https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp=sharing\" target=\"_blank\">here</a>.
@@ -2494,8 +2494,8 @@ Tick Data
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
@@ -2550,8 +2550,8 @@ Get support and resistance levels for a symbol.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol
@@ -2602,8 +2602,8 @@ Return technical indicator with price data. List of supported indicators can be 
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | symbol
@@ -2662,8 +2662,8 @@ Earnings Call Transcripts
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val id : kotlin.String = id_example // kotlin.String | Transcript's id obtained with <a href=\"#transcripts-list\">Transcripts List endpoint</a>.
@@ -2712,8 +2712,8 @@ List earnings call transcripts&#39; metadata. This endpoint is only available fo
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol: AAPL. Leave empty to list the latest transcripts
@@ -2762,8 +2762,8 @@ Get latest stock upgrade and downgrade.
 ### Example
 ```kotlin
 // Import classes:
-//import com.finnhub.api.infrastructure.*
-//import com.finnhub.api.models.*
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL. If left blank, the API will return latest stock upgrades/downgrades.

@@ -11,7 +11,7 @@ Install package
 
 ```
 repositories {
-    jcenter()
+    mavenCentral()
 }
 ```
 
@@ -19,7 +19,7 @@ For Maven
 
 ```
 <dependency>
-  <groupId>com.finnhub</groupId>
+  <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
   <version>1.2.0</version>
   <type>pom</type>
@@ -29,14 +29,19 @@ For Maven
 For Gradle
 
 ```
-implementation 'com.finnhub:kotlin-client:1.2.0'
+implementation 'io.finnhub:kotlin-client:1.2.0'
 ```
+
+## Migration to Maven
+
+- Due to recent sunset of Bintray we have migrated the library to Maven
+- For users who have already been using the library please change package from `com.finnhub` to `io.finnhub`
 
 ## Getting Started
 
 ```kotlin
-import com.finnhub.api.apis.DefaultApi
-import com.finnhub.api.infrastructure.ApiClient
+import io.finnhub.api.apis.DefaultApi
+import io.finnhub.api.infrastructure.ApiClient
 
 ApiClient.apiKey["token"] = "YOUR API KEY"
 val apiClient = DefaultApi()

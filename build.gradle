@@ -1,5 +1,5 @@
-group 'com.finnhub'
-version '1.2.0'
+group 'io.finnhub'
+version '1.2.5-SNAPSHOT'
 
 wrapper {
     gradleVersion = '4.9'
@@ -15,17 +15,18 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.15.1'
     }
 }
 
+apply plugin: 'com.vanniktech.maven.publish'
 apply plugin: 'kotlin'
 apply plugin: 'kotlinx-serialization'
 
 repositories {
-    maven { url "https://repo1.maven.org/maven2" }
+    mavenCentral()
 }
 
 dependencies {
@@ -36,56 +37,28 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
-repositories {
-    jcenter()
-}
-
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-        }
-    }
-}
+allprojects {
+    plugins.withId("com.vanniktech.maven.publish") {
+        mavenPublishing {
+            publishToMavenCentral("S01")
+            signAllPublications()
 
-bintray {
-    user = POM_DEVELOPER_ID
-    key = POM_DEVELOPER_KEY
-    publications = ['mavenJava']
-    dryRun = false
-    publish = true
-    pkg {
-        repo = 'finnhub-api'
-        name = 'kotlin'
-        desc = 'Finnhub API Client for Kotlin'
-        websiteUrl = 'https://finnhub.io'
-        issueTrackerUrl = 'https://github.com/Finnhub-Stock-API/finnhub-kotlin/issues'
-        vcsUrl = 'https://github.com/Finnhub-Stock-API/finnhub-kotlin'
-        licenses = ['Apache-2.0']
-        labels = ['finnhub', 'kotlin', 'api']
-        publicDownloadNumbers = true
-        version {
-            name = project.version
-            desc = 'optional, version-specific description'
+            pom {
+                name = 'finnhub-kotlin'
+                description = 'Kotlin client library for Finnhub API'
+                url = 'https://github.com/Finnhub-Stock-API/finnhub-kotlin'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/Finnhub-Stock-API/finnhub-kotlin'
+                }
+            }
         }
     }
 }
