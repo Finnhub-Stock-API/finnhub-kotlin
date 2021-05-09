@@ -1,5 +1,5 @@
 group 'io.finnhub'
-version '1.2.5-SNAPSHOT'
+version '2.0.0'
 
 wrapper {
     gradleVersion = '4.9'
@@ -44,7 +44,6 @@ allprojects {
         mavenPublishing {
             publishToMavenCentral("S01")
             signAllPublications()
-
             pom {
                 name = 'finnhub-kotlin'
                 description = 'Kotlin client library for Finnhub API'
@@ -56,6 +55,8 @@ allprojects {
                     }
                 }
                 scm {
+                    connection = 'scm:git:git@github.com:Finnhub-Stock-API/finnhub-kotlin.git'
+                    developerConnection = 'scm:git:git@github.com:Finnhub-Stock-API/finnhub-kotlin.git'
                     url = 'https://github.com/Finnhub-Stock-API/finnhub-kotlin'
                 }
             }

@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>1.2.0</version>
+  <version>2.0.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,13 +29,13 @@ For Maven
 For Gradle
 
 ```
-implementation 'io.finnhub:kotlin-client:1.2.0'
+implementation 'io.finnhub:kotlin-client:2.0.0'
 ```
 
-## Migration to Maven
+## Migrate from 1.x.x to 2.x.x
 
 - Due to recent sunset of Bintray we have migrated the library to Maven
-- For users who have already been using the library please change package from `com.finnhub` to `io.finnhub`
+- For users who have already been using the library from `1.x.x` please change package from `com.finnhub` to `io.finnhub`
 
 ## Getting Started
 
