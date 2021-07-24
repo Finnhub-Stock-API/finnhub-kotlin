@@ -202,10 +202,10 @@ fun majorDevelopments() {
   println(apiClient.pressReleases("AAPL", from = "2020-01-01", to = "2020-12-31"))
 }
 
-//@Test
-//fun patternRecognition() {
-//    println(apiClient.patternRecognition("AAPL", "D"))
-//}
+@Test
+fun patternRecognition() {
+    println(apiClient.patternRecognition("AAPL", "D"))
+}
 
 @Test
 fun priceTarget() {
