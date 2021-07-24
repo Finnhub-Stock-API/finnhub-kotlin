@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -24,37 +24,41 @@ import kotlinx.serialization.Serializable
  * @param v List of volume data.
  * @param p List of price data.
  * @param t List of timestamp in UNIX ms.
- * @param x List of venues/exchanges.
+ * @param x List of venues/exchanges. A list of exchange codes can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1Tj53M1svmr-hfEtbk6_NpVR1yAyGLMaH6ByYU6CG0ZY/edit?usp=sharing\",>here</a>
+ * @param c List of trade conditions. A comprehensive list of trade conditions code can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1PUxiSWPHSODbaTaoL2Vef6DgU-yFtlRGZf19oBb9Hp0/edit?usp=sharing\">here</a>
  */
 
-@Serializable
 data class TickData (
     /* Symbol. */
-    @SerialName("s")
-    val s: String? = null,
+    @Json(name = "s")
+    val s: kotlin.String? = null,
     /* Number of ticks skipped. */
-    @SerialName("skip")
-    val skip: Long? = null,
+    @Json(name = "skip")
+    val skip: kotlin.Long? = null,
     /* Number of ticks returned. If <code>count</code> < <code>limit</code>, all data for that date has been returned. */
-    @SerialName("count")
-    val count: Long? = null,
+    @Json(name = "count")
+    val count: kotlin.Long? = null,
     /* Total number of ticks for that date. */
-    @SerialName("total")
-    val total: Long? = null,
+    @Json(name = "total")
+    val total: kotlin.Long? = null,
     /* List of volume data. */
-    @SerialName("v")
-    val v: List<Float>? = null,
+    @Json(name = "v")
+    val v: kotlin.collections.List<kotlin.Float>? = null,
     /* List of price data. */
-    @SerialName("p")
-    val p: List<Float>? = null,
+    @Json(name = "p")
+    val p: kotlin.collections.List<kotlin.Float>? = null,
     /* List of timestamp in UNIX ms. */
-    @SerialName("t")
-    val t: List<Long>? = null,
-    /* List of venues/exchanges. */
-    @SerialName("x")
-    val x: List<String>? = null
-) {
-	companion object {
+    @Json(name = "t")
+    val t: kotlin.collections.List<kotlin.Long>? = null,
+    /* List of venues/exchanges. A list of exchange codes can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1Tj53M1svmr-hfEtbk6_NpVR1yAyGLMaH6ByYU6CG0ZY/edit?usp=sharing\",>here</a> */
+    @Json(name = "x")
+    val x: kotlin.collections.List<kotlin.String>? = null,
+    /* List of trade conditions. A comprehensive list of trade conditions code can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1PUxiSWPHSODbaTaoL2Vef6DgU-yFtlRGZf19oBb9Hp0/edit?usp=sharing\">here</a> */
+    @Json(name = "c")
+    val c: kotlin.collections.List<kotlin.collections.List<kotlin.String>>? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

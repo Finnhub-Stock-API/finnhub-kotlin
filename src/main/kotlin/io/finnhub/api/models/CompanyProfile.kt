@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -47,94 +47,94 @@ import kotlinx.serialization.Serializable
  * @param finnhubIndustry Finnhub industry classification.
  */
 
-@Serializable
 data class CompanyProfile (
     /* Address of company's headquarter. */
-    @SerialName("address")
-    val address: String? = null,
+    @Json(name = "address")
+    val address: kotlin.String? = null,
     /* City of company's headquarter. */
-    @SerialName("city")
-    val city: String? = null,
+    @Json(name = "city")
+    val city: kotlin.String? = null,
     /* Country of company's headquarter. */
-    @SerialName("country")
-    val country: String? = null,
+    @Json(name = "country")
+    val country: kotlin.String? = null,
     /* Currency used in company filings. */
-    @SerialName("currency")
-    val currency: String? = null,
+    @Json(name = "currency")
+    val currency: kotlin.String? = null,
     /* CUSIP number. */
-    @SerialName("cusip")
-    val cusip: String? = null,
+    @Json(name = "cusip")
+    val cusip: kotlin.String? = null,
     /* Sedol number. */
-    @SerialName("sedol")
-    val sedol: String? = null,
+    @Json(name = "sedol")
+    val sedol: kotlin.String? = null,
     /* Company business summary. */
-    @SerialName("description")
-    val description: String? = null,
+    @Json(name = "description")
+    val description: kotlin.String? = null,
     /* Listed exchange. */
-    @SerialName("exchange")
-    val exchange: String? = null,
+    @Json(name = "exchange")
+    val exchange: kotlin.String? = null,
     /* GICS industry group. */
-    @SerialName("ggroup")
-    val ggroup: String? = null,
+    @Json(name = "ggroup")
+    val ggroup: kotlin.String? = null,
     /* GICS industry. */
-    @SerialName("gind")
-    val gind: String? = null,
+    @Json(name = "gind")
+    val gind: kotlin.String? = null,
     /* GICS sector. */
-    @SerialName("gsector")
-    val gsector: String? = null,
+    @Json(name = "gsector")
+    val gsector: kotlin.String? = null,
     /* GICS sub-industry. */
-    @SerialName("gsubind")
-    val gsubind: String? = null,
+    @Json(name = "gsubind")
+    val gsubind: kotlin.String? = null,
     /* ISIN number. */
-    @SerialName("isin")
-    val isin: String? = null,
+    @Json(name = "isin")
+    val isin: kotlin.String? = null,
     /* NAICS national industry. */
-    @SerialName("naicsNationalIndustry")
-    val naicsNationalIndustry: String? = null,
+    @Json(name = "naicsNationalIndustry")
+    val naicsNationalIndustry: kotlin.String? = null,
     /* NAICS industry. */
-    @SerialName("naics")
-    val naics: String? = null,
+    @Json(name = "naics")
+    val naics: kotlin.String? = null,
     /* NAICS sector. */
-    @SerialName("naicsSector")
-    val naicsSector: String? = null,
+    @Json(name = "naicsSector")
+    val naicsSector: kotlin.String? = null,
     /* NAICS subsector. */
-    @SerialName("naicsSubsector")
-    val naicsSubsector: String? = null,
+    @Json(name = "naicsSubsector")
+    val naicsSubsector: kotlin.String? = null,
     /* Company name. */
-    @SerialName("name")
-    val name: String? = null,
+    @Json(name = "name")
+    val name: kotlin.String? = null,
     /* Company phone number. */
-    @SerialName("phone")
-    val phone: String? = null,
+    @Json(name = "phone")
+    val phone: kotlin.String? = null,
     /* State of company's headquarter. */
-    @SerialName("state")
-    val state: String? = null,
+    @Json(name = "state")
+    val state: kotlin.String? = null,
     /* Company symbol/ticker as used on the listed exchange. */
-    @SerialName("ticker")
-    val ticker: String? = null,
+    @Json(name = "ticker")
+    val ticker: kotlin.String? = null,
     /* Company website. */
-    @SerialName("weburl")
-    val weburl: String? = null,
+    @Json(name = "weburl")
+    val weburl: kotlin.String? = null,
     /* IPO date. */
-    @SerialName("ipo")
-    val ipo: String? = null,
+    @Json(name = "ipo")
+    val ipo: kotlin.String? = null,
     /* Market Capitalization. */
-    @SerialName("marketCapitalization")
-    val marketCapitalization: Float? = null,
+    @Json(name = "marketCapitalization")
+    val marketCapitalization: kotlin.Float? = null,
     /* Number of oustanding shares. */
-    @SerialName("shareOutstanding")
-    val shareOutstanding: Float? = null,
+    @Json(name = "shareOutstanding")
+    val shareOutstanding: kotlin.Float? = null,
     /* Number of employee. */
-    @SerialName("employeeTotal")
-    val employeeTotal: String? = null, // backend can return the result "wastage", necessary to parse as String to avoid crashes
+    @Json(name = "employeeTotal")
+    val employeeTotal: kotlin.Long? = null,
     /* Logo image. */
-    @SerialName("logo")
-    val logo: String? = null,
+    @Json(name = "logo")
+    val logo: kotlin.String? = null,
     /* Finnhub industry classification. */
-    @SerialName("finnhubIndustry")
-    val finnhubIndustry: String? = null
-) {
-	companion object {
+    @Json(name = "finnhubIndustry")
+    val finnhubIndustry: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

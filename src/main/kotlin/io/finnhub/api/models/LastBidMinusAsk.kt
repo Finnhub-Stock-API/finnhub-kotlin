@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -24,25 +24,25 @@ import kotlinx.serialization.Serializable
  * @param t Reference UNIX timestamp in ms.
  */
 
-@Serializable
 data class LastBidMinusAsk (
     /* Bid price. */
-    @SerialName("b")
-    val b: Float? = null,
+    @Json(name = "b")
+    val b: kotlin.Float? = null,
     /* Ask price. */
-    @SerialName("a")
-    val a: Float? = null,
+    @Json(name = "a")
+    val a: kotlin.Float? = null,
     /* Bid volume. */
-    @SerialName("bv")
-    val bv: Float? = null,
+    @Json(name = "bv")
+    val bv: kotlin.Float? = null,
     /* Ask volume. */
-    @SerialName("av")
-    val av: Float? = null,
+    @Json(name = "av")
+    val av: kotlin.Float? = null,
     /* Reference UNIX timestamp in ms. */
-    @SerialName("t")
-    val t: Long? = null
-) {
-	companion object {
+    @Json(name = "t")
+    val t: kotlin.Long? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

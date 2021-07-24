@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **l** | **kotlin.Float** | Low price of the day |  [optional]
 **c** | **kotlin.Float** | Current price |  [optional]
 **pc** | **kotlin.Float** | Previous close price |  [optional]
+**d** | **kotlin.Float** | Change |  [optional]
+**dp** | **kotlin.Float** | Percent change |  [optional]
 
 
 

@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -26,33 +26,32 @@ import kotlinx.serialization.Serializable
  * @param s Status of the response. This field can either be ok or no_data.
  */
 
-@Serializable
 data class CryptoCandles (
     /* List of open prices for returned candles. */
-    @SerialName("o")
-    val o: List<Float>? = null,
+    @Json(name = "o")
+    val o: kotlin.collections.List<kotlin.Float>? = null,
     /* List of high prices for returned candles. */
-    @SerialName("h")
-    val h: List<Float>? = null,
+    @Json(name = "h")
+    val h: kotlin.collections.List<kotlin.Float>? = null,
     /* List of low prices for returned candles. */
-    @SerialName("l")
-    val l: List<Float>? = null,
+    @Json(name = "l")
+    val l: kotlin.collections.List<kotlin.Float>? = null,
     /* List of close prices for returned candles. */
-    @SerialName("c")
-    val c: List<Float>? = null,
+    @Json(name = "c")
+    val c: kotlin.collections.List<kotlin.Float>? = null,
     /* List of volume data for returned candles. */
-    @SerialName("v")
-    val v: List<Float>? = null,
+    @Json(name = "v")
+    val v: kotlin.collections.List<kotlin.Float>? = null,
     /* List of timestamp for returned candles. */
-    @SerialName("t")
-    val t: List<Long>? = null,
+    @Json(name = "t")
+    val t: kotlin.collections.List<kotlin.Long>? = null,
     /* Status of the response. This field can either be ok or no_data. */
-    @SerialName("s")
-    val s: String? = null
-) {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    @Json(name = "s")
+    val s: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
 
 }
 

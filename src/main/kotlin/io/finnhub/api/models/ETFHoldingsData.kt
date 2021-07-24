@@ -12,31 +12,46 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
  * @param symbol Symbol description
+ * @param name Security name
+ * @param isin ISIN.
+ * @param cusip CUSIP.
  * @param share Number of shares owned by the ETF.
  * @param percent Portfolio's percent
+ * @param value Market value
  */
 
-@Serializable
 data class ETFHoldingsData (
     /* Symbol description */
-    @SerialName("symbol")
-    val symbol: String? = null,
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
+    /* Security name */
+    @Json(name = "name")
+    val name: kotlin.String? = null,
+    /* ISIN. */
+    @Json(name = "isin")
+    val isin: kotlin.String? = null,
+    /* CUSIP. */
+    @Json(name = "cusip")
+    val cusip: kotlin.String? = null,
     /* Number of shares owned by the ETF. */
-    @SerialName("share")
-    val share: Float? = null,
+    @Json(name = "share")
+    val share: kotlin.Float? = null,
     /* Portfolio's percent */
-    @SerialName("percent")
-    val percent: Float? = null
-) {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    @Json(name = "percent")
+    val percent: kotlin.Float? = null,
+    /* Market value */
+    @Json(name = "value")
+    val value: kotlin.Float? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
 
 }
 

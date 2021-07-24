@@ -11,9 +11,9 @@
 */
 package io.finnhub.api.models
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -27,30 +27,35 @@ import kotlinx.serialization.Serializable
  * @param totalSharesValue Total shares value.
  */
 
-@Serializable
 data class IPOEvent (
     /* Symbol. */
-    @SerialName("symbol")
+    @Json(name = "symbol")
     val symbol: kotlin.String? = null,
     /* IPO date. */
-    @SerialName("date")
+    @Json(name = "date")
     val date: kotlin.String? = null,
     /* Exchange. */
-    @SerialName("exchange")
+    @Json(name = "exchange")
     val exchange: kotlin.String? = null,
     /* Company's name. */
-    @SerialName("name")
+    @Json(name = "name")
     val name: kotlin.String? = null,
     /* IPO status. Can take 1 of the following values: <code>expected</code>,<code>priced</code>,<code>withdrawn</code>,<code>filed</code> */
-    @SerialName("status")
+    @Json(name = "status")
     val status: kotlin.String? = null,
     /* Projected price or price range. */
-    @SerialName("price")
+    @Json(name = "price")
     val price: kotlin.String? = null,
     /* Number of shares offered during the IPO. */
-    @SerialName("numberOfShares")
+    @Json(name = "numberOfShares")
     val numberOfShares: kotlin.Long? = null,
     /* Total shares value. */
-    @SerialName("totalSharesValue")
+    @Json(name = "totalSharesValue")
     val totalSharesValue: kotlin.Long? = null
-)
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
+
+}
+

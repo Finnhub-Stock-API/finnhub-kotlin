@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -26,33 +26,32 @@ import kotlinx.serialization.Serializable
  * @param strongSell Number of recommendations that fall into the Strong Sell category
  */
 
-@Serializable
 data class RecommendationTrend (
     /* Company symbol. */
-    @SerialName("symbol")
-    val symbol: String? = null,
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
     /* Number of recommendations that fall into the Buy category */
-    @SerialName("buy")
-    val buy: Double? = null,
+    @Json(name = "buy")
+    val buy: kotlin.Long? = null,
     /* Number of recommendations that fall into the Hold category */
-    @SerialName("hold")
-    val hold: Double? = null,
+    @Json(name = "hold")
+    val hold: kotlin.Long? = null,
     /* Updated period */
-    @SerialName("period")
-    val period: String? = null,
+    @Json(name = "period")
+    val period: kotlin.String? = null,
     /* Number of recommendations that fall into the Sell category */
-    @SerialName("sell")
-    val sell: Double? = null,
+    @Json(name = "sell")
+    val sell: kotlin.Long? = null,
     /* Number of recommendations that fall into the Strong Buy category */
-    @SerialName("strongBuy")
-    val strongBuy: Double? = null,
+    @Json(name = "strongBuy")
+    val strongBuy: kotlin.Long? = null,
     /* Number of recommendations that fall into the Strong Sell category */
-    @SerialName("strongSell")
-    val strongSell: Double? = null
-) {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    @Json(name = "strongSell")
+    val strongSell: kotlin.Long? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
 
 }
 

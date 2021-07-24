@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -25,28 +25,28 @@ import kotlinx.serialization.Serializable
  * @param lastUpdated Updated time of the data
  */
 
-@Serializable
 data class PriceTarget (
     /* Company symbol. */
-    @SerialName("symbol")
-    val symbol: String? = null,
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
     /* Highes analysts' target. */
-    @SerialName("targetHigh")
-    val targetHigh: Float? = null,
+    @Json(name = "targetHigh")
+    val targetHigh: kotlin.Float? = null,
     /* Lowest analysts' target. */
-    @SerialName("targetLow")
-    val targetLow: Float? = null,
+    @Json(name = "targetLow")
+    val targetLow: kotlin.Float? = null,
     /* Mean of all analysts' targets. */
-    @SerialName("targetMean")
-    val targetMean: Float? = null,
+    @Json(name = "targetMean")
+    val targetMean: kotlin.Float? = null,
     /* Median of all analysts' targets. */
-    @SerialName("targetMedian")
-    val targetMedian: Float? = null,
+    @Json(name = "targetMedian")
+    val targetMedian: kotlin.Float? = null,
     /* Updated time of the data */
-    @SerialName("lastUpdated")
-    val lastUpdated: String? = null
-) {
-	companion object {
+    @Json(name = "lastUpdated")
+    val lastUpdated: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

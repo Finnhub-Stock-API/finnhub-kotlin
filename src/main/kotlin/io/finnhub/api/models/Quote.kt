@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -22,27 +22,35 @@ import kotlinx.serialization.Serializable
  * @param l Low price of the day
  * @param c Current price
  * @param pc Previous close price
+ * @param d Change
+ * @param dp Percent change
  */
 
-@Serializable
 data class Quote (
     /* Open price of the day */
-    @SerialName("o")
-    val o: Float? = null,
+    @Json(name = "o")
+    val o: kotlin.Float? = null,
     /* High price of the day */
-    @SerialName("h")
-    val h: Float? = null,
+    @Json(name = "h")
+    val h: kotlin.Float? = null,
     /* Low price of the day */
-    @SerialName("l")
-    val l: Float? = null,
+    @Json(name = "l")
+    val l: kotlin.Float? = null,
     /* Current price */
-    @SerialName("c")
-    val c: Float? = null,
+    @Json(name = "c")
+    val c: kotlin.Float? = null,
     /* Previous close price */
-    @SerialName("pc")
-    val pc: Float? = null
-) {
-	companion object {
+    @Json(name = "pc")
+    val pc: kotlin.Float? = null,
+    /* Change */
+    @Json(name = "d")
+    val d: kotlin.Float? = null,
+    /* Percent change */
+    @Json(name = "dp")
+    val dp: kotlin.Float? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -22,19 +22,19 @@ import kotlinx.serialization.Serializable
  * @param symbol Unique symbol used to identify this symbol used in <code>/crypto/candle</code> endpoint.
  */
 
-@Serializable
 data class CryptoSymbol (
     /* Symbol description */
-    @SerialName("description")
-    val description: String? = null,
+    @Json(name = "description")
+    val description: kotlin.String? = null,
     /* Display symbol name. */
-    @SerialName("displaySymbol")
-    val displaySymbol: String? = null,
+    @Json(name = "displaySymbol")
+    val displaySymbol: kotlin.String? = null,
     /* Unique symbol used to identify this symbol used in <code>/crypto/candle</code> endpoint. */
-    @SerialName("symbol")
-    val symbol: String? = null
-) {
-	companion object {
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

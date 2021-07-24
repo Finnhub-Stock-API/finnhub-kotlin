@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -31,46 +31,46 @@ import kotlinx.serialization.Serializable
  * @param finnhubIndustry Finnhub industry classification.
  */
 
-@Serializable
 data class CompanyProfile2 (
     /* Country of company's headquarter. */
-    @SerialName("country")
-    val country: String? = null,
+    @Json(name = "country")
+    val country: kotlin.String? = null,
     /* Currency used in company filings. */
-    @SerialName("currency")
-    val currency: String? = null,
+    @Json(name = "currency")
+    val currency: kotlin.String? = null,
     /* Listed exchange. */
-    @SerialName("exchange")
-    val exchange: String? = null,
+    @Json(name = "exchange")
+    val exchange: kotlin.String? = null,
     /* Company name. */
-    @SerialName("name")
-    val name: String? = null,
+    @Json(name = "name")
+    val name: kotlin.String? = null,
     /* Company symbol/ticker as used on the listed exchange. */
-    @SerialName("ticker")
-    val ticker: String? = null,
+    @Json(name = "ticker")
+    val ticker: kotlin.String? = null,
     /* IPO date. */
-    @SerialName("ipo")
-    val ipo: String? = null,
+    @Json(name = "ipo")
+    val ipo: kotlin.String? = null,
     /* Market Capitalization. */
-    @SerialName("marketCapitalization")
-    val marketCapitalization: Float? = null,
+    @Json(name = "marketCapitalization")
+    val marketCapitalization: kotlin.Float? = null,
     /* Number of oustanding shares. */
-    @SerialName("shareOutstanding")
-    val shareOutstanding: Float? = null,
+    @Json(name = "shareOutstanding")
+    val shareOutstanding: kotlin.Float? = null,
     /* Logo image. */
-    @SerialName("logo")
-    val logo: String? = null,
+    @Json(name = "logo")
+    val logo: kotlin.String? = null,
     /* Company phone number. */
-    @SerialName("phone")
-    val phone: String? = null,
+    @Json(name = "phone")
+    val phone: kotlin.String? = null,
     /* Company website. */
-    @SerialName("weburl")
-    val weburl: String? = null,
+    @Json(name = "weburl")
+    val weburl: kotlin.String? = null,
     /* Finnhub industry classification. */
-    @SerialName("finnhubIndustry")
-    val finnhubIndustry: String? = null
-) {
-	companion object {
+    @Json(name = "finnhubIndustry")
+    val finnhubIndustry: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

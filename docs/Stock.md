@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **displaySymbol** | **kotlin.String** | Display symbol name. |  [optional]
 **symbol** | **kotlin.String** | Unique symbol used to identify this symbol used in &lt;code&gt;/stock/candle&lt;/code&gt; endpoint. |  [optional]
 **type** | **kotlin.String** | Security type. |  [optional]
-**currency** | **kotlin.String** | Price&#39;s currency. This might be different from the reporting currency of fundamental data. |  [optional]
 
 
 

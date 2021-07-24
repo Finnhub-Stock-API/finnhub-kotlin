@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -24,38 +24,42 @@ import kotlinx.serialization.Serializable
  * @param quarter Earnings quarter.
  * @param epsEstimate EPS estimate.
  * @param epsActual EPS actual.
- * @param revenueEstimate Revenue estimate.
+ * @param revenueEstimate Revenue estimate including Finnhub's proprietary estimates.
  * @param revenueActual Revenue actual.
  */
 
-@Serializable
 data class EarningRelease (
     /* Symbol. */
-    @SerialName("symbol")
+    @Json(name = "symbol")
     val symbol: kotlin.String? = null,
     /* Date. */
-    @SerialName("date")
+    @Json(name = "date")
     val date: kotlin.String? = null,
     /* Indicates whether the earnings is announced before market open(<code>bmo</code>), after market close(<code>amc</code>), or during market hour(<code>dmh</code>). */
-    @SerialName("hour")
+    @Json(name = "hour")
     val hour: kotlin.String? = null,
     /* Earnings year. */
-    @SerialName("year")
+    @Json(name = "year")
     val year: kotlin.Long? = null,
     /* Earnings quarter. */
-    @SerialName("quarter")
+    @Json(name = "quarter")
     val quarter: kotlin.Long? = null,
     /* EPS estimate. */
-    @SerialName("epsEstimate")
+    @Json(name = "epsEstimate")
     val epsEstimate: kotlin.Float? = null,
     /* EPS actual. */
-    @SerialName("epsActual")
+    @Json(name = "epsActual")
     val epsActual: kotlin.Float? = null,
-    /* Revenue estimate. */
-    @SerialName("revenueEstimate")
+    /* Revenue estimate including Finnhub's proprietary estimates. */
+    @Json(name = "revenueEstimate")
     val revenueEstimate: kotlin.Long? = null,
     /* Revenue actual. */
-    @SerialName("revenueActual")
+    @Json(name = "revenueActual")
     val revenueActual: kotlin.Long? = null
-)
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
+
+}
 

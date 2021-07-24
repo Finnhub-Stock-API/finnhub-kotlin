@@ -11,13 +11,83 @@
 */
 package io.finnhub.api.apis
 
-import io.finnhub.api.infrastructure.*
-import io.finnhub.api.models.*
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
+import io.finnhub.api.models.AggregateIndicators
+import io.finnhub.api.models.BasicFinancials
+import io.finnhub.api.models.CompanyExecutive
+import io.finnhub.api.models.CompanyProfile
+import io.finnhub.api.models.CompanyProfile2
+import io.finnhub.api.models.CountryMetadata
+import io.finnhub.api.models.CovidInfo
+import io.finnhub.api.models.CryptoCandles
+import io.finnhub.api.models.CryptoSymbol
+import io.finnhub.api.models.Dividends
+import io.finnhub.api.models.Dividends2LeftParenthesisBasicRightParenthesis
+import io.finnhub.api.models.ETFsCountryExposure
+import io.finnhub.api.models.ETFsHoldings
+import io.finnhub.api.models.ETFsProfile
+import io.finnhub.api.models.ETFsSectorExposure
+import io.finnhub.api.models.EarningResult
+import io.finnhub.api.models.EarningsCalendar
+import io.finnhub.api.models.EarningsCallTranscripts
+import io.finnhub.api.models.EarningsCallTranscriptsList
+import io.finnhub.api.models.EarningsEstimates
+import io.finnhub.api.models.EconomicCode
+import io.finnhub.api.models.EconomicData
+import io.finnhub.api.models.FDAComitteeMeeting
+import io.finnhub.api.models.Filing
+import io.finnhub.api.models.FinancialStatements
+import io.finnhub.api.models.FinancialsAsReported
+import io.finnhub.api.models.ForexCandles
+import io.finnhub.api.models.ForexSymbol
+import io.finnhub.api.models.Forexrates
+import io.finnhub.api.models.FundOwnership
+import io.finnhub.api.models.HistoricalNBBO
+import io.finnhub.api.models.IPOCalendar
+import io.finnhub.api.models.IndicesConstituents
+import io.finnhub.api.models.IndicesHistoricalConstituents
+import io.finnhub.api.models.InsiderTransactions
+import io.finnhub.api.models.InternationalFiling
+import io.finnhub.api.models.InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis
+import io.finnhub.api.models.LastBidMinusAsk
+import io.finnhub.api.models.MajorPressReleases
+import io.finnhub.api.models.MutualFundsCountryExposure
+import io.finnhub.api.models.MutualFundsHoldings
+import io.finnhub.api.models.MutualFundsProfile
+import io.finnhub.api.models.MutualMinusFundSectorExposure
+import io.finnhub.api.models.News
+import io.finnhub.api.models.NewsSentiment
+import io.finnhub.api.models.Ownership
+import io.finnhub.api.models.PatternRecognition
+import io.finnhub.api.models.PriceTarget
+import io.finnhub.api.models.Quote
+import io.finnhub.api.models.RecommendationTrend
+import io.finnhub.api.models.RevenueBreakdown
+import io.finnhub.api.models.RevenueEstimates
+import io.finnhub.api.models.SECSentimentAnalysis
+import io.finnhub.api.models.SimilarityIndex
+import io.finnhub.api.models.SocialSentiment
+import io.finnhub.api.models.Split
+import io.finnhub.api.models.Stock
+import io.finnhub.api.models.StockCandles
+import io.finnhub.api.models.SupplyChainRelationships
+import io.finnhub.api.models.SupportResistance
+import io.finnhub.api.models.SymbolLookup
+import io.finnhub.api.models.TickData
+import io.finnhub.api.models.UpgradeDowngrade
 
-class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.defaultBasePath) : ApiClient(basePath) {
+import io.finnhub.api.infrastructure.ApiClient
+import io.finnhub.api.infrastructure.ClientException
+import io.finnhub.api.infrastructure.ClientError
+import io.finnhub.api.infrastructure.ServerException
+import io.finnhub.api.infrastructure.ServerError
+import io.finnhub.api.infrastructure.MultiValueMap
+import io.finnhub.api.infrastructure.RequestConfig
+import io.finnhub.api.infrastructure.RequestMethod
+import io.finnhub.api.infrastructure.ResponseType
+import io.finnhub.api.infrastructure.Success
+import io.finnhub.api.infrastructure.toMultiValue
+
+class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -37,23 +107,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aggregateIndicator(symbol: String, resolution: String) : AggregateIndicators {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/scan/technical-indicator",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<AggregateIndicators>(
-            localVariableConfig,
-            localVariableBody
+    fun aggregateIndicator(symbol: kotlin.String, resolution: kotlin.String) : AggregateIndicators {
+        val localVariableConfig = aggregateIndicatorRequestConfig(symbol = symbol, resolution = resolution)
+
+        val localVarResponse = request<Unit, AggregateIndicators>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -72,10 +130,35 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation aggregateIndicator
+    *
+    * @param symbol symbol 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @return RequestConfig
+    */
+    fun aggregateIndicatorRequestConfig(symbol: kotlin.String, resolution: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/scan/technical-indicator",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Basic Financials
     * Get company basic financials such as margin, P/E ratio, 52-week high/low etc.
     * @param symbol Symbol of the company: AAPL. 
-    * @param metric Metric type. Can be 1 of the following values &lt;code&gt;all, price, valuation, margin&lt;/code&gt; 
+    * @param metric Metric type. Can be 1 of the following values &lt;code&gt;all&lt;/code&gt; 
     * @return BasicFinancials
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -83,23 +166,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyBasicFinancials(symbol: String, metric: String) : BasicFinancials {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("metric", listOf(metric))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/metric",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<BasicFinancials>(
-            localVariableConfig,
-            localVariableBody
+    fun companyBasicFinancials(symbol: kotlin.String, metric: kotlin.String) : BasicFinancials {
+        val localVariableConfig = companyBasicFinancialsRequestConfig(symbol = symbol, metric = metric)
+
+        val localVarResponse = request<Unit, BasicFinancials>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -118,6 +189,31 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyBasicFinancials
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param metric Metric type. Can be 1 of the following values &lt;code&gt;all&lt;/code&gt; 
+    * @return RequestConfig
+    */
+    fun companyBasicFinancialsRequestConfig(symbol: kotlin.String, metric: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("metric", listOf(metric.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/metric",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Earnings Surprises
     * Get company historical quarterly earnings surprise going back to 2000.
     * @param symbol Symbol of the company: AAPL. 
@@ -129,29 +225,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyEarnings(symbol: String, limit: Long?) : List<EarningResult> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/earnings",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<EarningResult>>(
-            localVariableConfig,
-            localVariableBody
+    fun companyEarnings(symbol: kotlin.String, limit: kotlin.Long?) : kotlin.collections.List<EarningResult> {
+        val localVariableConfig = companyEarningsRequestConfig(symbol = symbol, limit = limit)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<EarningResult>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<EarningResult>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EarningResult>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -166,6 +248,33 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyEarnings
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param limit Limit number of period returned. Leave blank to get the full history. (optional)
+    * @return RequestConfig
+    */
+    fun companyEarningsRequestConfig(symbol: kotlin.String, limit: kotlin.Long?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/earnings",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Earnings Estimates
     * Get company&#39;s EPS estimates.
     * @param symbol Symbol of the company: AAPL. 
@@ -177,25 +286,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyEpsEstimates(symbol: String, freq: String?) : EarningsEstimates {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                if (freq != null) {
-                    put("freq", listOf(freq.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/eps-estimate",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<EarningsEstimates>(
-            localVariableConfig,
-            localVariableBody
+    fun companyEpsEstimates(symbol: kotlin.String, freq: kotlin.String?) : EarningsEstimates {
+        val localVariableConfig = companyEpsEstimatesRequestConfig(symbol = symbol, freq = freq)
+
+        val localVarResponse = request<Unit, EarningsEstimates>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -214,6 +309,33 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyEpsEstimates
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param freq Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; (optional)
+    * @return RequestConfig
+    */
+    fun companyEpsEstimatesRequestConfig(symbol: kotlin.String, freq: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (freq != null) {
+                    put("freq", listOf(freq.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/eps-estimate",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Company Executive
     * Get a list of company&#39;s executives and members of the Board.
     * @param symbol Symbol of the company: AAPL. 
@@ -224,22 +346,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyExecutive(symbol: String) : CompanyExecutive {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/executive",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<CompanyExecutive>(
-            localVariableConfig,
-            localVariableBody
+    fun companyExecutive(symbol: kotlin.String) : CompanyExecutive {
+        val localVariableConfig = companyExecutiveRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, CompanyExecutive>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -258,6 +369,29 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyExecutive
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @return RequestConfig
+    */
+    fun companyExecutiveRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/executive",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Company News
     * List latest company news by symbol. This endpoint is only available for North American companies.
     * @param symbol Company symbol. 
@@ -270,28 +404,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyNews(symbol: String, from: String, to: String) : List<News> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("from", listOf(parseDateToQueryString(from)))
-                put("to", listOf(parseDateToQueryString(to)))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/company-news",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<News>>(
-            localVariableConfig,
-            localVariableBody
+    fun companyNews(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<News> {
+        val localVariableConfig = companyNewsRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<News>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<News>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<News>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -306,6 +427,33 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyNews
+    *
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun companyNewsRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/company-news",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Peers
     * Get company peers. Return a list of peers in the same country and GICS sub-industry
     * @param symbol Symbol of the company: AAPL. 
@@ -316,26 +464,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyPeers(symbol: String) : List<String> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/peers",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<String>>(
-            localVariableConfig,
-            localVariableBody
+    fun companyPeers(symbol: kotlin.String) : kotlin.collections.List<kotlin.String> {
+        val localVariableConfig = companyPeersRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<kotlin.String>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<String>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<kotlin.String>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -347,6 +484,29 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
         }
+    }
+
+    /**
+    * To obtain the request config of the operation companyPeers
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @return RequestConfig
+    */
+    fun companyPeersRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/peers",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -362,30 +522,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyProfile(symbol: String?, isin: String?, cusip: String?) : CompanyProfile {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                if (symbol != null) {
-                    put("symbol", listOf(symbol.toString()))
-                }
-                if (isin != null) {
-                    put("isin", listOf(isin.toString()))
-                }
-                if (cusip != null) {
-                    put("cusip", listOf(cusip.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/profile",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<CompanyProfile>(
-            localVariableConfig,
-            localVariableBody
+    fun companyProfile(symbol: kotlin.String?, isin: kotlin.String?, cusip: kotlin.String?) : CompanyProfile {
+        val localVariableConfig = companyProfileRequestConfig(symbol = symbol, isin = isin, cusip = cusip)
+
+        val localVarResponse = request<Unit, CompanyProfile>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -404,21 +545,16 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * Company Profile 2
-    * Get general information of a company. You can query by symbol, ISIN or CUSIP. This is the free version of &lt;a href&#x3D;\&quot;#company-profile\&quot;&gt;Company Profile&lt;/a&gt;.
+    * To obtain the request config of the operation companyProfile
+    *
     * @param symbol Symbol of the company: AAPL e.g. (optional)
     * @param isin ISIN (optional)
     * @param cusip CUSIP (optional)
-    * @return CompanyProfile2
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
+    * @return RequestConfig
     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyProfile2(symbol: String?, isin: String?, cusip: String?) : CompanyProfile2 {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
+    fun companyProfileRequestConfig(symbol: kotlin.String?, isin: kotlin.String?, cusip: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 if (symbol != null) {
                     put("symbol", listOf(symbol.toString()))
@@ -431,15 +567,34 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/profile2",
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/profile",
             query = localVariableQuery,
-            headers = localVariableHeaders
+            headers = localVariableHeaders,
+            body = localVariableBody
         )
-        val localVarResponse = request<CompanyProfile2>(
-            localVariableConfig,
-            localVariableBody
+    }
+
+    /**
+    * Company Profile 2
+    * Get general information of a company. You can query by symbol, ISIN or CUSIP. This is the free version of &lt;a href&#x3D;\&quot;#company-profile\&quot;&gt;Company Profile&lt;/a&gt;.
+    * @param symbol Symbol of the company: AAPL e.g. (optional)
+    * @param isin ISIN (optional)
+    * @param cusip CUSIP (optional)
+    * @return CompanyProfile2
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun companyProfile2(symbol: kotlin.String?, isin: kotlin.String?, cusip: kotlin.String?) : CompanyProfile2 {
+        val localVariableConfig = companyProfile2RequestConfig(symbol = symbol, isin = isin, cusip = cusip)
+
+        val localVarResponse = request<Unit, CompanyProfile2>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -458,6 +613,39 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyProfile2
+    *
+    * @param symbol Symbol of the company: AAPL e.g. (optional)
+    * @param isin ISIN (optional)
+    * @param cusip CUSIP (optional)
+    * @return RequestConfig
+    */
+    fun companyProfile2RequestConfig(symbol: kotlin.String?, isin: kotlin.String?, cusip: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (isin != null) {
+                    put("isin", listOf(isin.toString()))
+                }
+                if (cusip != null) {
+                    put("cusip", listOf(cusip.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/profile2",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Revenue Estimates
     * Get company&#39;s revenue estimates.
     * @param symbol Symbol of the company: AAPL. 
@@ -469,25 +657,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyRevenueEstimates(symbol: String, freq: String?) : RevenueEstimates {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                if (freq != null) {
-                    put("freq", listOf(freq.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/revenue-estimate",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<RevenueEstimates>(
-            localVariableConfig,
-            localVariableBody
+    fun companyRevenueEstimates(symbol: kotlin.String, freq: kotlin.String?) : RevenueEstimates {
+        val localVariableConfig = companyRevenueEstimatesRequestConfig(symbol = symbol, freq = freq)
+
+        val localVarResponse = request<Unit, RevenueEstimates>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -506,6 +680,33 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation companyRevenueEstimates
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param freq Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; (optional)
+    * @return RequestConfig
+    */
+    fun companyRevenueEstimatesRequestConfig(symbol: kotlin.String, freq: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (freq != null) {
+                    put("freq", listOf(freq.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/revenue-estimate",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Country Metadata
     * List all countries and metadata.
     * @return kotlin.collections.List<CountryMetadata>
@@ -515,23 +716,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun country() : List<CountryMetadata> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/country",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<CountryMetadata>>(
-            localVariableConfig,
-            localVariableBody
+    fun country() : kotlin.collections.List<CountryMetadata> {
+        val localVariableConfig = countryRequestConfig()
+
+        val localVarResponse = request<Unit, kotlin.collections.List<CountryMetadata>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<CountryMetadata>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CountryMetadata>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -546,6 +739,25 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation country
+    *
+    * @return RequestConfig
+    */
+    fun countryRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/country",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * COVID-19
     * Get real-time updates on the number of COVID-19 (Corona virus) cases in the US with a state-by-state breakdown. Data is sourced from CDC and reputable sources. You can also access this API &lt;a href&#x3D;\&quot;https://rapidapi.com/Finnhub/api/finnhub-real-time-covid-19\&quot; target&#x3D;\&quot;_blank\&quot; rel&#x3D;\&quot;nofollow\&quot;&gt;here&lt;/a&gt;
     * @return kotlin.collections.List<CovidInfo>
@@ -555,23 +767,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun covid19() : List<CovidInfo> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/covid19/us",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<CovidInfo>>(
-            localVariableConfig,
-            localVariableBody
+    fun covid19() : kotlin.collections.List<CovidInfo> {
+        val localVariableConfig = covid19RequestConfig()
+
+        val localVarResponse = request<Unit, kotlin.collections.List<CovidInfo>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<CovidInfo>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CovidInfo>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -583,6 +787,25 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
         }
+    }
+
+    /**
+    * To obtain the request config of the operation covid19
+    *
+    * @return RequestConfig
+    */
+    fun covid19RequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/covid19/us",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -599,25 +822,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cryptoCandles(symbol: String, resolution: String, from: Long, to: Long) : CryptoCandles {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-                put("from", listOf(from.toString()))
-                put("to", listOf(to.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/crypto/candle",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<CryptoCandles>(
-            localVariableConfig,
-            localVariableBody
+    fun cryptoCandles(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long) : CryptoCandles {
+        val localVariableConfig = cryptoCandlesRequestConfig(symbol = symbol, resolution = resolution, from = from, to = to)
+
+        val localVarResponse = request<Unit, CryptoCandles>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -636,6 +845,35 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation cryptoCandles
+    *
+    * @param symbol Use symbol returned in &lt;code&gt;/crypto/symbol&lt;/code&gt; endpoint for this field. 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @param from UNIX timestamp. Interval initial value. 
+    * @param to UNIX timestamp. Interval end value. 
+    * @return RequestConfig
+    */
+    fun cryptoCandlesRequestConfig(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/crypto/candle",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Crypto Exchanges
     * List supported crypto exchanges
     * @return kotlin.collections.List<kotlin.String>
@@ -645,23 +883,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cryptoExchanges() : List<String> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/crypto/exchange",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<String>>(
-            localVariableConfig,
-            localVariableBody
+    fun cryptoExchanges() : kotlin.collections.List<kotlin.String> {
+        val localVariableConfig = cryptoExchangesRequestConfig()
+
+        val localVarResponse = request<Unit, kotlin.collections.List<kotlin.String>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<String>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<kotlin.String>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -673,6 +903,25 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
         }
+    }
+
+    /**
+    * To obtain the request config of the operation cryptoExchanges
+    *
+    * @return RequestConfig
+    */
+    fun cryptoExchangesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/crypto/exchange",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -686,26 +935,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cryptoSymbols(exchange: String) : List<CryptoSymbol> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("exchange", listOf(exchange))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/crypto/symbol",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<CryptoSymbol>>(
-            localVariableConfig,
-            localVariableBody
+    fun cryptoSymbols(exchange: kotlin.String) : kotlin.collections.List<CryptoSymbol> {
+        val localVariableConfig = cryptoSymbolsRequestConfig(exchange = exchange)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<CryptoSymbol>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<CryptoSymbol>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CryptoSymbol>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -720,8 +958,31 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation cryptoSymbols
+    *
+    * @param exchange Exchange you want to get the list of symbols from. 
+    * @return RequestConfig
+    */
+    fun cryptoSymbolsRequestConfig(exchange: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("exchange", listOf(exchange.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/crypto/symbol",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Earnings Calendar
-    * Get historical and coming earnings release dating back to 2003. You can setup &lt;a href&#x3D;\&quot;#webhook\&quot;&gt;webhook&lt;/a&gt; to receive real-time earnings update.
+    * Get historical and coming earnings release. EPS and Revenue in this endpoint are non-GAAP, which means they are adjusted to exclude some one-time or unusual items. This is the same data investors usually react to and talked about on the media. Estimates are sourced from both sell-side and buy-side analysts.
     * @param from From date: 2020-03-15. (optional)
     * @param to To date: 2020-03-16. (optional)
     * @param symbol Filter by symbol: AAPL. (optional)
@@ -733,33 +994,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun earningsCalendar(from: String?, to: String?, symbol: String?, international: Boolean?) : EarningsCalendar {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                if (from != null) {
-                    put("from", listOf(parseDateToQueryString(from)))
-                }
-                if (to != null) {
-                    put("to", listOf(parseDateToQueryString(to)))
-                }
-                if (symbol != null) {
-                    put("symbol", listOf(symbol.toString()))
-                }
-                if (international != null) {
-                    put("international", listOf(international.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/calendar/earnings",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<EarningsCalendar>(
-            localVariableConfig,
-            localVariableBody
+    fun earningsCalendar(from: kotlin.String?, to: kotlin.String?, symbol: kotlin.String?, international: kotlin.Boolean?) : EarningsCalendar {
+        val localVariableConfig = earningsCalendarRequestConfig(from = from, to = to, symbol = symbol, international = international)
+
+        val localVarResponse = request<Unit, EarningsCalendar>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -778,32 +1017,62 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * Economic Code
-    * List codes of supported economic data.
-    * @return kotlin.collections.List<EconomicCode>
+    * To obtain the request config of the operation earningsCalendar
+    *
+    * @param from From date: 2020-03-15. (optional)
+    * @param to To date: 2020-03-16. (optional)
+    * @param symbol Filter by symbol: AAPL. (optional)
+    * @param international Set to &lt;code&gt;true&lt;/code&gt; to include international markets. Default value is &lt;code&gt;false&lt;/code&gt; (optional)
+    * @return RequestConfig
+    */
+    fun earningsCalendarRequestConfig(from: kotlin.String?, to: kotlin.String?, symbol: kotlin.String?, international: kotlin.Boolean?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
+                }
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (international != null) {
+                    put("international", listOf(international.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/calendar/earnings",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Earnings Call Transcripts
+    * &lt;p&gt;Get earnings call transcripts, audio and participants&#39; list. This endpoint is only available for US, UK, and Candian companies. &lt;p&gt;15+ years of data is available with 220,000+ audio which add up to 7TB in size.&lt;/p&gt;
+    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
+    * @return EarningsCallTranscripts
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun economicCode() : List<EconomicCode> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/economic/code",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<EconomicCode>>(
-            localVariableConfig,
-            localVariableBody
+    fun earningsCallTranscriptsApi(id: kotlin.String) : EarningsCallTranscripts {
+        val localVariableConfig = earningsCallTranscriptsApiRequestConfig(id = id)
+
+        val localVarResponse = request<Unit, EarningsCallTranscripts>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<EconomicCode>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EarningsCallTranscripts
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -818,6 +1087,80 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation earningsCallTranscriptsApi
+    *
+    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
+    * @return RequestConfig
+    */
+    fun earningsCallTranscriptsApiRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("id", listOf(id.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/transcripts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Economic Code
+    * List codes of supported economic data.
+    * @return kotlin.collections.List<EconomicCode>
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun economicCode() : kotlin.collections.List<EconomicCode> {
+        val localVariableConfig = economicCodeRequestConfig()
+
+        val localVarResponse = request<Unit, kotlin.collections.List<EconomicCode>>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EconomicCode>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation economicCode
+    *
+    * @return RequestConfig
+    */
+    fun economicCodeRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/economic/code",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Economic Data
     * Get economic data.
     * @param code Economic code. 
@@ -828,22 +1171,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun economicData(code: String) : EconomicData {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("code", listOf(code))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/economic",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<EconomicData>(
-            localVariableConfig,
-            localVariableBody
+    fun economicData(code: kotlin.String) : EconomicData {
+        val localVariableConfig = economicDataRequestConfig(code = code)
+
+        val localVarResponse = request<Unit, EconomicData>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -862,6 +1194,29 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation economicData
+    *
+    * @param code Economic code. 
+    * @return RequestConfig
+    */
+    fun economicDataRequestConfig(code: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("code", listOf(code.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/economic",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * ETFs Country Exposure
     * Get ETF country exposure data.
     * @param symbol ETF symbol. 
@@ -872,22 +1227,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun etfsCountryExposure(symbol: String) : ETFsCountryExposure {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/etf/country",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<ETFsCountryExposure>(
-            localVariableConfig,
-            localVariableBody
+    fun etfsCountryExposure(symbol: kotlin.String) : ETFsCountryExposure {
+        val localVariableConfig = etfsCountryExposureRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, ETFsCountryExposure>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -906,9 +1250,34 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * ETFs Holdings
-    * Get current ETF holdings.
+    * To obtain the request config of the operation etfsCountryExposure
+    *
     * @param symbol ETF symbol. 
+    * @return RequestConfig
+    */
+    fun etfsCountryExposureRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/etf/country",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * ETFs Holdings
+    * Get full ETF holdings/constituents. This endpoint has global coverage. Widget only shows top 10 holdings.
+    * @param symbol ETF symbol. (optional)
+    * @param isin ETF isin. (optional)
+    * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
     * @return ETFsHoldings
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -916,22 +1285,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun etfsHoldings(symbol: String) : ETFsHoldings {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/etf/holdings",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<ETFsHoldings>(
-            localVariableConfig,
-            localVariableBody
+    fun etfsHoldings(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : ETFsHoldings {
+        val localVariableConfig = etfsHoldingsRequestConfig(symbol = symbol, isin = isin, skip = skip)
+
+        val localVarResponse = request<Unit, ETFsHoldings>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -950,53 +1308,43 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * ETFs Industry Exposure
-    * Get ETF industry exposure data.
-    * @param symbol ETF symbol. 
-    * @return ETFsIndustryExposure
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
+    * To obtain the request config of the operation etfsHoldings
+    *
+    * @param symbol ETF symbol. (optional)
+    * @param isin ETF isin. (optional)
+    * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
+    * @return RequestConfig
     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun etfsIndustryExposure(symbol: String) : ETFsIndustryExposure {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
+    fun etfsHoldingsRequestConfig(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
-                put("symbol", listOf(symbol))
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (isin != null) {
+                    put("isin", listOf(isin.toString()))
+                }
+                if (skip != null) {
+                    put("skip", listOf(skip.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/etf/sector",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<ETFsIndustryExposure>(
-            localVariableConfig,
-            localVariableBody
-        )
 
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ETFsIndustryExposure
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/etf/holdings",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
     * ETFs Profile
-    * Get ETF profile information. Currently support all US ETFs.
-    * @param symbol ETF symbol. 
+    * Get ETF profile information. This endpoint has global coverage.
+    * @param symbol ETF symbol. (optional)
+    * @param isin ETF isin. (optional)
     * @return ETFsProfile
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -1004,22 +1352,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun etfsProfile(symbol: String) : ETFsProfile {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/etf/profile",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<ETFsProfile>(
-            localVariableConfig,
-            localVariableBody
+    fun etfsProfile(symbol: kotlin.String?, isin: kotlin.String?) : ETFsProfile {
+        val localVariableConfig = etfsProfileRequestConfig(symbol = symbol, isin = isin)
+
+        val localVarResponse = request<Unit, ETFsProfile>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1038,7 +1375,143 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * Filings
+    * To obtain the request config of the operation etfsProfile
+    *
+    * @param symbol ETF symbol. (optional)
+    * @param isin ETF isin. (optional)
+    * @return RequestConfig
+    */
+    fun etfsProfileRequestConfig(symbol: kotlin.String?, isin: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (isin != null) {
+                    put("isin", listOf(isin.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/etf/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * ETFs Sector Exposure
+    * Get ETF sector exposure data.
+    * @param symbol ETF symbol. 
+    * @return ETFsSectorExposure
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun etfsSectorExposure(symbol: kotlin.String) : ETFsSectorExposure {
+        val localVariableConfig = etfsSectorExposureRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, ETFsSectorExposure>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ETFsSectorExposure
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation etfsSectorExposure
+    *
+    * @param symbol ETF symbol. 
+    * @return RequestConfig
+    */
+    fun etfsSectorExposureRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/etf/sector",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * FDA Committee Meeting Calendar
+    * FDA&#39;s advisory committees are established to provide functions which support the agency&#39;s mission of protecting and promoting the public health, while meeting the requirements set forth in the Federal Advisory Committee Act. Committees are either mandated by statute or established at the discretion of the Department of Health and Human Services. Each committee is subject to renewal at two-year intervals unless the committee charter states otherwise.
+    * @return kotlin.collections.List<FDAComitteeMeeting>
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun fdaCommitteeMeetingCalendar() : kotlin.collections.List<FDAComitteeMeeting> {
+        val localVariableConfig = fdaCommitteeMeetingCalendarRequestConfig()
+
+        val localVarResponse = request<Unit, kotlin.collections.List<FDAComitteeMeeting>>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FDAComitteeMeeting>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation fdaCommitteeMeetingCalendar
+    *
+    * @return RequestConfig
+    */
+    fun fdaCommitteeMeetingCalendarRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/fda-advisory-committee-calendar",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * SEC Filings
     * List company&#39;s filing. Limit to 250 documents at a time. This data is available for bulk download on &lt;a href&#x3D;\&quot;https://www.kaggle.com/finnhub/sec-filings\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Kaggle SEC Filings database&lt;/a&gt;.
     * @param symbol Symbol. Leave &lt;code&gt;symbol&lt;/code&gt;,&lt;code&gt;cik&lt;/code&gt; and &lt;code&gt;accessNumber&lt;/code&gt; empty to list latest filings. (optional)
     * @param cik CIK. (optional)
@@ -1053,9 +1526,42 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun filings(symbol: String?, cik: String?, accessNumber: String?, form: String?, from: String?, to: String?) : List<Filing> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
+    fun filings(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, form: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : kotlin.collections.List<Filing> {
+        val localVariableConfig = filingsRequestConfig(symbol = symbol, cik = cik, accessNumber = accessNumber, form = form, from = from, to = to)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<Filing>>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Filing>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation filings
+    *
+    * @param symbol Symbol. Leave &lt;code&gt;symbol&lt;/code&gt;,&lt;code&gt;cik&lt;/code&gt; and &lt;code&gt;accessNumber&lt;/code&gt; empty to list latest filings. (optional)
+    * @param cik CIK. (optional)
+    * @param accessNumber Access number of a specific report you want to retrieve data from. (optional)
+    * @param form Filter by form. You can use this value &lt;code&gt;NT 10-K&lt;/code&gt; to find non-timely filings for a company. (optional)
+    * @param from From date: 2020-03-15. (optional)
+    * @param to To date: 2020-03-16. (optional)
+    * @return RequestConfig
+    */
+    fun filingsRequestConfig(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, form: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 if (symbol != null) {
                     put("symbol", listOf(symbol.toString()))
@@ -1077,19 +1583,36 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/filings",
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/filings",
             query = localVariableQuery,
-            headers = localVariableHeaders
+            headers = localVariableHeaders,
+            body = localVariableBody
         )
-        val localVarResponse = request<List<Filing>>(
-            localVariableConfig,
-            localVariableBody
+    }
+
+    /**
+    * SEC Sentiment Analysis
+    * Get sentiment analysis of 10-K and 10-Q filings from SEC. An abnormal increase in the number of positive/negative words in filings can signal a significant change in the company&#39;s stock price in the upcoming 4 quarters. We make use of &lt;a href&#x3D; \&quot;https://sraf.nd.edu/textual-analysis/resources/\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Loughran and McDonald Sentiment Word Lists&lt;/a&gt; to calculate the sentiment for each filing.
+    * @param accessNumber Access number of a specific report you want to retrieve data from. 
+    * @return SECSentimentAnalysis
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun filingsSentiment(accessNumber: kotlin.String) : SECSentimentAnalysis {
+        val localVariableConfig = filingsSentimentRequestConfig(accessNumber = accessNumber)
+
+        val localVarResponse = request<Unit, SECSentimentAnalysis>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<Filing>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SECSentimentAnalysis
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1104,8 +1627,31 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation filingsSentiment
+    *
+    * @param accessNumber Access number of a specific report you want to retrieve data from. 
+    * @return RequestConfig
+    */
+    fun filingsSentimentRequestConfig(accessNumber: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("accessNumber", listOf(accessNumber.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/filings-sentiment",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Financial Statements
-    * Get standardized balance sheet, income statement and cash flow for global companies going back 30+ years.
+    * &lt;p&gt;Get standardized balance sheet, income statement and cash flow for global companies going back 30+ years. Data is sourced from original filings most of which made available through &lt;a href&#x3D;\&quot;#filings\&quot;&gt;SEC Filings&lt;/a&gt; and &lt;a href&#x3D;\&quot;#international-filings\&quot;&gt;International Filings&lt;/a&gt; endpoints.&lt;/p&gt;&lt;p&gt;&lt;i&gt;Wondering why our standardized data is different from Bloomberg, Reuters, Factset, S&amp;P or Yahoo Finance ? Check out our &lt;a href&#x3D;\&quot;/faq\&quot;&gt;FAQ page&lt;/a&gt; to learn more&lt;/i&gt;&lt;/p&gt;
     * @param symbol Symbol of the company: AAPL. 
     * @param statement Statement can take 1 of these values &lt;code&gt;bs, ic, cf&lt;/code&gt; for Balance Sheet, Income Statement, Cash Flow respectively. 
     * @param freq Frequency can take 1 of these values &lt;code&gt;annual, quarterly, ttm, ytd&lt;/code&gt;.  TTM (Trailing Twelve Months) option is available for Income Statement and Cash Flow. YTD (Year To Date) option is only available for Cash Flow. 
@@ -1116,24 +1662,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun financials(symbol: String, statement: String, freq: String) : FinancialStatements {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("statement", listOf(statement))
-                put("freq", listOf(freq))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/financials",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<FinancialStatements>(
-            localVariableConfig,
-            localVariableBody
+    fun financials(symbol: kotlin.String, statement: kotlin.String, freq: kotlin.String) : FinancialStatements {
+        val localVariableConfig = financialsRequestConfig(symbol = symbol, statement = statement, freq = freq)
+
+        val localVarResponse = request<Unit, FinancialStatements>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1152,6 +1685,33 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation financials
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param statement Statement can take 1 of these values &lt;code&gt;bs, ic, cf&lt;/code&gt; for Balance Sheet, Income Statement, Cash Flow respectively. 
+    * @param freq Frequency can take 1 of these values &lt;code&gt;annual, quarterly, ttm, ytd&lt;/code&gt;.  TTM (Trailing Twelve Months) option is available for Income Statement and Cash Flow. YTD (Year To Date) option is only available for Cash Flow. 
+    * @return RequestConfig
+    */
+    fun financialsRequestConfig(symbol: kotlin.String, statement: kotlin.String, freq: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("statement", listOf(statement.toString()))
+                put("freq", listOf(freq.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/financials",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Financials As Reported
     * Get financials as reported. This data is available for bulk download on &lt;a href&#x3D;\&quot;https://www.kaggle.com/finnhub/reported-financials\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Kaggle SEC Financials database&lt;/a&gt;.
     * @param symbol Symbol. (optional)
@@ -1165,33 +1725,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun financialsReported(symbol: String?, cik: String?, accessNumber: String?, freq: String?) : FinancialsAsReported {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                if (symbol != null) {
-                    put("symbol", listOf(symbol.toString()))
-                }
-                if (cik != null) {
-                    put("cik", listOf(cik.toString()))
-                }
-                if (accessNumber != null) {
-                    put("accessNumber", listOf(accessNumber.toString()))
-                }
-                if (freq != null) {
-                    put("freq", listOf(freq.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/financials-reported",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<FinancialsAsReported>(
-            localVariableConfig,
-            localVariableBody
+    fun financialsReported(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, freq: kotlin.String?) : FinancialsAsReported {
+        val localVariableConfig = financialsReportedRequestConfig(symbol = symbol, cik = cik, accessNumber = accessNumber, freq = freq)
+
+        val localVarResponse = request<Unit, FinancialsAsReported>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1210,6 +1748,43 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation financialsReported
+    *
+    * @param symbol Symbol. (optional)
+    * @param cik CIK. (optional)
+    * @param accessNumber Access number of a specific report you want to retrieve financials from. (optional)
+    * @param freq Frequency. Can be either &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt;. (optional)
+    * @return RequestConfig
+    */
+    fun financialsReportedRequestConfig(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, freq: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (cik != null) {
+                    put("cik", listOf(cik.toString()))
+                }
+                if (accessNumber != null) {
+                    put("accessNumber", listOf(accessNumber.toString()))
+                }
+                if (freq != null) {
+                    put("freq", listOf(freq.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/financials-reported",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Forex Candles
     * Get candlestick data for forex symbols.
     * @param symbol Use symbol returned in &lt;code&gt;/forex/symbol&lt;/code&gt; endpoint for this field. 
@@ -1223,25 +1798,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexCandles(symbol: String, resolution: String, from: Long, to: Long) : ForexCandles {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-                put("from", listOf(from.toString()))
-                put("to", listOf(to.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/forex/candle",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<ForexCandles>(
-            localVariableConfig,
-            localVariableBody
+    fun forexCandles(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long) : ForexCandles {
+        val localVariableConfig = forexCandlesRequestConfig(symbol = symbol, resolution = resolution, from = from, to = to)
+
+        val localVarResponse = request<Unit, ForexCandles>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1260,6 +1821,35 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation forexCandles
+    *
+    * @param symbol Use symbol returned in &lt;code&gt;/forex/symbol&lt;/code&gt; endpoint for this field. 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @param from UNIX timestamp. Interval initial value. 
+    * @param to UNIX timestamp. Interval end value. 
+    * @return RequestConfig
+    */
+    fun forexCandlesRequestConfig(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/forex/candle",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Forex Exchanges
     * List supported forex exchanges
     * @return kotlin.collections.List<kotlin.String>
@@ -1269,23 +1859,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexExchanges() : List<String> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/forex/exchange",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<String>>(
-            localVariableConfig,
-            localVariableBody
+    fun forexExchanges() : kotlin.collections.List<kotlin.String> {
+        val localVariableConfig = forexExchangesRequestConfig()
+
+        val localVarResponse = request<Unit, kotlin.collections.List<kotlin.String>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<String>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<kotlin.String>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1300,6 +1882,25 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation forexExchanges
+    *
+    * @return RequestConfig
+    */
+    fun forexExchangesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/forex/exchange",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Forex rates
     * Get rates for all forex pairs. Ideal for currency conversion
     * @param base Base currency. Default to EUR. (optional)
@@ -1310,24 +1911,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexRates(base: String?) : Forexrates {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                if (base != null) {
-                    put("base", listOf(base.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/forex/rates",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<Forexrates>(
-            localVariableConfig,
-            localVariableBody
+    fun forexRates(base: kotlin.String?) : Forexrates {
+        val localVariableConfig = forexRatesRequestConfig(base = base)
+
+        val localVarResponse = request<Unit, Forexrates>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1346,6 +1934,31 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation forexRates
+    *
+    * @param base Base currency. Default to EUR. (optional)
+    * @return RequestConfig
+    */
+    fun forexRatesRequestConfig(base: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (base != null) {
+                    put("base", listOf(base.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/forex/rates",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Forex Symbol
     * List supported forex symbols.
     * @param exchange Exchange you want to get the list of symbols from. 
@@ -1356,26 +1969,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexSymbols(exchange: String) : List<ForexSymbol> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("exchange", listOf(exchange))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/forex/symbol",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<ForexSymbol>>(
-            localVariableConfig,
-            localVariableBody
+    fun forexSymbols(exchange: kotlin.String) : kotlin.collections.List<ForexSymbol> {
+        val localVariableConfig = forexSymbolsRequestConfig(exchange = exchange)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<ForexSymbol>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<ForexSymbol>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ForexSymbol>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1390,8 +1992,31 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation forexSymbols
+    *
+    * @param exchange Exchange you want to get the list of symbols from. 
+    * @return RequestConfig
+    */
+    fun forexSymbolsRequestConfig(exchange: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("exchange", listOf(exchange.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/forex/symbol",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Fund Ownership
-    * Get a full list fund and institutional investors of a company in descending order of the number of shares held.
+    * Get a full list fund and institutional investors of a company in descending order of the number of shares held. Data is sourced from &lt;code&gt;13F form&lt;/code&gt;, &lt;code&gt;Schedule 13D&lt;/code&gt; and &lt;code&gt;13G&lt;/code&gt; for US market, &lt;code&gt;UK Share Register&lt;/code&gt; for UK market, &lt;code&gt;SEDI&lt;/code&gt; for Canadian market and equivalent filings for other international markets.
     * @param symbol Symbol of the company: AAPL. 
     * @param limit Limit number of results. Leave empty to get the full list. (optional)
     * @return FundOwnership
@@ -1401,25 +2026,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun fundOwnership(symbol: String, limit: Long?) : FundOwnership {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/fund-ownership",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<FundOwnership>(
-            localVariableConfig,
-            localVariableBody
+    fun fundOwnership(symbol: kotlin.String, limit: kotlin.Long?) : FundOwnership {
+        val localVariableConfig = fundOwnershipRequestConfig(symbol = symbol, limit = limit)
+
+        val localVarResponse = request<Unit, FundOwnership>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1438,56 +2049,35 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * General News
-    * Get latest market news.
-    * @param category This parameter can be 1 of the following values &lt;code&gt;general, forex, crypto, merger&lt;/code&gt;. 
-    * @param minId Use this field to get only news after this ID. Default to 0 (optional)
-    * @return kotlin.collections.List<News>
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
+    * To obtain the request config of the operation fundOwnership
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param limit Limit number of results. Leave empty to get the full list. (optional)
+    * @return RequestConfig
     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun generalNews(category: String, minId: String?) : List<News> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
+    fun fundOwnershipRequestConfig(symbol: kotlin.String, limit: kotlin.Long?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
-                put("category", listOf(category))
-                if (minId != null) {
-                    put("minId", listOf(minId.toString()))
+                put("symbol", listOf(symbol.toString()))
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/news",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<News>>(
-            localVariableConfig,
-            localVariableBody
-        )
 
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<News>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/fund-ownership",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
     * Indices Constituents
-    * Get a list of index&#39;s constituents. Currently support &lt;code&gt;^GSPC (S&amp;P 500)&lt;/code&gt;, &lt;code&gt;^NDX (Nasdaq 100)&lt;/code&gt;, &lt;code&gt;^DJI (Dow Jones)&lt;/code&gt;
+    * Get a list of index&#39;s constituents. A list of supported indices for this endpoint can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1Syr2eLielHWsorxkDEZXyc55d6bNx1M3ZeI4vdn7Qzo/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
     * @param symbol symbol 
     * @return IndicesConstituents
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1496,22 +2086,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun indicesConstituents(symbol: String) : IndicesConstituents {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/index/constituents",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<IndicesConstituents>(
-            localVariableConfig,
-            localVariableBody
+    fun indicesConstituents(symbol: kotlin.String) : IndicesConstituents {
+        val localVariableConfig = indicesConstituentsRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, IndicesConstituents>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1530,6 +2109,29 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation indicesConstituents
+    *
+    * @param symbol symbol 
+    * @return RequestConfig
+    */
+    fun indicesConstituentsRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/index/constituents",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Indices Historical Constituents
     * Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC (S&amp;P 500)&lt;/code&gt;, &lt;code&gt;^NDX (Nasdaq 100)&lt;/code&gt;, &lt;code&gt;^DJI (Dow Jones)&lt;/code&gt;
     * @param symbol symbol 
@@ -1540,22 +2142,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun indicesHistoricalConstituents(symbol: String) : IndicesHistoricalConstituents {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/index/historical-constituents",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<IndicesHistoricalConstituents>(
-            localVariableConfig,
-            localVariableBody
+    fun indicesHistoricalConstituents(symbol: kotlin.String) : IndicesHistoricalConstituents {
+        val localVariableConfig = indicesHistoricalConstituentsRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, IndicesHistoricalConstituents>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1574,40 +2165,50 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * Investors Ownership
-    * Get a full list of shareholders/investors of a company in descending order of the number of shares held.
+    * To obtain the request config of the operation indicesHistoricalConstituents
+    *
+    * @param symbol symbol 
+    * @return RequestConfig
+    */
+    fun indicesHistoricalConstituentsRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/index/historical-constituents",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Insider Transactions
+    * Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&gt;. This endpoint only covers US companies at the moment. Limit to 100 transactions per API call.
     * @param symbol Symbol of the company: AAPL. 
-    * @param limit Limit number of results. Leave empty to get the full list. (optional)
-    * @return InvestorsOwnership
+    * @param from From date: 2020-03-15. (optional)
+    * @param to To date: 2020-03-16. (optional)
+    * @return InsiderTransactions
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun investorsOwnership(symbol: String, limit: Long?) : InvestorsOwnership {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/investor-ownership",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<InvestorsOwnership>(
-            localVariableConfig,
-            localVariableBody
+    fun insiderTransactions(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : InsiderTransactions {
+        val localVariableConfig = insiderTransactionsRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, InsiderTransactions>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as InvestorsOwnership
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InsiderTransactions
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1622,8 +2223,158 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation insiderTransactions
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param from From date: 2020-03-15. (optional)
+    * @param to To date: 2020-03-16. (optional)
+    * @return RequestConfig
+    */
+    fun insiderTransactionsRequestConfig(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/insider-transactions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * International Filings
+    * List filings for international companies which covers 95%+ of global market cap. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
+    * @param symbol Symbol. Leave empty to list latest filings. (optional)
+    * @param country Filter by country using country&#39;s 2-letter code. (optional)
+    * @return kotlin.collections.List<InternationalFiling>
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun internationalFilings(symbol: kotlin.String?, country: kotlin.String?) : kotlin.collections.List<InternationalFiling> {
+        val localVariableConfig = internationalFilingsRequestConfig(symbol = symbol, country = country)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<InternationalFiling>>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<InternationalFiling>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation internationalFilings
+    *
+    * @param symbol Symbol. Leave empty to list latest filings. (optional)
+    * @param country Filter by country using country&#39;s 2-letter code. (optional)
+    * @return RequestConfig
+    */
+    fun internationalFilingsRequestConfig(symbol: kotlin.String?, country: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (country != null) {
+                    put("country", listOf(country.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/international-filings",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Investment Themes (Thematic Investing)
+    * &lt;p&gt;Thematic investing involves creating a portfolio (or portion of a portfolio) by gathering together a collection of companies involved in certain areas that you predict will generate above-market returns over the long term. Themes can be based on a concept such as ageing populations or a sub-sector such as robotics, and drones. Thematic investing focuses on predicted long-term trends rather than specific companies or sectors, enabling investors to access structural, one-off shifts that can change an entire industry.&lt;/p&gt;&lt;p&gt;This endpoint will help you get portfolios of different investment themes that are changing our life and are the way of the future.&lt;/p&gt;&lt;p&gt;A full list of themes supported can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt;. The theme coverage and portfolios are updated bi-weekly by our analysts. Our approach excludes penny, super-small cap and illiquid stocks.&lt;/p&gt;
+    * @param theme Investment theme. A full list of themes supported can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt;. 
+    * @return InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun investmentThemesThematicInvesting(theme: kotlin.String) : InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis {
+        val localVariableConfig = investmentThemesThematicInvestingRequestConfig(theme = theme)
+
+        val localVarResponse = request<Unit, InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation investmentThemesThematicInvesting
+    *
+    * @param theme Investment theme. A full list of themes supported can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt;. 
+    * @return RequestConfig
+    */
+    fun investmentThemesThematicInvestingRequestConfig(theme: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("theme", listOf(theme.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/investment-theme",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * IPO Calendar
-    * Get recent and coming IPO.
+    * Get recent and upcoming IPO.
     * @param from From date: 2020-03-15. 
     * @param to To date: 2020-03-16. 
     * @return IPOCalendar
@@ -1633,23 +2384,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun ipoCalendar(from: String, to: String) : IPOCalendar {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("from", listOf(parseDateToQueryString(from)))
-                put("to", listOf(parseDateToQueryString(to)))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/calendar/ipo",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<IPOCalendar>(
-            localVariableConfig,
-            localVariableBody
+    fun ipoCalendar(from: kotlin.String, to: kotlin.String) : IPOCalendar {
+        val localVariableConfig = ipoCalendarRequestConfig(from = from, to = to)
+
+        val localVarResponse = request<Unit, IPOCalendar>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1668,44 +2407,51 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * Major Developments
-    * List latest major developments of a company going back 20 years with 12M+ data points. This data can be used to highlight the most significant events.
-    * @param symbol Company symbol. 
-    * @param from From time: 2020-01-01. (optional)
-    * @param to To time: 2020-01-05. (optional)
-    * @return MajorDevelopments
+    * To obtain the request config of the operation ipoCalendar
+    *
+    * @param from From date: 2020-03-15. 
+    * @param to To date: 2020-03-16. 
+    * @return RequestConfig
+    */
+    fun ipoCalendarRequestConfig(from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/calendar/ipo",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Market News
+    * Get latest market news.
+    * @param category This parameter can be 1 of the following values &lt;code&gt;general, forex, crypto, merger&lt;/code&gt;. 
+    * @param minId Use this field to get only news after this ID. Default to 0 (optional)
+    * @return kotlin.collections.List<News>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun majorDevelopments(symbol: String, from: String?, to: String?) : MajorDevelopments {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                if (from != null) {
-                    put("from", listOf(parseDateToQueryString(from)))
-                }
-                if (to != null) {
-                    put("to", listOf(parseDateToQueryString(to)))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/major-development",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<MajorDevelopments>(
-            localVariableConfig,
-            localVariableBody
+    fun marketNews(category: kotlin.String, minId: kotlin.String?) : kotlin.collections.List<News> {
+        val localVariableConfig = marketNewsRequestConfig(category = category, minId = minId)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<News>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MajorDevelopments
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<News>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1720,6 +2466,276 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation marketNews
+    *
+    * @param category This parameter can be 1 of the following values &lt;code&gt;general, forex, crypto, merger&lt;/code&gt;. 
+    * @param minId Use this field to get only news after this ID. Default to 0 (optional)
+    * @return RequestConfig
+    */
+    fun marketNewsRequestConfig(category: kotlin.String, minId: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("category", listOf(category.toString()))
+                if (minId != null) {
+                    put("minId", listOf(minId.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/news",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Mutual Funds Country Exposure
+    * Get Mutual Funds country exposure data.
+    * @param symbol Symbol. 
+    * @return MutualFundsCountryExposure
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun mutualFundCountryExposure(symbol: kotlin.String) : MutualFundsCountryExposure {
+        val localVariableConfig = mutualFundCountryExposureRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, MutualFundsCountryExposure>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundsCountryExposure
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation mutualFundCountryExposure
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun mutualFundCountryExposureRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/mutual-fund/country",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Mutual Funds Holdings
+    * Get full Mutual Funds holdings/constituents.
+    * @param symbol Fund&#39;s symbol. (optional)
+    * @param isin Fund&#39;s isin. (optional)
+    * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
+    * @return MutualFundsHoldings
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun mutualFundHoldings(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : MutualFundsHoldings {
+        val localVariableConfig = mutualFundHoldingsRequestConfig(symbol = symbol, isin = isin, skip = skip)
+
+        val localVarResponse = request<Unit, MutualFundsHoldings>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundsHoldings
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation mutualFundHoldings
+    *
+    * @param symbol Fund&#39;s symbol. (optional)
+    * @param isin Fund&#39;s isin. (optional)
+    * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
+    * @return RequestConfig
+    */
+    fun mutualFundHoldingsRequestConfig(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (isin != null) {
+                    put("isin", listOf(isin.toString()))
+                }
+                if (skip != null) {
+                    put("skip", listOf(skip.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/mutual-fund/holdings",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Mutual Funds Profile
+    * Get mutual funds profile information. This endpoint covers US mutual funds only.
+    * @param symbol Fund&#39;s symbol. (optional)
+    * @param isin Fund&#39;s isin. (optional)
+    * @return MutualFundsProfile
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun mutualFundProfile(symbol: kotlin.String?, isin: kotlin.String?) : MutualFundsProfile {
+        val localVariableConfig = mutualFundProfileRequestConfig(symbol = symbol, isin = isin)
+
+        val localVarResponse = request<Unit, MutualFundsProfile>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundsProfile
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation mutualFundProfile
+    *
+    * @param symbol Fund&#39;s symbol. (optional)
+    * @param isin Fund&#39;s isin. (optional)
+    * @return RequestConfig
+    */
+    fun mutualFundProfileRequestConfig(symbol: kotlin.String?, isin: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (isin != null) {
+                    put("isin", listOf(isin.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/mutual-fund/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Mutual Fund Sector Exposure
+    * Get Mutual Funds sector exposure data.
+    * @param symbol Mutual Fund symbol. 
+    * @return MutualMinusFundSectorExposure
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun mutualFundSectorExposure(symbol: kotlin.String) : MutualMinusFundSectorExposure {
+        val localVariableConfig = mutualFundSectorExposureRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, MutualMinusFundSectorExposure>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualMinusFundSectorExposure
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation mutualFundSectorExposure
+    *
+    * @param symbol Mutual Fund symbol. 
+    * @return RequestConfig
+    */
+    fun mutualFundSectorExposureRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/mutual-fund/sector",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * News Sentiment
     * Get company&#39;s news sentiment and statistics. This endpoint is only available for US companies.
     * @param symbol Company symbol. 
@@ -1730,22 +2746,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun newsSentiment(symbol: String) : NewsSentiment {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/news-sentiment",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<NewsSentiment>(
-            localVariableConfig,
-            localVariableBody
+    fun newsSentiment(symbol: kotlin.String) : NewsSentiment {
+        val localVariableConfig = newsSentimentRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, NewsSentiment>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1764,6 +2769,90 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation newsSentiment
+    *
+    * @param symbol Company symbol. 
+    * @return RequestConfig
+    */
+    fun newsSentimentRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/news-sentiment",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Ownership
+    * Get a full list of shareholders of a company in descending order of the number of shares held. Data is sourced from &lt;code&gt;13F form&lt;/code&gt;, &lt;code&gt;Schedule 13D&lt;/code&gt; and &lt;code&gt;13G&lt;/code&gt; for US market, &lt;code&gt;UK Share Register&lt;/code&gt; for UK market, &lt;code&gt;SEDI&lt;/code&gt; for Canadian market and equivalent filings for other international markets.
+    * @param symbol Symbol of the company: AAPL. 
+    * @param limit Limit number of results. Leave empty to get the full list. (optional)
+    * @return Ownership
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun ownership(symbol: kotlin.String, limit: kotlin.Long?) : Ownership {
+        val localVariableConfig = ownershipRequestConfig(symbol = symbol, limit = limit)
+
+        val localVarResponse = request<Unit, Ownership>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Ownership
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation ownership
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param limit Limit number of results. Leave empty to get the full list. (optional)
+    * @return RequestConfig
+    */
+    fun ownershipRequestConfig(symbol: kotlin.String, limit: kotlin.Long?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/ownership",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Pattern Recognition
     * Run pattern recognition algorithm on a symbol. Support double top/bottom, triple top/bottom, head and shoulders, triangle, wedge, channel, flag, and candlestick patterns.
     * @param symbol Symbol 
@@ -1775,23 +2864,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patternRecognition(symbol: String, resolution: String) : PatternRecognition {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/scan/pattern",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<PatternRecognition>(
-            localVariableConfig,
-            localVariableBody
+    fun patternRecognition(symbol: kotlin.String, resolution: kotlin.String) : PatternRecognition {
+        val localVariableConfig = patternRecognitionRequestConfig(symbol = symbol, resolution = resolution)
+
+        val localVarResponse = request<Unit, PatternRecognition>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1810,6 +2887,97 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation patternRecognition
+    *
+    * @param symbol Symbol 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @return RequestConfig
+    */
+    fun patternRecognitionRequestConfig(symbol: kotlin.String, resolution: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/scan/pattern",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Major Press Releases
+    * Get latest major press releases of a company. This data can be used to highlight the most significant events comprised of mostly press releases sourced from the exchanges, BusinessWire, AccessWire, GlobeNewswire, Newsfile, and PRNewswire.
+    * @param symbol Company symbol. 
+    * @param from From time: 2020-01-01. (optional)
+    * @param to To time: 2020-01-05. (optional)
+    * @return MajorPressReleases
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun pressReleases(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : MajorPressReleases {
+        val localVariableConfig = pressReleasesRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, MajorPressReleases>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MajorPressReleases
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation pressReleases
+    *
+    * @param symbol Company symbol. 
+    * @param from From time: 2020-01-01. (optional)
+    * @param to To time: 2020-01-05. (optional)
+    * @return RequestConfig
+    */
+    fun pressReleasesRequestConfig(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/press-releases",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Price Target
     * Get latest price target consensus.
     * @param symbol Symbol of the company: AAPL. 
@@ -1820,22 +2988,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun priceTarget(symbol: String) : PriceTarget {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/price-target",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<PriceTarget>(
-            localVariableConfig,
-            localVariableBody
+    fun priceTarget(symbol: kotlin.String) : PriceTarget {
+        val localVariableConfig = priceTargetRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, PriceTarget>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1854,8 +3011,31 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation priceTarget
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @return RequestConfig
+    */
+    fun priceTargetRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/price-target",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Quote
-    * &lt;p&gt;Get real-time quote data for US stocks. Constant polling is not recommended. Use websocket if you need real-time update.&lt;/p&gt;&lt;p&gt;Real-time stock prices for international markets are supported for Enterprise clients via our partner&#39;s feed. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact Us&lt;/a&gt; to learn more.&lt;/p&gt;
+    * &lt;p&gt;Get real-time quote data for US stocks. Constant polling is not recommended. Use websocket if you need real-time updates.&lt;/p&gt;&lt;p&gt;Real-time stock prices for international markets are supported for Enterprise clients via our partner&#39;s feed. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact Us&lt;/a&gt; to learn more.&lt;/p&gt;
     * @param symbol Symbol 
     * @return Quote
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1864,22 +3044,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun quote(symbol: String) : Quote {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/quote",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<Quote>(
-            localVariableConfig,
-            localVariableBody
+    fun quote(symbol: kotlin.String) : Quote {
+        val localVariableConfig = quoteRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, Quote>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1898,6 +3067,29 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation quote
+    *
+    * @param symbol Symbol 
+    * @return RequestConfig
+    */
+    fun quoteRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/quote",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Recommendation Trends
     * Get latest analyst recommendation trends for a company.
     * @param symbol Symbol of the company: AAPL. 
@@ -1908,26 +3100,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun recommendationTrends(symbol: String) : List<RecommendationTrend> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/recommendation",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<RecommendationTrend>>(
-            localVariableConfig,
-            localVariableBody
+    fun recommendationTrends(symbol: kotlin.String) : kotlin.collections.List<RecommendationTrend> {
+        val localVariableConfig = recommendationTrendsRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<RecommendationTrend>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<RecommendationTrend>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<RecommendationTrend>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1942,13 +3123,345 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation recommendationTrends
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @return RequestConfig
+    */
+    fun recommendationTrendsRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/recommendation",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Revenue Breakdown
+    * Get revenue breakdown by product. This dataset is only available for US companies which disclose their revenue breakdown in the annual or quarterly reports.
+    * @param symbol Symbol. (optional)
+    * @param cik CIK. (optional)
+    * @return RevenueBreakdown
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun revenueBreakdown(symbol: kotlin.String?, cik: kotlin.String?) : RevenueBreakdown {
+        val localVariableConfig = revenueBreakdownRequestConfig(symbol = symbol, cik = cik)
+
+        val localVarResponse = request<Unit, RevenueBreakdown>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RevenueBreakdown
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation revenueBreakdown
+    *
+    * @param symbol Symbol. (optional)
+    * @param cik CIK. (optional)
+    * @return RequestConfig
+    */
+    fun revenueBreakdownRequestConfig(symbol: kotlin.String?, cik: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (cik != null) {
+                    put("cik", listOf(cik.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/revenue-breakdown",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Similarity Index
+    * &lt;p&gt;Calculate the textual difference between a company&#39;s 10-K / 10-Q reports and the same type of report in the previous year using Cosine Similarity. For example, this endpoint compares 2019&#39;s 10-K with 2018&#39;s 10-K. Companies breaking from its routines in disclosure of financial condition and risk analysis section can signal a significant change in the company&#39;s stock price in the upcoming 4 quarters.&lt;/p&gt;
+    * @param symbol Symbol. Required if cik is empty (optional)
+    * @param cik CIK. Required if symbol is empty (optional)
+    * @param freq &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt; (optional)
+    * @return SimilarityIndex
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun similarityIndex(symbol: kotlin.String?, cik: kotlin.String?, freq: kotlin.String?) : SimilarityIndex {
+        val localVariableConfig = similarityIndexRequestConfig(symbol = symbol, cik = cik, freq = freq)
+
+        val localVarResponse = request<Unit, SimilarityIndex>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SimilarityIndex
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation similarityIndex
+    *
+    * @param symbol Symbol. Required if cik is empty (optional)
+    * @param cik CIK. Required if symbol is empty (optional)
+    * @param freq &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt; (optional)
+    * @return RequestConfig
+    */
+    fun similarityIndexRequestConfig(symbol: kotlin.String?, cik: kotlin.String?, freq: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+                if (cik != null) {
+                    put("cik", listOf(cik.toString()))
+                }
+                if (freq != null) {
+                    put("freq", listOf(freq.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/similarity-index",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Social Sentiment
+    * &lt;p&gt;Get social sentiment for stocks on Reddit and Twitter. This endpoint is currently in Beta.&lt;/p&gt;
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @return SocialSentiment
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun socialSentiment(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : SocialSentiment {
+        val localVariableConfig = socialSentimentRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, SocialSentiment>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialSentiment
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation socialSentiment
+    *
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @return RequestConfig
+    */
+    fun socialSentimentRequestConfig(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/social-sentiment",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Dividends 2 (Basic)
+    * Get global dividends data.
+    * @param symbol Symbol. 
+    * @return Dividends2LeftParenthesisBasicRightParenthesis
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockBasicDividends(symbol: kotlin.String) : Dividends2LeftParenthesisBasicRightParenthesis {
+        val localVariableConfig = stockBasicDividendsRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, Dividends2LeftParenthesisBasicRightParenthesis>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Dividends2LeftParenthesisBasicRightParenthesis
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockBasicDividends
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun stockBasicDividendsRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/dividend2",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Last Bid-Ask
+    * Get last bid/ask data for US stocks.
+    * @param symbol Symbol. 
+    * @return LastBidMinusAsk
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockBidask(symbol: kotlin.String) : LastBidMinusAsk {
+        val localVariableConfig = stockBidaskRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, LastBidMinusAsk>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LastBidMinusAsk
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockBidask
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun stockBidaskRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/bidask",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Stock Candles
-    * &lt;p&gt;Get candlestick data for stocks going back 25 years for US stocks.&lt;/p&gt;&lt;p&gt;Real-time stock prices for international markets are supported for Enterprise clients via our partner&#39;s feed. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact Us&lt;/a&gt; to learn more.&lt;/p&gt;
+    * &lt;p&gt;Get candlestick data (OHLCV) for stocks
     * @param symbol Symbol. 
     * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
     * @param from UNIX timestamp. Interval initial value. 
     * @param to UNIX timestamp. Interval end value. 
-    * @param adjusted By default, &lt;code&gt;adjusted&#x3D;false&lt;/code&gt;. Use &lt;code&gt;true&lt;/code&gt; to get adjusted data. (optional)
+    * @param adjusted DEPRECATED: this option has been deprecated. All Daily data will be adjusted for Splits and intraday data will remain unadjusted. (optional)
     * @return StockCandles
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -1956,28 +3469,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockCandles(symbol: String, resolution: String, from: Long, to: Long, adjusted: String?) : StockCandles {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-                put("from", listOf(from.toString()))
-                put("to", listOf(to.toString()))
-                if (adjusted != null) {
-                    put("adjusted", listOf(adjusted.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/candle",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<StockCandles>(
-            localVariableConfig,
-            localVariableBody
+    fun stockCandles(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long, adjusted: kotlin.String?) : StockCandles {
+        val localVariableConfig = stockCandlesRequestConfig(symbol = symbol, resolution = resolution, from = from, to = to, adjusted = adjusted)
+
+        val localVarResponse = request<Unit, StockCandles>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -1996,6 +3492,39 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation stockCandles
+    *
+    * @param symbol Symbol. 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @param from UNIX timestamp. Interval initial value. 
+    * @param to UNIX timestamp. Interval end value. 
+    * @param adjusted DEPRECATED: this option has been deprecated. All Daily data will be adjusted for Splits and intraday data will remain unadjusted. (optional)
+    * @return RequestConfig
+    */
+    fun stockCandlesRequestConfig(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long, adjusted: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+                if (adjusted != null) {
+                    put("adjusted", listOf(adjusted.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/candle",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Dividends
     * Get dividends data for common stocks going back 30 years.
     * @param symbol Symbol. 
@@ -2008,28 +3537,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockDividends(symbol: String, from: String, to: String) : List<Dividends> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("from", listOf(parseDateToQueryString(from)))
-                put("to", listOf(parseDateToQueryString(to)))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/dividend",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<Dividends>>(
-            localVariableConfig,
-            localVariableBody
+    fun stockDividends(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<Dividends> {
+        val localVariableConfig = stockDividendsRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<Dividends>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<Dividends>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Dividends>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2041,6 +3557,98 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
         }
+    }
+
+    /**
+    * To obtain the request config of the operation stockDividends
+    *
+    * @param symbol Symbol. 
+    * @param from YYYY-MM-DD. 
+    * @param to YYYY-MM-DD. 
+    * @return RequestConfig
+    */
+    fun stockDividendsRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/dividend",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Historical NBBO
+    * &lt;p&gt;Get historical best bid and offer for US stocks, LSE, TSX, Euronext and Deutsche Borse.&lt;/p&gt;&lt;p&gt;For US market, this endpoint only serves historical NBBO from the beginning of 2020. To download more historical data, please visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt;.&lt;/p&gt;
+    * @param symbol Symbol. 
+    * @param date Date: 2020-04-02. 
+    * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
+    * @param skip Number of ticks to skip. Use this parameter to loop through the entire data. 
+    * @return HistoricalNBBO
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockNbbo(symbol: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long) : HistoricalNBBO {
+        val localVariableConfig = stockNbboRequestConfig(symbol = symbol, date = date, limit = limit, skip = skip)
+
+        val localVarResponse = request<Unit, HistoricalNBBO>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HistoricalNBBO
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockNbbo
+    *
+    * @param symbol Symbol. 
+    * @param date Date: 2020-04-02. 
+    * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
+    * @param skip Number of ticks to skip. Use this parameter to loop through the entire data. 
+    * @return RequestConfig
+    */
+    fun stockNbboRequestConfig(symbol: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("date", listOf(parseDateToQueryString(date)))
+                put("limit", listOf(limit.toString()))
+                put("skip", listOf(skip.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/bbo",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -2056,28 +3664,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockSplits(symbol: String, from: String, to: String) : List<Split> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("from", listOf(parseDateToQueryString(from)))
-                put("to", listOf(parseDateToQueryString(to)))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/split",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<Split>>(
-            localVariableConfig,
-            localVariableBody
+    fun stockSplits(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<Split> {
+        val localVariableConfig = stockSplitsRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<Split>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<Split>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Split>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2092,9 +3687,39 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation stockSplits
+    *
+    * @param symbol Symbol. 
+    * @param from YYYY-MM-DD. 
+    * @param to YYYY-MM-DD. 
+    * @return RequestConfig
+    */
+    fun stockSplitsRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/split",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Stock Symbol
-    * List supported stocks. A list of supported CFD Indices can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1BAbIXBgl405fj0oHeEyRFEu8mW4QD1PhvtaBATLoR14/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
-    * @param exchange Exchange you want to get the list of symbols from. List of exchanges with fundamental data can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
+    * List supported stocks. We use the following symbology to identify stocks on Finnhub &lt;code&gt;Exchange_Ticker.Exchange_Code&lt;/code&gt;. A list of supported exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. A list of supported CFD Indices can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1BAbIXBgl405fj0oHeEyRFEu8mW4QD1PhvtaBATLoR14/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
+    * @param exchange Exchange you want to get the list of symbols from. List of exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
+    * @param mic Filter by MIC code. (optional)
+    * @param securityType Filter by security type used by OpenFigi standard. (optional)
+    * @param currency Filter by currency. (optional)
     * @return kotlin.collections.List<Stock>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -2102,26 +3727,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockSymbols(exchange: String) : List<Stock> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("exchange", listOf(exchange))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/symbol",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<Stock>>(
-            localVariableConfig,
-            localVariableBody
+    fun stockSymbols(exchange: kotlin.String, mic: kotlin.String?, securityType: kotlin.String?, currency: kotlin.String?) : kotlin.collections.List<Stock> {
+        val localVariableConfig = stockSymbolsRequestConfig(exchange = exchange, mic = mic, securityType = securityType, currency = currency)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<Stock>>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<Stock>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Stock>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2136,8 +3750,43 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation stockSymbols
+    *
+    * @param exchange Exchange you want to get the list of symbols from. List of exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
+    * @param mic Filter by MIC code. (optional)
+    * @param securityType Filter by security type used by OpenFigi standard. (optional)
+    * @param currency Filter by currency. (optional)
+    * @return RequestConfig
+    */
+    fun stockSymbolsRequestConfig(exchange: kotlin.String, mic: kotlin.String?, securityType: kotlin.String?, currency: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("exchange", listOf(exchange.toString()))
+                if (mic != null) {
+                    put("mic", listOf(mic.toString()))
+                }
+                if (securityType != null) {
+                    put("securityType", listOf(securityType.toString()))
+                }
+                if (currency != null) {
+                    put("currency", listOf(currency.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/symbol",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Tick Data
-    * &lt;p&gt;Get historical tick data for US stocks from all 13 exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server. Data is updated at the end of each trading day.&lt;/p&gt;&lt;p&gt;Tick data from 1985 is available for Enterprise clients. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to learn more.&lt;/p&gt;
+    * &lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For US market, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;p&gt;Note that for Nasdaq Nordic and Baltic, you need to use ISIN instead of symbol to query tick data. &lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Nasdaq Nordic &amp; Baltic&lt;/th&gt;       &lt;td&gt; &lt;ul&gt; &lt;li&gt;Copenhagen (CO)&lt;/li&gt; &lt;li&gt;Stockholm (ST)&lt;/li&gt; &lt;li&gt;Helsinki (HE)&lt;/li&gt; &lt;li&gt;Iceland (IC)&lt;/li&gt; &lt;li&gt;Riga (RG)&lt;/li&gt; &lt;li&gt;Tallinn (TL)&lt;/li&gt; &lt;li&gt;Vilnius(VS)&lt;/li&gt; &lt;li&gt;Fixed Income&lt;/li&gt; &lt;li&gt;Derivatives&lt;/li&gt; &lt;li&gt;Commodities&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
     * @param symbol Symbol. 
     * @param date Date: 2020-04-02. 
     * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
@@ -2149,25 +3798,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockTick(symbol: String, date: String, limit: Long, skip: Long) : TickData {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("date", listOf(parseDateToQueryString(date)))
-                put("limit", listOf(limit.toString()))
-                put("skip", listOf(skip.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/tick",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<TickData>(
-            localVariableConfig,
-            localVariableBody
+    fun stockTick(symbol: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long) : TickData {
+        val localVariableConfig = stockTickRequestConfig(symbol = symbol, date = date, limit = limit, skip = skip)
+
+        val localVarResponse = request<Unit, TickData>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -2186,6 +3821,91 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation stockTick
+    *
+    * @param symbol Symbol. 
+    * @param date Date: 2020-04-02. 
+    * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
+    * @param skip Number of ticks to skip. Use this parameter to loop through the entire data. 
+    * @return RequestConfig
+    */
+    fun stockTickRequestConfig(symbol: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("date", listOf(parseDateToQueryString(date)))
+                put("limit", listOf(limit.toString()))
+                put("skip", listOf(skip.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/tick",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Supply Chain Relationships
+    * &lt;p&gt;This endpoint provides an overall map of public companies&#39; key customers and suppliers. The data offers a deeper look into a company&#39;s supply chain and how products are created. The data will help investors manage risk, limit exposure or generate alpha-generating ideas and trading insights.&lt;/p&gt;&lt;p&gt;We currently cover data for S&amp;P500 and Nasdaq 100 companies.&lt;/p&gt;
+    * @param symbol Symbol. 
+    * @return SupplyChainRelationships
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun supplyChainRelationships(symbol: kotlin.String) : SupplyChainRelationships {
+        val localVariableConfig = supplyChainRelationshipsRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, SupplyChainRelationships>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SupplyChainRelationships
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation supplyChainRelationships
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun supplyChainRelationshipsRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/supply-chain",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Support/Resistance
     * Get support and resistance levels for a symbol.
     * @param symbol Symbol 
@@ -2197,23 +3917,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun supportResistance(symbol: String, resolution: String) : SupportResistance {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/scan/support-resistance",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<SupportResistance>(
-            localVariableConfig,
-            localVariableBody
+    fun supportResistance(symbol: kotlin.String, resolution: kotlin.String) : SupportResistance {
+        val localVariableConfig = supportResistanceRequestConfig(symbol = symbol, resolution = resolution)
+
+        val localVarResponse = request<Unit, SupportResistance>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -2232,6 +3940,87 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation supportResistance
+    *
+    * @param symbol Symbol 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @return RequestConfig
+    */
+    fun supportResistanceRequestConfig(symbol: kotlin.String, resolution: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/scan/support-resistance",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Symbol Lookup
+    * Search for best-matching symbols based on your query. You can input anything from symbol, security&#39;s name to ISIN and Cusip.
+    * @param q Query text can be symbol, name, isin, or cusip. 
+    * @return SymbolLookup
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun symbolSearch(q: kotlin.String) : SymbolLookup {
+        val localVariableConfig = symbolSearchRequestConfig(q = q)
+
+        val localVarResponse = request<Unit, SymbolLookup>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SymbolLookup
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation symbolSearch
+    *
+    * @param q Query text can be symbol, name, isin, or cusip. 
+    * @return RequestConfig
+    */
+    fun symbolSearchRequestConfig(q: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("q", listOf(q.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/search",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Technical Indicators
     * Return technical indicator with price data. List of supported indicators can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ylUvKHVYN2E87WdwIza8ROaCpd48ggEl1k5i5SgA29k/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
     * @param symbol symbol 
@@ -2247,37 +4036,15 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun technicalIndicator(symbol: String, resolution: String, from: Long, to: Long, indicator: String, indicatorFields: Map<String, Any>?) : JsonObject {
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-                put("resolution", listOf(resolution))
-                put("from", listOf(from.toString()))
-                put("to", listOf(to.toString()))
-                put("indicator", listOf(indicator))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.POST,
-            "/indicator",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<JsonObject>(
-            localVariableConfig,
-            buildJsonObject {
-                indicatorFields?.forEach { (key, value) ->
-                    when (value) {
-                        is Number -> this.put(key, value)
-                        is String -> this.put(key, value)
-                        else -> throw UnsupportedOperationException("Technical fields must be a Number or String. https://finnhub.io/docs/api/technical-indicator")
-                    }
-                }
-            }
+    fun technicalIndicator(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long, indicator: kotlin.String, indicatorFields: kotlin.Any?) : kotlin.Any {
+        val localVariableConfig = technicalIndicatorRequestConfig(symbol = symbol, resolution = resolution, from = from, to = to, indicator = indicator, indicatorFields = indicatorFields)
+
+        val localVarResponse = request<kotlin.Any, kotlin.Any>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as JsonObject
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2292,52 +4059,40 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
-    * Earnings Call Transcripts
-    * &lt;p&gt;Get earnings call transcripts, audio and participants&#39; list. This endpoint is only available for US companies. &lt;p&gt;17+ years of data is available with 170,000+ audio which add up to 6TB in size.&lt;/p&gt;
-    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
-    * @return EarningsCallTranscripts
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
+    * To obtain the request config of the operation technicalIndicator
+    *
+    * @param symbol symbol 
+    * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
+    * @param from UNIX timestamp. Interval initial value. 
+    * @param to UNIX timestamp. Interval end value. 
+    * @param indicator Indicator name. Full list can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ylUvKHVYN2E87WdwIza8ROaCpd48ggEl1k5i5SgA29k/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
+    * @param indicatorFields Check out &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ylUvKHVYN2E87WdwIza8ROaCpd48ggEl1k5i5SgA29k/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;this page&lt;/a&gt; to see which indicators and params are supported. (optional)
+    * @return RequestConfig
     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun transcripts(id: String) : EarningsCallTranscripts {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
+    fun technicalIndicatorRequestConfig(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long, indicator: kotlin.String, indicatorFields: kotlin.Any?) : RequestConfig<kotlin.Any> {
+        val localVariableBody = indicatorFields
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
-                put("id", listOf(id))
+                put("symbol", listOf(symbol.toString()))
+                put("resolution", listOf(resolution.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+                put("indicator", listOf(indicator.toString()))
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/transcripts",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<EarningsCallTranscripts>(
-            localVariableConfig,
-            localVariableBody
-        )
 
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EarningsCallTranscripts
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/indicator",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
     /**
     * Earnings Call Transcripts List
-    * List earnings call transcripts&#39; metadata. This endpoint is only available for US companies.
+    * List earnings call transcripts&#39; metadata. This endpoint is available for US, UK and Canadian companies.
     * @param symbol Company symbol: AAPL. Leave empty to list the latest transcripts 
     * @return EarningsCallTranscriptsList
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2346,22 +4101,11 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun transcriptsList(symbol: String) : EarningsCallTranscriptsList {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
-            .apply {
-                put("symbol", listOf(symbol))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/transcripts/list",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<EarningsCallTranscriptsList>(
-            localVariableConfig,
-            localVariableBody
+    fun transcriptsList(symbol: kotlin.String) : EarningsCallTranscriptsList {
+        val localVariableConfig = transcriptsListRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, EarningsCallTranscriptsList>(
+            localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
@@ -2380,6 +4124,29 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     }
 
     /**
+    * To obtain the request config of the operation transcriptsList
+    *
+    * @param symbol Company symbol: AAPL. Leave empty to list the latest transcripts 
+    * @return RequestConfig
+    */
+    fun transcriptsListRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/transcripts/list",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Stock Upgrade/Downgrade
     * Get latest stock upgrade and downgrade.
     * @param symbol Symbol of the company: AAPL. If left blank, the API will return latest stock upgrades/downgrades. (optional)
@@ -2392,9 +4159,39 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun upgradeDowngrade(symbol: String?, from: String?, to: String?) : List<UpgradeDowngrade> {
-        val localVariableBody: JsonObject? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<String, List<String>>()
+    fun upgradeDowngrade(symbol: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : kotlin.collections.List<UpgradeDowngrade> {
+        val localVariableConfig = upgradeDowngradeRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, kotlin.collections.List<UpgradeDowngrade>>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<UpgradeDowngrade>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation upgradeDowngrade
+    *
+    * @param symbol Symbol of the company: AAPL. If left blank, the API will return latest stock upgrades/downgrades. (optional)
+    * @param from From date: 2000-03-15. (optional)
+    * @param to To date: 2020-03-16. (optional)
+    * @return RequestConfig
+    */
+    fun upgradeDowngradeRequestConfig(symbol: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 if (symbol != null) {
                     put("symbol", listOf(symbol.toString()))
@@ -2407,30 +4204,14 @@ class DefaultApi(basePath: String = io.finnhub.api.apis.DefaultApi.Companion.def
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        val localVariableConfig = RequestConfig(
-            RequestMethod.GET,
-            "/stock/upgrade-downgrade",
-            query = localVariableQuery,
-            headers = localVariableHeaders
-        )
-        val localVarResponse = request<List<UpgradeDowngrade>>(
-            localVariableConfig,
-            localVariableBody
-        )
 
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as List<UpgradeDowngrade>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/upgrade-downgrade",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
     }
 
 }

@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -21,16 +21,16 @@ import kotlinx.serialization.Serializable
  * @param bullishPercent 
  */
 
-@Serializable
 data class Sentiment (
     /*  */
-    @SerialName("bearishPercent")
-    val bearishPercent: Long? = null,
+    @Json(name = "bearishPercent")
+    val bearishPercent: kotlin.Long? = null,
     /*  */
-    @SerialName("bullishPercent")
-    val bullishPercent: Long? = null
-) {
-	companion object {
+    @Json(name = "bullishPercent")
+    val bullishPercent: kotlin.Long? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

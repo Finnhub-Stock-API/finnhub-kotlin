@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -25,28 +25,28 @@ import kotlinx.serialization.Serializable
  * @param currencyCode Currency code
  */
 
-@Serializable
 data class CountryMetadata (
     /* Country name */
-    @SerialName("country")
-    val country: String? = null,
+    @Json(name = "country")
+    val country: kotlin.String? = null,
     /* Alpha 2 code */
-    @SerialName("code2")
-    val code2: String? = null,
+    @Json(name = "code2")
+    val code2: kotlin.String? = null,
     /* Alpha 3 code */
-    @SerialName("code3")
-    val code3: String? = null,
+    @Json(name = "code3")
+    val code3: kotlin.String? = null,
     /* UN code */
-    @SerialName("codeNo")
-    val codeNo: String? = null,
+    @Json(name = "codeNo")
+    val codeNo: kotlin.String? = null,
     /* Currency name */
-    @SerialName("currency")
-    val currency: String? = null,
+    @Json(name = "currency")
+    val currency: kotlin.String? = null,
     /* Currency code */
-    @SerialName("currencyCode")
-    val currencyCode: String? = null
-) {
-	companion object {
+    @Json(name = "currencyCode")
+    val currencyCode: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

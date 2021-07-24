@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -28,37 +28,37 @@ import kotlinx.serialization.Serializable
  * @param url URL of the original article.
  */
 
-@Serializable
 data class News (
     /* News category. */
-    @SerialName("category")
-    val category: String? = null,
+    @Json(name = "category")
+    val category: kotlin.String? = null,
     /* Published time in UNIX timestamp. */
-    @SerialName("datetime")
-    val datetime: Long? = null,
+    @Json(name = "datetime")
+    val datetime: kotlin.Long? = null,
     /* News headline. */
-    @SerialName("headline")
-    val headline: String? = null,
+    @Json(name = "headline")
+    val headline: kotlin.String? = null,
     /* News ID. This value can be used for <code>minId</code> params to get the latest news only. */
-    @SerialName("id")
-    val id: Long? = null,
+    @Json(name = "id")
+    val id: kotlin.Long? = null,
     /* Thumbnail image URL. */
-    @SerialName("image")
-    val image: String? = null,
+    @Json(name = "image")
+    val image: kotlin.String? = null,
     /* Related stocks and companies mentioned in the article. */
-    @SerialName("related")
-    val related: String? = null,
+    @Json(name = "related")
+    val related: kotlin.String? = null,
     /* News source. */
-    @SerialName("source")
-    val source: String? = null,
+    @Json(name = "source")
+    val source: kotlin.String? = null,
     /* News summary. */
-    @SerialName("summary")
-    val summary: String? = null,
+    @Json(name = "summary")
+    val summary: kotlin.String? = null,
     /* URL of the original article. */
-    @SerialName("url")
-    val url: String? = null
-) {
-	companion object {
+    @Json(name = "url")
+    val url: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

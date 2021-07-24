@@ -12,27 +12,30 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
  * @param name Speaker's name
  * @param speech Speaker's speech
+ * @param session Earnings calls section (management discussion or Q&A)
  */
 
-@Serializable
 data class TranscriptContent (
     /* Speaker's name */
-    @SerialName("name")
-    val name: String? = null,
+    @Json(name = "name")
+    val name: kotlin.String? = null,
     /* Speaker's speech */
-    @SerialName("speech")
-    val speech: List<String>? = null
-) {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    @Json(name = "speech")
+    val speech: kotlin.collections.List<kotlin.String>? = null,
+    /* Earnings calls section (management discussion or Q&A) */
+    @Json(name = "session")
+    val session: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
 
 }
 

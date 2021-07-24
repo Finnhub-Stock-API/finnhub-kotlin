@@ -12,9 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonObject
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -22,14 +21,17 @@ import kotlinx.serialization.json.JsonObject
  * @param executive Array of company's executives and members of the Board.
  */
 
-@Serializable
 data class CompanyExecutive (
     /* Company symbol. */
-    @SerialName("symbol")
-    val symbol: String? = null,
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
     /* Array of company's executives and members of the Board. */
-    @SerialName("executive")
-    val executive: List<JsonObject>? = null
-)
+    @Json(name = "executive")
+    val executive: kotlin.collections.List<kotlin.Any>? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
 
+}
 

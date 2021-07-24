@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -21,28 +21,24 @@ import kotlinx.serialization.Serializable
  * @param displaySymbol Display symbol name.
  * @param symbol Unique symbol used to identify this symbol used in <code>/stock/candle</code> endpoint.
  * @param type Security type.
- * @param currency Price's currency. This might be different from the reporting currency of fundamental data.
  */
 
-@Serializable
 data class Stock (
     /* Symbol description */
-    @SerialName("description")
-    val description: String? = null,
+    @Json(name = "description")
+    val description: kotlin.String? = null,
     /* Display symbol name. */
-    @SerialName("displaySymbol")
-    val displaySymbol: String? = null,
+    @Json(name = "displaySymbol")
+    val displaySymbol: kotlin.String? = null,
     /* Unique symbol used to identify this symbol used in <code>/stock/candle</code> endpoint. */
-    @SerialName("symbol")
-    val symbol: String? = null,
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
     /* Security type. */
-    @SerialName("type")
-    val type: String? = null,
-    /* Price's currency. This might be different from the reporting currency of fundamental data. */
-    @SerialName("currency")
-    val currency: String? = null
-) {
-	companion object {
+    @Json(name = "type")
+    val type: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

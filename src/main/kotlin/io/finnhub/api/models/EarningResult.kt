@@ -12,33 +12,41 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
  * @param actual Actual earning result.
  * @param estimate Estimated earning.
+ * @param surprise Surprise - The difference between actual and estimate.
+ * @param surprisePercent Surprise percent.
  * @param period Reported period.
  * @param symbol Company symbol.
  */
 
-@Serializable
 data class EarningResult (
     /* Actual earning result. */
-    @SerialName("actual")
-    val actual: Float? = null,
+    @Json(name = "actual")
+    val actual: kotlin.Float? = null,
     /* Estimated earning. */
-    @SerialName("estimate")
-    val estimate: Float? = null,
+    @Json(name = "estimate")
+    val estimate: kotlin.Float? = null,
+    /* Surprise - The difference between actual and estimate. */
+    @Json(name = "surprise")
+    val surprise: kotlin.Float? = null,
+    /* Surprise percent. */
+    @Json(name = "surprisePercent")
+    val surprisePercent: kotlin.Float? = null,
     /* Reported period. */
-    @SerialName("period")
-    val period: String? = null,
+    @Json(name = "period")
+    val period: kotlin.String? = null,
     /* Company symbol. */
-    @SerialName("symbol")
-    val symbol: String? = null
-) {
-	companion object {
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

@@ -12,9 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonObject
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -23,19 +22,19 @@ import kotlinx.serialization.json.JsonObject
  * @param symbol Company symbol.
  */
 
-@Serializable
 data class RevenueEstimates (
     /* List of estimates */
-    @SerialName("data")
-    val data: List<JsonObject>? = null,
+    @Json(name = "data")
+    val data: kotlin.collections.List<kotlin.Any>? = null,
     /* Frequency: annual or quarterly. */
-    @SerialName("freq")
-    val freq: String? = null,
+    @Json(name = "freq")
+    val freq: kotlin.String? = null,
     /* Company symbol. */
-    @SerialName("symbol")
-    val symbol: String? = null
-) {
-	companion object {
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

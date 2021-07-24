@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **actual** | **kotlin.Float** | Actual earning result. |  [optional]
 **estimate** | **kotlin.Float** | Estimated earning. |  [optional]
+**surprise** | **kotlin.Float** | Surprise - The difference between actual and estimate. |  [optional]
+**surprisePercent** | **kotlin.Float** | Surprise percent. |  [optional]
 **period** | **kotlin.String** | Reported period. |  [optional]
 **symbol** | **kotlin.String** | Company symbol. |  [optional]
 

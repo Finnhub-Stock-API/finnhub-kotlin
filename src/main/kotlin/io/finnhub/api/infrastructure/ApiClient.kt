@@ -1,22 +1,33 @@
 package io.finnhub.api.infrastructure
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.JsonObject
-import okhttp3.*
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.FormBody
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.ResponseBody
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.Request
+import okhttp3.Headers
+import okhttp3.MultipartBody
+import java.io.BufferedWriter
 import java.io.File
+import java.io.FileWriter
 import java.net.URLConnection
-import java.time.*
-import java.util.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.OffsetTime
+import java.util.Date
+import java.util.Locale
 
 open class ApiClient(val baseUrl: String) {
     companion object {
         protected const val ContentType = "Content-Type"
         protected const val Accept = "Accept"
+        protected const val Authorization = "Authorization"
         protected const val JsonMediaType = "application/json"
         protected const val FormDataMediaType = "multipart/form-data"
         protected const val FormUrlEncMediaType = "application/x-www-form-urlencoded"
@@ -24,6 +35,9 @@ open class ApiClient(val baseUrl: String) {
 
         val apiKey: MutableMap<String, String> = mutableMapOf()
         val apiKeyPrefix: MutableMap<String, String> = mutableMapOf()
+        var username: String? = null
+        var password: String? = null
+        var accessToken: String? = null
 
         @JvmStatic
         val client: OkHttpClient by lazy {
@@ -47,9 +61,7 @@ open class ApiClient(val baseUrl: String) {
 
     protected inline fun <reified T> requestBody(content: T, mediaType: String = JsonMediaType): RequestBody =
         when {
-            content is File -> content.asRequestBody(
-                mediaType.toMediaTypeOrNull()
-            )
+            content is File -> content.asRequestBody(mediaType.toMediaTypeOrNull())
             mediaType == FormDataMediaType -> {
                 MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -86,7 +98,7 @@ open class ApiClient(val baseUrl: String) {
                     }
                 }.build()
             }
-            mediaType == JsonMediaType -> Serializer.json.encodeToString(content).toRequestBody(
+            mediaType == JsonMediaType -> Serializer.moshi.adapter(T::class.java).toJson(content).toRequestBody(
                 mediaType.toMediaTypeOrNull()
             )
             mediaType == XmlMediaType -> throw UnsupportedOperationException("xml not currently supported.")
@@ -102,13 +114,22 @@ open class ApiClient(val baseUrl: String) {
         if (bodyContent.isEmpty()) {
             return null
         }
+        if (T::class.java == File::class.java) {
+            // return tempfile
+            val f = java.nio.file.Files.createTempFile("tmp.io.finnhub.api", null).toFile()
+            f.deleteOnExit()
+            val out = BufferedWriter(FileWriter(f))
+            out.write(bodyContent)
+            out.close()
+            return f as T
+        }
         return when(mediaType) {
-            JsonMediaType -> Serializer.json.decodeFromString<T>(bodyContent)
+            JsonMediaType -> Serializer.moshi.adapter(T::class.java).fromJson(bodyContent)
             else ->  throw UnsupportedOperationException("responseBody currently only supports JSON body.")
         }
     }
 
-    protected fun updateAuthParams(requestConfig: RequestConfig) {
+    protected fun <T> updateAuthParams(requestConfig: RequestConfig<T>) {
         if (requestConfig.query["token"].isNullOrEmpty()) {
             if (apiKey["token"] != null) {
                 if (apiKeyPrefix["token"] != null) {
@@ -120,7 +141,7 @@ open class ApiClient(val baseUrl: String) {
         }
     }
 
-    protected inline fun <reified T: Any?> request(requestConfig: RequestConfig, body : JsonObject? = null): ApiInfrastructureResponse<T?> {
+    protected inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiInfrastructureResponse<T?> {
         val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         // take authMethod from operation
@@ -154,62 +175,61 @@ open class ApiClient(val baseUrl: String) {
         }
 
         // TODO: support multiple contentType options here.
-        val contentType = (headers[ContentType] as String).substringBefore(";").toLowerCase()
+        val contentType = (headers[ContentType] as String).substringBefore(";").lowercase(Locale.getDefault())
 
         val request = when (requestConfig.method) {
-            RequestMethod.DELETE -> Request.Builder().url(url).delete(requestBody(body, contentType))
+            RequestMethod.DELETE -> Request.Builder().url(url).delete(requestBody(requestConfig.body, contentType))
             RequestMethod.GET -> Request.Builder().url(url)
             RequestMethod.HEAD -> Request.Builder().url(url).head()
-            RequestMethod.PATCH -> Request.Builder().url(url).patch(requestBody(body, contentType))
-            RequestMethod.PUT -> Request.Builder().url(url).put(requestBody(body, contentType))
-            RequestMethod.POST -> Request.Builder().url(url).post(requestBody(body, contentType))
+            RequestMethod.PATCH -> Request.Builder().url(url).patch(requestBody(requestConfig.body, contentType))
+            RequestMethod.PUT -> Request.Builder().url(url).put(requestBody(requestConfig.body, contentType))
+            RequestMethod.POST -> Request.Builder().url(url).post(requestBody(requestConfig.body, contentType))
             RequestMethod.OPTIONS -> Request.Builder().url(url).method("OPTIONS", null)
         }.apply {
             headers.forEach { header -> addHeader(header.key, header.value) }
         }.build()
 
         val response = client.newCall(request).execute()
-        val accept = response.header(ContentType)?.substringBefore(";")?.toLowerCase()
+        val accept = response.header(ContentType)?.substringBefore(";")?.lowercase(Locale.getDefault())
 
         // TODO: handle specific mapping types. e.g. Map<int, Class<?>>
-        when {
-            response.isRedirect -> return Redirection(
-                    response.code,
-                    response.headers.toMultimap()
+        return when {
+            response.isRedirect -> Redirection(
+                response.code,
+                response.headers.toMultimap()
             )
-            response.isInformational -> return Informational(
-                    response.message,
-                    response.code,
-                    response.headers.toMultimap()
+            response.isInformational -> Informational(
+                response.message,
+                response.code,
+                response.headers.toMultimap()
             )
-            response.isSuccessful -> return Success(
-                    responseBody(response.body, accept),
-                    response.code,
-                    response.headers.toMultimap()
+            response.isSuccessful -> Success(
+                responseBody(response.body, accept),
+                response.code,
+                response.headers.toMultimap()
             )
-            response.isClientError -> return ClientError(
-                    response.message,
-                    response.body?.string(),
-                    response.code,
-                    response.headers.toMultimap()
+            response.isClientError -> ClientError(
+                response.message,
+                response.body?.string(),
+                response.code,
+                response.headers.toMultimap()
             )
-            else -> return ServerError(
-                    response.message,
-                    response.body?.string(),
-                    response.code,
-                    response.headers.toMultimap()
+            else -> ServerError(
+                response.message,
+                response.body?.string(),
+                response.code,
+                response.headers.toMultimap()
             )
         }
     }
 
-    protected fun parameterToString(value: Any?): String {
-        return when (value) {
-            null -> ""
-            is Array<*> -> toMultiValue(value, "csv").toString()
-            is Iterable<*> -> toMultiValue(value, "csv").toString()
-            is OffsetDateTime, is OffsetTime, is LocalDateTime, is LocalDate, is LocalTime, is Date -> parseDateToQueryString(value)
-            else -> value.toString()
-        }
+    protected fun parameterToString(value: Any?): String = when (value) {
+        null -> ""
+        is Array<*> -> toMultiValue(value, "csv").toString()
+        is Iterable<*> -> toMultiValue(value, "csv").toString()
+        is OffsetDateTime, is OffsetTime, is LocalDateTime, is LocalDate, is LocalTime, is Date ->
+            parseDateToQueryString(value)
+        else -> value.toString()
     }
 
     protected inline fun <reified T: Any> parseDateToQueryString(value : T): String {
@@ -219,6 +239,6 @@ open class ApiClient(val baseUrl: String) {
         formatter. It also easily allows to provide a simple way to define a custom date format pattern
         inside a gson/moshi adapter.
         */
-        return Serializer.json.encodeToString(value).replace("\"", "")
+        return Serializer.moshi.adapter(T::class.java).toJson(value).replace("\"", "")
     }
 }

@@ -9,20 +9,22 @@ class DefaultApiTest {
     private val apiClient: DefaultApi
 
     init {
-        ApiClient.apiKey["token"] = "sandbox_c124g8n48v6p2grlmca0"
+        ApiClient.apiKey["token"] = "<API_key>"
         apiClient = DefaultApi()
     }
 
     @Test
     fun technicalIndicator() {
-        println(apiClient.technicalIndicator(
-            symbol = "AAPL",
-            resolution = "D",
-            from = 1583098857L,
-            to = 1584308457L,
-            indicator = "sma",
-            indicatorFields = mapOf<String, Any>("timeperiod" to 3)
-        ))
+        println(
+            apiClient.technicalIndicator(
+                symbol = "AAPL",
+                resolution = "D",
+                from = 1583098857L,
+                to = 1584308457L,
+                indicator = "sma",
+                indicatorFields = mapOf<String, Any>("timeperiod" to 3)
+            )
+        )
     }
 
     @Test
@@ -104,14 +106,16 @@ class DefaultApiTest {
 
     @Test
     fun filings() {
-        println(apiClient.filings(
-            symbol = "AAPL",
-            from = "2020-01-01",
-            to = "2020-06-11",
-            accessNumber = null,
-            cik = null,
-            form = null
-        ))
+        println(
+            apiClient.filings(
+                symbol = "AAPL",
+                from = "2020-01-01",
+                to = "2020-06-11",
+                accessNumber = null,
+                cik = null,
+                form = null
+            )
+        )
     }
 
     @Test
@@ -146,12 +150,12 @@ class DefaultApiTest {
 
     @Test
     fun generalNews() {
-        println(apiClient.generalNews("forex", minId = "0"))
+        println(apiClient.marketNews("forex", minId = "0"))
     }
 
     @Test
     fun investorsOwnership() {
-        println(apiClient.investorsOwnership("AAPL", limit = 5))
+        println(apiClient.ownership("AAPL", limit = 5))
     }
 
     @Test
@@ -161,13 +165,13 @@ class DefaultApiTest {
 
     @Test
     fun majorDevelopments() {
-        println(apiClient.majorDevelopments("AAPL", from = "2020-01-01", to = "2020-12-31"))
+        println(apiClient.pressReleases("AAPL", from = "2020-01-01", to = "2020-12-31"))
     }
 
-    @Test
-    fun patternRecognition() {
-        println(apiClient.patternRecognition("AAPL", "D"))
-    }
+    //@Test
+    //fun patternRecognition() {
+    //    println(apiClient.patternRecognition("AAPL", "D"))
+    //}
 
     @Test
     fun priceTarget() {
@@ -191,12 +195,12 @@ class DefaultApiTest {
 
     @Test
     fun stockSymbols() {
-        println(apiClient.stockSymbols("US"))
+        println(apiClient.stockSymbols("US", "", "", ""))
     }
 
     @Test
     fun transcripts() {
-        println(apiClient.transcripts("AAPL_162777"))
+        println(apiClient.earningsCallTranscriptsApi("AAPL_162777"))
     }
 
     @Test
@@ -231,10 +235,12 @@ class DefaultApiTest {
 
     @Test
     fun stockSplits() {
-        println(apiClient.stockSplits(
-            symbol = "AAPL",
-            from = "2000-01-01",
-            to = "2020-01-01")
+        println(
+            apiClient.stockSplits(
+                symbol = "AAPL",
+                from = "2000-01-01",
+                to = "2020-01-01"
+            )
         )
     }
 
@@ -249,7 +255,6 @@ class DefaultApiTest {
     }
 
     @Test
-    @Ignore
     fun stockTick() {
         println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
     }
@@ -266,21 +271,66 @@ class DefaultApiTest {
 
     @Test
     fun etfsProfile() {
-        println(apiClient.etfsProfile("SPY"))
+        println(apiClient.etfsProfile("SPY", ""))
     }
 
     @Test
     fun etfsHoldings() {
-        println(apiClient.etfsHoldings("SPY"))
+        println(apiClient.etfsHoldings("SPY", "", 0))
     }
 
     @Test
-    fun etfsIndustryExposure() {
-        println(apiClient.etfsIndustryExposure("SPY"))
+    fun etfsSectorExposure() {
+        println(apiClient.etfsSectorExposure("SPY"))
     }
 
     @Test
     fun etfsCountryExposure() {
         println(apiClient.etfsCountryExposure("SPY"))
+    }
+
+    @Test
+    fun mutualFundProfile() {
+        println(apiClient.mutualFundProfile("VTSAX", ""))
+    }
+
+    @Test
+    fun mutualFundHoldings() {
+        println(apiClient.mutualFundHoldings("VTSAX", "", 0))
+    }
+
+    @Test
+    fun mutualFundSectorExposure() {
+        println(apiClient.mutualFundSectorExposure("VTSAX"))
+    }
+
+    @Test
+    fun mutualFundCountryExposure() {
+        println(apiClient.mutualFundCountryExposure("VTSAX"))
+    }
+
+    @Test
+    fun insiderTransactions() {
+        println(apiClient.insiderTransactions("AAPL", "2021-01-01", "2021-07-07"))
+    }
+
+    @Test
+    fun revenueBreakdown() {
+        println(apiClient.revenueBreakdown("AAPL", ""))
+    }
+
+    @Test
+    fun investmentTheme() {
+        println(apiClient.investmentThemesThematicInvesting("financialExchangesData"))
+    }
+
+    @Test
+    fun socialSentiment() {
+        println(apiClient.socialSentiment("GME", "", ""))
+    }
+
+    @Test
+    fun supplyChain() {
+        println(apiClient.supplyChainRelationships("AAPL"))
     }
 }

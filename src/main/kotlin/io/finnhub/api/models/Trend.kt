@@ -12,8 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -21,16 +21,16 @@ import kotlinx.serialization.Serializable
  * @param trending Whether market is trending or going sideway
  */
 
-@Serializable
 data class Trend (
     /* ADX reading */
-    @SerialName("adx")
-    val adx: Float? = null,
+    @Json(name = "adx")
+    val adx: kotlin.Float? = null,
     /* Whether market is trending or going sideway */
-    @SerialName("trending")
-    val trending: Boolean? = null
-) {
-	companion object {
+    @Json(name = "trending")
+    val trending: kotlin.Boolean? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
     }
 
 }

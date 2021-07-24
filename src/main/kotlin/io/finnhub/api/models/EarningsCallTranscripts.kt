@@ -12,9 +12,8 @@
 package io.finnhub.api.models
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonObject
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * 
@@ -29,38 +28,38 @@ import kotlinx.serialization.json.JsonObject
  * @param quarter Quarter of earnings result in the case of earnings call transcript.
  */
 
-@Serializable
 data class EarningsCallTranscripts (
     /* Company symbol. */
-    @SerialName("symbol")
-    val symbol: String? = null,
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
     /* Transcript content. */
-    @SerialName("transcript")
-    val transcript: List<JsonObject>? = null,
+    @Json(name = "transcript")
+    val transcript: kotlin.collections.List<kotlin.Any>? = null,
     /* Participant list */
-    @SerialName("participant")
-    val participant: List<JsonObject>? = null,
+    @Json(name = "participant")
+    val participant: kotlin.collections.List<kotlin.Any>? = null,
     /* Audio link. */
-    @SerialName("audio")
-    val audio: String? = null,
+    @Json(name = "audio")
+    val audio: kotlin.String? = null,
     /* Transcript's ID. */
-    @SerialName("id")
-    val id: String? = null,
+    @Json(name = "id")
+    val id: kotlin.String? = null,
     /* Title. */
-    @SerialName("title")
-    val title: String? = null,
+    @Json(name = "title")
+    val title: kotlin.String? = null,
     /* Time of the event. */
-    @SerialName("time")
-    val time: String? = null,
+    @Json(name = "time")
+    val time: kotlin.String? = null,
     /* Year of earnings result in the case of earnings call transcript. */
-    @SerialName("year")
-    val year: Long? = null,
+    @Json(name = "year")
+    val year: kotlin.Long? = null,
     /* Quarter of earnings result in the case of earnings call transcript. */
-    @SerialName("quarter")
-    val quarter: Long? = null
-) {
-	companion object {
-		private const val serialVersionUID: Long = 123
-	}
+    @Json(name = "quarter")
+    val quarter: kotlin.Long? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID: Long = 123
+    }
+
 }
 
