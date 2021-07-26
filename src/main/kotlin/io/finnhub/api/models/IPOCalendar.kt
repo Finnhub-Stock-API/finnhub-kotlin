@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.IPOEvent
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -23,7 +24,7 @@ import java.io.Serializable
 data class IPOCalendar (
     /* Array of IPO events. */
     @Json(name = "ipoCalendar")
-    val ipoCalendar: kotlin.collections.List<kotlin.Any>? = null
+    val ipoCalendar: kotlin.collections.List<IPOEvent>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

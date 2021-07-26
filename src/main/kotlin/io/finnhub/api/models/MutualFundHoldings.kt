@@ -11,23 +11,32 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.MutualFundHoldingsData
 
 import com.squareup.moshi.Json
 import java.io.Serializable
 
 /**
  * 
- * @param symbol Symbol
- * @param data 
+ * @param symbol Symbol.
+ * @param atDate Holdings update date.
+ * @param numberOfHoldings Number of holdings.
+ * @param holdings Array of holdings.
  */
 
-data class Dividends2LeftParenthesisBasicRightParenthesis (
-    /* Symbol */
+data class MutualFundHoldings (
+    /* Symbol. */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
-    /*  */
-    @Json(name = "data")
-    val data: kotlin.collections.List<kotlin.Any>? = null
+    /* Holdings update date. */
+    @Json(name = "atDate")
+    val atDate: kotlin.String? = null,
+    /* Number of holdings. */
+    @Json(name = "numberOfHoldings")
+    val numberOfHoldings: kotlin.Long? = null,
+    /* Array of holdings. */
+    @Json(name = "holdings")
+    val holdings: kotlin.collections.List<MutualFundHoldingsData>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

@@ -17,17 +17,17 @@ import java.io.Serializable
 
 /**
  * 
- * @param theme Investment theme
- * @param data Investment theme portfolio.
+ * @param date Date of the reading
+ * @param value Value
  */
 
-data class InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis (
-    /* Investment theme */
-    @Json(name = "theme")
-    val theme: kotlin.String? = null,
-    /* Investment theme portfolio. */
-    @Json(name = "data")
-    val data: kotlin.collections.List<kotlin.Any>? = null
+data class EconomicDataInfo (
+    /* Date of the reading */
+    @Json(name = "date")
+    val date: kotlin.String? = null,
+    /* Value */
+    @Json(name = "value")
+    val value: kotlin.Float? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

@@ -11,7 +11,7 @@
 */
 package io.finnhub.api.models
 
-import io.finnhub.api.models.StockTranscripts
+import io.finnhub.api.models.Development
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -19,16 +19,16 @@ import java.io.Serializable
 /**
  * 
  * @param symbol Company symbol.
- * @param transcripts Array of transcripts' metadata
+ * @param majorDevelopment Array of major developments.
  */
 
-data class EarningsCallTranscriptsList (
+data class PressRelease (
     /* Company symbol. */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
-    /* Array of transcripts' metadata */
-    @Json(name = "transcripts")
-    val transcripts: kotlin.collections.List<StockTranscripts>? = null
+    /* Array of major developments. */
+    @Json(name = "majorDevelopment")
+    val majorDevelopment: kotlin.collections.List<Development>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

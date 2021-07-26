@@ -28,7 +28,7 @@ import java.io.Serializable
  * @param url URL of the original article.
  */
 
-data class News (
+data class CompanyNews (
     /* News category. */
     @Json(name = "category")
     val category: kotlin.String? = null,

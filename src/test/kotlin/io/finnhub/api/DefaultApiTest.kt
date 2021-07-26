@@ -200,7 +200,7 @@ class DefaultApiTest {
 
     @Test
     fun transcripts() {
-        println(apiClient.earningsCallTranscriptsApi("AAPL_162777"))
+        println(apiClient.transcripts("AAPL_162777"))
     }
 
     @Test
@@ -321,7 +321,7 @@ class DefaultApiTest {
 
     @Test
     fun investmentTheme() {
-        println(apiClient.investmentThemesThematicInvesting("financialExchangesData"))
+        println(apiClient.investmentThemes("financialExchangesData"))
     }
 
     @Test

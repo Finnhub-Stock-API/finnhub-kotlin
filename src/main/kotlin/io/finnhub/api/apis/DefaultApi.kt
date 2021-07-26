@@ -14,6 +14,7 @@ package io.finnhub.api.apis
 import io.finnhub.api.models.AggregateIndicators
 import io.finnhub.api.models.BasicFinancials
 import io.finnhub.api.models.CompanyExecutive
+import io.finnhub.api.models.CompanyNews
 import io.finnhub.api.models.CompanyProfile
 import io.finnhub.api.models.CompanyProfile2
 import io.finnhub.api.models.CountryMetadata
@@ -21,7 +22,7 @@ import io.finnhub.api.models.CovidInfo
 import io.finnhub.api.models.CryptoCandles
 import io.finnhub.api.models.CryptoSymbol
 import io.finnhub.api.models.Dividends
-import io.finnhub.api.models.Dividends2LeftParenthesisBasicRightParenthesis
+import io.finnhub.api.models.Dividends2
 import io.finnhub.api.models.ETFsCountryExposure
 import io.finnhub.api.models.ETFsHoldings
 import io.finnhub.api.models.ETFsProfile
@@ -31,6 +32,7 @@ import io.finnhub.api.models.EarningsCalendar
 import io.finnhub.api.models.EarningsCallTranscripts
 import io.finnhub.api.models.EarningsCallTranscriptsList
 import io.finnhub.api.models.EarningsEstimates
+import io.finnhub.api.models.EconomicCalendar
 import io.finnhub.api.models.EconomicCode
 import io.finnhub.api.models.EconomicData
 import io.finnhub.api.models.FDAComitteeMeeting
@@ -47,17 +49,17 @@ import io.finnhub.api.models.IndicesConstituents
 import io.finnhub.api.models.IndicesHistoricalConstituents
 import io.finnhub.api.models.InsiderTransactions
 import io.finnhub.api.models.InternationalFiling
-import io.finnhub.api.models.InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis
+import io.finnhub.api.models.InvestmentThemes
 import io.finnhub.api.models.LastBidMinusAsk
-import io.finnhub.api.models.MajorPressReleases
-import io.finnhub.api.models.MutualFundsCountryExposure
-import io.finnhub.api.models.MutualFundsHoldings
-import io.finnhub.api.models.MutualFundsProfile
-import io.finnhub.api.models.MutualMinusFundSectorExposure
-import io.finnhub.api.models.News
+import io.finnhub.api.models.MarketNews
+import io.finnhub.api.models.MutualFundCountryExposure
+import io.finnhub.api.models.MutualFundHoldings
+import io.finnhub.api.models.MutualFundProfile
+import io.finnhub.api.models.MutualFundSectorExposure
 import io.finnhub.api.models.NewsSentiment
 import io.finnhub.api.models.Ownership
 import io.finnhub.api.models.PatternRecognition
+import io.finnhub.api.models.PressRelease
 import io.finnhub.api.models.PriceTarget
 import io.finnhub.api.models.Quote
 import io.finnhub.api.models.RecommendationTrend
@@ -67,8 +69,8 @@ import io.finnhub.api.models.SECSentimentAnalysis
 import io.finnhub.api.models.SimilarityIndex
 import io.finnhub.api.models.SocialSentiment
 import io.finnhub.api.models.Split
-import io.finnhub.api.models.Stock
 import io.finnhub.api.models.StockCandles
+import io.finnhub.api.models.StockSymbol
 import io.finnhub.api.models.SupplyChainRelationships
 import io.finnhub.api.models.SupportResistance
 import io.finnhub.api.models.SymbolLookup
@@ -397,22 +399,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Company symbol. 
     * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
     * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
-    * @return kotlin.collections.List<News>
+    * @return kotlin.collections.List<CompanyNews>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyNews(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<News> {
+    fun companyNews(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : kotlin.collections.List<CompanyNews> {
         val localVariableConfig = companyNewsRequestConfig(symbol = symbol, from = from, to = to)
 
-        val localVarResponse = request<Unit, kotlin.collections.List<News>>(
+        val localVarResponse = request<Unit, kotlin.collections.List<CompanyNews>>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<News>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CompanyNews>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1054,25 +1056,24 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
-    * Earnings Call Transcripts
-    * &lt;p&gt;Get earnings call transcripts, audio and participants&#39; list. This endpoint is only available for US, UK, and Candian companies. &lt;p&gt;15+ years of data is available with 220,000+ audio which add up to 7TB in size.&lt;/p&gt;
-    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
-    * @return EarningsCallTranscripts
+    * Economic Calendar
+    * &lt;p&gt;Get recent and upcoming economic releases.&lt;/p&gt;&lt;p&gt;Historical events and surprises are available for Enterprise clients.&lt;/p&gt;
+    * @return EconomicCalendar
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun earningsCallTranscriptsApi(id: kotlin.String) : EarningsCallTranscripts {
-        val localVariableConfig = earningsCallTranscriptsApiRequestConfig(id = id)
+    fun economicCalendar() : EconomicCalendar {
+        val localVariableConfig = economicCalendarRequestConfig()
 
-        val localVarResponse = request<Unit, EarningsCallTranscripts>(
+        val localVarResponse = request<Unit, EconomicCalendar>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EarningsCallTranscripts
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EconomicCalendar
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1087,22 +1088,18 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
-    * To obtain the request config of the operation earningsCallTranscriptsApi
+    * To obtain the request config of the operation economicCalendar
     *
-    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
     * @return RequestConfig
     */
-    fun earningsCallTranscriptsApiRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun economicCalendarRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
-            .apply {
-                put("id", listOf(id.toString()))
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/stock/transcripts",
+            path = "/calendar/economic",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -2320,22 +2317,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Investment Themes (Thematic Investing)
     * &lt;p&gt;Thematic investing involves creating a portfolio (or portion of a portfolio) by gathering together a collection of companies involved in certain areas that you predict will generate above-market returns over the long term. Themes can be based on a concept such as ageing populations or a sub-sector such as robotics, and drones. Thematic investing focuses on predicted long-term trends rather than specific companies or sectors, enabling investors to access structural, one-off shifts that can change an entire industry.&lt;/p&gt;&lt;p&gt;This endpoint will help you get portfolios of different investment themes that are changing our life and are the way of the future.&lt;/p&gt;&lt;p&gt;A full list of themes supported can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt;. The theme coverage and portfolios are updated bi-weekly by our analysts. Our approach excludes penny, super-small cap and illiquid stocks.&lt;/p&gt;
     * @param theme Investment theme. A full list of themes supported can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt;. 
-    * @return InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis
+    * @return InvestmentThemes
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun investmentThemesThematicInvesting(theme: kotlin.String) : InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis {
-        val localVariableConfig = investmentThemesThematicInvestingRequestConfig(theme = theme)
+    fun investmentThemes(theme: kotlin.String) : InvestmentThemes {
+        val localVariableConfig = investmentThemesRequestConfig(theme = theme)
 
-        val localVarResponse = request<Unit, InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis>(
+        val localVarResponse = request<Unit, InvestmentThemes>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvestmentThemes
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2350,12 +2347,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
-    * To obtain the request config of the operation investmentThemesThematicInvesting
+    * To obtain the request config of the operation investmentThemes
     *
     * @param theme Investment theme. A full list of themes supported can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt;. 
     * @return RequestConfig
     */
-    fun investmentThemesThematicInvestingRequestConfig(theme: kotlin.String) : RequestConfig<Unit> {
+    fun investmentThemesRequestConfig(theme: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -2436,22 +2433,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Get latest market news.
     * @param category This parameter can be 1 of the following values &lt;code&gt;general, forex, crypto, merger&lt;/code&gt;. 
     * @param minId Use this field to get only news after this ID. Default to 0 (optional)
-    * @return kotlin.collections.List<News>
+    * @return kotlin.collections.List<MarketNews>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun marketNews(category: kotlin.String, minId: kotlin.String?) : kotlin.collections.List<News> {
+    fun marketNews(category: kotlin.String, minId: kotlin.String?) : kotlin.collections.List<MarketNews> {
         val localVariableConfig = marketNewsRequestConfig(category = category, minId = minId)
 
-        val localVarResponse = request<Unit, kotlin.collections.List<News>>(
+        val localVarResponse = request<Unit, kotlin.collections.List<MarketNews>>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<News>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<MarketNews>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2496,22 +2493,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Mutual Funds Country Exposure
     * Get Mutual Funds country exposure data.
     * @param symbol Symbol. 
-    * @return MutualFundsCountryExposure
+    * @return MutualFundCountryExposure
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mutualFundCountryExposure(symbol: kotlin.String) : MutualFundsCountryExposure {
+    fun mutualFundCountryExposure(symbol: kotlin.String) : MutualFundCountryExposure {
         val localVariableConfig = mutualFundCountryExposureRequestConfig(symbol = symbol)
 
-        val localVarResponse = request<Unit, MutualFundsCountryExposure>(
+        val localVarResponse = request<Unit, MutualFundCountryExposure>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundsCountryExposure
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundCountryExposure
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2554,22 +2551,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Fund&#39;s symbol. (optional)
     * @param isin Fund&#39;s isin. (optional)
     * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
-    * @return MutualFundsHoldings
+    * @return MutualFundHoldings
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mutualFundHoldings(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : MutualFundsHoldings {
+    fun mutualFundHoldings(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : MutualFundHoldings {
         val localVariableConfig = mutualFundHoldingsRequestConfig(symbol = symbol, isin = isin, skip = skip)
 
-        val localVarResponse = request<Unit, MutualFundsHoldings>(
+        val localVarResponse = request<Unit, MutualFundHoldings>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundsHoldings
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundHoldings
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2621,22 +2618,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Get mutual funds profile information. This endpoint covers US mutual funds only.
     * @param symbol Fund&#39;s symbol. (optional)
     * @param isin Fund&#39;s isin. (optional)
-    * @return MutualFundsProfile
+    * @return MutualFundProfile
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mutualFundProfile(symbol: kotlin.String?, isin: kotlin.String?) : MutualFundsProfile {
+    fun mutualFundProfile(symbol: kotlin.String?, isin: kotlin.String?) : MutualFundProfile {
         val localVariableConfig = mutualFundProfileRequestConfig(symbol = symbol, isin = isin)
 
-        val localVarResponse = request<Unit, MutualFundsProfile>(
+        val localVarResponse = request<Unit, MutualFundProfile>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundsProfile
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundProfile
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2680,25 +2677,25 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
-    * Mutual Fund Sector Exposure
+    * Mutual Funds Sector Exposure
     * Get Mutual Funds sector exposure data.
     * @param symbol Mutual Fund symbol. 
-    * @return MutualMinusFundSectorExposure
+    * @return MutualFundSectorExposure
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mutualFundSectorExposure(symbol: kotlin.String) : MutualMinusFundSectorExposure {
+    fun mutualFundSectorExposure(symbol: kotlin.String) : MutualFundSectorExposure {
         val localVariableConfig = mutualFundSectorExposureRequestConfig(symbol = symbol)
 
-        val localVarResponse = request<Unit, MutualMinusFundSectorExposure>(
+        val localVarResponse = request<Unit, MutualFundSectorExposure>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualMinusFundSectorExposure
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutualFundSectorExposure
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2917,22 +2914,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Company symbol. 
     * @param from From time: 2020-01-01. (optional)
     * @param to To time: 2020-01-05. (optional)
-    * @return MajorPressReleases
+    * @return PressRelease
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun pressReleases(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : MajorPressReleases {
+    fun pressReleases(symbol: kotlin.String, from: kotlin.String?, to: kotlin.String?) : PressRelease {
         val localVariableConfig = pressReleasesRequestConfig(symbol = symbol, from = from, to = to)
 
-        val localVarResponse = request<Unit, MajorPressReleases>(
+        val localVarResponse = request<Unit, PressRelease>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MajorPressReleases
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PressRelease
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3346,22 +3343,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Dividends 2 (Basic)
     * Get global dividends data.
     * @param symbol Symbol. 
-    * @return Dividends2LeftParenthesisBasicRightParenthesis
+    * @return Dividends2
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockBasicDividends(symbol: kotlin.String) : Dividends2LeftParenthesisBasicRightParenthesis {
+    fun stockBasicDividends(symbol: kotlin.String) : Dividends2 {
         val localVariableConfig = stockBasicDividendsRequestConfig(symbol = symbol)
 
-        val localVarResponse = request<Unit, Dividends2LeftParenthesisBasicRightParenthesis>(
+        val localVarResponse = request<Unit, Dividends2>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as Dividends2LeftParenthesisBasicRightParenthesis
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Dividends2
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3720,22 +3717,22 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param mic Filter by MIC code. (optional)
     * @param securityType Filter by security type used by OpenFigi standard. (optional)
     * @param currency Filter by currency. (optional)
-    * @return kotlin.collections.List<Stock>
+    * @return kotlin.collections.List<StockSymbol>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockSymbols(exchange: kotlin.String, mic: kotlin.String?, securityType: kotlin.String?, currency: kotlin.String?) : kotlin.collections.List<Stock> {
+    fun stockSymbols(exchange: kotlin.String, mic: kotlin.String?, securityType: kotlin.String?, currency: kotlin.String?) : kotlin.collections.List<StockSymbol> {
         val localVariableConfig = stockSymbolsRequestConfig(exchange = exchange, mic = mic, securityType = securityType, currency = currency)
 
-        val localVarResponse = request<Unit, kotlin.collections.List<Stock>>(
+        val localVarResponse = request<Unit, kotlin.collections.List<StockSymbol>>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Stock>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<StockSymbol>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4084,6 +4081,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/indicator",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Earnings Call Transcripts
+    * &lt;p&gt;Get earnings call transcripts, audio and participants&#39; list. This endpoint is only available for US, UK, and Candian companies. &lt;p&gt;15+ years of data is available with 220,000+ audio which add up to 7TB in size.&lt;/p&gt;
+    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
+    * @return EarningsCallTranscripts
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun transcripts(id: kotlin.String) : EarningsCallTranscripts {
+        val localVariableConfig = transcriptsRequestConfig(id = id)
+
+        val localVarResponse = request<Unit, EarningsCallTranscripts>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EarningsCallTranscripts
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation transcripts
+    *
+    * @param id Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. 
+    * @return RequestConfig
+    */
+    fun transcriptsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("id", listOf(id.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/transcripts",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

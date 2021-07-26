@@ -204,7 +204,7 @@ fun majorDevelopments() {
 
 @Test
 fun patternRecognition() {
-    println(apiClient.patternRecognition("AAPL", "D"))
+  println(apiClient.patternRecognition("AAPL", "D"))
 }
 
 @Test
@@ -234,7 +234,7 @@ fun stockSymbols() {
 
 @Test
 fun transcripts() {
-  println(apiClient.earningsCallTranscriptsApi("AAPL_162777"))
+  println(apiClient.transcripts("AAPL_162777"))
 }
 
 @Test
@@ -355,7 +355,7 @@ fun revenueBreakdown() {
 
 @Test
 fun investmentTheme() {
-  println(apiClient.investmentThemesThematicInvesting("financialExchangesData"))
+  println(apiClient.investmentThemes("financialExchangesData"))
 }
 
 @Test

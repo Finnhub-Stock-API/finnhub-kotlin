@@ -1,5 +1,5 @@
 
-# News
+# MarketNews
 
 ## Properties
 Name | Type | Description | Notes

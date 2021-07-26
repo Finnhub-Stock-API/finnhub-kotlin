@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **symbol** | **kotlin.String** | Company symbol. |  [optional]
-**transcript** | [**kotlin.collections.List&lt;kotlin.Any&gt;**](kotlin.Any.md) | Transcript content. |  [optional]
-**participant** | [**kotlin.collections.List&lt;kotlin.Any&gt;**](kotlin.Any.md) | Participant list |  [optional]
+**transcript** | [**kotlin.collections.List&lt;TranscriptContent&gt;**](TranscriptContent.md) | Transcript content. |  [optional]
+**participant** | [**kotlin.collections.List&lt;TranscriptParticipant&gt;**](TranscriptParticipant.md) | Participant list |  [optional]
 **audio** | **kotlin.String** | Audio link. |  [optional]
 **id** | **kotlin.String** | Transcript&#39;s ID. |  [optional]
 **title** | **kotlin.String** | Title. |  [optional]

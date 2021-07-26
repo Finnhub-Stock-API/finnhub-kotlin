@@ -20,7 +20,7 @@ Method | HTTP request | Description
 [**cryptoExchanges**](DefaultApi.md#cryptoExchanges) | **GET** /crypto/exchange | Crypto Exchanges
 [**cryptoSymbols**](DefaultApi.md#cryptoSymbols) | **GET** /crypto/symbol | Crypto Symbol
 [**earningsCalendar**](DefaultApi.md#earningsCalendar) | **GET** /calendar/earnings | Earnings Calendar
-[**earningsCallTranscriptsApi**](DefaultApi.md#earningsCallTranscriptsApi) | **GET** /stock/transcripts | Earnings Call Transcripts
+[**economicCalendar**](DefaultApi.md#economicCalendar) | **GET** /calendar/economic | Economic Calendar
 [**economicCode**](DefaultApi.md#economicCode) | **GET** /economic/code | Economic Code
 [**economicData**](DefaultApi.md#economicData) | **GET** /economic | Economic Data
 [**etfsCountryExposure**](DefaultApi.md#etfsCountryExposure) | **GET** /etf/country | ETFs Country Exposure
@@ -41,13 +41,13 @@ Method | HTTP request | Description
 [**indicesHistoricalConstituents**](DefaultApi.md#indicesHistoricalConstituents) | **GET** /index/historical-constituents | Indices Historical Constituents
 [**insiderTransactions**](DefaultApi.md#insiderTransactions) | **GET** /stock/insider-transactions | Insider Transactions
 [**internationalFilings**](DefaultApi.md#internationalFilings) | **GET** /stock/international-filings | International Filings
-[**investmentThemesThematicInvesting**](DefaultApi.md#investmentThemesThematicInvesting) | **GET** /stock/investment-theme | Investment Themes (Thematic Investing)
+[**investmentThemes**](DefaultApi.md#investmentThemes) | **GET** /stock/investment-theme | Investment Themes (Thematic Investing)
 [**ipoCalendar**](DefaultApi.md#ipoCalendar) | **GET** /calendar/ipo | IPO Calendar
 [**marketNews**](DefaultApi.md#marketNews) | **GET** /news | Market News
 [**mutualFundCountryExposure**](DefaultApi.md#mutualFundCountryExposure) | **GET** /mutual-fund/country | Mutual Funds Country Exposure
 [**mutualFundHoldings**](DefaultApi.md#mutualFundHoldings) | **GET** /mutual-fund/holdings | Mutual Funds Holdings
 [**mutualFundProfile**](DefaultApi.md#mutualFundProfile) | **GET** /mutual-fund/profile | Mutual Funds Profile
-[**mutualFundSectorExposure**](DefaultApi.md#mutualFundSectorExposure) | **GET** /mutual-fund/sector | Mutual Fund Sector Exposure
+[**mutualFundSectorExposure**](DefaultApi.md#mutualFundSectorExposure) | **GET** /mutual-fund/sector | Mutual Funds Sector Exposure
 [**newsSentiment**](DefaultApi.md#newsSentiment) | **GET** /news-sentiment | News Sentiment
 [**ownership**](DefaultApi.md#ownership) | **GET** /stock/ownership | Ownership
 [**patternRecognition**](DefaultApi.md#patternRecognition) | **GET** /scan/pattern | Pattern Recognition
@@ -70,6 +70,7 @@ Method | HTTP request | Description
 [**supportResistance**](DefaultApi.md#supportResistance) | **GET** /scan/support-resistance | Support/Resistance
 [**symbolSearch**](DefaultApi.md#symbolSearch) | **GET** /search | Symbol Lookup
 [**technicalIndicator**](DefaultApi.md#technicalIndicator) | **POST** /indicator | Technical Indicators
+[**transcripts**](DefaultApi.md#transcripts) | **GET** /stock/transcripts | Earnings Call Transcripts
 [**transcriptsList**](DefaultApi.md#transcriptsList) | **GET** /stock/transcripts/list | Earnings Call Transcripts List
 [**upgradeDowngrade**](DefaultApi.md#upgradeDowngrade) | **GET** /stock/upgrade-downgrade | Stock Upgrade/Downgrade
 
@@ -334,7 +335,7 @@ Configure api_key:
 
 <a name="companyNews"></a>
 # **companyNews**
-> kotlin.collections.List&lt;News&gt; companyNews(symbol, from, to)
+> kotlin.collections.List&lt;CompanyNews&gt; companyNews(symbol, from, to)
 
 Company News
 
@@ -351,7 +352,7 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
 val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
 val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
 try {
-    val result : kotlin.collections.List<News> = apiInstance.companyNews(symbol, from, to)
+    val result : kotlin.collections.List<CompanyNews> = apiInstance.companyNews(symbol, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#companyNews")
@@ -372,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.collections.List&lt;News&gt;**](News.md)
+[**kotlin.collections.List&lt;CompanyNews&gt;**](CompanyNews.md)
 
 ### Authorization
 
@@ -896,13 +897,13 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="earningsCallTranscriptsApi"></a>
-# **earningsCallTranscriptsApi**
-> EarningsCallTranscripts earningsCallTranscriptsApi(id)
+<a name="economicCalendar"></a>
+# **economicCalendar**
+> EconomicCalendar economicCalendar()
 
-Earnings Call Transcripts
+Economic Calendar
 
-&lt;p&gt;Get earnings call transcripts, audio and participants&#39; list. This endpoint is only available for US, UK, and Candian companies. &lt;p&gt;15+ years of data is available with 220,000+ audio which add up to 7TB in size.&lt;/p&gt;
+&lt;p&gt;Get recent and upcoming economic releases.&lt;/p&gt;&lt;p&gt;Historical events and surprises are available for Enterprise clients.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -911,28 +912,24 @@ Earnings Call Transcripts
 //import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
-val id : kotlin.String = id_example // kotlin.String | Transcript's id obtained with <a href=\"#transcripts-list\">Transcripts List endpoint</a>.
 try {
-    val result : EarningsCallTranscripts = apiInstance.earningsCallTranscriptsApi(id)
+    val result : EconomicCalendar = apiInstance.economicCalendar()
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling DefaultApi#earningsCallTranscriptsApi")
+    println("4xx response calling DefaultApi#economicCalendar")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling DefaultApi#earningsCallTranscriptsApi")
+    println("5xx response calling DefaultApi#economicCalendar")
     e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **kotlin.String**| Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. |
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**EarningsCallTranscripts**](EarningsCallTranscripts.md)
+[**EconomicCalendar**](EconomicCalendar.md)
 
 ### Authorization
 
@@ -1974,9 +1971,9 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="investmentThemesThematicInvesting"></a>
-# **investmentThemesThematicInvesting**
-> InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis investmentThemesThematicInvesting(theme)
+<a name="investmentThemes"></a>
+# **investmentThemes**
+> InvestmentThemes investmentThemes(theme)
 
 Investment Themes (Thematic Investing)
 
@@ -1991,13 +1988,13 @@ Investment Themes (Thematic Investing)
 val apiInstance = DefaultApi()
 val theme : kotlin.String = theme_example // kotlin.String | Investment theme. A full list of themes supported can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1ULj9xDh4iPoQj279M084adZ2_S852ttRthKKJ7madYc/edit?usp=sharing\">here</a>.
 try {
-    val result : InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis = apiInstance.investmentThemesThematicInvesting(theme)
+    val result : InvestmentThemes = apiInstance.investmentThemes(theme)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling DefaultApi#investmentThemesThematicInvesting")
+    println("4xx response calling DefaultApi#investmentThemes")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling DefaultApi#investmentThemesThematicInvesting")
+    println("5xx response calling DefaultApi#investmentThemes")
     e.printStackTrace()
 }
 ```
@@ -2010,7 +2007,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis**](InvestmentThemesLeftParenthesisThematicInvestingRightParenthesis.md)
+[**InvestmentThemes**](InvestmentThemes.md)
 
 ### Authorization
 
@@ -2078,7 +2075,7 @@ Configure api_key:
 
 <a name="marketNews"></a>
 # **marketNews**
-> kotlin.collections.List&lt;News&gt; marketNews(category, minId)
+> kotlin.collections.List&lt;MarketNews&gt; marketNews(category, minId)
 
 Market News
 
@@ -2094,7 +2091,7 @@ val apiInstance = DefaultApi()
 val category : kotlin.String = category_example // kotlin.String | This parameter can be 1 of the following values <code>general, forex, crypto, merger</code>.
 val minId : kotlin.String = minId_example // kotlin.String | Use this field to get only news after this ID. Default to 0
 try {
-    val result : kotlin.collections.List<News> = apiInstance.marketNews(category, minId)
+    val result : kotlin.collections.List<MarketNews> = apiInstance.marketNews(category, minId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#marketNews")
@@ -2114,7 +2111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.collections.List&lt;News&gt;**](News.md)
+[**kotlin.collections.List&lt;MarketNews&gt;**](MarketNews.md)
 
 ### Authorization
 
@@ -2130,7 +2127,7 @@ Configure api_key:
 
 <a name="mutualFundCountryExposure"></a>
 # **mutualFundCountryExposure**
-> MutualFundsCountryExposure mutualFundCountryExposure(symbol)
+> MutualFundCountryExposure mutualFundCountryExposure(symbol)
 
 Mutual Funds Country Exposure
 
@@ -2145,7 +2142,7 @@ Get Mutual Funds country exposure data.
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
 try {
-    val result : MutualFundsCountryExposure = apiInstance.mutualFundCountryExposure(symbol)
+    val result : MutualFundCountryExposure = apiInstance.mutualFundCountryExposure(symbol)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#mutualFundCountryExposure")
@@ -2164,7 +2161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MutualFundsCountryExposure**](MutualFundsCountryExposure.md)
+[**MutualFundCountryExposure**](MutualFundCountryExposure.md)
 
 ### Authorization
 
@@ -2180,7 +2177,7 @@ Configure api_key:
 
 <a name="mutualFundHoldings"></a>
 # **mutualFundHoldings**
-> MutualFundsHoldings mutualFundHoldings(symbol, isin, skip)
+> MutualFundHoldings mutualFundHoldings(symbol, isin, skip)
 
 Mutual Funds Holdings
 
@@ -2197,7 +2194,7 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Fund's symbol.
 val isin : kotlin.String = isin_example // kotlin.String | Fund's isin.
 val skip : kotlin.Long = 789 // kotlin.Long | Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip=0 or not set.
 try {
-    val result : MutualFundsHoldings = apiInstance.mutualFundHoldings(symbol, isin, skip)
+    val result : MutualFundHoldings = apiInstance.mutualFundHoldings(symbol, isin, skip)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#mutualFundHoldings")
@@ -2218,7 +2215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MutualFundsHoldings**](MutualFundsHoldings.md)
+[**MutualFundHoldings**](MutualFundHoldings.md)
 
 ### Authorization
 
@@ -2234,7 +2231,7 @@ Configure api_key:
 
 <a name="mutualFundProfile"></a>
 # **mutualFundProfile**
-> MutualFundsProfile mutualFundProfile(symbol, isin)
+> MutualFundProfile mutualFundProfile(symbol, isin)
 
 Mutual Funds Profile
 
@@ -2250,7 +2247,7 @@ val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Fund's symbol.
 val isin : kotlin.String = isin_example // kotlin.String | Fund's isin.
 try {
-    val result : MutualFundsProfile = apiInstance.mutualFundProfile(symbol, isin)
+    val result : MutualFundProfile = apiInstance.mutualFundProfile(symbol, isin)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#mutualFundProfile")
@@ -2270,7 +2267,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MutualFundsProfile**](MutualFundsProfile.md)
+[**MutualFundProfile**](MutualFundProfile.md)
 
 ### Authorization
 
@@ -2286,9 +2283,9 @@ Configure api_key:
 
 <a name="mutualFundSectorExposure"></a>
 # **mutualFundSectorExposure**
-> MutualMinusFundSectorExposure mutualFundSectorExposure(symbol)
+> MutualFundSectorExposure mutualFundSectorExposure(symbol)
 
-Mutual Fund Sector Exposure
+Mutual Funds Sector Exposure
 
 Get Mutual Funds sector exposure data.
 
@@ -2301,7 +2298,7 @@ Get Mutual Funds sector exposure data.
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Mutual Fund symbol.
 try {
-    val result : MutualMinusFundSectorExposure = apiInstance.mutualFundSectorExposure(symbol)
+    val result : MutualFundSectorExposure = apiInstance.mutualFundSectorExposure(symbol)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#mutualFundSectorExposure")
@@ -2320,7 +2317,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MutualMinusFundSectorExposure**](MutualMinusFundSectorExposure.md)
+[**MutualFundSectorExposure**](MutualFundSectorExposure.md)
 
 ### Authorization
 
@@ -2490,7 +2487,7 @@ Configure api_key:
 
 <a name="pressReleases"></a>
 # **pressReleases**
-> MajorPressReleases pressReleases(symbol, from, to)
+> PressRelease pressReleases(symbol, from, to)
 
 Major Press Releases
 
@@ -2507,7 +2504,7 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
 val from : kotlin.String = 2013-10-20 // kotlin.String | From time: 2020-01-01.
 val to : kotlin.String = 2013-10-20 // kotlin.String | To time: 2020-01-05.
 try {
-    val result : MajorPressReleases = apiInstance.pressReleases(symbol, from, to)
+    val result : PressRelease = apiInstance.pressReleases(symbol, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#pressReleases")
@@ -2528,7 +2525,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MajorPressReleases**](MajorPressReleases.md)
+[**PressRelease**](PressRelease.md)
 
 ### Authorization
 
@@ -2854,7 +2851,7 @@ Configure api_key:
 
 <a name="stockBasicDividends"></a>
 # **stockBasicDividends**
-> Dividends2LeftParenthesisBasicRightParenthesis stockBasicDividends(symbol)
+> Dividends2 stockBasicDividends(symbol)
 
 Dividends 2 (Basic)
 
@@ -2869,7 +2866,7 @@ Get global dividends data.
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
 try {
-    val result : Dividends2LeftParenthesisBasicRightParenthesis = apiInstance.stockBasicDividends(symbol)
+    val result : Dividends2 = apiInstance.stockBasicDividends(symbol)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#stockBasicDividends")
@@ -2888,7 +2885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Dividends2LeftParenthesisBasicRightParenthesis**](Dividends2LeftParenthesisBasicRightParenthesis.md)
+[**Dividends2**](Dividends2.md)
 
 ### Authorization
 
@@ -3176,7 +3173,7 @@ Configure api_key:
 
 <a name="stockSymbols"></a>
 # **stockSymbols**
-> kotlin.collections.List&lt;Stock&gt; stockSymbols(exchange, mic, securityType, currency)
+> kotlin.collections.List&lt;StockSymbol&gt; stockSymbols(exchange, mic, securityType, currency)
 
 Stock Symbol
 
@@ -3194,7 +3191,7 @@ val mic : kotlin.String = mic_example // kotlin.String | Filter by MIC code.
 val securityType : kotlin.String = securityType_example // kotlin.String | Filter by security type used by OpenFigi standard.
 val currency : kotlin.String = currency_example // kotlin.String | Filter by currency.
 try {
-    val result : kotlin.collections.List<Stock> = apiInstance.stockSymbols(exchange, mic, securityType, currency)
+    val result : kotlin.collections.List<StockSymbol> = apiInstance.stockSymbols(exchange, mic, securityType, currency)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#stockSymbols")
@@ -3216,7 +3213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**kotlin.collections.List&lt;Stock&gt;**](Stock.md)
+[**kotlin.collections.List&lt;StockSymbol&gt;**](StockSymbol.md)
 
 ### Authorization
 
@@ -3496,6 +3493,56 @@ Configure api_key:
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="transcripts"></a>
+# **transcripts**
+> EarningsCallTranscripts transcripts(id)
+
+Earnings Call Transcripts
+
+&lt;p&gt;Get earnings call transcripts, audio and participants&#39; list. This endpoint is only available for US, UK, and Candian companies. &lt;p&gt;15+ years of data is available with 220,000+ audio which add up to 7TB in size.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val id : kotlin.String = id_example // kotlin.String | Transcript's id obtained with <a href=\"#transcripts-list\">Transcripts List endpoint</a>.
+try {
+    val result : EarningsCallTranscripts = apiInstance.transcripts(id)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#transcripts")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#transcripts")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **kotlin.String**| Transcript&#39;s id obtained with &lt;a href&#x3D;\&quot;#transcripts-list\&quot;&gt;Transcripts List endpoint&lt;/a&gt;. |
+
+### Return type
+
+[**EarningsCallTranscripts**](EarningsCallTranscripts.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 <a name="transcriptsList"></a>

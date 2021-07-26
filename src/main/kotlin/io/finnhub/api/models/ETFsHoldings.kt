@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.ETFHoldingsData
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -35,7 +36,7 @@ data class ETFsHoldings (
     val numberOfHoldings: kotlin.Long? = null,
     /* Array of holdings. */
     @Json(name = "holdings")
-    val holdings: kotlin.collections.List<kotlin.Any>? = null
+    val holdings: kotlin.collections.List<ETFHoldingsData>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

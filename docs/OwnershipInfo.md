@@ -1,5 +1,5 @@
 
-# Investor
+# OwnershipInfo
 
 ## Properties
 Name | Type | Description | Notes

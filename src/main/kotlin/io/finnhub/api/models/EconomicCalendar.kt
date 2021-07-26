@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.EconomicEvent
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -23,7 +24,7 @@ import java.io.Serializable
 data class EconomicCalendar (
     /* Array of economic events. */
     @Json(name = "economicCalendar")
-    val economicCalendar: kotlin.collections.List<kotlin.Any>? = null
+    val economicCalendar: kotlin.collections.List<EconomicEvent>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

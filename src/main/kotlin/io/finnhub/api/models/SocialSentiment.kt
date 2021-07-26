@@ -11,6 +11,8 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.RedditSentimentContent
+import io.finnhub.api.models.TwitterSentimentContent
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -28,10 +30,10 @@ data class SocialSentiment (
     val symbol: kotlin.String? = null,
     /* Reddit sentiment. */
     @Json(name = "reddit")
-    val reddit: kotlin.collections.List<kotlin.Any>? = null,
+    val reddit: kotlin.collections.List<RedditSentimentContent>? = null,
     /* Twitter sentiment. */
     @Json(name = "twitter")
-    val twitter: kotlin.collections.List<kotlin.Any>? = null
+    val twitter: kotlin.collections.List<TwitterSentimentContent>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

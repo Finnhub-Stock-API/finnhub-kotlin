@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.EarningRelease
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -23,7 +24,7 @@ import java.io.Serializable
 data class EarningsCalendar (
     /* Array of earnings release. */
     @Json(name = "earningsCalendar")
-    val earningsCalendar: kotlin.collections.List<kotlin.Any>? = null
+    val earningsCalendar: kotlin.collections.List<EarningRelease>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

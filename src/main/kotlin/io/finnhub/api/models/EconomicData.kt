@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.EconomicDataInfo
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -24,7 +25,7 @@ import java.io.Serializable
 data class EconomicData (
     /* Array of economic data for requested code. */
     @Json(name = "data")
-    val data: kotlin.collections.List<kotlin.Any>? = null,
+    val data: kotlin.collections.List<EconomicDataInfo>? = null,
     /* Finnhub economic code */
     @Json(name = "code")
     val code: kotlin.String? = null

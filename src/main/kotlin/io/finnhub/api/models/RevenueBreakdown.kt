@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.BreakdownItem
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -31,7 +32,7 @@ data class RevenueBreakdown (
     val cik: kotlin.String? = null,
     /* Array of revenue breakdown over multiple periods. */
     @Json(name = "data")
-    val data: kotlin.collections.List<kotlin.Any>? = null
+    val data: kotlin.collections.List<BreakdownItem>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

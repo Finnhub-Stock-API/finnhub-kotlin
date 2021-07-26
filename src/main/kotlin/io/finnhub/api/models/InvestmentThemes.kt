@@ -11,23 +11,24 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.InvestmentThemePortfolio
 
 import com.squareup.moshi.Json
 import java.io.Serializable
 
 /**
  * 
- * @param symbol Symbol.
- * @param countryExposure Array of countries and and exposure levels.
+ * @param theme Investment theme
+ * @param data Investment theme portfolio.
  */
 
-data class MutualFundsCountryExposure (
-    /* Symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
-    /* Array of countries and and exposure levels. */
-    @Json(name = "countryExposure")
-    val countryExposure: kotlin.collections.List<kotlin.Any>? = null
+data class InvestmentThemes (
+    /* Investment theme */
+    @Json(name = "theme")
+    val theme: kotlin.String? = null,
+    /* Investment theme portfolio. */
+    @Json(name = "data")
+    val data: kotlin.collections.List<InvestmentThemePortfolio>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

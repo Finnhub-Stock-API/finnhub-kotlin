@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **symbol** | **kotlin.String** | Company symbol. |  [optional]
-**reddit** | [**kotlin.collections.List&lt;kotlin.Any&gt;**](kotlin.Any.md) | Reddit sentiment. |  [optional]
-**twitter** | [**kotlin.collections.List&lt;kotlin.Any&gt;**](kotlin.Any.md) | Twitter sentiment. |  [optional]
+**reddit** | [**kotlin.collections.List&lt;RedditSentimentContent&gt;**](RedditSentimentContent.md) | Reddit sentiment. |  [optional]
+**twitter** | [**kotlin.collections.List&lt;TwitterSentimentContent&gt;**](TwitterSentimentContent.md) | Twitter sentiment. |  [optional]
 
 
 

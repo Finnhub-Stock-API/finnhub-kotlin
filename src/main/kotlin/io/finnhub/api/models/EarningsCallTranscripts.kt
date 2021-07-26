@@ -11,6 +11,8 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.TranscriptContent
+import io.finnhub.api.models.TranscriptParticipant
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -34,10 +36,10 @@ data class EarningsCallTranscripts (
     val symbol: kotlin.String? = null,
     /* Transcript content. */
     @Json(name = "transcript")
-    val transcript: kotlin.collections.List<kotlin.Any>? = null,
+    val transcript: kotlin.collections.List<TranscriptContent>? = null,
     /* Participant list */
     @Json(name = "participant")
-    val participant: kotlin.collections.List<kotlin.Any>? = null,
+    val participant: kotlin.collections.List<TranscriptParticipant>? = null,
     /* Audio link. */
     @Json(name = "audio")
     val audio: kotlin.String? = null,

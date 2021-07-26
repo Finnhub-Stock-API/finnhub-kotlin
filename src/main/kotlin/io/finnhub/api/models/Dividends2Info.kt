@@ -17,17 +17,17 @@ import java.io.Serializable
 
 /**
  * 
- * @param symbol Mutual symbol.
- * @param sectorExposure Array of sector and exposure levels.
+ * @param exDate Ex-Dividend date.
+ * @param amount Amount in local currency.
  */
 
-data class MutualMinusFundSectorExposure (
-    /* Mutual symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
-    /* Array of sector and exposure levels. */
-    @Json(name = "sectorExposure")
-    val sectorExposure: kotlin.collections.List<kotlin.Any>? = null
+data class Dividends2Info (
+    /* Ex-Dividend date. */
+    @Json(name = "exDate")
+    val exDate: kotlin.String? = null,
+    /* Amount in local currency. */
+    @Json(name = "amount")
+    val amount: kotlin.Float? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

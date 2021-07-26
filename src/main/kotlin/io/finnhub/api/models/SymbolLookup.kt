@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.SymbolLookupInfo
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -24,7 +25,7 @@ import java.io.Serializable
 data class SymbolLookup (
     /* Array of search results. */
     @Json(name = "result")
-    val result: kotlin.collections.List<kotlin.Any>? = null,
+    val result: kotlin.collections.List<SymbolLookupInfo>? = null,
     /* Number of results. */
     @Json(name = "count")
     val count: kotlin.Long? = null

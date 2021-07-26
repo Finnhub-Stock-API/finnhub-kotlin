@@ -23,7 +23,7 @@ import java.io.Serializable
  * @param type Security type.
  */
 
-data class Stock (
+data class SymbolLookupInfo (
     /* Symbol description */
     @Json(name = "description")
     val description: kotlin.String? = null,

@@ -21,9 +21,10 @@ import java.io.Serializable
  * @param share Number of shares held by the investor.
  * @param change Number of share changed (net buy or sell) from the last period.
  * @param filingDate Filing date.
+ * @param portfolioPercent Percent of the fund's portfolio comprised of the company's share.
  */
 
-data class Investor (
+data class FundOwnershipInfo (
     /* Investor's name. */
     @Json(name = "name")
     val name: kotlin.String? = null,
@@ -35,7 +36,10 @@ data class Investor (
     val change: kotlin.Long? = null,
     /* Filing date. */
     @Json(name = "filingDate")
-    val filingDate: kotlin.String? = null
+    val filingDate: kotlin.String? = null,
+    /* Percent of the fund's portfolio comprised of the company's share. */
+    @Json(name = "portfolioPercent")
+    val portfolioPercent: kotlin.Float? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

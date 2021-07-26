@@ -11,6 +11,7 @@
 */
 package io.finnhub.api.models
 
+import io.finnhub.api.models.MutualFundCountryExposureData
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -18,24 +19,16 @@ import java.io.Serializable
 /**
  * 
  * @param symbol Symbol.
- * @param atDate Holdings update date.
- * @param numberOfHoldings Number of holdings.
- * @param holdings Array of holdings.
+ * @param countryExposure Array of countries and and exposure levels.
  */
 
-data class MutualFundsHoldings (
+data class MutualFundCountryExposure (
     /* Symbol. */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
-    /* Holdings update date. */
-    @Json(name = "atDate")
-    val atDate: kotlin.String? = null,
-    /* Number of holdings. */
-    @Json(name = "numberOfHoldings")
-    val numberOfHoldings: kotlin.Long? = null,
-    /* Array of holdings. */
-    @Json(name = "holdings")
-    val holdings: kotlin.collections.List<kotlin.Any>? = null
+    /* Array of countries and and exposure levels. */
+    @Json(name = "countryExposure")
+    val countryExposure: kotlin.collections.List<MutualFundCountryExposureData>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123
