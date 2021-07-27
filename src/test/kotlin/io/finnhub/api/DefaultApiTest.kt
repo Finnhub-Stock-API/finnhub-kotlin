@@ -9,7 +9,7 @@ class DefaultApiTest {
     private val apiClient: DefaultApi
 
     init {
-        ApiClient.apiKey["token"] = "<API_key>"
+        ApiClient.apiKey["token"] = System.getenv("FINNHUB_API_KEY") // Replace with your API key
         apiClient = DefaultApi()
     }
 
@@ -29,7 +29,12 @@ class DefaultApiTest {
 
     @Test
     fun stockCandles() {
-        println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249, null))
+        println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249))
+    }
+
+    @Test
+    fun stockBidask() {
+        println(apiClient.stockBidask("AAPL"))
     }
 
     @Test
@@ -39,7 +44,7 @@ class DefaultApiTest {
 
     @Test
     fun basicFinancials() {
-        println(apiClient.companyBasicFinancials("AAPL", "margin"))
+        println(apiClient.companyBasicFinancials("AAPL", "all"))
     }
 
     @Test
@@ -60,6 +65,11 @@ class DefaultApiTest {
     @Test
     fun companyNews() {
         println(apiClient.companyNews("AAPL", from = "2020-06-01", to = "2020-06-10"))
+    }
+
+    @Test
+    fun newsSentiment() {
+        println(apiClient.newsSentiment("AAPL"))
     }
 
     @Test
@@ -119,6 +129,21 @@ class DefaultApiTest {
     }
 
     @Test
+    fun internationalFilings() {
+        println(apiClient.internationalFilings("AC.TO", ""))
+    }
+
+    @Test
+    fun filingsSentiment() {
+        println(apiClient.filingsSentiment("0000320193-20-000052"))
+    }
+
+    @Test
+    fun similarityIndex() {
+        println(apiClient.similarityIndex("AAPL", "", "annual"))
+    }
+
+    @Test
     fun financials() {
         println(apiClient.financials("AAPL", "bs", "annual"))
     }
@@ -150,7 +175,7 @@ class DefaultApiTest {
 
     @Test
     fun generalNews() {
-        println(apiClient.marketNews("forex", minId = "0"))
+        println(apiClient.marketNews("forex", minId = 0))
     }
 
     @Test
@@ -194,6 +219,11 @@ class DefaultApiTest {
     }
 
     @Test
+    fun stockDividends2() {
+        println(apiClient.stockBasicDividends("KO"))
+    }
+
+    @Test
     fun stockSymbols() {
         println(apiClient.stockSymbols("US", "", "", ""))
     }
@@ -219,6 +249,11 @@ class DefaultApiTest {
     }
 
     @Test
+    fun fdaCalendar() {
+        println(apiClient.fdaCommitteeMeetingCalendar())
+    }
+
+    @Test
     fun upgradeDowngrade() {
         println(apiClient.upgradeDowngrade(symbol = "AAPL", from = "2020-01-01", to = "2020-06-30"))
     }
@@ -229,19 +264,18 @@ class DefaultApiTest {
     }
 
     @Test
+    fun economicCalendar() {
+        println(apiClient.economicCalendar())
+    }
+
+    @Test
     fun supportResistance() {
         println(apiClient.supportResistance("AAPL", "D"))
     }
 
     @Test
     fun stockSplits() {
-        println(
-            apiClient.stockSplits(
-                symbol = "AAPL",
-                from = "2000-01-01",
-                to = "2020-01-01"
-            )
-        )
+        println(apiClient.stockSplits(symbol = "AAPL", from = "2000-01-01", to = "2020-01-01"))
     }
 
     @Test
@@ -257,6 +291,11 @@ class DefaultApiTest {
     @Test
     fun stockTick() {
         println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
+    }
+
+    @Test
+    fun stockBBO() {
+        println(apiClient.stockNbbo("AAPL", "2020-03-25", 500, 0))
     }
 
     @Test
@@ -332,5 +371,10 @@ class DefaultApiTest {
     @Test
     fun supplyChain() {
         println(apiClient.supplyChainRelationships("AAPL"))
+    }
+
+    @Test
+    fun symbolSearch() {
+        println(apiClient.symbolSearch("AAPL"))
     }
 }

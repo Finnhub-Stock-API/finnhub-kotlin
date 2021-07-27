@@ -2440,7 +2440,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun marketNews(category: kotlin.String, minId: kotlin.String?) : kotlin.collections.List<MarketNews> {
+    fun marketNews(category: kotlin.String, minId: kotlin.Long?) : kotlin.collections.List<MarketNews> {
         val localVariableConfig = marketNewsRequestConfig(category = category, minId = minId)
 
         val localVarResponse = request<Unit, kotlin.collections.List<MarketNews>>(
@@ -2469,7 +2469,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param minId Use this field to get only news after this ID. Default to 0 (optional)
     * @return RequestConfig
     */
-    fun marketNewsRequestConfig(category: kotlin.String, minId: kotlin.String?) : RequestConfig<Unit> {
+    fun marketNewsRequestConfig(category: kotlin.String, minId: kotlin.Long?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -3453,12 +3453,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Stock Candles
-    * &lt;p&gt;Get candlestick data (OHLCV) for stocks
+    * &lt;p&gt;Get candlestick data (OHLCV) for stocks.&lt;/p&gt;&lt;p&gt;Daily data will be adjusted for Splits. Intraday data will remain unadjusted.&lt;/p&gt;
     * @param symbol Symbol. 
     * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
     * @param from UNIX timestamp. Interval initial value. 
     * @param to UNIX timestamp. Interval end value. 
-    * @param adjusted DEPRECATED: this option has been deprecated. All Daily data will be adjusted for Splits and intraday data will remain unadjusted. (optional)
     * @return StockCandles
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -3466,8 +3465,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun stockCandles(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long, adjusted: kotlin.String?) : StockCandles {
-        val localVariableConfig = stockCandlesRequestConfig(symbol = symbol, resolution = resolution, from = from, to = to, adjusted = adjusted)
+    fun stockCandles(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long) : StockCandles {
+        val localVariableConfig = stockCandlesRequestConfig(symbol = symbol, resolution = resolution, from = from, to = to)
 
         val localVarResponse = request<Unit, StockCandles>(
             localVariableConfig
@@ -3495,10 +3494,9 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param resolution Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. 
     * @param from UNIX timestamp. Interval initial value. 
     * @param to UNIX timestamp. Interval end value. 
-    * @param adjusted DEPRECATED: this option has been deprecated. All Daily data will be adjusted for Splits and intraday data will remain unadjusted. (optional)
     * @return RequestConfig
     */
-    fun stockCandlesRequestConfig(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long, adjusted: kotlin.String?) : RequestConfig<Unit> {
+    fun stockCandlesRequestConfig(symbol: kotlin.String, resolution: kotlin.String, from: kotlin.Long, to: kotlin.Long) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -3506,9 +3504,6 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
                 put("resolution", listOf(resolution.toString()))
                 put("from", listOf(from.toString()))
                 put("to", listOf(to.toString()))
-                if (adjusted != null) {
-                    put("adjusted", listOf(adjusted.toString()))
-                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 

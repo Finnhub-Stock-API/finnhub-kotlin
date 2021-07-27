@@ -24,10 +24,10 @@ import java.io.Serializable
 data class Sentiment (
     /*  */
     @Json(name = "bearishPercent")
-    val bearishPercent: kotlin.Long? = null,
+    val bearishPercent: kotlin.Float? = null,
     /*  */
     @Json(name = "bullishPercent")
-    val bullishPercent: kotlin.Long? = null
+    val bullishPercent: kotlin.Float? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

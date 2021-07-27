@@ -125,7 +125,7 @@ data class CompanyProfile (
     val shareOutstanding: kotlin.Float? = null,
     /* Number of employee. */
     @Json(name = "employeeTotal")
-    val employeeTotal: kotlin.Long? = null,
+    val employeeTotal: kotlin.Float? = null,
     /* Logo image. */
     @Json(name = "logo")
     val logo: kotlin.String? = null,

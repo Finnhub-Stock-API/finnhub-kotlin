@@ -24,16 +24,16 @@ import java.io.Serializable
  * @param period Period.
  */
 
-data class Estimate (
+data class RevenueEstimatesInfo (
     /* Average revenue estimates including Finnhub's proprietary estimates. */
     @Json(name = "revenueAvg")
-    val revenueAvg: kotlin.Long? = null,
+    val revenueAvg: kotlin.Float? = null,
     /* Highest estimate. */
     @Json(name = "revenueHigh")
-    val revenueHigh: kotlin.Long? = null,
+    val revenueHigh: kotlin.Float? = null,
     /* Lowest estimate. */
     @Json(name = "revenueLow")
-    val revenueLow: kotlin.Long? = null,
+    val revenueLow: kotlin.Float? = null,
     /* Number of Analysts. */
     @Json(name = "numberAnalysts")
     val numberAnalysts: kotlin.Long? = null,

@@ -2089,7 +2089,7 @@ Get latest market news.
 
 val apiInstance = DefaultApi()
 val category : kotlin.String = category_example // kotlin.String | This parameter can be 1 of the following values <code>general, forex, crypto, merger</code>.
-val minId : kotlin.String = minId_example // kotlin.String | Use this field to get only news after this ID. Default to 0
+val minId : kotlin.Long = 789 // kotlin.Long | Use this field to get only news after this ID. Default to 0
 try {
     val result : kotlin.collections.List<MarketNews> = apiInstance.marketNews(category, minId)
     println(result)
@@ -2107,7 +2107,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **category** | **kotlin.String**| This parameter can be 1 of the following values &lt;code&gt;general, forex, crypto, merger&lt;/code&gt;. |
- **minId** | **kotlin.String**| Use this field to get only news after this ID. Default to 0 | [optional]
+ **minId** | **kotlin.Long**| Use this field to get only news after this ID. Default to 0 | [optional]
 
 ### Return type
 
@@ -2951,11 +2951,11 @@ Configure api_key:
 
 <a name="stockCandles"></a>
 # **stockCandles**
-> StockCandles stockCandles(symbol, resolution, from, to, adjusted)
+> StockCandles stockCandles(symbol, resolution, from, to)
 
 Stock Candles
 
-&lt;p&gt;Get candlestick data (OHLCV) for stocks
+&lt;p&gt;Get candlestick data (OHLCV) for stocks.&lt;/p&gt;&lt;p&gt;Daily data will be adjusted for Splits. Intraday data will remain unadjusted.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -2968,9 +2968,8 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
 val resolution : kotlin.String = resolution_example // kotlin.String | Supported resolution includes <code>1, 5, 15, 30, 60, D, W, M </code>.Some timeframes might not be available depending on the exchange.
 val from : kotlin.Long = 789 // kotlin.Long | UNIX timestamp. Interval initial value.
 val to : kotlin.Long = 789 // kotlin.Long | UNIX timestamp. Interval end value.
-val adjusted : kotlin.String = adjusted_example // kotlin.String | DEPRECATED: this option has been deprecated. All Daily data will be adjusted for Splits and intraday data will remain unadjusted.
 try {
-    val result : StockCandles = apiInstance.stockCandles(symbol, resolution, from, to, adjusted)
+    val result : StockCandles = apiInstance.stockCandles(symbol, resolution, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#stockCandles")
@@ -2989,7 +2988,6 @@ Name | Type | Description  | Notes
  **resolution** | **kotlin.String**| Supported resolution includes &lt;code&gt;1, 5, 15, 30, 60, D, W, M &lt;/code&gt;.Some timeframes might not be available depending on the exchange. |
  **from** | **kotlin.Long**| UNIX timestamp. Interval initial value. |
  **to** | **kotlin.Long**| UNIX timestamp. Interval end value. |
- **adjusted** | **kotlin.String**| DEPRECATED: this option has been deprecated. All Daily data will be adjusted for Splits and intraday data will remain unadjusted. | [optional]
 
 ### Return type
 

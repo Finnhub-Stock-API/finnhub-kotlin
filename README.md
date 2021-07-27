@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.5</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,7 +29,7 @@ For Maven
 For Gradle
 
 ```
-implementation 'io.finnhub:kotlin-client:2.0.0'
+implementation 'io.finnhub:kotlin-client:2.0.5'
 ```
 
 ## Migrate from 1.x.x to 2.x.x
@@ -63,7 +63,12 @@ fun technicalIndicator() {
 
 @Test
 fun stockCandles() {
-  println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249, null))
+  println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249))
+}
+
+@Test
+fun stockBidask() {
+  println(apiClient.stockBidask("AAPL"))
 }
 
 @Test
@@ -73,7 +78,7 @@ fun aggregateIndicator() {
 
 @Test
 fun basicFinancials() {
-  println(apiClient.companyBasicFinancials("AAPL", "margin"))
+  println(apiClient.companyBasicFinancials("AAPL", "all"))
 }
 
 @Test
@@ -94,6 +99,11 @@ fun companyExecutive() {
 @Test
 fun companyNews() {
   println(apiClient.companyNews("AAPL", from = "2020-06-01", to = "2020-06-10"))
+}
+
+@Test
+fun newsSentiment() {
+  println(apiClient.newsSentiment("AAPL"))
 }
 
 @Test
@@ -153,6 +163,21 @@ fun filings() {
 }
 
 @Test
+fun internationalFilings() {
+  println(apiClient.internationalFilings("AC.TO", ""))
+}
+
+@Test
+fun filingsSentiment() {
+  println(apiClient.filingsSentiment("0000320193-20-000052"))
+}
+
+@Test
+fun similarityIndex() {
+  println(apiClient.similarityIndex("AAPL", "", "annual"))
+}
+
+@Test
 fun financials() {
   println(apiClient.financials("AAPL", "bs", "annual"))
 }
@@ -184,7 +209,7 @@ fun fundOwnership() {
 
 @Test
 fun generalNews() {
-  println(apiClient.marketNews("forex", minId = "0"))
+  println(apiClient.marketNews("forex", minId = 0))
 }
 
 @Test
@@ -228,6 +253,11 @@ fun stockDividends() {
 }
 
 @Test
+fun stockDividends2() {
+  println(apiClient.stockBasicDividends("KO"))
+}
+
+@Test
 fun stockSymbols() {
   println(apiClient.stockSymbols("US", "", "", ""))
 }
@@ -253,6 +283,11 @@ fun covid19() {
 }
 
 @Test
+fun fdaCalendar() {
+  println(apiClient.fdaCommitteeMeetingCalendar())
+}
+
+@Test
 fun upgradeDowngrade() {
   println(apiClient.upgradeDowngrade(symbol = "AAPL", from = "2020-01-01", to = "2020-06-30"))
 }
@@ -263,19 +298,18 @@ fun economicCode() {
 }
 
 @Test
+fun economicCalendar() {
+  println(apiClient.economicCalendar())
+}
+
+@Test
 fun supportResistance() {
   println(apiClient.supportResistance("AAPL", "D"))
 }
 
 @Test
 fun stockSplits() {
-  println(
-    apiClient.stockSplits(
-      symbol = "AAPL",
-      from = "2000-01-01",
-      to = "2020-01-01"
-    )
-  )
+  println(apiClient.stockSplits(symbol = "AAPL", from = "2000-01-01", to = "2020-01-01"))
 }
 
 @Test
@@ -291,6 +325,11 @@ fun cryptoCandles() {
 @Test
 fun stockTick() {
   println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
+}
+
+@Test
+fun stockBBO() {
+  println(apiClient.stockNbbo("AAPL", "2020-03-25", 500, 0))
 }
 
 @Test
@@ -366,6 +405,11 @@ fun socialSentiment() {
 @Test
 fun supplyChain() {
   println(apiClient.supplyChainRelationships("AAPL"))
+}
+
+@Test
+fun symbolSearch() {
+  println(apiClient.symbolSearch("AAPL"))
 }
 ```
 

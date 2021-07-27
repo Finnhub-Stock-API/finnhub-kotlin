@@ -24,7 +24,7 @@ import java.io.Serializable
  * @param period Period.
  */
 
-data class EarningEstimate (
+data class EarningsEstimatesInfo (
     /* Average EPS estimates including Finnhub's proprietary estimates. */
     @Json(name = "epsAvg")
     val epsAvg: kotlin.Float? = null,

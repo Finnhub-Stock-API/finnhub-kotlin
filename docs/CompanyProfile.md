@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **ipo** | **kotlin.String** | IPO date. |  [optional]
 **marketCapitalization** | **kotlin.Float** | Market Capitalization. |  [optional]
 **shareOutstanding** | **kotlin.Float** | Number of oustanding shares. |  [optional]
-**employeeTotal** | **kotlin.Long** | Number of employee. |  [optional]
+**employeeTotal** | **kotlin.Float** | Number of employee. |  [optional]
 **logo** | **kotlin.String** | Logo image. |  [optional]
 **finnhubIndustry** | **kotlin.String** | Finnhub industry classification. |  [optional]
 

@@ -48,10 +48,10 @@ data class IPOEvent (
     val price: kotlin.String? = null,
     /* Number of shares offered during the IPO. */
     @Json(name = "numberOfShares")
-    val numberOfShares: kotlin.Long? = null,
+    val numberOfShares: kotlin.Float? = null,
     /* Total shares value. */
     @Json(name = "totalSharesValue")
-    val totalSharesValue: kotlin.Long? = null
+    val totalSharesValue: kotlin.Float? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

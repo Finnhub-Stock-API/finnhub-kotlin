@@ -52,10 +52,10 @@ data class EarningRelease (
     val epsActual: kotlin.Float? = null,
     /* Revenue estimate including Finnhub's proprietary estimates. */
     @Json(name = "revenueEstimate")
-    val revenueEstimate: kotlin.Long? = null,
+    val revenueEstimate: kotlin.Float? = null,
     /* Revenue actual. */
     @Json(name = "revenueActual")
-    val revenueActual: kotlin.Long? = null
+    val revenueActual: kotlin.Float? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

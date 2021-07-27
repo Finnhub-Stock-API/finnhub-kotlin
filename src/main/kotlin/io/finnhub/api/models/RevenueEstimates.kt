@@ -11,7 +11,7 @@
 */
 package io.finnhub.api.models
 
-import io.finnhub.api.models.Estimate
+import io.finnhub.api.models.RevenueEstimatesInfo
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -26,7 +26,7 @@ import java.io.Serializable
 data class RevenueEstimates (
     /* List of estimates */
     @Json(name = "data")
-    val data: kotlin.collections.List<Estimate>? = null,
+    val data: kotlin.collections.List<RevenueEstimatesInfo>? = null,
     /* Frequency: annual or quarterly. */
     @Json(name = "freq")
     val freq: kotlin.String? = null,

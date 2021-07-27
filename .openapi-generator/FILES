@@ -24,19 +24,18 @@ docs/ETFsCountryExposure.md
 docs/ETFsHoldings.md
 docs/ETFsProfile.md
 docs/ETFsSectorExposure.md
-docs/EarningEstimate.md
 docs/EarningRelease.md
 docs/EarningResult.md
 docs/EarningsCalendar.md
 docs/EarningsCallTranscripts.md
 docs/EarningsCallTranscriptsList.md
 docs/EarningsEstimates.md
+docs/EarningsEstimatesInfo.md
 docs/Economic event.md
 docs/EconomicCalendar.md
 docs/EconomicCode.md
 docs/EconomicData.md
 docs/EconomicDataInfo.md
-docs/Estimate.md
 docs/FDAComitteeMeeting.md
 docs/Filing.md
 docs/FilingSentiment.md
@@ -81,6 +80,7 @@ docs/RedditSentimentContent.md
 docs/Report.md
 docs/RevenueBreakdown.md
 docs/RevenueEstimates.md
+docs/RevenueEstimatesInfo.md
 docs/SECSentimentAnalysis.md
 docs/Sentiment.md
 docs/SimilarityIndex.md
@@ -147,19 +147,18 @@ src/main/kotlin/io/finnhub/api/models/ETFsCountryExposure.kt
 src/main/kotlin/io/finnhub/api/models/ETFsHoldings.kt
 src/main/kotlin/io/finnhub/api/models/ETFsProfile.kt
 src/main/kotlin/io/finnhub/api/models/ETFsSectorExposure.kt
-src/main/kotlin/io/finnhub/api/models/EarningEstimate.kt
 src/main/kotlin/io/finnhub/api/models/EarningRelease.kt
 src/main/kotlin/io/finnhub/api/models/EarningResult.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCalendar.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCallTranscripts.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCallTranscriptsList.kt
 src/main/kotlin/io/finnhub/api/models/EarningsEstimates.kt
+src/main/kotlin/io/finnhub/api/models/EarningsEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/EconomicCalendar.kt
 src/main/kotlin/io/finnhub/api/models/EconomicCode.kt
 src/main/kotlin/io/finnhub/api/models/EconomicData.kt
 src/main/kotlin/io/finnhub/api/models/EconomicDataInfo.kt
 src/main/kotlin/io/finnhub/api/models/EconomicEvent.kt
-src/main/kotlin/io/finnhub/api/models/Estimate.kt
 src/main/kotlin/io/finnhub/api/models/FDAComitteeMeeting.kt
 src/main/kotlin/io/finnhub/api/models/Filing.kt
 src/main/kotlin/io/finnhub/api/models/FilingSentiment.kt
@@ -204,6 +203,7 @@ src/main/kotlin/io/finnhub/api/models/RedditSentimentContent.kt
 src/main/kotlin/io/finnhub/api/models/Report.kt
 src/main/kotlin/io/finnhub/api/models/RevenueBreakdown.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimates.kt
+src/main/kotlin/io/finnhub/api/models/RevenueEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/SECSentimentAnalysis.kt
 src/main/kotlin/io/finnhub/api/models/Sentiment.kt
 src/main/kotlin/io/finnhub/api/models/SimilarityIndex.kt

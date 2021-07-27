@@ -1,5 +1,5 @@
 
-# EarningEstimate
+# EarningsEstimatesInfo
 
 ## Properties
 Name | Type | Description | Notes
