@@ -11,7 +11,7 @@
 */
 package io.finnhub.api.models
 
-import io.finnhub.api.models.Filing
+import io.finnhub.api.models.SimilarityIndexInfo
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -32,7 +32,7 @@ data class SimilarityIndex (
     val cik: kotlin.String? = null,
     /* Array of filings with its cosine similarity compared to the same report of the previous year. */
     @Json(name = "similarity")
-    val similarity: kotlin.collections.List<Filing>? = null
+    val similarity: kotlin.collections.List<SimilarityIndexInfo>? = null
 ) : Serializable {
     companion object {
         private const val serialVersionUID: Long = 123

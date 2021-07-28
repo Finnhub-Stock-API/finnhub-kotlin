@@ -84,6 +84,7 @@ docs/RevenueEstimatesInfo.md
 docs/SECSentimentAnalysis.md
 docs/Sentiment.md
 docs/SimilarityIndex.md
+docs/SimilarityIndexInfo.md
 docs/SocialSentiment.md
 docs/Split.md
 docs/StockCandles.md
@@ -207,6 +208,7 @@ src/main/kotlin/io/finnhub/api/models/RevenueEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/SECSentimentAnalysis.kt
 src/main/kotlin/io/finnhub/api/models/Sentiment.kt
 src/main/kotlin/io/finnhub/api/models/SimilarityIndex.kt
+src/main/kotlin/io/finnhub/api/models/SimilarityIndexInfo.kt
 src/main/kotlin/io/finnhub/api/models/SocialSentiment.kt
 src/main/kotlin/io/finnhub/api/models/Split.kt
 src/main/kotlin/io/finnhub/api/models/StockCandles.kt
