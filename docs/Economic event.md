@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actual** | **kotlin.Float** | Actual release |  [optional]
+**&#x60;actual&#x60;** | **kotlin.Float** | Actual release |  [optional]
 **prev** | **kotlin.Float** | Previous release |  [optional]
 **country** | **kotlin.String** | Country |  [optional]
 **unit** | **kotlin.String** | Unit |  [optional]

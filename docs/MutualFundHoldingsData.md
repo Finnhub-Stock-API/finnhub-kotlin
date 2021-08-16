@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **cusip** | **kotlin.String** | CUSIP. |  [optional]
 **share** | **kotlin.Float** | Number of shares. |  [optional]
 **percent** | **kotlin.Float** | Portfolio&#39;s percent |  [optional]
-**value** | **kotlin.Float** | Market value |  [optional]
+**&#x60;value&#x60;** | **kotlin.Float** | Market value |  [optional]
 
 
 

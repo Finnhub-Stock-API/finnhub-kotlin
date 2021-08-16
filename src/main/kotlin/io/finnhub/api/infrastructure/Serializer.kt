@@ -2,7 +2,6 @@ package io.finnhub.api.infrastructure
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import java.util.Date
 
 object Serializer {
     @JvmStatic

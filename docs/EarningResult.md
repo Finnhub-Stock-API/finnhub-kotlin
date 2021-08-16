@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actual** | **kotlin.Float** | Actual earning result. |  [optional]
+**&#x60;actual&#x60;** | **kotlin.Float** | Actual earning result. |  [optional]
 **estimate** | **kotlin.Float** | Estimated earning. |  [optional]
 **surprise** | **kotlin.Float** | Surprise - The difference between actual and estimate. |  [optional]
 **surprisePercent** | **kotlin.Float** | Surprise percent. |  [optional]

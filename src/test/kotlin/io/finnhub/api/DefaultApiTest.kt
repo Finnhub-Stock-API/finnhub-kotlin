@@ -215,7 +215,9 @@ class DefaultApiTest {
 
     @Test
     fun stockDividends() {
-        println(apiClient.stockDividends("KO", from = "2019-01-01", to = "2020-01-01"))
+        var dividend = apiClient.stockDividends("KO", from = "2019-01-01", to = "2020-01-01")
+        println(dividend[0].symbol)
+        println(dividend[0].amount)
     }
 
     @Test
@@ -225,7 +227,9 @@ class DefaultApiTest {
 
     @Test
     fun stockSymbols() {
-        println(apiClient.stockSymbols("US", "", "", ""))
+        var a = apiClient.stockSymbols("US", "", "", "")
+        println(a[0].displaySymbol)
+        println(a[0].description)
     }
 
     @Test
