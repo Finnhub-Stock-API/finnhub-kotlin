@@ -31,6 +31,12 @@ import java.io.Serializable
  * @param name Name
  * @param customer Whether the company is a customer.
  * @param supplier Whether the company is a supplier
+ * @param oneMonthCorrelation 1-month price correlation
+ * @param oneYearCorrelation 1-year price correlation
+ * @param sixMonthCorrelation 6-month price correlation
+ * @param threeMonthCorrelation 3-month price correlation
+ * @param twoWeekCorrelation 2-week price correlation
+ * @param twoYearCorrelation 2-year price correlation
  */
 
 data class KeyCustomersSuppliers (
@@ -49,7 +55,31 @@ data class KeyCustomersSuppliers (
 
     /* Whether the company is a supplier */
     @Json(name = "supplier")
-    val supplier: kotlin.Boolean? = null
+    val supplier: kotlin.Boolean? = null,
+
+    /* 1-month price correlation */
+    @Json(name = "oneMonthCorrelation")
+    val oneMonthCorrelation: kotlin.Float? = null,
+
+    /* 1-year price correlation */
+    @Json(name = "oneYearCorrelation")
+    val oneYearCorrelation: kotlin.Float? = null,
+
+    /* 6-month price correlation */
+    @Json(name = "sixMonthCorrelation")
+    val sixMonthCorrelation: kotlin.Float? = null,
+
+    /* 3-month price correlation */
+    @Json(name = "threeMonthCorrelation")
+    val threeMonthCorrelation: kotlin.Float? = null,
+
+    /* 2-week price correlation */
+    @Json(name = "twoWeekCorrelation")
+    val twoWeekCorrelation: kotlin.Float? = null,
+
+    /* 2-year price correlation */
+    @Json(name = "twoYearCorrelation")
+    val twoYearCorrelation: kotlin.Float? = null
 
 ) : Serializable {
     companion object {

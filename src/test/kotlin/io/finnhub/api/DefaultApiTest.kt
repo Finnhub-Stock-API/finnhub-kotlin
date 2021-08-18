@@ -381,4 +381,9 @@ class DefaultApiTest {
     fun symbolSearch() {
         println(apiClient.symbolSearch("AAPL"))
     }
+
+    @Test
+    fun companyESG() {
+        println(apiClient.companyEsgScore("AAPL"))
+    }
 }

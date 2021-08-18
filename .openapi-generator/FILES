@@ -2,6 +2,7 @@ docs/AggregateIndicators.md
 docs/BasicFinancials.md
 docs/BreakdownItem.md
 docs/Company.md
+docs/CompanyESG.md
 docs/CompanyExecutive.md
 docs/CompanyNews.md
 docs/CompanyNewsStatistics.md
@@ -127,6 +128,7 @@ src/main/kotlin/io/finnhub/api/models/AggregateIndicators.kt
 src/main/kotlin/io/finnhub/api/models/BasicFinancials.kt
 src/main/kotlin/io/finnhub/api/models/BreakdownItem.kt
 src/main/kotlin/io/finnhub/api/models/Company.kt
+src/main/kotlin/io/finnhub/api/models/CompanyESG.kt
 src/main/kotlin/io/finnhub/api/models/CompanyExecutive.kt
 src/main/kotlin/io/finnhub/api/models/CompanyNews.kt
 src/main/kotlin/io/finnhub/api/models/CompanyNewsStatistics.kt

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**companyBasicFinancials**](DefaultApi.md#companyBasicFinancials) | **GET** /stock/metric | Basic Financials
 [**companyEarnings**](DefaultApi.md#companyEarnings) | **GET** /stock/earnings | Earnings Surprises
 [**companyEpsEstimates**](DefaultApi.md#companyEpsEstimates) | **GET** /stock/eps-estimate | Earnings Estimates
+[**companyEsgScore**](DefaultApi.md#companyEsgScore) | **GET** /stock/esg | Company ESG Scores
 [**companyExecutive**](DefaultApi.md#companyExecutive) | **GET** /stock/executive | Company Executive
 [**companyNews**](DefaultApi.md#companyNews) | **GET** /company-news | Company News
 [**companyPeers**](DefaultApi.md#companyPeers) | **GET** /stock/peers | Peers
@@ -270,6 +271,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EarningsEstimates**](EarningsEstimates.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="companyEsgScore"></a>
+# **companyEsgScore**
+> CompanyESG companyEsgScore(symbol)
+
+Company ESG Scores
+
+&lt;p&gt;This endpoint provides ESG scores and important indicators for 1000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+try {
+    val result : CompanyESG = apiInstance.companyEsgScore(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#companyEsgScore")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#companyEsgScore")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+
+### Return type
+
+[**CompanyESG**](CompanyESG.md)
 
 ### Authorization
 
