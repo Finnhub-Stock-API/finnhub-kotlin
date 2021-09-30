@@ -386,4 +386,9 @@ class DefaultApiTest {
     fun companyESG() {
         println(apiClient.companyEsgScore("AAPL"))
     }
+
+    @Test
+    fun companyEarningsQualityScore() {
+        println(apiClient.companyEarningsQualityScore("AAPL", "quarterly"))
+    }
 }

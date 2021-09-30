@@ -20,6 +20,7 @@
 
 package io.finnhub.api.models
 
+import io.finnhub.api.models.CompanyEarningsQualityScoreData
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -27,38 +28,24 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol symbol
- * @param totalESGScore Total ESG Score
- * @param environmentScore Environment Score
- * @param governanceScore Governance Score
- * @param socialScore Social Score
- * @param `data` 
+ * @param symbol Symbol
+ * @param freq Frequency
+ * @param `data` Array of earnings quality score.
  */
 
-data class CompanyESG (
+data class CompanyEarningsQualityScore (
 
-    /* symbol */
+    /* Symbol */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
 
-    /* Total ESG Score */
-    @Json(name = "totalESGScore")
-    val totalESGScore: kotlin.Float? = null,
+    /* Frequency */
+    @Json(name = "freq")
+    val freq: kotlin.String? = null,
 
-    /* Environment Score */
-    @Json(name = "environmentScore")
-    val environmentScore: kotlin.Float? = null,
-
-    /* Governance Score */
-    @Json(name = "governanceScore")
-    val governanceScore: kotlin.Float? = null,
-
-    /* Social Score */
-    @Json(name = "socialScore")
-    val socialScore: kotlin.Float? = null,
-
+    /* Array of earnings quality score. */
     @Json(name = "data")
-    val `data`: kotlin.Any? = null
+    val `data`: kotlin.collections.List<CompanyEarningsQualityScoreData>? = null
 
 ) : Serializable {
     companion object {

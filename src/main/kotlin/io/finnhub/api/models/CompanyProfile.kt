@@ -35,10 +35,10 @@ import java.io.Serializable
  * @param sedol Sedol number.
  * @param description Company business summary.
  * @param exchange Listed exchange.
- * @param ggroup GICS industry group.
- * @param gind GICS industry.
- * @param gsector GICS sector.
- * @param gsubind GICS sub-industry.
+ * @param ggroup Industry group.
+ * @param gind Industry.
+ * @param gsector Sector.
+ * @param gsubind Sub-industry.
  * @param isin ISIN number.
  * @param naicsNationalIndustry NAICS national industry.
  * @param naics NAICS industry.
@@ -91,19 +91,19 @@ data class CompanyProfile (
     @Json(name = "exchange")
     val exchange: kotlin.String? = null,
 
-    /* GICS industry group. */
+    /* Industry group. */
     @Json(name = "ggroup")
     val ggroup: kotlin.String? = null,
 
-    /* GICS industry. */
+    /* Industry. */
     @Json(name = "gind")
     val gind: kotlin.String? = null,
 
-    /* GICS sector. */
+    /* Sector. */
     @Json(name = "gsector")
     val gsector: kotlin.String? = null,
 
-    /* GICS sub-industry. */
+    /* Sub-industry. */
     @Json(name = "gsubind")
     val gsubind: kotlin.String? = null,
 

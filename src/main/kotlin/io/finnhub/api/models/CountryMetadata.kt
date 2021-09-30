@@ -33,6 +33,8 @@ import java.io.Serializable
  * @param codeNo UN code
  * @param currency Currency name
  * @param currencyCode Currency code
+ * @param region Region
+ * @param subRegion Sub-Region
  */
 
 data class CountryMetadata (
@@ -59,7 +61,15 @@ data class CountryMetadata (
 
     /* Currency code */
     @Json(name = "currencyCode")
-    val currencyCode: kotlin.String? = null
+    val currencyCode: kotlin.String? = null,
+
+    /* Region */
+    @Json(name = "region")
+    val region: kotlin.String? = null,
+
+    /* Sub-Region */
+    @Json(name = "subRegion")
+    val subRegion: kotlin.String? = null
 
 ) : Serializable {
     companion object {

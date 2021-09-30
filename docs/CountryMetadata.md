@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **codeNo** | **kotlin.String** | UN code |  [optional]
 **currency** | **kotlin.String** | Currency name |  [optional]
 **currencyCode** | **kotlin.String** | Currency code |  [optional]
+**region** | **kotlin.String** | Region |  [optional]
+**subRegion** | **kotlin.String** | Sub-Region |  [optional]
 
 
 
