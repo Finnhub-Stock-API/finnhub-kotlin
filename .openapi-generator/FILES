@@ -13,6 +13,7 @@ docs/CompanyProfile2.md
 docs/CountryMetadata.md
 docs/CovidInfo.md
 docs/CryptoCandles.md
+docs/CryptoProfile.md
 docs/CryptoSymbol.md
 docs/DefaultApi.md
 docs/Development.md
@@ -141,6 +142,7 @@ src/main/kotlin/io/finnhub/api/models/CompanyProfile2.kt
 src/main/kotlin/io/finnhub/api/models/CountryMetadata.kt
 src/main/kotlin/io/finnhub/api/models/CovidInfo.kt
 src/main/kotlin/io/finnhub/api/models/CryptoCandles.kt
+src/main/kotlin/io/finnhub/api/models/CryptoProfile.kt
 src/main/kotlin/io/finnhub/api/models/CryptoSymbol.kt
 src/main/kotlin/io/finnhub/api/models/Development.kt
 src/main/kotlin/io/finnhub/api/models/Dividends.kt

@@ -31,6 +31,7 @@ import io.finnhub.api.models.CompanyProfile2
 import io.finnhub.api.models.CountryMetadata
 import io.finnhub.api.models.CovidInfo
 import io.finnhub.api.models.CryptoCandles
+import io.finnhub.api.models.CryptoProfile
 import io.finnhub.api.models.CryptoSymbol
 import io.finnhub.api.models.Dividends
 import io.finnhub.api.models.Dividends2
@@ -291,7 +292,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Company Earnings Quality Score
     * &lt;p&gt;This endpoint provides Earnings Quality Score for global companies.&lt;/p&gt;&lt;p&gt; Earnings quality refers to the extent to which current earnings predict future earnings. \&quot;High-quality\&quot; earnings are expected to persist, while \&quot;low-quality\&quot; earnings do not. A higher score means a higher earnings quality&lt;/p&gt;&lt;p&gt;Finnhub uses a proprietary model which takes into consideration 4 criteria:&lt;/p&gt; &lt;ul style&#x3D;\&quot;list-style-type: unset; margin-left: 30px;\&quot;&gt;&lt;li&gt;Profitability&lt;/li&gt;&lt;li&gt;Growth&lt;/li&gt;&lt;li&gt;Cash Generation &amp; Capital Allocation&lt;/li&gt;&lt;li&gt;Leverage&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;p&gt;We then compare the metrics of each company in each category against its peers in the same industry to gauge how quality its earnings is.&lt;/p&gt;
     * @param symbol Symbol. 
-    * @param freq Frequency. Currently only support &lt;code&gt;quarterly&lt;/code&gt; 
+    * @param freq Frequency. Currently support &lt;code&gt;annual&lt;/code&gt; and &lt;code&gt;quarterly&lt;/code&gt; 
     * @return CompanyEarningsQualityScore
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -325,7 +326,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * To obtain the request config of the operation companyEarningsQualityScore
     *
     * @param symbol Symbol. 
-    * @param freq Frequency. Currently only support &lt;code&gt;quarterly&lt;/code&gt; 
+    * @param freq Frequency. Currently support &lt;code&gt;annual&lt;/code&gt; and &lt;code&gt;quarterly&lt;/code&gt; 
     * @return RequestConfig
     */
     fun companyEarningsQualityScoreRequestConfig(symbol: kotlin.String, freq: kotlin.String) : RequestConfig<Unit> {
@@ -1053,6 +1054,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
+    * Crypto Profile
+    * Get crypto&#39;s profile.
+    * @param symbol Crypto symbol such as BTC or ETH. 
+    * @return CryptoProfile
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun cryptoProfile(symbol: kotlin.String) : CryptoProfile {
+        val localVariableConfig = cryptoProfileRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, CryptoProfile>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CryptoProfile
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation cryptoProfile
+    *
+    * @param symbol Crypto symbol such as BTC or ETH. 
+    * @return RequestConfig
+    */
+    fun cryptoProfileRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/crypto/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Crypto Symbol
     * List supported crypto symbols by exchange
     * @param exchange Exchange you want to get the list of symbols from. 
@@ -1184,6 +1241,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * Economic Calendar
     * &lt;p&gt;Get recent and upcoming economic releases.&lt;/p&gt;&lt;p&gt;Historical events and surprises are available for Enterprise clients.&lt;/p&gt;
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
     * @return EconomicCalendar
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -1191,8 +1250,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun economicCalendar() : EconomicCalendar {
-        val localVariableConfig = economicCalendarRequestConfig()
+    fun economicCalendar(from: kotlin.String?, to: kotlin.String?) : EconomicCalendar {
+        val localVariableConfig = economicCalendarRequestConfig(from = from, to = to)
 
         val localVarResponse = request<Unit, EconomicCalendar>(
             localVariableConfig
@@ -1216,11 +1275,21 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * To obtain the request config of the operation economicCalendar
     *
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
     * @return RequestConfig
     */
-    fun economicCalendarRequestConfig() : RequestConfig<Unit> {
+    fun economicCalendarRequestConfig(from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
         return RequestConfig(
@@ -2313,7 +2382,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * Insider Transactions
     * Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&gt;. This endpoint only covers US companies at the moment. Limit to 100 transactions per API call.
-    * @param symbol Symbol of the company: AAPL. 
+    * @param symbol Symbol of the company: AAPL. Leave this param blank to get the latest transactions. 
     * @param from From date: 2020-03-15. (optional)
     * @param to To date: 2020-03-16. (optional)
     * @return InsiderTransactions
@@ -2348,7 +2417,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     /**
     * To obtain the request config of the operation insiderTransactions
     *
-    * @param symbol Symbol of the company: AAPL. 
+    * @param symbol Symbol of the company: AAPL. Leave this param blank to get the latest transactions. 
     * @param from From date: 2020-03-15. (optional)
     * @param to To date: 2020-03-16. (optional)
     * @return RequestConfig

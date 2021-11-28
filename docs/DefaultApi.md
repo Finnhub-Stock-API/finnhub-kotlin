@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**covid19**](DefaultApi.md#covid19) | **GET** /covid19/us | COVID-19
 [**cryptoCandles**](DefaultApi.md#cryptoCandles) | **GET** /crypto/candle | Crypto Candles
 [**cryptoExchanges**](DefaultApi.md#cryptoExchanges) | **GET** /crypto/exchange | Crypto Exchanges
+[**cryptoProfile**](DefaultApi.md#cryptoProfile) | **GET** /crypto/profile | Crypto Profile
 [**cryptoSymbols**](DefaultApi.md#cryptoSymbols) | **GET** /crypto/symbol | Crypto Symbol
 [**earningsCalendar**](DefaultApi.md#earningsCalendar) | **GET** /calendar/earnings | Earnings Calendar
 [**economicCalendar**](DefaultApi.md#economicCalendar) | **GET** /calendar/economic | Economic Calendar
@@ -249,7 +250,7 @@ Company Earnings Quality Score
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
-val freq : kotlin.String = freq_example // kotlin.String | Frequency. Currently only support <code>quarterly</code>
+val freq : kotlin.String = freq_example // kotlin.String | Frequency. Currently support <code>annual</code> and <code>quarterly</code>
 try {
     val result : CompanyEarningsQualityScore = apiInstance.companyEarningsQualityScore(symbol, freq)
     println(result)
@@ -267,7 +268,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol. |
- **freq** | **kotlin.String**| Frequency. Currently only support &lt;code&gt;quarterly&lt;/code&gt; |
+ **freq** | **kotlin.String**| Frequency. Currently support &lt;code&gt;annual&lt;/code&gt; and &lt;code&gt;quarterly&lt;/code&gt; |
 
 ### Return type
 
@@ -895,6 +896,56 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="cryptoProfile"></a>
+# **cryptoProfile**
+> CryptoProfile cryptoProfile(symbol)
+
+Crypto Profile
+
+Get crypto&#39;s profile.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Crypto symbol such as BTC or ETH.
+try {
+    val result : CryptoProfile = apiInstance.cryptoProfile(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#cryptoProfile")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#cryptoProfile")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Crypto symbol such as BTC or ETH. |
+
+### Return type
+
+[**CryptoProfile**](CryptoProfile.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="cryptoSymbols"></a>
 # **cryptoSymbols**
 > kotlin.collections.List&lt;CryptoSymbol&gt; cryptoSymbols(exchange)
@@ -1003,7 +1054,7 @@ Configure api_key:
 
 <a name="economicCalendar"></a>
 # **economicCalendar**
-> EconomicCalendar economicCalendar()
+> EconomicCalendar economicCalendar(from, to)
 
 Economic Calendar
 
@@ -1016,8 +1067,10 @@ Economic Calendar
 //import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
 try {
-    val result : EconomicCalendar = apiInstance.economicCalendar()
+    val result : EconomicCalendar = apiInstance.economicCalendar(from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#economicCalendar")
@@ -1029,7 +1082,11 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. | [optional]
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. | [optional]
 
 ### Return type
 
@@ -1984,7 +2041,7 @@ Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&g
 //import io.finnhub.api.models.*
 
 val apiInstance = DefaultApi()
-val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL. Leave this param blank to get the latest transactions.
 val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
 val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
 try {
@@ -2003,7 +2060,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
+ **symbol** | **kotlin.String**| Symbol of the company: AAPL. Leave this param blank to get the latest transactions. |
  **from** | **kotlin.String**| From date: 2020-03-15. | [optional]
  **to** | **kotlin.String**| To date: 2020-03-16. | [optional]
 

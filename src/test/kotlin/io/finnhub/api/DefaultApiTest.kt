@@ -269,7 +269,7 @@ class DefaultApiTest {
 
     @Test
     fun economicCalendar() {
-        println(apiClient.economicCalendar())
+        println(apiClient.economicCalendar(from = "2021-11-24", to = "2021-11-26"))
     }
 
     @Test
@@ -390,5 +390,10 @@ class DefaultApiTest {
     @Test
     fun companyEarningsQualityScore() {
         println(apiClient.companyEarningsQualityScore("AAPL", "quarterly"))
+    }
+
+    @Test
+    fun cryptoProfile() {
+        println(apiClient.cryptoProfile("BTC"))
     }
 }
