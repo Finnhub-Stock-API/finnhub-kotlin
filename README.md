@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>2.0.10</version>
+  <version>2.0.11</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,7 +29,7 @@ For Maven
 For Gradle
 
 ```
-implementation 'io.finnhub:kotlin-client:2.0.10'
+implementation 'io.finnhub:kotlin-client:2.0.11'
 ```
 
 ## Migrate from 1.x.x to 2.x.x

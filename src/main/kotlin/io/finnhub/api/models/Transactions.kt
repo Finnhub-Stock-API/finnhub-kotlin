@@ -27,6 +27,7 @@ import java.io.Serializable
 /**
  * 
  *
+ * @param symbol Symbol.
  * @param name Insider's name.
  * @param share Number of shares held after the transaction.
  * @param change Number of share changed from the last period. A positive value suggests a <code>BUY</code> transaction. A negative value suggests a <code>SELL</code> transaction.
@@ -37,6 +38,10 @@ import java.io.Serializable
  */
 
 data class Transactions (
+
+    /* Symbol. */
+    @Json(name = "symbol")
+    val symbol: kotlin.String? = null,
 
     /* Insider's name. */
     @Json(name = "name")

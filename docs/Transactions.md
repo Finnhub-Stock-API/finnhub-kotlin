@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**symbol** | **kotlin.String** | Symbol. |  [optional]
 **name** | **kotlin.String** | Insider&#39;s name. |  [optional]
 **share** | **kotlin.Long** | Number of shares held after the transaction. |  [optional]
 **change** | **kotlin.Long** | Number of share changed from the last period. A positive value suggests a &lt;code&gt;BUY&lt;/code&gt; transaction. A negative value suggests a &lt;code&gt;SELL&lt;/code&gt; transaction. |  [optional]

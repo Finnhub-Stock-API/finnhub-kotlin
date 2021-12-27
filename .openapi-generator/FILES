@@ -35,6 +35,10 @@ docs/EarningsCallTranscripts.md
 docs/EarningsCallTranscriptsList.md
 docs/EarningsEstimates.md
 docs/EarningsEstimatesInfo.md
+docs/EbitEstimates.md
+docs/EbitEstimatesInfo.md
+docs/EbitdaEstimates.md
+docs/EbitdaEstimatesInfo.md
 docs/Economic event.md
 docs/EconomicCalendar.md
 docs/EconomicCode.md
@@ -163,6 +167,10 @@ src/main/kotlin/io/finnhub/api/models/EarningsCallTranscripts.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCallTranscriptsList.kt
 src/main/kotlin/io/finnhub/api/models/EarningsEstimates.kt
 src/main/kotlin/io/finnhub/api/models/EarningsEstimatesInfo.kt
+src/main/kotlin/io/finnhub/api/models/EbitEstimates.kt
+src/main/kotlin/io/finnhub/api/models/EbitEstimatesInfo.kt
+src/main/kotlin/io/finnhub/api/models/EbitdaEstimates.kt
+src/main/kotlin/io/finnhub/api/models/EbitdaEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/EconomicCalendar.kt
 src/main/kotlin/io/finnhub/api/models/EconomicCode.kt
 src/main/kotlin/io/finnhub/api/models/EconomicData.kt

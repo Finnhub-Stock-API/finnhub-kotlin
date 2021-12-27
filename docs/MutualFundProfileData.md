@@ -25,6 +25,10 @@ Name | Type | Description | Notes
 **maxRedemptionFee** | **kotlin.Float** | Max redemption fee. |  [optional]
 **standardMinInvestment** | **kotlin.Float** | Minimum investment for standard accounts. |  [optional]
 **turnover** | **kotlin.Float** | Turnover. |  [optional]
+**seriesId** | **kotlin.String** | Fund&#39;s series ID. This field can be used to group multiple share classes into 1 unique fund. |  [optional]
+**seriesName** | **kotlin.String** | Fund&#39;s series name. |  [optional]
+**classId** | **kotlin.String** | Class ID. |  [optional]
+**className** | **kotlin.String** | Class name. |  [optional]
 
 
 

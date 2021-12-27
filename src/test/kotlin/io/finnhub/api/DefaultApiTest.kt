@@ -396,4 +396,14 @@ class DefaultApiTest {
     fun cryptoProfile() {
         println(apiClient.cryptoProfile("BTC"))
     }
+
+    @Test
+    fun companyEbitdaEstimates() {
+        println(apiClient.companyEbitdaEstimates("AAPL", freq = "quarterly"))
+    }
+
+    @Test
+    fun companyEbitEstimates() {
+        println(apiClient.companyEbitEstimates("TSLA", freq = "annual"))
+    }
 }

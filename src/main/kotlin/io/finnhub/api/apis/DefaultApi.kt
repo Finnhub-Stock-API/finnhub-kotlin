@@ -44,6 +44,8 @@ import io.finnhub.api.models.EarningsCalendar
 import io.finnhub.api.models.EarningsCallTranscripts
 import io.finnhub.api.models.EarningsCallTranscriptsList
 import io.finnhub.api.models.EarningsEstimates
+import io.finnhub.api.models.EbitEstimates
+import io.finnhub.api.models.EbitdaEstimates
 import io.finnhub.api.models.EconomicCalendar
 import io.finnhub.api.models.EconomicCode
 import io.finnhub.api.models.EconomicData
@@ -341,6 +343,128 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/earnings-quality-score",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * EBIT Estimates
+    * Get company&#39;s ebit estimates.
+    * @param symbol Symbol of the company: AAPL. 
+    * @param freq Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; (optional)
+    * @return EbitEstimates
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun companyEbitEstimates(symbol: kotlin.String, freq: kotlin.String?) : EbitEstimates {
+        val localVariableConfig = companyEbitEstimatesRequestConfig(symbol = symbol, freq = freq)
+
+        val localVarResponse = request<Unit, EbitEstimates>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EbitEstimates
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation companyEbitEstimates
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param freq Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; (optional)
+    * @return RequestConfig
+    */
+    fun companyEbitEstimatesRequestConfig(symbol: kotlin.String, freq: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (freq != null) {
+                    put("freq", listOf(freq.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/ebit-estimate",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * EBITDA Estimates
+    * Get company&#39;s ebitda estimates.
+    * @param symbol Symbol of the company: AAPL. 
+    * @param freq Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; (optional)
+    * @return EbitdaEstimates
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun companyEbitdaEstimates(symbol: kotlin.String, freq: kotlin.String?) : EbitdaEstimates {
+        val localVariableConfig = companyEbitdaEstimatesRequestConfig(symbol = symbol, freq = freq)
+
+        val localVarResponse = request<Unit, EbitdaEstimates>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EbitdaEstimates
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation companyEbitdaEstimates
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param freq Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; (optional)
+    * @return RequestConfig
+    */
+    fun companyEbitdaEstimatesRequestConfig(symbol: kotlin.String, freq: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                if (freq != null) {
+                    put("freq", listOf(freq.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/ebitda-estimate",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

@@ -48,6 +48,10 @@ import java.io.Serializable
  * @param maxRedemptionFee Max redemption fee.
  * @param standardMinInvestment Minimum investment for standard accounts.
  * @param turnover Turnover.
+ * @param seriesId Fund's series ID. This field can be used to group multiple share classes into 1 unique fund.
+ * @param seriesName Fund's series name.
+ * @param classId Class ID.
+ * @param className Class name.
  */
 
 data class MutualFundProfileData (
@@ -134,7 +138,23 @@ data class MutualFundProfileData (
 
     /* Turnover. */
     @Json(name = "turnover")
-    val turnover: kotlin.Float? = null
+    val turnover: kotlin.Float? = null,
+
+    /* Fund's series ID. This field can be used to group multiple share classes into 1 unique fund. */
+    @Json(name = "seriesId")
+    val seriesId: kotlin.String? = null,
+
+    /* Fund's series name. */
+    @Json(name = "seriesName")
+    val seriesName: kotlin.String? = null,
+
+    /* Class ID. */
+    @Json(name = "classId")
+    val classId: kotlin.String? = null,
+
+    /* Class name. */
+    @Json(name = "className")
+    val className: kotlin.String? = null
 
 ) : Serializable {
     companion object {

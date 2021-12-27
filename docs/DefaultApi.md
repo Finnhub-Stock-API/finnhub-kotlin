@@ -8,6 +8,8 @@ Method | HTTP request | Description
 [**companyBasicFinancials**](DefaultApi.md#companyBasicFinancials) | **GET** /stock/metric | Basic Financials
 [**companyEarnings**](DefaultApi.md#companyEarnings) | **GET** /stock/earnings | Earnings Surprises
 [**companyEarningsQualityScore**](DefaultApi.md#companyEarningsQualityScore) | **GET** /stock/earnings-quality-score | Company Earnings Quality Score
+[**companyEbitEstimates**](DefaultApi.md#companyEbitEstimates) | **GET** /stock/ebit-estimate | EBIT Estimates
+[**companyEbitdaEstimates**](DefaultApi.md#companyEbitdaEstimates) | **GET** /stock/ebitda-estimate | EBITDA Estimates
 [**companyEpsEstimates**](DefaultApi.md#companyEpsEstimates) | **GET** /stock/eps-estimate | Earnings Estimates
 [**companyEsgScore**](DefaultApi.md#companyEsgScore) | **GET** /stock/esg | Company ESG Scores
 [**companyExecutive**](DefaultApi.md#companyExecutive) | **GET** /stock/executive | Company Executive
@@ -273,6 +275,110 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CompanyEarningsQualityScore**](CompanyEarningsQualityScore.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="companyEbitEstimates"></a>
+# **companyEbitEstimates**
+> EbitEstimates companyEbitEstimates(symbol, freq)
+
+EBIT Estimates
+
+Get company&#39;s ebit estimates.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
+val freq : kotlin.String = freq_example // kotlin.String | Can take 1 of the following values: <code>annual, quarterly</code>. Default to <code>quarterly</code>
+try {
+    val result : EbitEstimates = apiInstance.companyEbitEstimates(symbol, freq)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#companyEbitEstimates")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#companyEbitEstimates")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
+ **freq** | **kotlin.String**| Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; | [optional]
+
+### Return type
+
+[**EbitEstimates**](EbitEstimates.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="companyEbitdaEstimates"></a>
+# **companyEbitdaEstimates**
+> EbitdaEstimates companyEbitdaEstimates(symbol, freq)
+
+EBITDA Estimates
+
+Get company&#39;s ebitda estimates.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
+val freq : kotlin.String = freq_example // kotlin.String | Can take 1 of the following values: <code>annual, quarterly</code>. Default to <code>quarterly</code>
+try {
+    val result : EbitdaEstimates = apiInstance.companyEbitdaEstimates(symbol, freq)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#companyEbitdaEstimates")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#companyEbitdaEstimates")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
+ **freq** | **kotlin.String**| Can take 1 of the following values: &lt;code&gt;annual, quarterly&lt;/code&gt;. Default to &lt;code&gt;quarterly&lt;/code&gt; | [optional]
+
+### Return type
+
+[**EbitdaEstimates**](EbitdaEstimates.md)
 
 ### Authorization
 
