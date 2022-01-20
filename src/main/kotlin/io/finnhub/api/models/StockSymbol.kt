@@ -33,7 +33,10 @@ import java.io.Serializable
  * @param type Security type.
  * @param mic Primary exchange's MIC.
  * @param figi FIGI identifier.
+ * @param shareClassFIGI Global Share Class FIGI.
  * @param currency Price's currency. This might be different from the reporting currency of fundamental data.
+ * @param symbol2 Alternative ticker for exchanges with multiple tickers for 1 stock such as BSE.
+ * @param isin ISIN. This field is only available for EU stocks and selected Asian markets. Entitlement from Finnhub is required to access this field.
  */
 
 data class StockSymbol (
@@ -62,9 +65,21 @@ data class StockSymbol (
     @Json(name = "figi")
     val figi: kotlin.String? = null,
 
+    /* Global Share Class FIGI. */
+    @Json(name = "shareClassFIGI")
+    val shareClassFIGI: kotlin.String? = null,
+
     /* Price's currency. This might be different from the reporting currency of fundamental data. */
     @Json(name = "currency")
-    val currency: kotlin.String? = null
+    val currency: kotlin.String? = null,
+
+    /* Alternative ticker for exchanges with multiple tickers for 1 stock such as BSE. */
+    @Json(name = "symbol2")
+    val symbol2: kotlin.String? = null,
+
+    /* ISIN. This field is only available for EU stocks and selected Asian markets. Entitlement from Finnhub is required to access this field. */
+    @Json(name = "isin")
+    val isin: kotlin.String? = null
 
 ) : Serializable {
     companion object {

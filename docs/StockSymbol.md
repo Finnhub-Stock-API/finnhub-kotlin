@@ -10,7 +10,10 @@ Name | Type | Description | Notes
 **type** | **kotlin.String** | Security type. |  [optional]
 **mic** | **kotlin.String** | Primary exchange&#39;s MIC. |  [optional]
 **figi** | **kotlin.String** | FIGI identifier. |  [optional]
+**shareClassFIGI** | **kotlin.String** | Global Share Class FIGI. |  [optional]
 **currency** | **kotlin.String** | Price&#39;s currency. This might be different from the reporting currency of fundamental data. |  [optional]
+**symbol2** | **kotlin.String** | Alternative ticker for exchanges with multiple tickers for 1 stock such as BSE. |  [optional]
+**isin** | **kotlin.String** | ISIN. This field is only available for EU stocks and selected Asian markets. Entitlement from Finnhub is required to access this field. |  [optional]
 
 
 

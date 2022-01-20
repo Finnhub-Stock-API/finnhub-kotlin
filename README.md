@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>2.0.11</version>
+  <version>2.0.12</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,7 +29,7 @@ For Maven
 For Gradle
 
 ```
-implementation 'io.finnhub:kotlin-client:2.0.11'
+implementation 'io.finnhub:kotlin-client:2.0.12'
 ```
 
 ## Migrate from 1.x.x to 2.x.x
@@ -421,6 +421,21 @@ fun companyESG() {
 @Test
 fun cryptoProfile() {
   println(apiClient.cryptoProfile("BTC"))
+}
+
+@Test
+fun companyEbitdaEstimates() {
+  println(apiClient.companyEbitdaEstimates("AAPL", freq = "quarterly"))
+}
+
+@Test
+fun companyEbitEstimates() {
+  println(apiClient.companyEbitEstimates("TSLA", freq = "annual"))
+}
+
+@Test
+fun stockUsptoPatent() {
+  println(apiClient.stockUsptoPatent("NVDA", "2021-01-01", "2021-12-31"))
 }
 
 ```

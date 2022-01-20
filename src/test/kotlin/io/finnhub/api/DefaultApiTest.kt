@@ -406,4 +406,9 @@ class DefaultApiTest {
     fun companyEbitEstimates() {
         println(apiClient.companyEbitEstimates("TSLA", freq = "annual"))
     }
+
+    @Test
+    fun stockUsptoPatent() {
+        println(apiClient.stockUsptoPatent("NVDA", "2021-01-01", "2021-12-31"))
+    }
 }

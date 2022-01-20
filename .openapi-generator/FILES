@@ -110,6 +110,8 @@ docs/TranscriptParticipant.md
 docs/Trend.md
 docs/TwitterSentimentContent.md
 docs/UpgradeDowngrade.md
+docs/UsptoPatent.md
+docs/UsptoPatentResult.md
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 gradlew
@@ -242,3 +244,5 @@ src/main/kotlin/io/finnhub/api/models/TranscriptParticipant.kt
 src/main/kotlin/io/finnhub/api/models/Trend.kt
 src/main/kotlin/io/finnhub/api/models/TwitterSentimentContent.kt
 src/main/kotlin/io/finnhub/api/models/UpgradeDowngrade.kt
+src/main/kotlin/io/finnhub/api/models/UsptoPatent.kt
+src/main/kotlin/io/finnhub/api/models/UsptoPatentResult.kt

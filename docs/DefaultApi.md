@@ -71,6 +71,7 @@ Method | HTTP request | Description
 [**stockSplits**](DefaultApi.md#stockSplits) | **GET** /stock/split | Splits
 [**stockSymbols**](DefaultApi.md#stockSymbols) | **GET** /stock/symbol | Stock Symbol
 [**stockTick**](DefaultApi.md#stockTick) | **GET** /stock/tick | Tick Data
+[**stockUsptoPatent**](DefaultApi.md#stockUsptoPatent) | **GET** /stock/uspto-patent | USPTO Patents
 [**supplyChainRelationships**](DefaultApi.md#supplyChainRelationships) | **GET** /stock/supply-chain | Supply Chain Relationships
 [**supportResistance**](DefaultApi.md#supportResistance) | **GET** /scan/support-resistance | Support/Resistance
 [**symbolSearch**](DefaultApi.md#symbolSearch) | **GET** /search | Symbol Lookup
@@ -2192,7 +2193,7 @@ Configure api_key:
 
 International Filings
 
-List filings for international companies which covers 95%+ of global market cap. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
+List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
 
 ### Example
 ```kotlin
@@ -3535,6 +3536,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TickData**](TickData.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="stockUsptoPatent"></a>
+# **stockUsptoPatent**
+> UsptoPatentResult stockUsptoPatent(symbol, from, to)
+
+USPTO Patents
+
+List USPTO patents for companies. Limit to 250 records per API call.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : UsptoPatentResult = apiInstance.stockUsptoPatent(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#stockUsptoPatent")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#stockUsptoPatent")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**UsptoPatentResult**](UsptoPatentResult.md)
 
 ### Authorization
 

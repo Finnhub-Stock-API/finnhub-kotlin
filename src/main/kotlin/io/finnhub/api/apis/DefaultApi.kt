@@ -90,6 +90,7 @@ import io.finnhub.api.models.SupportResistance
 import io.finnhub.api.models.SymbolLookup
 import io.finnhub.api.models.TickData
 import io.finnhub.api.models.UpgradeDowngrade
+import io.finnhub.api.models.UsptoPatentResult
 
 import io.finnhub.api.infrastructure.ApiClient
 import io.finnhub.api.infrastructure.ClientException
@@ -2571,7 +2572,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * International Filings
-    * List filings for international companies which covers 95%+ of global market cap. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
+    * List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
     * @param symbol Symbol. Leave empty to list latest filings. (optional)
     * @param country Filter by country using country&#39;s 2-letter code. (optional)
     * @return kotlin.collections.List<InternationalFiling>
@@ -4154,6 +4155,68 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/tick",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * USPTO Patents
+    * List USPTO patents for companies. Limit to 250 records per API call.
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return UsptoPatentResult
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockUsptoPatent(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : UsptoPatentResult {
+        val localVariableConfig = stockUsptoPatentRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, UsptoPatentResult>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsptoPatentResult
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockUsptoPatent
+    *
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun stockUsptoPatentRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/uspto-patent",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
