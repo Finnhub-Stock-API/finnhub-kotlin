@@ -33,7 +33,7 @@ import java.io.Serializable
  * @param description Description.
  * @param filingStatus Filing status.
  * @param patentNumber Patent number.
- * @param publicationDate Filing date.
+ * @param publicationDate Publication date.
  * @param patentType Patent's type.
  * @param url URL of the original article.
  */
@@ -64,7 +64,7 @@ data class UsptoPatent (
     @Json(name = "patentNumber")
     val patentNumber: kotlin.String? = null,
 
-    /* Filing date. */
+    /* Publication date. */
     @Json(name = "publicationDate")
     val publicationDate: kotlin.String? = null,
 

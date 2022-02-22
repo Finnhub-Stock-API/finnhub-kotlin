@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>2.0.12</version>
+  <version>2.0.13</version>
   <type>pom</type>
 </dependency>
 ```
@@ -49,367 +49,367 @@ val apiClient = DefaultApi()
 
 @Test
 fun technicalIndicator() {
-  println(
-    apiClient.technicalIndicator(
-      symbol = "AAPL",
-      resolution = "D",
-      from = 1583098857L,
-      to = 1584308457L,
-      indicator = "sma",
-      indicatorFields = mapOf<String, Any>("timeperiod" to 3)
+    println(
+        apiClient.technicalIndicator(
+            symbol = "AAPL",
+            resolution = "D",
+            from = 1583098857L,
+            to = 1584308457L,
+            indicator = "sma",
+            indicatorFields = mapOf<String, Any>("timeperiod" to 3)
+        )
     )
-  )
 }
 
 @Test
 fun stockCandles() {
-  println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249))
+    println(apiClient.stockCandles("AAPL", "D", 1590988249, 1591852249))
 }
 
 @Test
 fun stockBidask() {
-  println(apiClient.stockBidask("AAPL"))
+    println(apiClient.stockBidask("AAPL"))
 }
 
 @Test
 fun aggregateIndicator() {
-  println(apiClient.aggregateIndicator("AAPL", "D"))
+    println(apiClient.aggregateIndicator("AAPL", "D"))
 }
 
 @Test
 fun basicFinancials() {
-  println(apiClient.companyBasicFinancials("AAPL", "all"))
+    println(apiClient.companyBasicFinancials("AAPL", "all"))
 }
 
 @Test
 fun companyEarnings() {
-  println(apiClient.companyEarnings("TSLA", limit = 5))
+    println(apiClient.companyEarnings("TSLA", limit = 5))
 }
 
 @Test
 fun companyEpsEstimates() {
-  println(apiClient.companyEpsEstimates("AMZN", freq = "quarterly"))
+    println(apiClient.companyEpsEstimates("AMZN", freq = "quarterly"))
 }
 
 @Test
 fun companyExecutive() {
-  println(apiClient.companyExecutive("AAPL"))
+    println(apiClient.companyExecutive("AAPL"))
 }
 
 @Test
 fun companyNews() {
-  println(apiClient.companyNews("AAPL", from = "2020-06-01", to = "2020-06-10"))
+    println(apiClient.companyNews("AAPL", from = "2020-06-01", to = "2020-06-10"))
 }
 
 @Test
 fun newsSentiment() {
-  println(apiClient.newsSentiment("AAPL"))
+    println(apiClient.newsSentiment("AAPL"))
 }
 
 @Test
 fun companyPeers() {
-  println(apiClient.companyPeers("AAPL"))
+    println(apiClient.companyPeers("AAPL"))
 }
 
 @Test
 fun companyProfile() {
-  println(apiClient.companyProfile(symbol = "AAPL", isin = null, cusip = null))
-  println(apiClient.companyProfile(isin = "US0378331005", symbol = null, cusip = null))
-  println(apiClient.companyProfile(cusip = "037833100", symbol = null, isin = null))
+    println(apiClient.companyProfile(symbol = "AAPL", isin = null, cusip = null))
+    println(apiClient.companyProfile(isin = "US0378331005", symbol = null, cusip = null))
+    println(apiClient.companyProfile(cusip = "037833100", symbol = null, isin = null))
 }
 
 @Test
 fun companyProfile2() {
-  println(apiClient.companyProfile2(symbol = "AAPL", isin = null, cusip = null))
+    println(apiClient.companyProfile2(symbol = "AAPL", isin = null, cusip = null))
 }
 
 @Test
 fun companyRevenueEstimates() {
-  println(apiClient.companyRevenueEstimates("TSLA", freq = "quarterly"))
+    println(apiClient.companyRevenueEstimates("TSLA", freq = "quarterly"))
 }
 
 @Test
 fun country() {
-  println(apiClient.country())
+    println(apiClient.country())
 }
 
 @Test
 fun cryptoExchange() {
-  println(apiClient.cryptoExchanges())
+    println(apiClient.cryptoExchanges())
 }
 
 @Test
 fun cryptoSymbols() {
-  println(apiClient.cryptoSymbols("BINANCE"))
+    println(apiClient.cryptoSymbols("BINANCE"))
 }
 
 @Test
 fun economicData() {
-  println(apiClient.economicData("MA-USA-656880"))
+    println(apiClient.economicData("MA-USA-656880"))
 }
 
 @Test
 fun filings() {
-  println(
-    apiClient.filings(
-      symbol = "AAPL",
-      from = "2020-01-01",
-      to = "2020-06-11",
-      accessNumber = null,
-      cik = null,
-      form = null
+    println(
+        apiClient.filings(
+            symbol = "AAPL",
+            from = "2020-01-01",
+            to = "2020-06-11",
+            accessNumber = null,
+            cik = null,
+            form = null
+        )
     )
-  )
 }
 
 @Test
 fun internationalFilings() {
-  println(apiClient.internationalFilings("AC.TO", ""))
+    println(apiClient.internationalFilings("AC.TO", ""))
 }
 
 @Test
 fun filingsSentiment() {
-  println(apiClient.filingsSentiment("0000320193-20-000052"))
+    println(apiClient.filingsSentiment("0000320193-20-000052"))
 }
 
 @Test
 fun similarityIndex() {
-  println(apiClient.similarityIndex("AAPL", "", "annual"))
+    println(apiClient.similarityIndex("AAPL", "", "annual"))
 }
 
 @Test
 fun financials() {
-  println(apiClient.financials("AAPL", "bs", "annual"))
+    println(apiClient.financials("AAPL", "bs", "annual"))
 }
 
 @Test
 fun financialsReported() {
-  println(apiClient.financialsReported(symbol = "AAPL", freq = "annual", accessNumber = null, cik = null))
+    println(apiClient.financialsReported(symbol = "AAPL", freq = "annual", accessNumber = null, cik = null))
 }
 
 @Test
 fun forexExchanges() {
-  println(apiClient.forexExchanges())
+    println(apiClient.forexExchanges())
 }
 
 @Test
 fun forexRates() {
-  println(apiClient.forexRates(base = "USD"))
+    println(apiClient.forexRates(base = "USD", date = ""))
 }
 
 @Test
 fun forexSymbols() {
-  println(apiClient.forexSymbols("OANDA"))
+    println(apiClient.forexSymbols("OANDA"))
 }
 
 @Test
 fun fundOwnership() {
-  println(apiClient.fundOwnership("AMZN", limit = 5))
+    println(apiClient.fundOwnership("AMZN", limit = 5))
 }
 
 @Test
 fun generalNews() {
-  println(apiClient.marketNews("forex", minId = 0))
+    println(apiClient.marketNews("forex", minId = 0))
 }
 
 @Test
 fun investorsOwnership() {
-  println(apiClient.ownership("AAPL", limit = 5))
+    println(apiClient.ownership("AAPL", limit = 5))
 }
 
 @Test
 fun ipoCalendar() {
-  println(apiClient.ipoCalendar(from = "2020-05-01", to = "2020-06-01"))
+    println(apiClient.ipoCalendar(from = "2020-05-01", to = "2020-06-01"))
 }
 
 @Test
 fun majorDevelopments() {
-  println(apiClient.pressReleases("AAPL", from = "2020-01-01", to = "2020-12-31"))
+    println(apiClient.pressReleases("AAPL", from = "2020-01-01", to = "2020-12-31"))
 }
 
 @Test
 fun patternRecognition() {
-  println(apiClient.patternRecognition("AAPL", "D"))
+    println(apiClient.patternRecognition("AAPL", "D"))
 }
 
 @Test
 fun priceTarget() {
-  println(apiClient.priceTarget("AAPL"))
+    println(apiClient.priceTarget("AAPL"))
 }
 
 @Test
 fun quote() {
-  println(apiClient.quote("AAPL"))
+    println(apiClient.quote("AAPL"))
 }
 
 @Test
 fun recommendationTrends() {
-  println(apiClient.recommendationTrends("AAPL"))
+    println(apiClient.recommendationTrends("AAPL"))
 }
 
 @Test
 fun stockDividends() {
-  println(apiClient.stockDividends("KO", from = "2019-01-01", to = "2020-01-01"))
+    println(apiClient.stockDividends("KO", from = "2019-01-01", to = "2020-01-01"))
 }
 
 @Test
 fun stockDividends2() {
-  println(apiClient.stockBasicDividends("KO"))
+    println(apiClient.stockBasicDividends("KO"))
 }
 
 @Test
 fun stockSymbols() {
-  println(apiClient.stockSymbols("US", "", "", ""))
+    println(apiClient.stockSymbols("US", "", "", ""))
 }
 
 @Test
 fun transcripts() {
-  println(apiClient.transcripts("AAPL_162777"))
+    println(apiClient.transcripts("AAPL_162777"))
 }
 
 @Test
 fun transcriptsList() {
-  println(apiClient.transcriptsList("AAPL"))
+    println(apiClient.transcriptsList("AAPL"))
 }
 
 @Test
 fun earningsCalendar() {
-  println(apiClient.earningsCalendar(from = "2020-06-10", to = "2020-06-30", symbol = "", international = false))
+    println(apiClient.earningsCalendar(from = "2020-06-10", to = "2020-06-30", symbol = "", international = false))
 }
 
 @Test
 fun covid19() {
-  println(apiClient.covid19())
+    println(apiClient.covid19())
 }
 
 @Test
 fun fdaCalendar() {
-  println(apiClient.fdaCommitteeMeetingCalendar())
+    println(apiClient.fdaCommitteeMeetingCalendar())
 }
 
 @Test
 fun upgradeDowngrade() {
-  println(apiClient.upgradeDowngrade(symbol = "AAPL", from = "2020-01-01", to = "2020-06-30"))
+    println(apiClient.upgradeDowngrade(symbol = "AAPL", from = "2020-01-01", to = "2020-06-30"))
 }
 
 @Test
 fun economicCode() {
-  println(apiClient.economicCode())
+    println(apiClient.economicCode())
 }
 
 @Test
 fun economicCalendar() {
-  println(apiClient.economicCalendar())
+    println(apiClient.economicCalendar())
 }
 
 @Test
 fun supportResistance() {
-  println(apiClient.supportResistance("AAPL", "D"))
+    println(apiClient.supportResistance("AAPL", "D"))
 }
 
 @Test
 fun stockSplits() {
-  println(apiClient.stockSplits(symbol = "AAPL", from = "2000-01-01", to = "2020-01-01"))
+    println(apiClient.stockSplits(symbol = "AAPL", from = "2000-01-01", to = "2020-01-01"))
 }
 
 @Test
 fun forexCandles() {
-  println(apiClient.forexCandles("OANDA:EUR_USD", "D", 1590988249, 1591852249))
+    println(apiClient.forexCandles("OANDA:EUR_USD", "D", 1590988249, 1591852249))
 }
 
 @Test
 fun cryptoCandles() {
-  println(apiClient.cryptoCandles("BINANCE:BTCUSDT", "D", 1590988249, 1591852249))
+    println(apiClient.cryptoCandles("BINANCE:BTCUSDT", "D", 1590988249, 1591852249))
 }
 
 @Test
 fun stockTick() {
-  println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
+    println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
 }
 
 @Test
 fun stockBBO() {
-  println(apiClient.stockNbbo("AAPL", "2020-03-25", 500, 0))
+    println(apiClient.stockNbbo("AAPL", "2020-03-25", 500, 0))
 }
 
 @Test
 fun indicesConstituents() {
-  println(apiClient.indicesConstituents("^GSPC"))
+    println(apiClient.indicesConstituents("^GSPC"))
 }
 
 @Test
 fun indicesHistoricalConstituents() {
-  println(apiClient.indicesHistoricalConstituents("^GSPC"))
+    println(apiClient.indicesHistoricalConstituents("^GSPC"))
 }
 
 @Test
 fun etfsProfile() {
-  println(apiClient.etfsProfile("SPY", ""))
+    println(apiClient.etfsProfile("SPY", ""))
 }
 
 @Test
 fun etfsHoldings() {
-  println(apiClient.etfsHoldings("SPY", "", 0))
+    println(apiClient.etfsHoldings("SPY", "", 0))
 }
 
 @Test
 fun etfsSectorExposure() {
-  println(apiClient.etfsSectorExposure("SPY"))
+    println(apiClient.etfsSectorExposure("SPY"))
 }
 
 @Test
 fun etfsCountryExposure() {
-  println(apiClient.etfsCountryExposure("SPY"))
+    println(apiClient.etfsCountryExposure("SPY"))
 }
 
 @Test
 fun mutualFundProfile() {
-  println(apiClient.mutualFundProfile("VTSAX", ""))
+    println(apiClient.mutualFundProfile("VTSAX", ""))
 }
 
 @Test
 fun mutualFundHoldings() {
-  println(apiClient.mutualFundHoldings("VTSAX", "", 0))
+    println(apiClient.mutualFundHoldings("VTSAX", "", 0))
 }
 
 @Test
 fun mutualFundSectorExposure() {
-  println(apiClient.mutualFundSectorExposure("VTSAX"))
+    println(apiClient.mutualFundSectorExposure("VTSAX"))
 }
 
 @Test
 fun mutualFundCountryExposure() {
-  println(apiClient.mutualFundCountryExposure("VTSAX"))
+    println(apiClient.mutualFundCountryExposure("VTSAX"))
 }
 
 @Test
 fun insiderTransactions() {
-  println(apiClient.insiderTransactions("AAPL", "2021-01-01", "2021-07-07"))
+    println(apiClient.insiderTransactions("AAPL", "2021-01-01", "2021-07-07"))
 }
 
 @Test
 fun revenueBreakdown() {
-  println(apiClient.revenueBreakdown("AAPL", ""))
+    println(apiClient.revenueBreakdown("AAPL", ""))
 }
 
 @Test
 fun investmentTheme() {
-  println(apiClient.investmentThemes("financialExchangesData"))
+    println(apiClient.investmentThemes("financialExchangesData"))
 }
 
 @Test
 fun socialSentiment() {
-  println(apiClient.socialSentiment("GME", "", ""))
+    println(apiClient.socialSentiment("GME", "", ""))
 }
 
 @Test
 fun supplyChain() {
-  println(apiClient.supplyChainRelationships("AAPL"))
+    println(apiClient.supplyChainRelationships("AAPL"))
 }
 
 @Test
 fun symbolSearch() {
-  println(apiClient.symbolSearch("AAPL"))
+    println(apiClient.symbolSearch("AAPL"))
 }
 
 @Test
@@ -420,22 +420,27 @@ fun companyESG() {
 
 @Test
 fun cryptoProfile() {
-  println(apiClient.cryptoProfile("BTC"))
+    println(apiClient.cryptoProfile("BTC"))
 }
 
 @Test
 fun companyEbitdaEstimates() {
-  println(apiClient.companyEbitdaEstimates("AAPL", freq = "quarterly"))
+    println(apiClient.companyEbitdaEstimates("AAPL", freq = "quarterly"))
 }
 
 @Test
 fun companyEbitEstimates() {
-  println(apiClient.companyEbitEstimates("TSLA", freq = "annual"))
+    println(apiClient.companyEbitEstimates("TSLA", freq = "annual"))
 }
 
 @Test
 fun stockUsptoPatent() {
-  println(apiClient.stockUsptoPatent("NVDA", "2021-01-01", "2021-12-31"))
+    println(apiClient.stockUsptoPatent("NVDA", "2021-01-01", "2021-12-31"))
+}
+
+@Test
+fun stockVisaApplication() {
+  println(apiClient.stockVisaApplication("AAPL", "2019-01-01", "2021-12-31"))
 }
 
 ```

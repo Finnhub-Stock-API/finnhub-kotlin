@@ -72,6 +72,7 @@ Method | HTTP request | Description
 [**stockSymbols**](DefaultApi.md#stockSymbols) | **GET** /stock/symbol | Stock Symbol
 [**stockTick**](DefaultApi.md#stockTick) | **GET** /stock/tick | Tick Data
 [**stockUsptoPatent**](DefaultApi.md#stockUsptoPatent) | **GET** /stock/uspto-patent | USPTO Patents
+[**stockVisaApplication**](DefaultApi.md#stockVisaApplication) | **GET** /stock/visa-application | H1-B Visa Application
 [**supplyChainRelationships**](DefaultApi.md#supplyChainRelationships) | **GET** /stock/supply-chain | Supply Chain Relationships
 [**supportResistance**](DefaultApi.md#supportResistance) | **GET** /scan/support-resistance | Support/Resistance
 [**symbolSearch**](DefaultApi.md#symbolSearch) | **GET** /search | Symbol Lookup
@@ -1883,7 +1884,7 @@ Configure api_key:
 
 <a name="forexRates"></a>
 # **forexRates**
-> Forexrates forexRates(base)
+> Forexrates forexRates(base, date)
 
 Forex rates
 
@@ -1897,8 +1898,9 @@ Get rates for all forex pairs. Ideal for currency conversion
 
 val apiInstance = DefaultApi()
 val base : kotlin.String = base_example // kotlin.String | Base currency. Default to EUR.
+val date : kotlin.String = date_example // kotlin.String | Date. Leave blank to get the latest data.
 try {
-    val result : Forexrates = apiInstance.forexRates(base)
+    val result : Forexrates = apiInstance.forexRates(base, date)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#forexRates")
@@ -1914,6 +1916,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **base** | **kotlin.String**| Base currency. Default to EUR. | [optional]
+ **date** | **kotlin.String**| Date. Leave blank to get the latest data. | [optional]
 
 ### Return type
 
@@ -3590,6 +3593,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UsptoPatentResult**](UsptoPatentResult.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="stockVisaApplication"></a>
+# **stockVisaApplication**
+> VisaApplicationResult stockVisaApplication(symbol, from, to)
+
+H1-B Visa Application
+
+Get a list of H1-B and Permanent visa applications for companies from the DOL. The data is updated quarterly.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>. Filter on the <code>beginDate</code> column.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>. Filter on the <code>beginDate</code> column.
+try {
+    val result : VisaApplicationResult = apiInstance.stockVisaApplication(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#stockVisaApplication")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#stockVisaApplication")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter on the &lt;code&gt;beginDate&lt;/code&gt; column. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter on the &lt;code&gt;beginDate&lt;/code&gt; column. |
+
+### Return type
+
+[**VisaApplicationResult**](VisaApplicationResult.md)
 
 ### Authorization
 

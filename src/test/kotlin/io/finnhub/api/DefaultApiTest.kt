@@ -160,7 +160,7 @@ class DefaultApiTest {
 
     @Test
     fun forexRates() {
-        println(apiClient.forexRates(base = "USD"))
+        println(apiClient.forexRates(base = "USD", date = ""))
     }
 
     @Test
@@ -294,12 +294,12 @@ class DefaultApiTest {
 
     @Test
     fun stockTick() {
-        println(apiClient.stockTick("AAPL", "2020-03-25", 500, 0))
+        println(apiClient.stockTick("AAPL", "2021-03-25", 50, 0))
     }
 
     @Test
     fun stockBBO() {
-        println(apiClient.stockNbbo("AAPL", "2020-03-25", 500, 0))
+        println(apiClient.stockNbbo("AAPL", "2021-03-25", 50, 0))
     }
 
     @Test
@@ -410,5 +410,10 @@ class DefaultApiTest {
     @Test
     fun stockUsptoPatent() {
         println(apiClient.stockUsptoPatent("NVDA", "2021-01-01", "2021-12-31"))
+    }
+
+    @Test
+    fun stockVisaApplication() {
+        println(apiClient.stockVisaApplication("AAPL", "2019-01-01", "2021-12-31"))
     }
 }

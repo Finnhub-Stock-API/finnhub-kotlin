@@ -112,6 +112,8 @@ docs/TwitterSentimentContent.md
 docs/UpgradeDowngrade.md
 docs/UsptoPatent.md
 docs/UsptoPatentResult.md
+docs/VisaApplication.md
+docs/VisaApplicationResult.md
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 gradlew
@@ -246,3 +248,5 @@ src/main/kotlin/io/finnhub/api/models/TwitterSentimentContent.kt
 src/main/kotlin/io/finnhub/api/models/UpgradeDowngrade.kt
 src/main/kotlin/io/finnhub/api/models/UsptoPatent.kt
 src/main/kotlin/io/finnhub/api/models/UsptoPatentResult.kt
+src/main/kotlin/io/finnhub/api/models/VisaApplication.kt
+src/main/kotlin/io/finnhub/api/models/VisaApplicationResult.kt

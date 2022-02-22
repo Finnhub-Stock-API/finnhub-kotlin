@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **description** | **kotlin.String** | Description. |  [optional]
 **filingStatus** | **kotlin.String** | Filing status. |  [optional]
 **patentNumber** | **kotlin.String** | Patent number. |  [optional]
-**publicationDate** | **kotlin.String** | Filing date. |  [optional]
+**publicationDate** | **kotlin.String** | Publication date. |  [optional]
 **patentType** | **kotlin.String** | Patent&#39;s type. |  [optional]
 **url** | **kotlin.String** | URL of the original article. |  [optional]
 

@@ -91,6 +91,7 @@ import io.finnhub.api.models.SymbolLookup
 import io.finnhub.api.models.TickData
 import io.finnhub.api.models.UpgradeDowngrade
 import io.finnhub.api.models.UsptoPatentResult
+import io.finnhub.api.models.VisaApplicationResult
 
 import io.finnhub.api.infrastructure.ApiClient
 import io.finnhub.api.infrastructure.ClientException
@@ -2221,6 +2222,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Forex rates
     * Get rates for all forex pairs. Ideal for currency conversion
     * @param base Base currency. Default to EUR. (optional)
+    * @param date Date. Leave blank to get the latest data. (optional)
     * @return Forexrates
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -2228,8 +2230,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun forexRates(base: kotlin.String?) : Forexrates {
-        val localVariableConfig = forexRatesRequestConfig(base = base)
+    fun forexRates(base: kotlin.String?, date: kotlin.String?) : Forexrates {
+        val localVariableConfig = forexRatesRequestConfig(base = base, date = date)
 
         val localVarResponse = request<Unit, Forexrates>(
             localVariableConfig
@@ -2254,14 +2256,18 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * To obtain the request config of the operation forexRates
     *
     * @param base Base currency. Default to EUR. (optional)
+    * @param date Date. Leave blank to get the latest data. (optional)
     * @return RequestConfig
     */
-    fun forexRatesRequestConfig(base: kotlin.String?) : RequestConfig<Unit> {
+    fun forexRatesRequestConfig(base: kotlin.String?, date: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 if (base != null) {
                     put("base", listOf(base.toString()))
+                }
+                if (date != null) {
+                    put("date", listOf(date.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4217,6 +4223,68 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/uspto-patent",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * H1-B Visa Application
+    * Get a list of H1-B and Permanent visa applications for companies from the DOL. The data is updated quarterly.
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter on the &lt;code&gt;beginDate&lt;/code&gt; column. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter on the &lt;code&gt;beginDate&lt;/code&gt; column. 
+    * @return VisaApplicationResult
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockVisaApplication(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : VisaApplicationResult {
+        val localVariableConfig = stockVisaApplicationRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, VisaApplicationResult>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VisaApplicationResult
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockVisaApplication
+    *
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter on the &lt;code&gt;beginDate&lt;/code&gt; column. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter on the &lt;code&gt;beginDate&lt;/code&gt; column. 
+    * @return RequestConfig
+    */
+    fun stockVisaApplicationRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/visa-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
