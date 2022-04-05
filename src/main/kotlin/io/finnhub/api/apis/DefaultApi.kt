@@ -22,6 +22,8 @@ package io.finnhub.api.apis
 
 import io.finnhub.api.models.AggregateIndicators
 import io.finnhub.api.models.BasicFinancials
+import io.finnhub.api.models.BondCandles
+import io.finnhub.api.models.BondProfile
 import io.finnhub.api.models.CompanyESG
 import io.finnhub.api.models.CompanyEarningsQualityScore
 import io.finnhub.api.models.CompanyExecutive
@@ -61,10 +63,12 @@ import io.finnhub.api.models.HistoricalNBBO
 import io.finnhub.api.models.IPOCalendar
 import io.finnhub.api.models.IndicesConstituents
 import io.finnhub.api.models.IndicesHistoricalConstituents
+import io.finnhub.api.models.InsiderSentiments
 import io.finnhub.api.models.InsiderTransactions
 import io.finnhub.api.models.InternationalFiling
 import io.finnhub.api.models.InvestmentThemes
 import io.finnhub.api.models.LastBidMinusAsk
+import io.finnhub.api.models.LobbyingResult
 import io.finnhub.api.models.MarketNews
 import io.finnhub.api.models.MutualFundCountryExposure
 import io.finnhub.api.models.MutualFundHoldings
@@ -166,6 +170,136 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/scan/technical-indicator",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Bond price data
+    * Get end-of-day bond&#39;s price data.
+    * @param isin ISIN. 
+    * @param from UNIX timestamp. Interval initial value. 
+    * @param to UNIX timestamp. Interval end value. 
+    * @return BondCandles
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun bondPrice(isin: kotlin.String, from: kotlin.Long, to: kotlin.Long) : BondCandles {
+        val localVariableConfig = bondPriceRequestConfig(isin = isin, from = from, to = to)
+
+        val localVarResponse = request<Unit, BondCandles>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BondCandles
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation bondPrice
+    *
+    * @param isin ISIN. 
+    * @param from UNIX timestamp. Interval initial value. 
+    * @param to UNIX timestamp. Interval end value. 
+    * @return RequestConfig
+    */
+    fun bondPriceRequestConfig(isin: kotlin.String, from: kotlin.Long, to: kotlin.Long) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("isin", listOf(isin.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/bond/price",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Bond Profile
+    * Get general information of a bond. You can query by FIGI, ISIN or CUSIP
+    * @param isin ISIN (optional)
+    * @param cusip CUSIP (optional)
+    * @param figi FIGI (optional)
+    * @return BondProfile
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun bondProfile(isin: kotlin.String?, cusip: kotlin.String?, figi: kotlin.String?) : BondProfile {
+        val localVariableConfig = bondProfileRequestConfig(isin = isin, cusip = cusip, figi = figi)
+
+        val localVarResponse = request<Unit, BondProfile>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BondProfile
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation bondProfile
+    *
+    * @param isin ISIN (optional)
+    * @param cusip CUSIP (optional)
+    * @param figi FIGI (optional)
+    * @return RequestConfig
+    */
+    fun bondProfileRequestConfig(isin: kotlin.String?, cusip: kotlin.String?, figi: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (isin != null) {
+                    put("isin", listOf(isin.toString()))
+                }
+                if (cusip != null) {
+                    put("cusip", listOf(cusip.toString()))
+                }
+                if (figi != null) {
+                    put("figi", listOf(figi.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/bond/profile",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -1596,6 +1730,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol ETF symbol. (optional)
     * @param isin ETF isin. (optional)
     * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
+    * @param date Query holdings by date. You can use either this param or &lt;code&gt;skip&lt;/code&gt; param, not both. (optional)
     * @return ETFsHoldings
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -1603,8 +1738,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun etfsHoldings(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : ETFsHoldings {
-        val localVariableConfig = etfsHoldingsRequestConfig(symbol = symbol, isin = isin, skip = skip)
+    fun etfsHoldings(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?, date: kotlin.String?) : ETFsHoldings {
+        val localVariableConfig = etfsHoldingsRequestConfig(symbol = symbol, isin = isin, skip = skip, date = date)
 
         val localVarResponse = request<Unit, ETFsHoldings>(
             localVariableConfig
@@ -1631,9 +1766,10 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol ETF symbol. (optional)
     * @param isin ETF isin. (optional)
     * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
+    * @param date Query holdings by date. You can use either this param or &lt;code&gt;skip&lt;/code&gt; param, not both. (optional)
     * @return RequestConfig
     */
-    fun etfsHoldingsRequestConfig(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?) : RequestConfig<Unit> {
+    fun etfsHoldingsRequestConfig(symbol: kotlin.String?, isin: kotlin.String?, skip: kotlin.Long?, date: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -1645,6 +1781,9 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
                 }
                 if (skip != null) {
                     put("skip", listOf(skip.toString()))
+                }
+                if (date != null) {
+                    put("date", listOf(date.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2456,7 +2595,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Indices Historical Constituents
-    * Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC (S&amp;P 500)&lt;/code&gt;, &lt;code&gt;^NDX (Nasdaq 100)&lt;/code&gt;, &lt;code&gt;^DJI (Dow Jones)&lt;/code&gt;
+    * Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC&lt;/code&gt;, &lt;code&gt;^NDX&lt;/code&gt;, &lt;code&gt;^DJI&lt;/code&gt;
     * @param symbol symbol 
     * @return IndicesHistoricalConstituents
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2504,6 +2643,68 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/index/historical-constituents",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Insider Sentiment
+    * Get insider sentiment data for US companies calculated using method discussed &lt;a href&#x3D;\&quot;https://medium.com/@stock-api/finnhub-insiders-sentiment-analysis-cc43f9f64b3a\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. The MSPR ranges from -100 for the most negative to 100 for the most positive which can signal price changes in the coming 30-90 days.
+    * @param symbol Symbol of the company: AAPL. 
+    * @param from From date: 2020-03-15. 
+    * @param to To date: 2020-03-16. 
+    * @return InsiderSentiments
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun insiderSentiment(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : InsiderSentiments {
+        val localVariableConfig = insiderSentimentRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, InsiderSentiments>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InsiderSentiments
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation insiderSentiment
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @param from From date: 2020-03-15. 
+    * @param to To date: 2020-03-16. 
+    * @return RequestConfig
+    */
+    fun insiderSentimentRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/insider-sentiment",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -3905,6 +4106,68 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
+    * Senate Lobbying
+    * Get a list of reported lobbying activities in the Senate and the House.
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return LobbyingResult
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockLobbying(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : LobbyingResult {
+        val localVariableConfig = stockLobbyingRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, LobbyingResult>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LobbyingResult
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockLobbying
+    *
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun stockLobbyingRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/lobbying",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Historical NBBO
     * &lt;p&gt;Get historical best bid and offer for US stocks, LSE, TSX, Euronext and Deutsche Borse.&lt;/p&gt;&lt;p&gt;For US market, this endpoint only serves historical NBBO from the beginning of 2020. To download more historical data, please visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt;.&lt;/p&gt;
     * @param symbol Symbol. 
@@ -4033,7 +4296,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Stock Symbol
-    * List supported stocks. We use the following symbology to identify stocks on Finnhub &lt;code&gt;Exchange_Ticker.Exchange_Code&lt;/code&gt;. A list of supported exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. A list of supported CFD Indices can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1BAbIXBgl405fj0oHeEyRFEu8mW4QD1PhvtaBATLoR14/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
+    * List supported stocks. We use the following symbology to identify stocks on Finnhub &lt;code&gt;Exchange_Ticker.Exchange_Code&lt;/code&gt;. A list of supported exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
     * @param exchange Exchange you want to get the list of symbols from. List of exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
     * @param mic Filter by MIC code. (optional)
     * @param securityType Filter by security type used by OpenFigi standard. (optional)
@@ -4104,7 +4367,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Tick Data
-    * &lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For US market, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Nasdaq Nordic &amp; Baltic&lt;/th&gt;       &lt;td&gt; &lt;ul&gt; &lt;li&gt;Copenhagen (CO)&lt;/li&gt; &lt;li&gt;Stockholm (ST)&lt;/li&gt; &lt;li&gt;Helsinki (HE)&lt;/li&gt; &lt;li&gt;Iceland (IC)&lt;/li&gt; &lt;li&gt;Riga (RG)&lt;/li&gt; &lt;li&gt;Tallinn (TL)&lt;/li&gt; &lt;li&gt;Vilnius(VS)&lt;/li&gt; &lt;li&gt;Fixed Income&lt;/li&gt; &lt;li&gt;Derivatives&lt;/li&gt; &lt;li&gt;Commodities&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+    * &lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For US market, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
     * @param symbol Symbol. 
     * @param date Date: 2020-04-02. 
     * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
@@ -4293,7 +4556,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Supply Chain Relationships
-    * &lt;p&gt;This endpoint provides an overall map of public companies&#39; key customers and suppliers. The data offers a deeper look into a company&#39;s supply chain and how products are created. The data will help investors manage risk, limit exposure or generate alpha-generating ideas and trading insights.&lt;/p&gt;&lt;p&gt;We currently cover data for S&amp;P500 and Nasdaq 100 companies.&lt;/p&gt;
+    * &lt;p&gt;This endpoint provides an overall map of public companies&#39; key customers and suppliers. The data offers a deeper look into a company&#39;s supply chain and how products are created. The data will help investors manage risk, limit exposure or generate alpha-generating ideas and trading insights.&lt;/p&gt;
     * @param symbol Symbol. 
     * @return SupplyChainRelationships
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4590,7 +4853,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Earnings Call Transcripts List
-    * List earnings call transcripts&#39; metadata. This endpoint is available for US, UK and Canadian companies.
+    * List earnings call transcripts&#39; metadata. This endpoint is available for US, UK, European, Australian and Canadian companies.
     * @param symbol Company symbol: AAPL. Leave empty to list the latest transcripts 
     * @return EarningsCallTranscriptsList
     * @throws UnsupportedOperationException If the API returns an informational or redirection response

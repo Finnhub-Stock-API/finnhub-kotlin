@@ -5,6 +5,8 @@ All URIs are relative to *https://finnhub.io/api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**aggregateIndicator**](DefaultApi.md#aggregateIndicator) | **GET** /scan/technical-indicator | Aggregate Indicators
+[**bondPrice**](DefaultApi.md#bondPrice) | **GET** /bond/price | Bond price data
+[**bondProfile**](DefaultApi.md#bondProfile) | **GET** /bond/profile | Bond Profile
 [**companyBasicFinancials**](DefaultApi.md#companyBasicFinancials) | **GET** /stock/metric | Basic Financials
 [**companyEarnings**](DefaultApi.md#companyEarnings) | **GET** /stock/earnings | Earnings Surprises
 [**companyEarningsQualityScore**](DefaultApi.md#companyEarningsQualityScore) | **GET** /stock/earnings-quality-score | Company Earnings Quality Score
@@ -44,6 +46,7 @@ Method | HTTP request | Description
 [**fundOwnership**](DefaultApi.md#fundOwnership) | **GET** /stock/fund-ownership | Fund Ownership
 [**indicesConstituents**](DefaultApi.md#indicesConstituents) | **GET** /index/constituents | Indices Constituents
 [**indicesHistoricalConstituents**](DefaultApi.md#indicesHistoricalConstituents) | **GET** /index/historical-constituents | Indices Historical Constituents
+[**insiderSentiment**](DefaultApi.md#insiderSentiment) | **GET** /stock/insider-sentiment | Insider Sentiment
 [**insiderTransactions**](DefaultApi.md#insiderTransactions) | **GET** /stock/insider-transactions | Insider Transactions
 [**internationalFilings**](DefaultApi.md#internationalFilings) | **GET** /stock/international-filings | International Filings
 [**investmentThemes**](DefaultApi.md#investmentThemes) | **GET** /stock/investment-theme | Investment Themes (Thematic Investing)
@@ -67,6 +70,7 @@ Method | HTTP request | Description
 [**stockBidask**](DefaultApi.md#stockBidask) | **GET** /stock/bidask | Last Bid-Ask
 [**stockCandles**](DefaultApi.md#stockCandles) | **GET** /stock/candle | Stock Candles
 [**stockDividends**](DefaultApi.md#stockDividends) | **GET** /stock/dividend | Dividends
+[**stockLobbying**](DefaultApi.md#stockLobbying) | **GET** /stock/lobbying | Senate Lobbying
 [**stockNbbo**](DefaultApi.md#stockNbbo) | **GET** /stock/bbo | Historical NBBO
 [**stockSplits**](DefaultApi.md#stockSplits) | **GET** /stock/split | Splits
 [**stockSymbols**](DefaultApi.md#stockSymbols) | **GET** /stock/symbol | Stock Symbol
@@ -121,6 +125,114 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AggregateIndicators**](AggregateIndicators.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="bondPrice"></a>
+# **bondPrice**
+> BondCandles bondPrice(isin, from, to)
+
+Bond price data
+
+Get end-of-day bond&#39;s price data.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val isin : kotlin.String = isin_example // kotlin.String | ISIN.
+val from : kotlin.Long = 789 // kotlin.Long | UNIX timestamp. Interval initial value.
+val to : kotlin.Long = 789 // kotlin.Long | UNIX timestamp. Interval end value.
+try {
+    val result : BondCandles = apiInstance.bondPrice(isin, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#bondPrice")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#bondPrice")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **isin** | **kotlin.String**| ISIN. |
+ **from** | **kotlin.Long**| UNIX timestamp. Interval initial value. |
+ **to** | **kotlin.Long**| UNIX timestamp. Interval end value. |
+
+### Return type
+
+[**BondCandles**](BondCandles.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="bondProfile"></a>
+# **bondProfile**
+> BondProfile bondProfile(isin, cusip, figi)
+
+Bond Profile
+
+Get general information of a bond. You can query by FIGI, ISIN or CUSIP
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val isin : kotlin.String = isin_example // kotlin.String | ISIN
+val cusip : kotlin.String = cusip_example // kotlin.String | CUSIP
+val figi : kotlin.String = figi_example // kotlin.String | FIGI
+try {
+    val result : BondProfile = apiInstance.bondProfile(isin, cusip, figi)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#bondProfile")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#bondProfile")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **isin** | **kotlin.String**| ISIN | [optional]
+ **cusip** | **kotlin.String**| CUSIP | [optional]
+ **figi** | **kotlin.String**| FIGI | [optional]
+
+### Return type
+
+[**BondProfile**](BondProfile.md)
 
 ### Authorization
 
@@ -1360,7 +1472,7 @@ Configure api_key:
 
 <a name="etfsHoldings"></a>
 # **etfsHoldings**
-> ETFsHoldings etfsHoldings(symbol, isin, skip)
+> ETFsHoldings etfsHoldings(symbol, isin, skip, date)
 
 ETFs Holdings
 
@@ -1376,8 +1488,9 @@ val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
 val isin : kotlin.String = isin_example // kotlin.String | ETF isin.
 val skip : kotlin.Long = 789 // kotlin.Long | Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip=0 or not set.
+val date : kotlin.String = date_example // kotlin.String | Query holdings by date. You can use either this param or <code>skip</code> param, not both.
 try {
-    val result : ETFsHoldings = apiInstance.etfsHoldings(symbol, isin, skip)
+    val result : ETFsHoldings = apiInstance.etfsHoldings(symbol, isin, skip, date)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#etfsHoldings")
@@ -1395,6 +1508,7 @@ Name | Type | Description  | Notes
  **symbol** | **kotlin.String**| ETF symbol. | [optional]
  **isin** | **kotlin.String**| ETF isin. | [optional]
  **skip** | **kotlin.Long**| Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. | [optional]
+ **date** | **kotlin.String**| Query holdings by date. You can use either this param or &lt;code&gt;skip&lt;/code&gt; param, not both. | [optional]
 
 ### Return type
 
@@ -2092,7 +2206,7 @@ Configure api_key:
 
 Indices Historical Constituents
 
-Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC (S&amp;P 500)&lt;/code&gt;, &lt;code&gt;^NDX (Nasdaq 100)&lt;/code&gt;, &lt;code&gt;^DJI (Dow Jones)&lt;/code&gt;
+Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC&lt;/code&gt;, &lt;code&gt;^NDX&lt;/code&gt;, &lt;code&gt;^DJI&lt;/code&gt;
 
 ### Example
 ```kotlin
@@ -2123,6 +2237,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IndicesHistoricalConstituents**](IndicesHistoricalConstituents.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="insiderSentiment"></a>
+# **insiderSentiment**
+> InsiderSentiments insiderSentiment(symbol, from, to)
+
+Insider Sentiment
+
+Get insider sentiment data for US companies calculated using method discussed &lt;a href&#x3D;\&quot;https://medium.com/@stock-api/finnhub-insiders-sentiment-analysis-cc43f9f64b3a\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. The MSPR ranges from -100 for the most negative to 100 for the most positive which can signal price changes in the coming 30-90 days.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
+try {
+    val result : InsiderSentiments = apiInstance.insiderSentiment(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#insiderSentiment")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#insiderSentiment")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
+ **from** | **kotlin.String**| From date: 2020-03-15. |
+ **to** | **kotlin.String**| To date: 2020-03-16. |
+
+### Return type
+
+[**InsiderSentiments**](InsiderSentiments.md)
 
 ### Authorization
 
@@ -3330,6 +3498,60 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="stockLobbying"></a>
+# **stockLobbying**
+> LobbyingResult stockLobbying(symbol, from, to)
+
+Senate Lobbying
+
+Get a list of reported lobbying activities in the Senate and the House.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : LobbyingResult = apiInstance.stockLobbying(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#stockLobbying")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#stockLobbying")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**LobbyingResult**](LobbyingResult.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="stockNbbo"></a>
 # **stockNbbo**
 > HistoricalNBBO stockNbbo(symbol, date, limit, skip)
@@ -3446,7 +3668,7 @@ Configure api_key:
 
 Stock Symbol
 
-List supported stocks. We use the following symbology to identify stocks on Finnhub &lt;code&gt;Exchange_Ticker.Exchange_Code&lt;/code&gt;. A list of supported exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. A list of supported CFD Indices can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1BAbIXBgl405fj0oHeEyRFEu8mW4QD1PhvtaBATLoR14/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
+List supported stocks. We use the following symbology to identify stocks on Finnhub &lt;code&gt;Exchange_Ticker.Exchange_Code&lt;/code&gt;. A list of supported exchange codes can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1I3pBxjfXB056-g_JYf_6o3Rns3BV2kMGG1nCatb91ls/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
 
 ### Example
 ```kotlin
@@ -3502,7 +3724,7 @@ Configure api_key:
 
 Tick Data
 
-&lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For US market, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Nasdaq Nordic &amp; Baltic&lt;/th&gt;       &lt;td&gt; &lt;ul&gt; &lt;li&gt;Copenhagen (CO)&lt;/li&gt; &lt;li&gt;Stockholm (ST)&lt;/li&gt; &lt;li&gt;Helsinki (HE)&lt;/li&gt; &lt;li&gt;Iceland (IC)&lt;/li&gt; &lt;li&gt;Riga (RG)&lt;/li&gt; &lt;li&gt;Tallinn (TL)&lt;/li&gt; &lt;li&gt;Vilnius(VS)&lt;/li&gt; &lt;li&gt;Fixed Income&lt;/li&gt; &lt;li&gt;Derivatives&lt;/li&gt; &lt;li&gt;Commodities&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+&lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For US market, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
 
 ### Example
 ```kotlin
@@ -3666,7 +3888,7 @@ Configure api_key:
 
 Supply Chain Relationships
 
-&lt;p&gt;This endpoint provides an overall map of public companies&#39; key customers and suppliers. The data offers a deeper look into a company&#39;s supply chain and how products are created. The data will help investors manage risk, limit exposure or generate alpha-generating ideas and trading insights.&lt;/p&gt;&lt;p&gt;We currently cover data for S&amp;P500 and Nasdaq 100 companies.&lt;/p&gt;
+&lt;p&gt;This endpoint provides an overall map of public companies&#39; key customers and suppliers. The data offers a deeper look into a company&#39;s supply chain and how products are created. The data will help investors manage risk, limit exposure or generate alpha-generating ideas and trading insights.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -3928,7 +4150,7 @@ Configure api_key:
 
 Earnings Call Transcripts List
 
-List earnings call transcripts&#39; metadata. This endpoint is available for US, UK and Canadian companies.
+List earnings call transcripts&#39; metadata. This endpoint is available for US, UK, European, Australian and Canadian companies.
 
 ### Example
 ```kotlin

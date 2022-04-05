@@ -319,7 +319,7 @@ class DefaultApiTest {
 
     @Test
     fun etfsHoldings() {
-        println(apiClient.etfsHoldings("SPY", "", 0))
+        println(apiClient.etfsHoldings("SPY", "", 0, ""))
     }
 
     @Test
@@ -415,5 +415,25 @@ class DefaultApiTest {
     @Test
     fun stockVisaApplication() {
         println(apiClient.stockVisaApplication("AAPL", "2019-01-01", "2021-12-31"))
+    }
+
+    @Test
+    fun insiderSentiment() {
+        println(apiClient.insiderSentiment("AAPL", "2019-01-01", "2022-12-31"))
+    }
+
+    @Test
+    fun stockLobbying() {
+        println(apiClient.stockLobbying("AAPL", "2019-01-01", "2022-12-31"))
+    }
+
+    @Test
+    fun bondProfile() {
+        println(apiClient.bondProfile(isin = "US912810TD00", cusip = null, figi = null))
+    }
+
+    @Test
+    fun bondPrice() {
+        println(apiClient.bondPrice("US912810TD00", 1590988249, 1649099548))
     }
 }
