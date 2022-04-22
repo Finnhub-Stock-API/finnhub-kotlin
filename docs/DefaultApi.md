@@ -75,6 +75,7 @@ Method | HTTP request | Description
 [**stockSplits**](DefaultApi.md#stockSplits) | **GET** /stock/split | Splits
 [**stockSymbols**](DefaultApi.md#stockSymbols) | **GET** /stock/symbol | Stock Symbol
 [**stockTick**](DefaultApi.md#stockTick) | **GET** /stock/tick | Tick Data
+[**stockUsaSpending**](DefaultApi.md#stockUsaSpending) | **GET** /stock/usa-spending | USA Spending
 [**stockUsptoPatent**](DefaultApi.md#stockUsptoPatent) | **GET** /stock/uspto-patent | USPTO Patents
 [**stockVisaApplication**](DefaultApi.md#stockVisaApplication) | **GET** /stock/visa-application | H1-B Visa Application
 [**supplyChainRelationships**](DefaultApi.md#supplyChainRelationships) | **GET** /stock/supply-chain | Supply Chain Relationships
@@ -2620,7 +2621,7 @@ Configure api_key:
 
 Mutual Funds Holdings
 
-Get full Mutual Funds holdings/constituents.
+Get full Mutual Funds holdings/constituents. This endpoint covers both US and global mutual funds. For international funds, you must query the data using ISIN.
 
 ### Example
 ```kotlin
@@ -2674,7 +2675,7 @@ Configure api_key:
 
 Mutual Funds Profile
 
-Get mutual funds profile information. This endpoint covers US mutual funds only.
+Get mutual funds profile information. This endpoint covers both US and global mutual funds. For international funds, you must query the data using ISIN.
 
 ### Example
 ```kotlin
@@ -3761,6 +3762,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TickData**](TickData.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="stockUsaSpending"></a>
+# **stockUsaSpending**
+> UsaSpendingResult stockUsaSpending(symbol, from, to)
+
+USA Spending
+
+Get a list of government&#39;s spending activities from USASpending dataset for public companies. This dataset can help you identify companies that win big government contracts which is extremely important for industries such as Defense, Aerospace, and Education.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>. Filter for <code>actionDate</code>
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>. Filter for <code>actionDate</code>
+try {
+    val result : UsaSpendingResult = apiInstance.stockUsaSpending(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#stockUsaSpending")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#stockUsaSpending")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for &lt;code&gt;actionDate&lt;/code&gt; |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for &lt;code&gt;actionDate&lt;/code&gt; |
+
+### Return type
+
+[**UsaSpendingResult**](UsaSpendingResult.md)
 
 ### Authorization
 

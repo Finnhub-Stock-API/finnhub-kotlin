@@ -436,4 +436,9 @@ class DefaultApiTest {
     fun bondPrice() {
         println(apiClient.bondPrice("US912810TD00", 1590988249, 1649099548))
     }
+
+    @Test
+    fun stockUsaSpending() {
+        println(apiClient.stockUsaSpending("AAPL", from = "2020-06-01", to = "2022-06-10"))
+    }
 }

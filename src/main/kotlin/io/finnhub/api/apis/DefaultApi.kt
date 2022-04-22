@@ -94,6 +94,7 @@ import io.finnhub.api.models.SupportResistance
 import io.finnhub.api.models.SymbolLookup
 import io.finnhub.api.models.TickData
 import io.finnhub.api.models.UpgradeDowngrade
+import io.finnhub.api.models.UsaSpendingResult
 import io.finnhub.api.models.UsptoPatentResult
 import io.finnhub.api.models.VisaApplicationResult
 
@@ -3074,7 +3075,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Mutual Funds Holdings
-    * Get full Mutual Funds holdings/constituents.
+    * Get full Mutual Funds holdings/constituents. This endpoint covers both US and global mutual funds. For international funds, you must query the data using ISIN.
     * @param symbol Fund&#39;s symbol. (optional)
     * @param isin Fund&#39;s isin. (optional)
     * @param skip Skip the first n results. You can use this parameter to query historical constituents data. The latest result is returned if skip&#x3D;0 or not set. (optional)
@@ -3142,7 +3143,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Mutual Funds Profile
-    * Get mutual funds profile information. This endpoint covers US mutual funds only.
+    * Get mutual funds profile information. This endpoint covers both US and global mutual funds. For international funds, you must query the data using ISIN.
     * @param symbol Fund&#39;s symbol. (optional)
     * @param isin Fund&#39;s isin. (optional)
     * @return MutualFundProfile
@@ -4424,6 +4425,68 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/tick",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * USA Spending
+    * Get a list of government&#39;s spending activities from USASpending dataset for public companies. This dataset can help you identify companies that win big government contracts which is extremely important for industries such as Defense, Aerospace, and Education.
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for &lt;code&gt;actionDate&lt;/code&gt; 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for &lt;code&gt;actionDate&lt;/code&gt; 
+    * @return UsaSpendingResult
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockUsaSpending(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : UsaSpendingResult {
+        val localVariableConfig = stockUsaSpendingRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, UsaSpendingResult>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsaSpendingResult
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockUsaSpending
+    *
+    * @param symbol Symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for &lt;code&gt;actionDate&lt;/code&gt; 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for &lt;code&gt;actionDate&lt;/code&gt; 
+    * @return RequestConfig
+    */
+    fun stockUsaSpendingRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/usa-spending",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
