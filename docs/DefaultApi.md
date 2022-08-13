@@ -64,6 +64,7 @@ Method | HTTP request | Description
 [**quote**](DefaultApi.md#quote) | **GET** /quote | Quote
 [**recommendationTrends**](DefaultApi.md#recommendationTrends) | **GET** /stock/recommendation | Recommendation Trends
 [**revenueBreakdown**](DefaultApi.md#revenueBreakdown) | **GET** /stock/revenue-breakdown | Revenue Breakdown
+[**sectorMetric**](DefaultApi.md#sectorMetric) | **GET** /sector/metrics | Sector Metrics
 [**similarityIndex**](DefaultApi.md#similarityIndex) | **GET** /stock/similarity-index | Similarity Index
 [**socialSentiment**](DefaultApi.md#socialSentiment) | **GET** /stock/social-sentiment | Social Sentiment
 [**stockBasicDividends**](DefaultApi.md#stockBasicDividends) | **GET** /stock/dividend2 | Dividends 2 (Basic)
@@ -2365,7 +2366,7 @@ Configure api_key:
 
 International Filings
 
-List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
+List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
 
 ### Example
 ```kotlin
@@ -2931,7 +2932,7 @@ Configure api_key:
 
 Major Press Releases
 
-Get latest major press releases of a company. This data can be used to highlight the most significant events comprised of mostly press releases sourced from the exchanges, BusinessWire, AccessWire, GlobeNewswire, Newsfile, and PRNewswire.
+&lt;p&gt;Get latest major press releases of a company. This data can be used to highlight the most significant events comprised of mostly press releases sourced from the exchanges, BusinessWire, AccessWire, GlobeNewswire, Newsfile, and PRNewswire.&lt;/p&gt;&lt;p&gt;Full-text press releases data is available for Enterprise clients. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact Us&lt;/a&gt; to learn more.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -3168,6 +3169,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RevenueBreakdown**](RevenueBreakdown.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="sectorMetric"></a>
+# **sectorMetric**
+> SectorMetric sectorMetric(region)
+
+Sector Metrics
+
+Get ratios for different sectors and regions/indices.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val region : kotlin.String = region_example // kotlin.String | Region. A list of supported values for this field can be found <a href=\"https://docs.google.com/spreadsheets/d/1afedyv7yWJ-z7pMjaAZK-f6ENY3mI3EBCk95QffpoHw/edit?usp=sharing\" target=\"_blank\">here</a>.
+try {
+    val result : SectorMetric = apiInstance.sectorMetric(region)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#sectorMetric")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#sectorMetric")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **region** | **kotlin.String**| Region. A list of supported values for this field can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1afedyv7yWJ-z7pMjaAZK-f6ENY3mI3EBCk95QffpoHw/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. |
+
+### Return type
+
+[**SectorMetric**](SectorMetric.md)
 
 ### Authorization
 

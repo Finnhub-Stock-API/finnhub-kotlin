@@ -96,6 +96,8 @@ docs/RevenueBreakdown.md
 docs/RevenueEstimates.md
 docs/RevenueEstimatesInfo.md
 docs/SECSentimentAnalysis.md
+docs/SectorMetric.md
+docs/SectorMetricData.md
 docs/Sentiment.md
 docs/SimilarityIndex.md
 docs/SimilarityIndexInfo.md
@@ -240,6 +242,8 @@ src/main/kotlin/io/finnhub/api/models/RevenueBreakdown.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimates.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/SECSentimentAnalysis.kt
+src/main/kotlin/io/finnhub/api/models/SectorMetric.kt
+src/main/kotlin/io/finnhub/api/models/SectorMetricData.kt
 src/main/kotlin/io/finnhub/api/models/Sentiment.kt
 src/main/kotlin/io/finnhub/api/models/SimilarityIndex.kt
 src/main/kotlin/io/finnhub/api/models/SimilarityIndexInfo.kt

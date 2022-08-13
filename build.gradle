@@ -1,5 +1,5 @@
 group 'io.finnhub'
-version '2.0.16'
+version '2.0.17'
 
 wrapper {
     gradleVersion = '4.9'

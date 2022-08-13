@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **symbol** | **kotlin.String** | Symbol |  [optional]
 **name** | **kotlin.String** | Name |  [optional]
+**country** | **kotlin.String** | Country |  [optional]
+**industry** | **kotlin.String** | Industry |  [optional]
 **customer** | **kotlin.Boolean** | Whether the company is a customer. |  [optional]
 **supplier** | **kotlin.Boolean** | Whether the company is a supplier |  [optional]
 **oneMonthCorrelation** | **kotlin.Float** | 1-month price correlation |  [optional]

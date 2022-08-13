@@ -29,6 +29,8 @@ import java.io.Serializable
  *
  * @param symbol Symbol
  * @param name Name
+ * @param country Country
+ * @param industry Industry
  * @param customer Whether the company is a customer.
  * @param supplier Whether the company is a supplier
  * @param oneMonthCorrelation 1-month price correlation
@@ -48,6 +50,14 @@ data class KeyCustomersSuppliers (
     /* Name */
     @Json(name = "name")
     val name: kotlin.String? = null,
+
+    /* Country */
+    @Json(name = "country")
+    val country: kotlin.String? = null,
+
+    /* Industry */
+    @Json(name = "industry")
+    val industry: kotlin.String? = null,
 
     /* Whether the company is a customer. */
     @Json(name = "customer")

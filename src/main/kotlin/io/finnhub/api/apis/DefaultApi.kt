@@ -84,6 +84,7 @@ import io.finnhub.api.models.RecommendationTrend
 import io.finnhub.api.models.RevenueBreakdown
 import io.finnhub.api.models.RevenueEstimates
 import io.finnhub.api.models.SECSentimentAnalysis
+import io.finnhub.api.models.SectorMetric
 import io.finnhub.api.models.SimilarityIndex
 import io.finnhub.api.models.SocialSentiment
 import io.finnhub.api.models.Split
@@ -2780,7 +2781,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * International Filings
-    * List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data.
+    * List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
     * @param symbol Symbol. Leave empty to list latest filings. (optional)
     * @param country Filter by country using country&#39;s 2-letter code. (optional)
     * @return kotlin.collections.List<InternationalFiling>
@@ -3438,7 +3439,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Major Press Releases
-    * Get latest major press releases of a company. This data can be used to highlight the most significant events comprised of mostly press releases sourced from the exchanges, BusinessWire, AccessWire, GlobeNewswire, Newsfile, and PRNewswire.
+    * &lt;p&gt;Get latest major press releases of a company. This data can be used to highlight the most significant events comprised of mostly press releases sourced from the exchanges, BusinessWire, AccessWire, GlobeNewswire, Newsfile, and PRNewswire.&lt;/p&gt;&lt;p&gt;Full-text press releases data is available for Enterprise clients. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact Us&lt;/a&gt; to learn more.&lt;/p&gt;
     * @param symbol Company symbol. 
     * @param from From time: 2020-01-01. (optional)
     * @param to To time: 2020-01-05. (optional)
@@ -3727,6 +3728,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/revenue-breakdown",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Sector Metrics
+    * Get ratios for different sectors and regions/indices.
+    * @param region Region. A list of supported values for this field can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1afedyv7yWJ-z7pMjaAZK-f6ENY3mI3EBCk95QffpoHw/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
+    * @return SectorMetric
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun sectorMetric(region: kotlin.String) : SectorMetric {
+        val localVariableConfig = sectorMetricRequestConfig(region = region)
+
+        val localVarResponse = request<Unit, SectorMetric>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SectorMetric
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation sectorMetric
+    *
+    * @param region Region. A list of supported values for this field can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1afedyv7yWJ-z7pMjaAZK-f6ENY3mI3EBCk95QffpoHw/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;. 
+    * @return RequestConfig
+    */
+    fun sectorMetricRequestConfig(region: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("region", listOf(region.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/sector/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

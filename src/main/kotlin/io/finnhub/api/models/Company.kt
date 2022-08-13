@@ -30,7 +30,7 @@ import java.io.Serializable
  * @param name Executive name
  * @param age Age
  * @param title Title
- * @param since Year appointed
+ * @param since Year first appointed as executive/director of the company
  * @param sex Sex
  * @param compensation Total compensation
  * @param currency Compensation currency
@@ -50,7 +50,7 @@ data class Company (
     @Json(name = "title")
     val title: kotlin.String? = null,
 
-    /* Year appointed */
+    /* Year first appointed as executive/director of the company */
     @Json(name = "since")
     val since: kotlin.String? = null,
 

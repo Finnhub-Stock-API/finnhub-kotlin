@@ -441,4 +441,9 @@ class DefaultApiTest {
     fun stockUsaSpending() {
         println(apiClient.stockUsaSpending("AAPL", from = "2020-06-01", to = "2022-06-10"))
     }
+
+    @Test
+    fun sectorMetric() {
+        println(apiClient.sectorMetric("NA"))
+    }
 }

@@ -52,6 +52,8 @@ import java.io.Serializable
  * @param seriesName Fund's series name.
  * @param classId Class ID.
  * @param className Class name.
+ * @param sfdrClassification SFDR classification for EU funds. Under the new classifications, a fund's strategy will labeled under either Article 6, 8 or 9. Article 6 covers funds which do not integrate any kind of sustainability into the investment process. Article 8, also known as ‘environmental and socially promoting’, applies “… where a financial product promotes, among other characteristics, environmental or social characteristics, or a combination of those characteristics, provided that the companies in which the investments are made follow good governance practices.”. Article 9, also known as ‘products targeting sustainable investments’, covers products targeting bespoke sustainable investments and applies “… where a financial product has sustainable investment as its objective and an index has been designated as a reference benchmark.”
+ * @param currency Fund's currency
  */
 
 data class MutualFundProfileData (
@@ -154,7 +156,15 @@ data class MutualFundProfileData (
 
     /* Class name. */
     @Json(name = "className")
-    val className: kotlin.String? = null
+    val className: kotlin.String? = null,
+
+    /* SFDR classification for EU funds. Under the new classifications, a fund's strategy will labeled under either Article 6, 8 or 9. Article 6 covers funds which do not integrate any kind of sustainability into the investment process. Article 8, also known as ‘environmental and socially promoting’, applies “… where a financial product promotes, among other characteristics, environmental or social characteristics, or a combination of those characteristics, provided that the companies in which the investments are made follow good governance practices.”. Article 9, also known as ‘products targeting sustainable investments’, covers products targeting bespoke sustainable investments and applies “… where a financial product has sustainable investment as its objective and an index has been designated as a reference benchmark.” */
+    @Json(name = "sfdrClassification")
+    val sfdrClassification: kotlin.String? = null,
+
+    /* Fund's currency */
+    @Json(name = "currency")
+    val currency: kotlin.String? = null
 
 ) : Serializable {
     companion object {
