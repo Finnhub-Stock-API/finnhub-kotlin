@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**aggregateIndicator**](DefaultApi.md#aggregateIndicator) | **GET** /scan/technical-indicator | Aggregate Indicators
 [**bondPrice**](DefaultApi.md#bondPrice) | **GET** /bond/price | Bond price data
 [**bondProfile**](DefaultApi.md#bondProfile) | **GET** /bond/profile | Bond Profile
+[**bondTick**](DefaultApi.md#bondTick) | **GET** /bond/tick | Bond Tick Data
 [**companyBasicFinancials**](DefaultApi.md#companyBasicFinancials) | **GET** /stock/metric | Basic Financials
 [**companyEarnings**](DefaultApi.md#companyEarnings) | **GET** /stock/earnings | Earnings Surprises
 [**companyEarningsQualityScore**](DefaultApi.md#companyEarningsQualityScore) | **GET** /stock/earnings-quality-score | Company Earnings Quality Score
@@ -48,9 +49,13 @@ Method | HTTP request | Description
 [**indicesHistoricalConstituents**](DefaultApi.md#indicesHistoricalConstituents) | **GET** /index/historical-constituents | Indices Historical Constituents
 [**insiderSentiment**](DefaultApi.md#insiderSentiment) | **GET** /stock/insider-sentiment | Insider Sentiment
 [**insiderTransactions**](DefaultApi.md#insiderTransactions) | **GET** /stock/insider-transactions | Insider Transactions
+[**institutionalOwnership**](DefaultApi.md#institutionalOwnership) | **GET** /institutional/ownership | Institutional Ownership
+[**institutionalPortfolio**](DefaultApi.md#institutionalPortfolio) | **GET** /institutional/portfolio | Institutional Portfolio
+[**institutionalProfile**](DefaultApi.md#institutionalProfile) | **GET** /institutional/profile | Institutional Profile
 [**internationalFilings**](DefaultApi.md#internationalFilings) | **GET** /stock/international-filings | International Filings
 [**investmentThemes**](DefaultApi.md#investmentThemes) | **GET** /stock/investment-theme | Investment Themes (Thematic Investing)
 [**ipoCalendar**](DefaultApi.md#ipoCalendar) | **GET** /calendar/ipo | IPO Calendar
+[**isinChange**](DefaultApi.md#isinChange) | **GET** /ca/isin-change | ISIN Change
 [**marketNews**](DefaultApi.md#marketNews) | **GET** /news | Market News
 [**mutualFundCountryExposure**](DefaultApi.md#mutualFundCountryExposure) | **GET** /mutual-fund/country | Mutual Funds Country Exposure
 [**mutualFundHoldings**](DefaultApi.md#mutualFundHoldings) | **GET** /mutual-fund/holdings | Mutual Funds Holdings
@@ -60,6 +65,7 @@ Method | HTTP request | Description
 [**ownership**](DefaultApi.md#ownership) | **GET** /stock/ownership | Ownership
 [**patternRecognition**](DefaultApi.md#patternRecognition) | **GET** /scan/pattern | Pattern Recognition
 [**pressReleases**](DefaultApi.md#pressReleases) | **GET** /press-releases | Major Press Releases
+[**priceMetrics**](DefaultApi.md#priceMetrics) | **GET** /stock/price-metric | Price Metrics
 [**priceTarget**](DefaultApi.md#priceTarget) | **GET** /stock/price-target | Price Target
 [**quote**](DefaultApi.md#quote) | **GET** /quote | Quote
 [**recommendationTrends**](DefaultApi.md#recommendationTrends) | **GET** /stock/recommendation | Recommendation Trends
@@ -81,6 +87,7 @@ Method | HTTP request | Description
 [**stockVisaApplication**](DefaultApi.md#stockVisaApplication) | **GET** /stock/visa-application | H1-B Visa Application
 [**supplyChainRelationships**](DefaultApi.md#supplyChainRelationships) | **GET** /stock/supply-chain | Supply Chain Relationships
 [**supportResistance**](DefaultApi.md#supportResistance) | **GET** /scan/support-resistance | Support/Resistance
+[**symbolChange**](DefaultApi.md#symbolChange) | **GET** /ca/symbol-change | Symbol Change
 [**symbolSearch**](DefaultApi.md#symbolSearch) | **GET** /search | Symbol Lookup
 [**technicalIndicator**](DefaultApi.md#technicalIndicator) | **POST** /indicator | Technical Indicators
 [**transcripts**](DefaultApi.md#transcripts) | **GET** /stock/transcripts | Earnings Call Transcripts
@@ -146,7 +153,7 @@ Configure api_key:
 
 Bond price data
 
-Get end-of-day bond&#39;s price data.
+&lt;p&gt;Get bond&#39;s price data. The following datasets are supported:&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;   &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US Government Bonds&lt;/th&gt;       &lt;td&gt;Government Bonds&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;BTDS: US Corporate Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;144A Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
 
 ### Example
 ```kotlin
@@ -235,6 +242,64 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BondProfile**](BondProfile.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="bondTick"></a>
+# **bondTick**
+> BondTickData bondTick(isin, date, limit, skip, exchange)
+
+Bond Tick Data
+
+&lt;p&gt;Get trade-level data for bonds. The following datasets are supported:&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;BTDS: US Corporate Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;144A Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val isin : kotlin.String = isin_example // kotlin.String | ISIN.
+val date : kotlin.String = 2013-10-20 // kotlin.String | Date: 2020-04-02.
+val limit : kotlin.Long = 789 // kotlin.Long | Limit number of ticks returned. Maximum value: <code>25000</code>
+val skip : kotlin.Long = 789 // kotlin.Long | Number of ticks to skip. Use this parameter to loop through the entire data.
+val exchange : kotlin.String = exchange_example // kotlin.String | Currently support the following values: <code>trace</code>.
+try {
+    val result : BondTickData = apiInstance.bondTick(isin, date, limit, skip, exchange)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#bondTick")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#bondTick")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **isin** | **kotlin.String**| ISIN. |
+ **date** | **kotlin.String**| Date: 2020-04-02. |
+ **limit** | **kotlin.Long**| Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; |
+ **skip** | **kotlin.Long**| Number of ticks to skip. Use this parameter to loop through the entire data. |
+ **exchange** | **kotlin.String**| Currently support the following values: &lt;code&gt;trace&lt;/code&gt;. |
+
+### Return type
+
+[**BondTickData**](BondTickData.md)
 
 ### Authorization
 
@@ -716,11 +781,11 @@ Configure api_key:
 
 <a name="companyPeers"></a>
 # **companyPeers**
-> kotlin.collections.List&lt;kotlin.String&gt; companyPeers(symbol)
+> kotlin.collections.List&lt;kotlin.String&gt; companyPeers(symbol, grouping)
 
 Peers
 
-Get company peers. Return a list of peers in the same country and sub-industry
+Get company peers. Return a list of peers operating in the same country and sector/industry.
 
 ### Example
 ```kotlin
@@ -730,8 +795,9 @@ Get company peers. Return a list of peers in the same country and sub-industry
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
+val grouping : kotlin.String = grouping_example // kotlin.String | Specify the grouping criteria for choosing peers.Supporter values: <code>sector</code>, <code>industry</code>, <code>subIndustry</code>. Default to <code>subIndustry</code>.
 try {
-    val result : kotlin.collections.List<kotlin.String> = apiInstance.companyPeers(symbol)
+    val result : kotlin.collections.List<kotlin.String> = apiInstance.companyPeers(symbol, grouping)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#companyPeers")
@@ -747,6 +813,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
+ **grouping** | **kotlin.String**| Specify the grouping criteria for choosing peers.Supporter values: &lt;code&gt;sector&lt;/code&gt;, &lt;code&gt;industry&lt;/code&gt;, &lt;code&gt;subIndustry&lt;/code&gt;. Default to &lt;code&gt;subIndustry&lt;/code&gt;. | [optional]
 
 ### Return type
 
@@ -1842,7 +1909,7 @@ Configure api_key:
 
 <a name="financialsReported"></a>
 # **financialsReported**
-> FinancialsAsReported financialsReported(symbol, cik, accessNumber, freq)
+> FinancialsAsReported financialsReported(symbol, cik, accessNumber, freq, from, to)
 
 Financials As Reported
 
@@ -1859,8 +1926,10 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
 val cik : kotlin.String = cik_example // kotlin.String | CIK.
 val accessNumber : kotlin.String = accessNumber_example // kotlin.String | Access number of a specific report you want to retrieve financials from.
 val freq : kotlin.String = freq_example // kotlin.String | Frequency. Can be either <code>annual</code> or <code>quarterly</code>. Default to <code>annual</code>.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>. Filter for endDate.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>. Filter for endDate.
 try {
-    val result : FinancialsAsReported = apiInstance.financialsReported(symbol, cik, accessNumber, freq)
+    val result : FinancialsAsReported = apiInstance.financialsReported(symbol, cik, accessNumber, freq, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#financialsReported")
@@ -1879,6 +1948,8 @@ Name | Type | Description  | Notes
  **cik** | **kotlin.String**| CIK. | [optional]
  **accessNumber** | **kotlin.String**| Access number of a specific report you want to retrieve financials from. | [optional]
  **freq** | **kotlin.String**| Frequency. Can be either &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt;. | [optional]
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for endDate. | [optional]
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for endDate. | [optional]
 
 ### Return type
 
@@ -2360,6 +2431,166 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="institutionalOwnership"></a>
+# **institutionalOwnership**
+> InstitutionalOwnership institutionalOwnership(symbol, cusip, from, to)
+
+Institutional Ownership
+
+Get a list institutional investors&#39; positions for a particular stock overtime. Data from 13-F filings. Limit to 1 year of data at a time.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Filter by symbol.
+val cusip : kotlin.String = cusip_example // kotlin.String | Filter by CUSIP.
+val from : kotlin.String = from_example // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = to_example // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : InstitutionalOwnership = apiInstance.institutionalOwnership(symbol, cusip, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#institutionalOwnership")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#institutionalOwnership")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Filter by symbol. |
+ **cusip** | **kotlin.String**| Filter by CUSIP. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**InstitutionalOwnership**](InstitutionalOwnership.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="institutionalPortfolio"></a>
+# **institutionalPortfolio**
+> InstitutionalPortfolio institutionalPortfolio(cik, from, to)
+
+Institutional Portfolio
+
+Get the holdings/portfolio data of institutional investors from 13-F filings. Limit to 1 year of data at a time.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val cik : kotlin.String = cik_example // kotlin.String | Fund's CIK.
+val from : kotlin.String = from_example // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = to_example // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : InstitutionalPortfolio = apiInstance.institutionalPortfolio(cik, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#institutionalPortfolio")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#institutionalPortfolio")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cik** | **kotlin.String**| Fund&#39;s CIK. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**InstitutionalPortfolio**](InstitutionalPortfolio.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="institutionalProfile"></a>
+# **institutionalProfile**
+> InstitutionalProfile institutionalProfile(cik)
+
+Institutional Profile
+
+Get a list of well-known institutional investors. Currently support 60+ profiles.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val cik : kotlin.String = cik_example // kotlin.String | Filter by CIK. Leave blank to get the full list.
+try {
+    val result : InstitutionalProfile = apiInstance.institutionalProfile(cik)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#institutionalProfile")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#institutionalProfile")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cik** | **kotlin.String**| Filter by CIK. Leave blank to get the full list. | [optional]
+
+### Return type
+
+[**InstitutionalProfile**](InstitutionalProfile.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="internationalFilings"></a>
 # **internationalFilings**
 > kotlin.collections.List&lt;InternationalFiling&gt; internationalFilings(symbol, country)
@@ -2501,6 +2732,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IPOCalendar**](IPOCalendar.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="isinChange"></a>
+# **isinChange**
+> IsinChange isinChange(from, to)
+
+ISIN Change
+
+Get a list of ISIN changes for EU-listed securities. Limit to 2000 events at a time.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val from : kotlin.String = from_example // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = to_example // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : IsinChange = apiInstance.isinChange(from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#isinChange")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#isinChange")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**IsinChange**](IsinChange.md)
 
 ### Authorization
 
@@ -2967,6 +3250,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PressRelease**](PressRelease.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="priceMetrics"></a>
+# **priceMetrics**
+> PriceMetrics priceMetrics(symbol)
+
+Price Metrics
+
+Get company price performance statistics such as 52-week high/low, YTD return and much more.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
+try {
+    val result : PriceMetrics = apiInstance.priceMetrics(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#priceMetrics")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#priceMetrics")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
+
+### Return type
+
+[**PriceMetrics**](PriceMetrics.md)
 
 ### Authorization
 
@@ -4077,6 +4410,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SupportResistance**](SupportResistance.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="symbolChange"></a>
+# **symbolChange**
+> SymbolChange symbolChange(from, to)
+
+Symbol Change
+
+Get a list of symbol changes for US-listed and EU-listed securities. Limit to 2000 events at a time.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val from : kotlin.String = from_example // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = to_example // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : SymbolChange = apiInstance.symbolChange(from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#symbolChange")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#symbolChange")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**SymbolChange**](SymbolChange.md)
 
 ### Authorization
 

@@ -24,6 +24,7 @@ import io.finnhub.api.models.AggregateIndicators
 import io.finnhub.api.models.BasicFinancials
 import io.finnhub.api.models.BondCandles
 import io.finnhub.api.models.BondProfile
+import io.finnhub.api.models.BondTickData
 import io.finnhub.api.models.CompanyESG
 import io.finnhub.api.models.CompanyEarningsQualityScore
 import io.finnhub.api.models.CompanyExecutive
@@ -65,8 +66,12 @@ import io.finnhub.api.models.IndicesConstituents
 import io.finnhub.api.models.IndicesHistoricalConstituents
 import io.finnhub.api.models.InsiderSentiments
 import io.finnhub.api.models.InsiderTransactions
+import io.finnhub.api.models.InstitutionalOwnership
+import io.finnhub.api.models.InstitutionalPortfolio
+import io.finnhub.api.models.InstitutionalProfile
 import io.finnhub.api.models.InternationalFiling
 import io.finnhub.api.models.InvestmentThemes
+import io.finnhub.api.models.IsinChange
 import io.finnhub.api.models.LastBidMinusAsk
 import io.finnhub.api.models.LobbyingResult
 import io.finnhub.api.models.MarketNews
@@ -78,6 +83,7 @@ import io.finnhub.api.models.NewsSentiment
 import io.finnhub.api.models.Ownership
 import io.finnhub.api.models.PatternRecognition
 import io.finnhub.api.models.PressRelease
+import io.finnhub.api.models.PriceMetrics
 import io.finnhub.api.models.PriceTarget
 import io.finnhub.api.models.Quote
 import io.finnhub.api.models.RecommendationTrend
@@ -92,6 +98,7 @@ import io.finnhub.api.models.StockCandles
 import io.finnhub.api.models.StockSymbol
 import io.finnhub.api.models.SupplyChainRelationships
 import io.finnhub.api.models.SupportResistance
+import io.finnhub.api.models.SymbolChange
 import io.finnhub.api.models.SymbolLookup
 import io.finnhub.api.models.TickData
 import io.finnhub.api.models.UpgradeDowngrade
@@ -180,7 +187,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Bond price data
-    * Get end-of-day bond&#39;s price data.
+    * &lt;p&gt;Get bond&#39;s price data. The following datasets are supported:&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;   &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US Government Bonds&lt;/th&gt;       &lt;td&gt;Government Bonds&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;BTDS: US Corporate Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;144A Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
     * @param isin ISIN. 
     * @param from UNIX timestamp. Interval initial value. 
     * @param to UNIX timestamp. Interval end value. 
@@ -302,6 +309,74 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/bond/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Bond Tick Data
+    * &lt;p&gt;Get trade-level data for bonds. The following datasets are supported:&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;BTDS: US Corporate Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;FINRA Trace&lt;/th&gt;       &lt;td&gt;144A Bonds&lt;/td&gt;       &lt;td&gt;Delayed 4h&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+    * @param isin ISIN. 
+    * @param date Date: 2020-04-02. 
+    * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
+    * @param skip Number of ticks to skip. Use this parameter to loop through the entire data. 
+    * @param exchange Currently support the following values: &lt;code&gt;trace&lt;/code&gt;. 
+    * @return BondTickData
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun bondTick(isin: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long, exchange: kotlin.String) : BondTickData {
+        val localVariableConfig = bondTickRequestConfig(isin = isin, date = date, limit = limit, skip = skip, exchange = exchange)
+
+        val localVarResponse = request<Unit, BondTickData>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BondTickData
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation bondTick
+    *
+    * @param isin ISIN. 
+    * @param date Date: 2020-04-02. 
+    * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
+    * @param skip Number of ticks to skip. Use this parameter to loop through the entire data. 
+    * @param exchange Currently support the following values: &lt;code&gt;trace&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun bondTickRequestConfig(isin: kotlin.String, date: kotlin.String, limit: kotlin.Long, skip: kotlin.Long, exchange: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("isin", listOf(isin.toString()))
+                put("date", listOf(parseDateToQueryString(date)))
+                put("limit", listOf(limit.toString()))
+                put("skip", listOf(skip.toString()))
+                put("exchange", listOf(exchange.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/bond/tick",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -846,8 +921,9 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Peers
-    * Get company peers. Return a list of peers in the same country and sub-industry
+    * Get company peers. Return a list of peers operating in the same country and sector/industry.
     * @param symbol Symbol of the company: AAPL. 
+    * @param grouping Specify the grouping criteria for choosing peers.Supporter values: &lt;code&gt;sector&lt;/code&gt;, &lt;code&gt;industry&lt;/code&gt;, &lt;code&gt;subIndustry&lt;/code&gt;. Default to &lt;code&gt;subIndustry&lt;/code&gt;. (optional)
     * @return kotlin.collections.List<kotlin.String>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -855,8 +931,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun companyPeers(symbol: kotlin.String) : kotlin.collections.List<kotlin.String> {
-        val localVariableConfig = companyPeersRequestConfig(symbol = symbol)
+    fun companyPeers(symbol: kotlin.String, grouping: kotlin.String?) : kotlin.collections.List<kotlin.String> {
+        val localVariableConfig = companyPeersRequestConfig(symbol = symbol, grouping = grouping)
 
         val localVarResponse = request<Unit, kotlin.collections.List<kotlin.String>>(
             localVariableConfig
@@ -881,13 +957,17 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * To obtain the request config of the operation companyPeers
     *
     * @param symbol Symbol of the company: AAPL. 
+    * @param grouping Specify the grouping criteria for choosing peers.Supporter values: &lt;code&gt;sector&lt;/code&gt;, &lt;code&gt;industry&lt;/code&gt;, &lt;code&gt;subIndustry&lt;/code&gt;. Default to &lt;code&gt;subIndustry&lt;/code&gt;. (optional)
     * @return RequestConfig
     */
-    fun companyPeersRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+    fun companyPeersRequestConfig(symbol: kotlin.String, grouping: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 put("symbol", listOf(symbol.toString()))
+                if (grouping != null) {
+                    put("grouping", listOf(grouping.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
@@ -2177,6 +2257,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param cik CIK. (optional)
     * @param accessNumber Access number of a specific report you want to retrieve financials from. (optional)
     * @param freq Frequency. Can be either &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt;. (optional)
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for endDate. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for endDate. (optional)
     * @return FinancialsAsReported
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -2184,8 +2266,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun financialsReported(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, freq: kotlin.String?) : FinancialsAsReported {
-        val localVariableConfig = financialsReportedRequestConfig(symbol = symbol, cik = cik, accessNumber = accessNumber, freq = freq)
+    fun financialsReported(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, freq: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : FinancialsAsReported {
+        val localVariableConfig = financialsReportedRequestConfig(symbol = symbol, cik = cik, accessNumber = accessNumber, freq = freq, from = from, to = to)
 
         val localVarResponse = request<Unit, FinancialsAsReported>(
             localVariableConfig
@@ -2213,9 +2295,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param cik CIK. (optional)
     * @param accessNumber Access number of a specific report you want to retrieve financials from. (optional)
     * @param freq Frequency. Can be either &lt;code&gt;annual&lt;/code&gt; or &lt;code&gt;quarterly&lt;/code&gt;. Default to &lt;code&gt;annual&lt;/code&gt;. (optional)
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for endDate. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. Filter for endDate. (optional)
     * @return RequestConfig
     */
-    fun financialsReportedRequestConfig(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, freq: kotlin.String?) : RequestConfig<Unit> {
+    fun financialsReportedRequestConfig(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, freq: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -2230,6 +2314,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
                 }
                 if (freq != null) {
                     put("freq", listOf(freq.toString()))
+                }
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2780,6 +2870,191 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
+    * Institutional Ownership
+    * Get a list institutional investors&#39; positions for a particular stock overtime. Data from 13-F filings. Limit to 1 year of data at a time.
+    * @param symbol Filter by symbol. 
+    * @param cusip Filter by CUSIP. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return InstitutionalOwnership
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun institutionalOwnership(symbol: kotlin.String, cusip: kotlin.String, from: kotlin.String, to: kotlin.String) : InstitutionalOwnership {
+        val localVariableConfig = institutionalOwnershipRequestConfig(symbol = symbol, cusip = cusip, from = from, to = to)
+
+        val localVarResponse = request<Unit, InstitutionalOwnership>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InstitutionalOwnership
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation institutionalOwnership
+    *
+    * @param symbol Filter by symbol. 
+    * @param cusip Filter by CUSIP. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun institutionalOwnershipRequestConfig(symbol: kotlin.String, cusip: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("cusip", listOf(cusip.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/institutional/ownership",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Institutional Portfolio
+    * Get the holdings/portfolio data of institutional investors from 13-F filings. Limit to 1 year of data at a time.
+    * @param cik Fund&#39;s CIK. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return InstitutionalPortfolio
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun institutionalPortfolio(cik: kotlin.String, from: kotlin.String, to: kotlin.String) : InstitutionalPortfolio {
+        val localVariableConfig = institutionalPortfolioRequestConfig(cik = cik, from = from, to = to)
+
+        val localVarResponse = request<Unit, InstitutionalPortfolio>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InstitutionalPortfolio
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation institutionalPortfolio
+    *
+    * @param cik Fund&#39;s CIK. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun institutionalPortfolioRequestConfig(cik: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("cik", listOf(cik.toString()))
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/institutional/portfolio",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Institutional Profile
+    * Get a list of well-known institutional investors. Currently support 60+ profiles.
+    * @param cik Filter by CIK. Leave blank to get the full list. (optional)
+    * @return InstitutionalProfile
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun institutionalProfile(cik: kotlin.String?) : InstitutionalProfile {
+        val localVariableConfig = institutionalProfileRequestConfig(cik = cik)
+
+        val localVarResponse = request<Unit, InstitutionalProfile>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InstitutionalProfile
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation institutionalProfile
+    *
+    * @param cik Filter by CIK. Leave blank to get the full list. (optional)
+    * @return RequestConfig
+    */
+    fun institutionalProfileRequestConfig(cik: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (cik != null) {
+                    put("cik", listOf(cik.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/institutional/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * International Filings
     * List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
     * @param symbol Symbol. Leave empty to list latest filings. (optional)
@@ -2951,6 +3226,65 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/calendar/ipo",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * ISIN Change
+    * Get a list of ISIN changes for EU-listed securities. Limit to 2000 events at a time.
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return IsinChange
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun isinChange(from: kotlin.String, to: kotlin.String) : IsinChange {
+        val localVariableConfig = isinChangeRequestConfig(from = from, to = to)
+
+        val localVarResponse = request<Unit, IsinChange>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IsinChange
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation isinChange
+    *
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun isinChangeRequestConfig(from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/ca/isin-change",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -3497,6 +3831,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/press-releases",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Price Metrics
+    * Get company price performance statistics such as 52-week high/low, YTD return and much more.
+    * @param symbol Symbol of the company: AAPL. 
+    * @return PriceMetrics
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun priceMetrics(symbol: kotlin.String) : PriceMetrics {
+        val localVariableConfig = priceMetricsRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, PriceMetrics>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PriceMetrics
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation priceMetrics
+    *
+    * @param symbol Symbol of the company: AAPL. 
+    * @return RequestConfig
+    */
+    fun priceMetricsRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/price-metric",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -4783,6 +5173,65 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/scan/support-resistance",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Symbol Change
+    * Get a list of symbol changes for US-listed and EU-listed securities. Limit to 2000 events at a time.
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return SymbolChange
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun symbolChange(from: kotlin.String, to: kotlin.String) : SymbolChange {
+        val localVariableConfig = symbolChangeRequestConfig(from = from, to = to)
+
+        val localVarResponse = request<Unit, SymbolChange>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SymbolChange
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation symbolChange
+    *
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun symbolChangeRequestConfig(from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("from", listOf(from.toString()))
+                put("to", listOf(to.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/ca/symbol-change",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

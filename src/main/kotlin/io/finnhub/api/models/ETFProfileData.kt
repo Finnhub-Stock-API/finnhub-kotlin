@@ -33,7 +33,7 @@ import java.io.Serializable
  * @param aum AUM.
  * @param nav NAV.
  * @param navCurrency NAV currency.
- * @param expenseRatio Expense ratio.
+ * @param expenseRatio Expense ratio. For non-US funds, this is the <a href=\"https://www.esma.europa.eu/sites/default/files/library/2015/11/09_1028_final_kid_ongoing_charges_methodology_for_publication_u_2_.pdf\" target=\"_blank\">KID ongoing charges<a/>.
  * @param trackingIndex Tracking Index.
  * @param etfCompany ETF issuer.
  * @param domicile ETF domicile.
@@ -45,6 +45,9 @@ import java.io.Serializable
  * @param priceToBook P/B.
  * @param avgVolume 30-day average volume.
  * @param description ETF's description.
+ * @param isInverse Whether the ETF is inverse
+ * @param isLeveraged Whether the ETF is leveraged
+ * @param leverageFactor Leverage factor.
  */
 
 data class ETFProfileData (
@@ -73,7 +76,7 @@ data class ETFProfileData (
     @Json(name = "navCurrency")
     val navCurrency: kotlin.String? = null,
 
-    /* Expense ratio. */
+    /* Expense ratio. For non-US funds, this is the <a href=\"https://www.esma.europa.eu/sites/default/files/library/2015/11/09_1028_final_kid_ongoing_charges_methodology_for_publication_u_2_.pdf\" target=\"_blank\">KID ongoing charges<a/>. */
     @Json(name = "expenseRatio")
     val expenseRatio: kotlin.Float? = null,
 
@@ -119,7 +122,19 @@ data class ETFProfileData (
 
     /* ETF's description. */
     @Json(name = "description")
-    val description: kotlin.String? = null
+    val description: kotlin.String? = null,
+
+    /* Whether the ETF is inverse */
+    @Json(name = "isInverse")
+    val isInverse: kotlin.Boolean? = null,
+
+    /* Whether the ETF is leveraged */
+    @Json(name = "isLeveraged")
+    val isLeveraged: kotlin.Boolean? = null,
+
+    /* Leverage factor. */
+    @Json(name = "leverageFactor")
+    val leverageFactor: kotlin.Float? = null
 
 ) : Serializable {
     companion object {

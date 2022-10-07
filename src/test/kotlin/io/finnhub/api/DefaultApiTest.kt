@@ -74,7 +74,7 @@ class DefaultApiTest {
 
     @Test
     fun companyPeers() {
-        println(apiClient.companyPeers("AAPL"))
+        println(apiClient.companyPeers("AAPL", "industry"))
     }
 
     @Test
@@ -150,7 +150,16 @@ class DefaultApiTest {
 
     @Test
     fun financialsReported() {
-        println(apiClient.financialsReported(symbol = "AAPL", freq = "annual", accessNumber = null, cik = null))
+        println(
+            apiClient.financialsReported(
+                symbol = "AAPL",
+                freq = "annual",
+                accessNumber = null,
+                cik = null,
+                from = "",
+                to = ""
+            )
+        )
     }
 
     @Test
@@ -445,5 +454,35 @@ class DefaultApiTest {
     @Test
     fun sectorMetric() {
         println(apiClient.sectorMetric("NA"))
+    }
+
+    @Test
+    fun priceMetric() {
+        println(apiClient.priceMetrics("AAPL"))
+    }
+
+    @Test
+    fun symbolChange() {
+        println(apiClient.symbolChange(from = "2022-06-01", to = "2022-06-10"))
+    }
+
+    @Test
+    fun isinChange() {
+        println(apiClient.isinChange(from = "2022-06-01", to = "2022-06-10"))
+    }
+
+    @Test
+    fun institutionalProfile() {
+        println(apiClient.institutionalProfile(""))
+    }
+
+    @Test
+    fun institutionalPortfolio() {
+        println(apiClient.institutionalPortfolio("1000097", from = "2022-06-01", to = "2022-09-10"))
+    }
+
+    @Test
+    fun institutionalOwnership() {
+        println(apiClient.institutionalOwnership("TSLA", "", from = "2022-06-01", to = "2022-09-10"))
     }
 }
