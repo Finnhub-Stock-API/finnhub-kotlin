@@ -32,9 +32,12 @@ import java.io.Serializable
  * @param total Total number of ticks for that date.
  * @param v List of volume data.
  * @param p List of price data.
+ * @param y List of yield data.
  * @param t List of timestamp in UNIX ms.
  * @param si List of values showing the side (Buy/sell) of each trade. List of supported values: <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\",>here</a>
  * @param cp List of values showing the counterparty of each trade. List of supported values: <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\",>here</a>
+ * @param rp List of values showing the reporting party of each trade. List of supported values: <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\",>here</a>
+ * @param ats ATS flag. Y or empty
  * @param c List of trade conditions. A comprehensive list of trade conditions code can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\">here</a>
  */
 
@@ -60,6 +63,10 @@ data class BondTickData (
     @Json(name = "p")
     val p: kotlin.collections.List<kotlin.Float>? = null,
 
+    /* List of yield data. */
+    @Json(name = "y")
+    val y: kotlin.collections.List<kotlin.Float>? = null,
+
     /* List of timestamp in UNIX ms. */
     @Json(name = "t")
     val t: kotlin.collections.List<kotlin.Long>? = null,
@@ -71,6 +78,14 @@ data class BondTickData (
     /* List of values showing the counterparty of each trade. List of supported values: <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\",>here</a> */
     @Json(name = "cp")
     val cp: kotlin.collections.List<kotlin.String>? = null,
+
+    /* List of values showing the reporting party of each trade. List of supported values: <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\",>here</a> */
+    @Json(name = "rp")
+    val rp: kotlin.collections.List<kotlin.String>? = null,
+
+    /* ATS flag. Y or empty */
+    @Json(name = "ats")
+    val ats: kotlin.collections.List<kotlin.String>? = null,
 
     /* List of trade conditions. A comprehensive list of trade conditions code can be found <a target=\"_blank\" href=\"https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp=sharing\">here</a> */
     @Json(name = "c")

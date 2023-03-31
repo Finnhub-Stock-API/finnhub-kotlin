@@ -27,23 +27,19 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol Symbol of the company.
- * @param atDate Data date.
- * @param `data` 
+ * @param d Date of the reading
+ * @param v Value
  */
 
-data class PriceMetrics (
+data class BondYieldCurveInfo (
 
-    /* Symbol of the company. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    /* Date of the reading */
+    @Json(name = "d")
+    val d: kotlin.String? = null,
 
-    /* Data date. */
-    @Json(name = "atDate")
-    val atDate: kotlin.String? = null,
-
-    @Json(name = "data")
-    val `data`: kotlin.Any? = null
+    /* Value */
+    @Json(name = "v")
+    val v: kotlin.Float? = null
 
 ) : Serializable {
     companion object {

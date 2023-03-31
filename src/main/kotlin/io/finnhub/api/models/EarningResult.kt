@@ -33,6 +33,8 @@ import java.io.Serializable
  * @param surprisePercent Surprise percent.
  * @param period Reported period.
  * @param symbol Company symbol.
+ * @param year Earnings year.
+ * @param quarter Earnings quarter.
  */
 
 data class EarningResult (
@@ -59,7 +61,15 @@ data class EarningResult (
 
     /* Company symbol. */
     @Json(name = "symbol")
-    val symbol: kotlin.String? = null
+    val symbol: kotlin.String? = null,
+
+    /* Earnings year. */
+    @Json(name = "year")
+    val year: kotlin.Long? = null,
+
+    /* Earnings quarter. */
+    @Json(name = "quarter")
+    val quarter: kotlin.Long? = null
 
 ) : Serializable {
     companion object {

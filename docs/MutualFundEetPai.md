@@ -1,11 +1,10 @@
 
-# PriceMetrics
+# MutualFundEetPai
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**symbol** | **kotlin.String** | Symbol of the company. |  [optional]
-**atDate** | **kotlin.String** | Data date. |  [optional]
+**isin** | **kotlin.String** | ISIN. |  [optional]
 **&#x60;data&#x60;** | [**kotlin.Any**](.md) |  |  [optional]
 
 

@@ -34,6 +34,7 @@ import java.io.Serializable
  * @param share Number of shares owned by the ETF.
  * @param percent Portfolio's percent
  * @param `value` Market value
+ * @param assetType Asset type. Can be 1 of the following values: <code>Equity</code>, <code>ETP</code>, <code>Fund</code>, <code>Bond</code>, <code>Other</code> or empty.
  */
 
 data class ETFHoldingsData (
@@ -64,7 +65,11 @@ data class ETFHoldingsData (
 
     /* Market value */
     @Json(name = "value")
-    val `value`: kotlin.Float? = null
+    val `value`: kotlin.Float? = null,
+
+    /* Asset type. Can be 1 of the following values: <code>Equity</code>, <code>ETP</code>, <code>Fund</code>, <code>Bond</code>, <code>Other</code> or empty. */
+    @Json(name = "assetType")
+    val assetType: kotlin.String? = null
 
 ) : Serializable {
     companion object {

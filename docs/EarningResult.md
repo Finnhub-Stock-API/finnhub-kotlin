@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **surprisePercent** | **kotlin.Float** | Surprise percent. |  [optional]
 **period** | **kotlin.String** | Reported period. |  [optional]
 **symbol** | **kotlin.String** | Company symbol. |  [optional]
+**year** | **kotlin.Long** | Earnings year. |  [optional]
+**quarter** | **kotlin.Long** | Earnings quarter. |  [optional]
 
 
 

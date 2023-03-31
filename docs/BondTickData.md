@@ -9,9 +9,12 @@ Name | Type | Description | Notes
 **total** | **kotlin.Long** | Total number of ticks for that date. |  [optional]
 **v** | **kotlin.collections.List&lt;kotlin.Float&gt;** | List of volume data. |  [optional]
 **p** | **kotlin.collections.List&lt;kotlin.Float&gt;** | List of price data. |  [optional]
+**y** | **kotlin.collections.List&lt;kotlin.Float&gt;** | List of yield data. |  [optional]
 **t** | **kotlin.collections.List&lt;kotlin.Long&gt;** | List of timestamp in UNIX ms. |  [optional]
 **si** | **kotlin.collections.List&lt;kotlin.String&gt;** | List of values showing the side (Buy/sell) of each trade. List of supported values: &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp&#x3D;sharing\&quot;,&gt;here&lt;/a&gt; |  [optional]
 **cp** | **kotlin.collections.List&lt;kotlin.String&gt;** | List of values showing the counterparty of each trade. List of supported values: &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp&#x3D;sharing\&quot;,&gt;here&lt;/a&gt; |  [optional]
+**rp** | **kotlin.collections.List&lt;kotlin.String&gt;** | List of values showing the reporting party of each trade. List of supported values: &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp&#x3D;sharing\&quot;,&gt;here&lt;/a&gt; |  [optional]
+**ats** | **kotlin.collections.List&lt;kotlin.String&gt;** | ATS flag. Y or empty |  [optional]
 **c** | **kotlin.collections.List&lt;kotlin.collections.List&lt;kotlin.String&gt;&gt;** | List of trade conditions. A comprehensive list of trade conditions code can be found &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1O3aueXSPOqo7Iuyz4PqDG6yZunHsX8BTefZ2kFk5pz4/edit?usp&#x3D;sharing\&quot;&gt;here&lt;/a&gt; |  [optional]
 
 

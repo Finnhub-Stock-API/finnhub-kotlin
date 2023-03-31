@@ -129,11 +129,6 @@ class DefaultApiTest {
     }
 
     @Test
-    fun internationalFilings() {
-        println(apiClient.internationalFilings("AC.TO", ""))
-    }
-
-    @Test
     fun filingsSentiment() {
         println(apiClient.filingsSentiment("0000320193-20-000052"))
     }
@@ -458,7 +453,7 @@ class DefaultApiTest {
 
     @Test
     fun priceMetric() {
-        println(apiClient.priceMetrics("AAPL"))
+        println(apiClient.priceMetrics("AAPL", "2022-02-22"))
     }
 
     @Test
@@ -484,5 +479,20 @@ class DefaultApiTest {
     @Test
     fun institutionalOwnership() {
         println(apiClient.institutionalOwnership("TSLA", "", from = "2022-06-01", to = "2022-09-10"))
+    }
+
+    @Test
+    fun congressionalTrading() {
+        println(apiClient.congressionalTrading("TSLA", from = "2015-06-01", to = "2023-09-10"))
+    }
+
+    @Test
+    fun bondTick() {
+        println(apiClient.bondTick("US693475BF18", "2022-08-19", 50, 0, "exchange"))
+    }
+
+    @Test
+    fun bondYield() {
+        println(apiClient.bondYieldCurve("10y"))
     }
 }

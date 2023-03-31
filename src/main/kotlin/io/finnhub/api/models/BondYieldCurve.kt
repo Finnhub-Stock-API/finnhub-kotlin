@@ -20,6 +20,7 @@
 
 package io.finnhub.api.models
 
+import io.finnhub.api.models.BondYieldCurveInfo
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -27,23 +28,19 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol Symbol of the company.
- * @param atDate Data date.
- * @param `data` 
+ * @param `data` Array of data.
+ * @param code Bond's code
  */
 
-data class PriceMetrics (
+data class BondYieldCurve (
 
-    /* Symbol of the company. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
-
-    /* Data date. */
-    @Json(name = "atDate")
-    val atDate: kotlin.String? = null,
-
+    /* Array of data. */
     @Json(name = "data")
-    val `data`: kotlin.Any? = null
+    val `data`: kotlin.collections.List<BondYieldCurveInfo>? = null,
+
+    /* Bond's code */
+    @Json(name = "code")
+    val code: kotlin.String? = null
 
 ) : Serializable {
     companion object {

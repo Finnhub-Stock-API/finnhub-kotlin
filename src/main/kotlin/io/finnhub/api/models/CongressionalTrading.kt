@@ -20,6 +20,7 @@
 
 package io.finnhub.api.models
 
+import io.finnhub.api.models.CongressionalTransaction
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -28,22 +29,18 @@ import java.io.Serializable
  * 
  *
  * @param symbol Symbol of the company.
- * @param atDate Data date.
- * @param `data` 
+ * @param `data` Array of stock trades.
  */
 
-data class PriceMetrics (
+data class CongressionalTrading (
 
     /* Symbol of the company. */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
 
-    /* Data date. */
-    @Json(name = "atDate")
-    val atDate: kotlin.String? = null,
-
+    /* Array of stock trades. */
     @Json(name = "data")
-    val `data`: kotlin.Any? = null
+    val `data`: kotlin.collections.List<CongressionalTransaction>? = null
 
 ) : Serializable {
     companion object {

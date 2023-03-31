@@ -27,23 +27,19 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol Symbol of the company.
- * @param atDate Data date.
- * @param `data` 
+ * @param id Filter id, use with respective field in search query body.
+ * @param name Display name.
  */
 
-data class PriceMetrics (
+data class SearchFilter (
 
-    /* Symbol of the company. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    /* Filter id, use with respective field in search query body. */
+    @Json(name = "id")
+    val id: kotlin.String? = null,
 
-    /* Data date. */
-    @Json(name = "atDate")
-    val atDate: kotlin.String? = null,
-
-    @Json(name = "data")
-    val `data`: kotlin.Any? = null
+    /* Display name. */
+    @Json(name = "name")
+    val name: kotlin.String? = null
 
 ) : Serializable {
     companion object {

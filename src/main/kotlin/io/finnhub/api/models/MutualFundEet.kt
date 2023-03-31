@@ -27,20 +27,15 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol Symbol of the company.
- * @param atDate Data date.
+ * @param isin ISIN.
  * @param `data` 
  */
 
-data class PriceMetrics (
+data class MutualFundEet (
 
-    /* Symbol of the company. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
-
-    /* Data date. */
-    @Json(name = "atDate")
-    val atDate: kotlin.String? = null,
+    /* ISIN. */
+    @Json(name = "isin")
+    val isin: kotlin.String? = null,
 
     @Json(name = "data")
     val `data`: kotlin.Any? = null

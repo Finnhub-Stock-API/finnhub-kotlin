@@ -3,6 +3,8 @@ docs/BasicFinancials.md
 docs/BondCandles.md
 docs/BondProfile.md
 docs/BondTickData.md
+docs/BondYieldCurve.md
+docs/BondYieldCurveInfo.md
 docs/BreakdownItem.md
 docs/Company.md
 docs/CompanyESG.md
@@ -13,6 +15,8 @@ docs/CompanyNews.md
 docs/CompanyNewsStatistics.md
 docs/CompanyProfile.md
 docs/CompanyProfile2.md
+docs/CongressionalTrading.md
+docs/CongressionalTransaction.md
 docs/CountryMetadata.md
 docs/CovidInfo.md
 docs/CryptoCandles.md
@@ -23,6 +27,7 @@ docs/Development.md
 docs/Dividends.md
 docs/Dividends2.md
 docs/Dividends2Info.md
+docs/DocumentResponse.md
 docs/ETFCountryExposureData.md
 docs/ETFHoldingsData.md
 docs/ETFProfileData.md
@@ -47,8 +52,10 @@ docs/EconomicCalendar.md
 docs/EconomicCode.md
 docs/EconomicData.md
 docs/EconomicDataInfo.md
+docs/ExcerptResponse.md
 docs/FDAComitteeMeeting.md
 docs/Filing.md
+docs/FilingResponse.md
 docs/FilingSentiment.md
 docs/FinancialStatements.md
 docs/FinancialsAsReported.md
@@ -60,6 +67,8 @@ docs/FundOwnershipInfo.md
 docs/HistoricalNBBO.md
 docs/IPOCalendar.md
 docs/IPOEvent.md
+docs/InFilingResponse.md
+docs/InFilingSearchBody.md
 docs/IndexHistoricalConstituent.md
 docs/Indicator.md
 docs/IndicesConstituents.md
@@ -87,6 +96,8 @@ docs/LobbyingResult.md
 docs/MarketNews.md
 docs/MutualFundCountryExposure.md
 docs/MutualFundCountryExposureData.md
+docs/MutualFundEet.md
+docs/MutualFundEetPai.md
 docs/MutualFundHoldings.md
 docs/MutualFundHoldingsData.md
 docs/MutualFundProfile.md
@@ -108,6 +119,9 @@ docs/RevenueBreakdown.md
 docs/RevenueEstimates.md
 docs/RevenueEstimatesInfo.md
 docs/SECSentimentAnalysis.md
+docs/SearchBody.md
+docs/SearchFilter.md
+docs/SearchResponse.md
 docs/SectorMetric.md
 docs/SectorMetricData.md
 docs/Sentiment.md
@@ -164,6 +178,8 @@ src/main/kotlin/io/finnhub/api/models/BasicFinancials.kt
 src/main/kotlin/io/finnhub/api/models/BondCandles.kt
 src/main/kotlin/io/finnhub/api/models/BondProfile.kt
 src/main/kotlin/io/finnhub/api/models/BondTickData.kt
+src/main/kotlin/io/finnhub/api/models/BondYieldCurve.kt
+src/main/kotlin/io/finnhub/api/models/BondYieldCurveInfo.kt
 src/main/kotlin/io/finnhub/api/models/BreakdownItem.kt
 src/main/kotlin/io/finnhub/api/models/Company.kt
 src/main/kotlin/io/finnhub/api/models/CompanyESG.kt
@@ -174,6 +190,8 @@ src/main/kotlin/io/finnhub/api/models/CompanyNews.kt
 src/main/kotlin/io/finnhub/api/models/CompanyNewsStatistics.kt
 src/main/kotlin/io/finnhub/api/models/CompanyProfile.kt
 src/main/kotlin/io/finnhub/api/models/CompanyProfile2.kt
+src/main/kotlin/io/finnhub/api/models/CongressionalTrading.kt
+src/main/kotlin/io/finnhub/api/models/CongressionalTransaction.kt
 src/main/kotlin/io/finnhub/api/models/CountryMetadata.kt
 src/main/kotlin/io/finnhub/api/models/CovidInfo.kt
 src/main/kotlin/io/finnhub/api/models/CryptoCandles.kt
@@ -183,6 +201,7 @@ src/main/kotlin/io/finnhub/api/models/Development.kt
 src/main/kotlin/io/finnhub/api/models/Dividends.kt
 src/main/kotlin/io/finnhub/api/models/Dividends2.kt
 src/main/kotlin/io/finnhub/api/models/Dividends2Info.kt
+src/main/kotlin/io/finnhub/api/models/DocumentResponse.kt
 src/main/kotlin/io/finnhub/api/models/ETFCountryExposureData.kt
 src/main/kotlin/io/finnhub/api/models/ETFHoldingsData.kt
 src/main/kotlin/io/finnhub/api/models/ETFProfileData.kt
@@ -207,8 +226,10 @@ src/main/kotlin/io/finnhub/api/models/EconomicCode.kt
 src/main/kotlin/io/finnhub/api/models/EconomicData.kt
 src/main/kotlin/io/finnhub/api/models/EconomicDataInfo.kt
 src/main/kotlin/io/finnhub/api/models/EconomicEvent.kt
+src/main/kotlin/io/finnhub/api/models/ExcerptResponse.kt
 src/main/kotlin/io/finnhub/api/models/FDAComitteeMeeting.kt
 src/main/kotlin/io/finnhub/api/models/Filing.kt
+src/main/kotlin/io/finnhub/api/models/FilingResponse.kt
 src/main/kotlin/io/finnhub/api/models/FilingSentiment.kt
 src/main/kotlin/io/finnhub/api/models/FinancialStatements.kt
 src/main/kotlin/io/finnhub/api/models/FinancialsAsReported.kt
@@ -220,6 +241,8 @@ src/main/kotlin/io/finnhub/api/models/FundOwnershipInfo.kt
 src/main/kotlin/io/finnhub/api/models/HistoricalNBBO.kt
 src/main/kotlin/io/finnhub/api/models/IPOCalendar.kt
 src/main/kotlin/io/finnhub/api/models/IPOEvent.kt
+src/main/kotlin/io/finnhub/api/models/InFilingResponse.kt
+src/main/kotlin/io/finnhub/api/models/InFilingSearchBody.kt
 src/main/kotlin/io/finnhub/api/models/IndexHistoricalConstituent.kt
 src/main/kotlin/io/finnhub/api/models/Indicator.kt
 src/main/kotlin/io/finnhub/api/models/IndicesConstituents.kt
@@ -247,6 +270,8 @@ src/main/kotlin/io/finnhub/api/models/LobbyingResult.kt
 src/main/kotlin/io/finnhub/api/models/MarketNews.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundCountryExposure.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundCountryExposureData.kt
+src/main/kotlin/io/finnhub/api/models/MutualFundEet.kt
+src/main/kotlin/io/finnhub/api/models/MutualFundEetPai.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundHoldings.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundHoldingsData.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundProfile.kt
@@ -268,6 +293,9 @@ src/main/kotlin/io/finnhub/api/models/RevenueBreakdown.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimates.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/SECSentimentAnalysis.kt
+src/main/kotlin/io/finnhub/api/models/SearchBody.kt
+src/main/kotlin/io/finnhub/api/models/SearchFilter.kt
+src/main/kotlin/io/finnhub/api/models/SearchResponse.kt
 src/main/kotlin/io/finnhub/api/models/SectorMetric.kt
 src/main/kotlin/io/finnhub/api/models/SectorMetricData.kt
 src/main/kotlin/io/finnhub/api/models/Sentiment.kt

@@ -35,6 +35,7 @@ import java.io.Serializable
  * @param recordDate Record date.
  * @param declarationDate Declaration date.
  * @param currency Currency.
+ * @param freq <p>Dividend frequency. Can be 1 of the following values:</p><ul> <li><code>0: Annually</code></li> <li><code>1: Monthly</code></li> <li><code>2: Quarterly</code></li> <li><code>3: Semi-annually</code></li> <li><code>4: Other/Unknown</code></li> <li><code>5: Bimonthly</code></li> <li><code>6: Trimesterly</code></li> <li><code>7: Weekly</code></li> </ul>
  */
 
 data class Dividends (
@@ -69,7 +70,11 @@ data class Dividends (
 
     /* Currency. */
     @Json(name = "currency")
-    val currency: kotlin.String? = null
+    val currency: kotlin.String? = null,
+
+    /* <p>Dividend frequency. Can be 1 of the following values:</p><ul> <li><code>0: Annually</code></li> <li><code>1: Monthly</code></li> <li><code>2: Quarterly</code></li> <li><code>3: Semi-annually</code></li> <li><code>4: Other/Unknown</code></li> <li><code>5: Bimonthly</code></li> <li><code>6: Trimesterly</code></li> <li><code>7: Weekly</code></li> </ul> */
+    @Json(name = "freq")
+    val freq: kotlin.String? = null
 
 ) : Serializable {
     companion object {

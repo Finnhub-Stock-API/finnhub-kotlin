@@ -30,7 +30,9 @@ import java.io.Serializable
  * @param address Address of company's headquarter.
  * @param city City of company's headquarter.
  * @param country Country of company's headquarter.
- * @param currency Currency used in company filings.
+ * @param currency Currency used in company filings and financials.
+ * @param estimateCurrency Currency used in Estimates data.
+ * @param marketCapCurrency Currency used in market capitalization.
  * @param cusip CUSIP number.
  * @param sedol Sedol number.
  * @param description Company business summary.
@@ -71,9 +73,17 @@ data class CompanyProfile (
     @Json(name = "country")
     val country: kotlin.String? = null,
 
-    /* Currency used in company filings. */
+    /* Currency used in company filings and financials. */
     @Json(name = "currency")
     val currency: kotlin.String? = null,
+
+    /* Currency used in Estimates data. */
+    @Json(name = "estimateCurrency")
+    val estimateCurrency: kotlin.String? = null,
+
+    /* Currency used in market capitalization. */
+    @Json(name = "marketCapCurrency")
+    val marketCapCurrency: kotlin.String? = null,
 
     /* CUSIP number. */
     @Json(name = "cusip")
