@@ -12,6 +12,10 @@ Name | Type | Description | Notes
 **currencyCode** | **kotlin.String** | Currency code |  [optional]
 **region** | **kotlin.String** | Region |  [optional]
 **subRegion** | **kotlin.String** | Sub-Region |  [optional]
+**rating** | **kotlin.String** | Moody&#39;s credit risk rating. |  [optional]
+**defaultSpread** | **kotlin.Float** | Default spread |  [optional]
+**countryRiskPremium** | **kotlin.Float** | Country risk premium |  [optional]
+**equityRiskPremium** | **kotlin.Float** | Equity risk premium |  [optional]
 
 
 

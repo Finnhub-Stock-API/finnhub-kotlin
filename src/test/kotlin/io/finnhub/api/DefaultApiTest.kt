@@ -328,12 +328,12 @@ class DefaultApiTest {
 
     @Test
     fun etfsSectorExposure() {
-        println(apiClient.etfsSectorExposure("SPY"))
+        println(apiClient.etfsSectorExposure("SPY", ""))
     }
 
     @Test
     fun etfsCountryExposure() {
-        println(apiClient.etfsCountryExposure("SPY"))
+        println(apiClient.etfsCountryExposure("SPY", ""))
     }
 
     @Test
@@ -348,12 +348,12 @@ class DefaultApiTest {
 
     @Test
     fun mutualFundSectorExposure() {
-        println(apiClient.mutualFundSectorExposure("VTSAX"))
+        println(apiClient.mutualFundSectorExposure("VTSAX", ""))
     }
 
     @Test
     fun mutualFundCountryExposure() {
-        println(apiClient.mutualFundCountryExposure("VTSAX"))
+        println(apiClient.mutualFundCountryExposure("VTSAX", ""))
     }
 
     @Test
@@ -494,5 +494,15 @@ class DefaultApiTest {
     @Test
     fun bondYield() {
         println(apiClient.bondYieldCurve("10y"))
+    }
+
+    @Test
+    fun marketHoliday() {
+        println(apiClient.marketHoliday("US"))
+    }
+
+    @Test
+    fun marketStatus() {
+        println(apiClient.marketStatus("US"))
     }
 }

@@ -20,7 +20,6 @@
 
 package io.finnhub.api.models
 
-import io.finnhub.api.models.IndicesConstituentsBreakdown
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -28,24 +27,24 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol Index's symbol.
- * @param constituents Array of constituents.
- * @param constituentsBreakdown Array of constituents' details.
+ * @param eventName Holiday's name.
+ * @param atDate Date.
+ * @param tradingHour Trading hours for this day if the market is partially closed only.
  */
 
-data class IndicesConstituents (
+data class MarketHolidayData (
 
-    /* Index's symbol. */
-    @Json(name = "symbol")
-    val symbol: kotlin.String? = null,
+    /* Holiday's name. */
+    @Json(name = "eventName")
+    val eventName: kotlin.String? = null,
 
-    /* Array of constituents. */
-    @Json(name = "constituents")
-    val constituents: kotlin.collections.List<kotlin.String>? = null,
+    /* Date. */
+    @Json(name = "atDate")
+    val atDate: kotlin.String? = null,
 
-    /* Array of constituents' details. */
-    @Json(name = "constituentsBreakdown")
-    val constituentsBreakdown: kotlin.collections.List<IndicesConstituentsBreakdown>? = null
+    /* Trading hours for this day if the market is partially closed only. */
+    @Json(name = "tradingHour")
+    val tradingHour: kotlin.String? = null
 
 ) : Serializable {
     companion object {

@@ -32,6 +32,8 @@ import java.io.Serializable
  * @param epsLow Lowest estimate.
  * @param numberAnalysts Number of Analysts.
  * @param period Period.
+ * @param year Fiscal year.
+ * @param quarter Fiscal quarter.
  */
 
 data class EarningsEstimatesInfo (
@@ -54,7 +56,15 @@ data class EarningsEstimatesInfo (
 
     /* Period. */
     @Json(name = "period")
-    val period: kotlin.String? = null
+    val period: kotlin.String? = null,
+
+    /* Fiscal year. */
+    @Json(name = "year")
+    val year: kotlin.Long? = null,
+
+    /* Fiscal quarter. */
+    @Json(name = "quarter")
+    val quarter: kotlin.Long? = null
 
 ) : Serializable {
     companion object {

@@ -36,6 +36,7 @@ import java.io.Serializable
  * @param inceptionDate Inception date.
  * @param description Fund's description.
  * @param fundFamily Fund Family.
+ * @param fundCompany Fund Company.
  * @param manager Fund's managers.
  * @param status Status.
  * @param beta Beta.
@@ -93,6 +94,10 @@ data class MutualFundProfileData (
     /* Fund Family. */
     @Json(name = "fundFamily")
     val fundFamily: kotlin.String? = null,
+
+    /* Fund Company. */
+    @Json(name = "fundCompany")
+    val fundCompany: kotlin.String? = null,
 
     /* Fund's managers. */
     @Json(name = "manager")

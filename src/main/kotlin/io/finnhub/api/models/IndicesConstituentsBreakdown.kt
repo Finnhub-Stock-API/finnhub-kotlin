@@ -20,7 +20,6 @@
 
 package io.finnhub.api.models
 
-import io.finnhub.api.models.IndicesConstituentsBreakdown
 
 import com.squareup.moshi.Json
 import java.io.Serializable
@@ -28,24 +27,39 @@ import java.io.Serializable
 /**
  * 
  *
- * @param symbol Index's symbol.
- * @param constituents Array of constituents.
- * @param constituentsBreakdown Array of constituents' details.
+ * @param symbol Symbol.
+ * @param name Name.
+ * @param isin ISIN.
+ * @param cusip Cusip.
+ * @param shareClassFIGI Global Share Class FIGI.
+ * @param weight Weight.
  */
 
-data class IndicesConstituents (
+data class IndicesConstituentsBreakdown (
 
-    /* Index's symbol. */
+    /* Symbol. */
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
 
-    /* Array of constituents. */
-    @Json(name = "constituents")
-    val constituents: kotlin.collections.List<kotlin.String>? = null,
+    /* Name. */
+    @Json(name = "name")
+    val name: kotlin.String? = null,
 
-    /* Array of constituents' details. */
-    @Json(name = "constituentsBreakdown")
-    val constituentsBreakdown: kotlin.collections.List<IndicesConstituentsBreakdown>? = null
+    /* ISIN. */
+    @Json(name = "isin")
+    val isin: kotlin.String? = null,
+
+    /* Cusip. */
+    @Json(name = "cusip")
+    val cusip: kotlin.String? = null,
+
+    /* Global Share Class FIGI. */
+    @Json(name = "shareClassFIGI")
+    val shareClassFIGI: kotlin.String? = null,
+
+    /* Weight. */
+    @Json(name = "weight")
+    val weight: kotlin.Float? = null
 
 ) : Serializable {
     companion object {

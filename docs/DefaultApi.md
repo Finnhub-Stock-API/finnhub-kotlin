@@ -54,10 +54,13 @@ Method | HTTP request | Description
 [**institutionalOwnership**](DefaultApi.md#institutionalOwnership) | **GET** /institutional/ownership | Institutional Ownership
 [**institutionalPortfolio**](DefaultApi.md#institutionalPortfolio) | **GET** /institutional/portfolio | Institutional Portfolio
 [**institutionalProfile**](DefaultApi.md#institutionalProfile) | **GET** /institutional/profile | Institutional Profile
+[**internationalFilings**](DefaultApi.md#internationalFilings) | **GET** /stock/international-filings | International Filings
 [**investmentThemes**](DefaultApi.md#investmentThemes) | **GET** /stock/investment-theme | Investment Themes (Thematic Investing)
 [**ipoCalendar**](DefaultApi.md#ipoCalendar) | **GET** /calendar/ipo | IPO Calendar
 [**isinChange**](DefaultApi.md#isinChange) | **GET** /ca/isin-change | ISIN Change
+[**marketHoliday**](DefaultApi.md#marketHoliday) | **GET** /stock/market-holiday | Market Holiday
 [**marketNews**](DefaultApi.md#marketNews) | **GET** /news | Market News
+[**marketStatus**](DefaultApi.md#marketStatus) | **GET** /stock/market-status | Market Status
 [**mutualFundCountryExposure**](DefaultApi.md#mutualFundCountryExposure) | **GET** /mutual-fund/country | Mutual Funds Country Exposure
 [**mutualFundEet**](DefaultApi.md#mutualFundEet) | **GET** /mutual-fund/eet | Mutual Funds EET
 [**mutualFundEetPai**](DefaultApi.md#mutualFundEetPai) | **GET** /mutual-fund/eet-pai | Mutual Funds EET PAI
@@ -684,7 +687,7 @@ Configure api_key:
 
 Company ESG Scores
 
-&lt;p&gt;This endpoint provides ESG scores and important indicators for 1000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;
+&lt;p&gt;This endpoint provides ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;&lt;p&gt;Historical ESG data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to learn more.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -1598,7 +1601,7 @@ Configure api_key:
 
 <a name="etfsCountryExposure"></a>
 # **etfsCountryExposure**
-> ETFsCountryExposure etfsCountryExposure(symbol)
+> ETFsCountryExposure etfsCountryExposure(symbol, isin)
 
 ETFs Country Exposure
 
@@ -1612,8 +1615,9 @@ Get ETF country exposure data.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
+val isin : kotlin.String = isin_example // kotlin.String | ETF isin.
 try {
-    val result : ETFsCountryExposure = apiInstance.etfsCountryExposure(symbol)
+    val result : ETFsCountryExposure = apiInstance.etfsCountryExposure(symbol, isin)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#etfsCountryExposure")
@@ -1628,7 +1632,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbol** | **kotlin.String**| ETF symbol. |
+ **symbol** | **kotlin.String**| ETF symbol. | [optional]
+ **isin** | **kotlin.String**| ETF isin. | [optional]
 
 ### Return type
 
@@ -1756,7 +1761,7 @@ Configure api_key:
 
 <a name="etfsSectorExposure"></a>
 # **etfsSectorExposure**
-> ETFsSectorExposure etfsSectorExposure(symbol)
+> ETFsSectorExposure etfsSectorExposure(symbol, isin)
 
 ETFs Sector Exposure
 
@@ -1770,8 +1775,9 @@ Get ETF sector exposure data.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | ETF symbol.
+val isin : kotlin.String = isin_example // kotlin.String | ETF isin.
 try {
-    val result : ETFsSectorExposure = apiInstance.etfsSectorExposure(symbol)
+    val result : ETFsSectorExposure = apiInstance.etfsSectorExposure(symbol, isin)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#etfsSectorExposure")
@@ -1786,7 +1792,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbol** | **kotlin.String**| ETF symbol. |
+ **symbol** | **kotlin.String**| ETF symbol. | [optional]
+ **isin** | **kotlin.String**| ETF isin. | [optional]
 
 ### Return type
 
@@ -2336,7 +2343,7 @@ Configure api_key:
 
 Indices Constituents
 
-Get a list of index&#39;s constituents. A list of supported indices for this endpoint can be found &lt;a href&#x3D;\&quot;https://docs.google.com/spreadsheets/d/1Syr2eLielHWsorxkDEZXyc55d6bNx1M3ZeI4vdn7Qzo/edit?usp&#x3D;sharing\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
+Get a list of index&#39;s constituents. A list of supported indices for this endpoint can be found &lt;a href&#x3D;\&quot;/api/v1/index/list?token&#x3D;\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
 
 ### Example
 ```kotlin
@@ -2698,6 +2705,58 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="internationalFilings"></a>
+# **internationalFilings**
+> kotlin.collections.List&lt;InternationalFiling&gt; internationalFilings(symbol, country)
+
+International Filings
+
+List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Leave empty to list latest filings.
+val country : kotlin.String = country_example // kotlin.String | Filter by country using country's 2-letter code.
+try {
+    val result : kotlin.collections.List<InternationalFiling> = apiInstance.internationalFilings(symbol, country)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#internationalFilings")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#internationalFilings")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. Leave empty to list latest filings. | [optional]
+ **country** | **kotlin.String**| Filter by country using country&#39;s 2-letter code. | [optional]
+
+### Return type
+
+[**kotlin.collections.List&lt;InternationalFiling&gt;**](InternationalFiling.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="investmentThemes"></a>
 # **investmentThemes**
 > InvestmentThemes investmentThemes(theme)
@@ -2852,6 +2911,56 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="marketHoliday"></a>
+# **marketHoliday**
+> MarketHoliday marketHoliday(exchange)
+
+Market Holiday
+
+Get a list of holidays for global exchanges.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val exchange : kotlin.String = exchange_example // kotlin.String | Exchange code.
+try {
+    val result : MarketHoliday = apiInstance.marketHoliday(exchange)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#marketHoliday")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#marketHoliday")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exchange** | **kotlin.String**| Exchange code. |
+
+### Return type
+
+[**MarketHoliday**](MarketHoliday.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="marketNews"></a>
 # **marketNews**
 > kotlin.collections.List&lt;MarketNews&gt; marketNews(category, minId)
@@ -2904,9 +3013,59 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="marketStatus"></a>
+# **marketStatus**
+> MarketStatus marketStatus(exchange)
+
+Market Status
+
+Get current market status for global exchanges (whether exchanges are open or close).
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val exchange : kotlin.String = exchange_example // kotlin.String | Exchange code.
+try {
+    val result : MarketStatus = apiInstance.marketStatus(exchange)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#marketStatus")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#marketStatus")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exchange** | **kotlin.String**| Exchange code. |
+
+### Return type
+
+[**MarketStatus**](MarketStatus.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="mutualFundCountryExposure"></a>
 # **mutualFundCountryExposure**
-> MutualFundCountryExposure mutualFundCountryExposure(symbol)
+> MutualFundCountryExposure mutualFundCountryExposure(symbol, isin)
 
 Mutual Funds Country Exposure
 
@@ -2920,8 +3079,9 @@ Get Mutual Funds country exposure data.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+val isin : kotlin.String = isin_example // kotlin.String | Fund's isin.
 try {
-    val result : MutualFundCountryExposure = apiInstance.mutualFundCountryExposure(symbol)
+    val result : MutualFundCountryExposure = apiInstance.mutualFundCountryExposure(symbol, isin)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#mutualFundCountryExposure")
@@ -2936,7 +3096,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbol** | **kotlin.String**| Symbol. |
+ **symbol** | **kotlin.String**| Symbol. | [optional]
+ **isin** | **kotlin.String**| Fund&#39;s isin. | [optional]
 
 ### Return type
 
@@ -3162,7 +3323,7 @@ Configure api_key:
 
 <a name="mutualFundSectorExposure"></a>
 # **mutualFundSectorExposure**
-> MutualFundSectorExposure mutualFundSectorExposure(symbol)
+> MutualFundSectorExposure mutualFundSectorExposure(symbol, isin)
 
 Mutual Funds Sector Exposure
 
@@ -3176,8 +3337,9 @@ Get Mutual Funds sector exposure data.
 
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Mutual Fund symbol.
+val isin : kotlin.String = isin_example // kotlin.String | Fund's isin.
 try {
-    val result : MutualFundSectorExposure = apiInstance.mutualFundSectorExposure(symbol)
+    val result : MutualFundSectorExposure = apiInstance.mutualFundSectorExposure(symbol, isin)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#mutualFundSectorExposure")
@@ -3192,7 +3354,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbol** | **kotlin.String**| Mutual Fund symbol. |
+ **symbol** | **kotlin.String**| Mutual Fund symbol. | [optional]
+ **isin** | **kotlin.String**| Fund&#39;s isin. | [optional]
 
 ### Return type
 
@@ -3782,7 +3945,7 @@ Configure api_key:
 
 Social Sentiment
 
-&lt;p&gt;Get social sentiment for stocks on Reddit and Twitter. This endpoint is currently in Beta.&lt;/p&gt;
+&lt;p&gt;Get social sentiment for stocks on Reddit and Twitter.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -3936,7 +4099,7 @@ Configure api_key:
 
 Stock Candles
 
-&lt;p&gt;Get candlestick data (OHLCV) for stocks.&lt;/p&gt;&lt;p&gt;Daily data will be adjusted for Splits. Intraday data will remain unadjusted.&lt;/p&gt;
+&lt;p&gt;Get candlestick data (OHLCV) for stocks.&lt;/p&gt;&lt;p&gt;Daily data will be adjusted for Splits. Intraday data will remain unadjusted. Only 1 month of intraday will be returned at a time. If you need more historical intraday data, please use the from and to params iteratively to request more data.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -4266,7 +4429,7 @@ Configure api_key:
 
 Tick Data
 
-&lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For US market, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+&lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For more historical tick data, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
 
 ### Example
 ```kotlin

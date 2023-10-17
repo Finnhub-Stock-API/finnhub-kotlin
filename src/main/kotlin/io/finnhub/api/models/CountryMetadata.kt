@@ -35,6 +35,10 @@ import java.io.Serializable
  * @param currencyCode Currency code
  * @param region Region
  * @param subRegion Sub-Region
+ * @param rating Moody's credit risk rating.
+ * @param defaultSpread Default spread
+ * @param countryRiskPremium Country risk premium
+ * @param equityRiskPremium Equity risk premium
  */
 
 data class CountryMetadata (
@@ -69,7 +73,23 @@ data class CountryMetadata (
 
     /* Sub-Region */
     @Json(name = "subRegion")
-    val subRegion: kotlin.String? = null
+    val subRegion: kotlin.String? = null,
+
+    /* Moody's credit risk rating. */
+    @Json(name = "rating")
+    val rating: kotlin.String? = null,
+
+    /* Default spread */
+    @Json(name = "defaultSpread")
+    val defaultSpread: kotlin.Float? = null,
+
+    /* Country risk premium */
+    @Json(name = "countryRiskPremium")
+    val countryRiskPremium: kotlin.Float? = null,
+
+    /* Equity risk premium */
+    @Json(name = "equityRiskPremium")
+    val equityRiskPremium: kotlin.Float? = null
 
 ) : Serializable {
     companion object {

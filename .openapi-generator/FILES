@@ -72,6 +72,7 @@ docs/InFilingSearchBody.md
 docs/IndexHistoricalConstituent.md
 docs/Indicator.md
 docs/IndicesConstituents.md
+docs/IndicesConstituentsBreakdown.md
 docs/IndicesHistoricalConstituents.md
 docs/InsiderSentiments.md
 docs/InsiderSentimentsData.md
@@ -93,7 +94,10 @@ docs/KeyCustomersSuppliers.md
 docs/LastBidAsk.md
 docs/LobbyingData.md
 docs/LobbyingResult.md
+docs/MarketHoliday.md
+docs/MarketHolidayData.md
 docs/MarketNews.md
+docs/MarketStatus.md
 docs/MutualFundCountryExposure.md
 docs/MutualFundCountryExposureData.md
 docs/MutualFundEet.md
@@ -113,7 +117,6 @@ docs/PriceMetrics.md
 docs/PriceTarget.md
 docs/Quote.md
 docs/RecommendationTrend.md
-docs/RedditSentimentContent.md
 docs/Report.md
 docs/RevenueBreakdown.md
 docs/RevenueEstimates.md
@@ -125,6 +128,7 @@ docs/SearchResponse.md
 docs/SectorMetric.md
 docs/SectorMetricData.md
 docs/Sentiment.md
+docs/SentimentContent.md
 docs/SimilarityIndex.md
 docs/SimilarityIndexInfo.md
 docs/SocialSentiment.md
@@ -144,7 +148,6 @@ docs/Transactions.md
 docs/TranscriptContent.md
 docs/TranscriptParticipant.md
 docs/Trend.md
-docs/TwitterSentimentContent.md
 docs/UpgradeDowngrade.md
 docs/UsaSpending.md
 docs/UsaSpendingResult.md
@@ -246,6 +249,7 @@ src/main/kotlin/io/finnhub/api/models/InFilingSearchBody.kt
 src/main/kotlin/io/finnhub/api/models/IndexHistoricalConstituent.kt
 src/main/kotlin/io/finnhub/api/models/Indicator.kt
 src/main/kotlin/io/finnhub/api/models/IndicesConstituents.kt
+src/main/kotlin/io/finnhub/api/models/IndicesConstituentsBreakdown.kt
 src/main/kotlin/io/finnhub/api/models/IndicesHistoricalConstituents.kt
 src/main/kotlin/io/finnhub/api/models/InsiderSentiments.kt
 src/main/kotlin/io/finnhub/api/models/InsiderSentimentsData.kt
@@ -267,7 +271,10 @@ src/main/kotlin/io/finnhub/api/models/KeyCustomersSuppliers.kt
 src/main/kotlin/io/finnhub/api/models/LastBidMinusAsk.kt
 src/main/kotlin/io/finnhub/api/models/LobbyingData.kt
 src/main/kotlin/io/finnhub/api/models/LobbyingResult.kt
+src/main/kotlin/io/finnhub/api/models/MarketHoliday.kt
+src/main/kotlin/io/finnhub/api/models/MarketHolidayData.kt
 src/main/kotlin/io/finnhub/api/models/MarketNews.kt
+src/main/kotlin/io/finnhub/api/models/MarketStatus.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundCountryExposure.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundCountryExposureData.kt
 src/main/kotlin/io/finnhub/api/models/MutualFundEet.kt
@@ -287,7 +294,6 @@ src/main/kotlin/io/finnhub/api/models/PriceMetrics.kt
 src/main/kotlin/io/finnhub/api/models/PriceTarget.kt
 src/main/kotlin/io/finnhub/api/models/Quote.kt
 src/main/kotlin/io/finnhub/api/models/RecommendationTrend.kt
-src/main/kotlin/io/finnhub/api/models/RedditSentimentContent.kt
 src/main/kotlin/io/finnhub/api/models/Report.kt
 src/main/kotlin/io/finnhub/api/models/RevenueBreakdown.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimates.kt
@@ -299,6 +305,7 @@ src/main/kotlin/io/finnhub/api/models/SearchResponse.kt
 src/main/kotlin/io/finnhub/api/models/SectorMetric.kt
 src/main/kotlin/io/finnhub/api/models/SectorMetricData.kt
 src/main/kotlin/io/finnhub/api/models/Sentiment.kt
+src/main/kotlin/io/finnhub/api/models/SentimentContent.kt
 src/main/kotlin/io/finnhub/api/models/SimilarityIndex.kt
 src/main/kotlin/io/finnhub/api/models/SimilarityIndexInfo.kt
 src/main/kotlin/io/finnhub/api/models/SocialSentiment.kt
@@ -318,7 +325,6 @@ src/main/kotlin/io/finnhub/api/models/Transactions.kt
 src/main/kotlin/io/finnhub/api/models/TranscriptContent.kt
 src/main/kotlin/io/finnhub/api/models/TranscriptParticipant.kt
 src/main/kotlin/io/finnhub/api/models/Trend.kt
-src/main/kotlin/io/finnhub/api/models/TwitterSentimentContent.kt
 src/main/kotlin/io/finnhub/api/models/UpgradeDowngrade.kt
 src/main/kotlin/io/finnhub/api/models/UsaSpending.kt
 src/main/kotlin/io/finnhub/api/models/UsaSpendingResult.kt

@@ -33,8 +33,8 @@ import java.io.Serializable
  * @param surprisePercent Surprise percent.
  * @param period Reported period.
  * @param symbol Company symbol.
- * @param year Earnings year.
- * @param quarter Earnings quarter.
+ * @param year Fiscal year.
+ * @param quarter Fiscal quarter.
  */
 
 data class EarningResult (
@@ -63,11 +63,11 @@ data class EarningResult (
     @Json(name = "symbol")
     val symbol: kotlin.String? = null,
 
-    /* Earnings year. */
+    /* Fiscal year. */
     @Json(name = "year")
     val year: kotlin.Long? = null,
 
-    /* Earnings quarter. */
+    /* Fiscal quarter. */
     @Json(name = "quarter")
     val quarter: kotlin.Long? = null
 

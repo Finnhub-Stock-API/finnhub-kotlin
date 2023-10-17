@@ -21,7 +21,7 @@ For Maven
 <dependency>
   <groupId>io.finnhub</groupId>
   <artifactId>kotlin-client</artifactId>
-  <version>2.0.19</version>
+  <version>2.0.20</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,7 +29,7 @@ For Maven
 For Gradle
 
 ```
-implementation 'io.finnhub:kotlin-client:2.0.19'
+implementation 'io.finnhub:kotlin-client:2.0.20'
 ```
 
 ## Migrate from 1.x.x to 2.x.x
@@ -354,12 +354,12 @@ fun etfsHoldings() {
 
 @Test
 fun etfsSectorExposure() {
-    println(apiClient.etfsSectorExposure("SPY"))
+    println(apiClient.etfsSectorExposure("SPY", ""))
 }
 
 @Test
 fun etfsCountryExposure() {
-    println(apiClient.etfsCountryExposure("SPY"))
+    println(apiClient.etfsCountryExposure("SPY", ""))
 }
 
 @Test
@@ -374,12 +374,12 @@ fun mutualFundHoldings() {
 
 @Test
 fun mutualFundSectorExposure() {
-    println(apiClient.mutualFundSectorExposure("VTSAX"))
+    println(apiClient.mutualFundSectorExposure("VTSAX", ""))
 }
 
 @Test
 fun mutualFundCountryExposure() {
-    println(apiClient.mutualFundCountryExposure("VTSAX"))
+    println(apiClient.mutualFundCountryExposure("VTSAX", ""))
 }
 
 @Test
@@ -448,6 +448,15 @@ fun insiderSentiment() {
   println(apiClient.insiderSentiment("AAPL", "2019-01-01", "2022-12-31"))
 }
 
+@Test
+fun marketHoliday() {
+  println(apiClient.marketHoliday("US"))
+}
+
+@Test
+fun marketStatus() {
+  println(apiClient.marketStatus("US"))
+}
 ```
 
 ## License

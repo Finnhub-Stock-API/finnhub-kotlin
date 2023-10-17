@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **inceptionDate** | **kotlin.String** | Inception date. |  [optional]
 **description** | **kotlin.String** | Fund&#39;s description. |  [optional]
 **fundFamily** | **kotlin.String** | Fund Family. |  [optional]
+**fundCompany** | **kotlin.String** | Fund Company. |  [optional]
 **manager** | **kotlin.String** | Fund&#39;s managers. |  [optional]
 **status** | **kotlin.String** | Status. |  [optional]
 **beta** | **kotlin.Float** | Beta. |  [optional]

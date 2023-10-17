@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**alias** | **kotlin.collections.List&lt;kotlin.String&gt;** | Company name alias. |  [optional]
 **address** | **kotlin.String** | Address of company&#39;s headquarter. |  [optional]
 **city** | **kotlin.String** | City of company&#39;s headquarter. |  [optional]
 **country** | **kotlin.String** | Country of company&#39;s headquarter. |  [optional]
@@ -19,6 +20,7 @@ Name | Type | Description | Notes
 **gsector** | **kotlin.String** | Sector. |  [optional]
 **gsubind** | **kotlin.String** | Sub-industry. |  [optional]
 **isin** | **kotlin.String** | ISIN number. |  [optional]
+**lei** | **kotlin.String** | LEI number. |  [optional]
 **naicsNationalIndustry** | **kotlin.String** | NAICS national industry. |  [optional]
 **naics** | **kotlin.String** | NAICS industry. |  [optional]
 **naicsSector** | **kotlin.String** | NAICS sector. |  [optional]

@@ -27,6 +27,7 @@ import java.io.Serializable
 /**
  * 
  *
+ * @param alias Company name alias.
  * @param address Address of company's headquarter.
  * @param city City of company's headquarter.
  * @param country Country of company's headquarter.
@@ -42,6 +43,7 @@ import java.io.Serializable
  * @param gsector Sector.
  * @param gsubind Sub-industry.
  * @param isin ISIN number.
+ * @param lei LEI number.
  * @param naicsNationalIndustry NAICS national industry.
  * @param naics NAICS industry.
  * @param naicsSector NAICS sector.
@@ -60,6 +62,10 @@ import java.io.Serializable
  */
 
 data class CompanyProfile (
+
+    /* Company name alias. */
+    @Json(name = "alias")
+    val alias: kotlin.collections.List<kotlin.String>? = null,
 
     /* Address of company's headquarter. */
     @Json(name = "address")
@@ -120,6 +126,10 @@ data class CompanyProfile (
     /* ISIN number. */
     @Json(name = "isin")
     val isin: kotlin.String? = null,
+
+    /* LEI number. */
+    @Json(name = "lei")
+    val lei: kotlin.String? = null,
 
     /* NAICS national industry. */
     @Json(name = "naicsNationalIndustry")
