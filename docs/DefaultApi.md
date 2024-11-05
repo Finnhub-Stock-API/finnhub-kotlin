@@ -5,6 +5,7 @@ All URIs are relative to *https://finnhub.io/api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**aggregateIndicator**](DefaultApi.md#aggregateIndicator) | **GET** /scan/technical-indicator | Aggregate Indicators
+[**airlinePriceIndex**](DefaultApi.md#airlinePriceIndex) | **GET** /airline/price-index | Airline Price Index
 [**bondPrice**](DefaultApi.md#bondPrice) | **GET** /bond/price | Bond price data
 [**bondProfile**](DefaultApi.md#bondProfile) | **GET** /bond/profile | Bond Profile
 [**bondTick**](DefaultApi.md#bondTick) | **GET** /bond/tick | Bond Tick Data
@@ -17,6 +18,7 @@ Method | HTTP request | Description
 [**companyEpsEstimates**](DefaultApi.md#companyEpsEstimates) | **GET** /stock/eps-estimate | Earnings Estimates
 [**companyEsgScore**](DefaultApi.md#companyEsgScore) | **GET** /stock/esg | Company ESG Scores
 [**companyExecutive**](DefaultApi.md#companyExecutive) | **GET** /stock/executive | Company Executive
+[**companyHistoricalEsgScore**](DefaultApi.md#companyHistoricalEsgScore) | **GET** /stock/historical-esg | Historical ESG Scores
 [**companyNews**](DefaultApi.md#companyNews) | **GET** /company-news | Company News
 [**companyPeers**](DefaultApi.md#companyPeers) | **GET** /stock/peers | Peers
 [**companyProfile**](DefaultApi.md#companyProfile) | **GET** /stock/profile | Company Profile
@@ -47,6 +49,8 @@ Method | HTTP request | Description
 [**forexRates**](DefaultApi.md#forexRates) | **GET** /forex/rates | Forex rates
 [**forexSymbols**](DefaultApi.md#forexSymbols) | **GET** /forex/symbol | Forex Symbol
 [**fundOwnership**](DefaultApi.md#fundOwnership) | **GET** /stock/fund-ownership | Fund Ownership
+[**historicalEmployeeCount**](DefaultApi.md#historicalEmployeeCount) | **GET** /stock/historical-employee-count | Historical Employee Count
+[**historicalMarketCap**](DefaultApi.md#historicalMarketCap) | **GET** /stock/historical-market-cap | Historical Market Cap
 [**indicesConstituents**](DefaultApi.md#indicesConstituents) | **GET** /index/constituents | Indices Constituents
 [**indicesHistoricalConstituents**](DefaultApi.md#indicesHistoricalConstituents) | **GET** /index/historical-constituents | Indices Historical Constituents
 [**insiderSentiment**](DefaultApi.md#insiderSentiment) | **GET** /stock/insider-sentiment | Insider Sentiment
@@ -140,6 +144,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AggregateIndicators**](AggregateIndicators.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="airlinePriceIndex"></a>
+# **airlinePriceIndex**
+> AirlinePriceIndexData airlinePriceIndex(airline, from, to)
+
+Airline Price Index
+
+&lt;p&gt;The Flight Ticket Price Index API provides comprehensive data on airline ticket prices, including the average daily ticket price and its percentage change (price index). This data, collected weekly and projected two weeks ahead, aggregates daily prices and indexes from the 50 busiest and largest airports across the USA. The dataset includes detailed information on airlines, dates, and average ticket prices, offering valuable insights for market analysis and pricing strategies.&lt;/p&gt;&lt;p&gt;The price index is calculated as percentage change of average daily ticket price from the previous weekly reading. Raw ticket prices data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to inquire about the raw price data.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val airline : kotlin.String = airline_example // kotlin.String | Filter data by airline. Accepted values: <code>united</code>,<code>delta</code>,<code>american_airlines</code>,<code>southwest</code>,<code>southern_airways_express</code>,<code>alaska_airlines</code>,<code>frontier_airlines</code>,<code>jetblue_airways</code>,<code>spirit_airlines</code>,<code>sun_country_airlines</code>,<code>breeze_airways</code>,<code>hawaiian_airlines</code>
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : AirlinePriceIndexData = apiInstance.airlinePriceIndex(airline, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#airlinePriceIndex")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#airlinePriceIndex")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **airline** | **kotlin.String**| Filter data by airline. Accepted values: &lt;code&gt;united&lt;/code&gt;,&lt;code&gt;delta&lt;/code&gt;,&lt;code&gt;american_airlines&lt;/code&gt;,&lt;code&gt;southwest&lt;/code&gt;,&lt;code&gt;southern_airways_express&lt;/code&gt;,&lt;code&gt;alaska_airlines&lt;/code&gt;,&lt;code&gt;frontier_airlines&lt;/code&gt;,&lt;code&gt;jetblue_airways&lt;/code&gt;,&lt;code&gt;spirit_airlines&lt;/code&gt;,&lt;code&gt;sun_country_airlines&lt;/code&gt;,&lt;code&gt;breeze_airways&lt;/code&gt;,&lt;code&gt;hawaiian_airlines&lt;/code&gt; |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**AirlinePriceIndexData**](AirlinePriceIndexData.md)
 
 ### Authorization
 
@@ -687,7 +745,7 @@ Configure api_key:
 
 Company ESG Scores
 
-&lt;p&gt;This endpoint provides ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;&lt;p&gt;Historical ESG data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to learn more.&lt;/p&gt;
+&lt;p&gt;This endpoint provides the latest ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -768,6 +826,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CompanyExecutive**](CompanyExecutive.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="companyHistoricalEsgScore"></a>
+# **companyHistoricalEsgScore**
+> HistoricalCompanyESG companyHistoricalEsgScore(symbol)
+
+Historical ESG Scores
+
+&lt;p&gt;This endpoint provides historical ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+try {
+    val result : HistoricalCompanyESG = apiInstance.companyHistoricalEsgScore(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#companyHistoricalEsgScore")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#companyHistoricalEsgScore")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+
+### Return type
+
+[**HistoricalCompanyESG**](HistoricalCompanyESG.md)
 
 ### Authorization
 
@@ -1876,8 +1984,8 @@ val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Leave <co
 val cik : kotlin.String = cik_example // kotlin.String | CIK.
 val accessNumber : kotlin.String = accessNumber_example // kotlin.String | Access number of a specific report you want to retrieve data from.
 val form : kotlin.String = form_example // kotlin.String | Filter by form. You can use this value <code>NT 10-K</code> to find non-timely filings for a company.
-val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2020-03-15.
-val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2020-03-16.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2023-03-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2023-03-16.
 try {
     val result : kotlin.collections.List<Filing> = apiInstance.filings(symbol, cik, accessNumber, form, from, to)
     println(result)
@@ -1898,8 +2006,8 @@ Name | Type | Description  | Notes
  **cik** | **kotlin.String**| CIK. | [optional]
  **accessNumber** | **kotlin.String**| Access number of a specific report you want to retrieve data from. | [optional]
  **form** | **kotlin.String**| Filter by form. You can use this value &lt;code&gt;NT 10-K&lt;/code&gt; to find non-timely filings for a company. | [optional]
- **from** | **kotlin.String**| From date: 2020-03-15. | [optional]
- **to** | **kotlin.String**| To date: 2020-03-16. | [optional]
+ **from** | **kotlin.String**| From date: 2023-03-15. | [optional]
+ **to** | **kotlin.String**| To date: 2023-03-16. | [optional]
 
 ### Return type
 
@@ -2337,6 +2445,114 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="historicalEmployeeCount"></a>
+# **historicalEmployeeCount**
+> HistoricalEmployeeCount historicalEmployeeCount(symbol, from, to)
+
+Historical Employee Count
+
+Get historical employee count for global companies.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : HistoricalEmployeeCount = apiInstance.historicalEmployeeCount(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#historicalEmployeeCount")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#historicalEmployeeCount")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Company symbol. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**HistoricalEmployeeCount**](HistoricalEmployeeCount.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="historicalMarketCap"></a>
+# **historicalMarketCap**
+> HistoricalMarketCapData historicalMarketCap(symbol, from, to)
+
+Historical Market Cap
+
+Get historical market cap data for global companies.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
+try {
+    val result : HistoricalMarketCapData = apiInstance.historicalMarketCap(symbol, from, to)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#historicalMarketCap")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#historicalMarketCap")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Company symbol. |
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. |
+
+### Return type
+
+[**HistoricalMarketCapData**](HistoricalMarketCapData.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="indicesConstituents"></a>
 # **indicesConstituents**
 > IndicesConstituents indicesConstituents(symbol)
@@ -2497,7 +2713,7 @@ Configure api_key:
 
 Insider Transactions
 
-Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&gt;, SEDI and relevant companies&#39; filings. This endpoint covers US, Canada, Australia, and selected EU companies. Limit to 100 transactions per API call.
+Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&gt;, SEDI and relevant companies&#39; filings. This endpoint covers US, UK, Canada, Australia, India, and all major EU markets. Limit to 100 transactions per API call.
 
 ### Example
 ```kotlin
@@ -2707,11 +2923,11 @@ Configure api_key:
 
 <a name="internationalFilings"></a>
 # **internationalFilings**
-> kotlin.collections.List&lt;InternationalFiling&gt; internationalFilings(symbol, country)
+> kotlin.collections.List&lt;InternationalFiling&gt; internationalFilings(symbol, country, from, to)
 
 International Filings
 
-List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
+List filings for international companies. Limit to 500 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
 
 ### Example
 ```kotlin
@@ -2722,8 +2938,10 @@ List filings for international companies. Limit to 250 documents at a time. Thes
 val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol. Leave empty to list latest filings.
 val country : kotlin.String = country_example // kotlin.String | Filter by country using country's 2-letter code.
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date: 2023-01-15.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date: 2023-12-16.
 try {
-    val result : kotlin.collections.List<InternationalFiling> = apiInstance.internationalFilings(symbol, country)
+    val result : kotlin.collections.List<InternationalFiling> = apiInstance.internationalFilings(symbol, country, from, to)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#internationalFilings")
@@ -2740,6 +2958,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **symbol** | **kotlin.String**| Symbol. Leave empty to list latest filings. | [optional]
  **country** | **kotlin.String**| Filter by country using country&#39;s 2-letter code. | [optional]
+ **from** | **kotlin.String**| From date: 2023-01-15. | [optional]
+ **to** | **kotlin.String**| To date: 2023-12-16. | [optional]
 
 ### Return type
 
@@ -4429,7 +4649,7 @@ Configure api_key:
 
 Tick Data
 
-&lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For more historical tick data, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+&lt;p&gt;Get historical tick data for global exchanges.&lt;/p&gt;&lt;p&gt;For more historical tick data, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
 
 ### Example
 ```kotlin
@@ -4797,7 +5017,7 @@ Configure api_key:
 
 <a name="symbolSearch"></a>
 # **symbolSearch**
-> SymbolLookup symbolSearch(q)
+> SymbolLookup symbolSearch(q, exchange)
 
 Symbol Lookup
 
@@ -4811,8 +5031,9 @@ Search for best-matching symbols based on your query. You can input anything fro
 
 val apiInstance = DefaultApi()
 val q : kotlin.String = q_example // kotlin.String | Query text can be symbol, name, isin, or cusip.
+val exchange : kotlin.String = exchange_example // kotlin.String | Exchange limit.
 try {
-    val result : SymbolLookup = apiInstance.symbolSearch(q)
+    val result : SymbolLookup = apiInstance.symbolSearch(q, exchange)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#symbolSearch")
@@ -4828,6 +5049,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **q** | **kotlin.String**| Query text can be symbol, name, isin, or cusip. |
+ **exchange** | **kotlin.String**| Exchange limit. | [optional]
 
 ### Return type
 

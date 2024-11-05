@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **domicile** | **kotlin.String** | ETF domicile. |  [optional]
 **inceptionDate** | **kotlin.String** | Inception date. |  [optional]
 **website** | **kotlin.String** | ETF&#39;s website. |  [optional]
+**logo** | **kotlin.String** | Logo. |  [optional]
 **isin** | **kotlin.String** | ISIN. |  [optional]
 **cusip** | **kotlin.String** | CUSIP. |  [optional]
 **priceToEarnings** | **kotlin.Float** | P/E. |  [optional]

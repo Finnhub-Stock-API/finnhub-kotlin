@@ -29,7 +29,7 @@ import java.io.Serializable
  *
  * @param exchange Exchange.
  * @param timezone Timezone.
- * @param session Market session.
+ * @param session Market session. Can be 1 of the following values: <code>pre-market</code>,<code>regular</code>,<code>post-market</code> or <code>null</code> if the market is closed.
  * @param holiday Holiday event.
  * @param isOpen Whether the market is open at the moment.
  * @param t Current timestamp.
@@ -45,7 +45,7 @@ data class MarketStatus (
     @Json(name = "timezone")
     val timezone: kotlin.String? = null,
 
-    /* Market session. */
+    /* Market session. Can be 1 of the following values: <code>pre-market</code>,<code>regular</code>,<code>post-market</code> or <code>null</code> if the market is closed. */
     @Json(name = "session")
     val session: kotlin.String? = null,
 

@@ -44,6 +44,7 @@ import java.io.Serializable
  * @param gsubind Sub-industry.
  * @param isin ISIN number.
  * @param lei LEI number.
+ * @param irUrl Investor relations website.
  * @param naicsNationalIndustry NAICS national industry.
  * @param naics NAICS industry.
  * @param naicsSector NAICS sector.
@@ -130,6 +131,10 @@ data class CompanyProfile (
     /* LEI number. */
     @Json(name = "lei")
     val lei: kotlin.String? = null,
+
+    /* Investor relations website. */
+    @Json(name = "irUrl")
+    val irUrl: kotlin.String? = null,
 
     /* NAICS national industry. */
     @Json(name = "naicsNationalIndustry")

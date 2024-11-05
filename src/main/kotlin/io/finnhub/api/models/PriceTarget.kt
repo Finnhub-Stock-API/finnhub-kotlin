@@ -32,6 +32,7 @@ import java.io.Serializable
  * @param targetLow Lowest analysts' target.
  * @param targetMean Mean of all analysts' targets.
  * @param targetMedian Median of all analysts' targets.
+ * @param numberAnalysts Number of Analysts.
  * @param lastUpdated Updated time of the data
  */
 
@@ -56,6 +57,10 @@ data class PriceTarget (
     /* Median of all analysts' targets. */
     @Json(name = "targetMedian")
     val targetMedian: kotlin.Float? = null,
+
+    /* Number of Analysts. */
+    @Json(name = "numberAnalysts")
+    val numberAnalysts: kotlin.Long? = null,
 
     /* Updated time of the data */
     @Json(name = "lastUpdated")

@@ -21,6 +21,7 @@
 package io.finnhub.api.apis
 
 import io.finnhub.api.models.AggregateIndicators
+import io.finnhub.api.models.AirlinePriceIndexData
 import io.finnhub.api.models.BasicFinancials
 import io.finnhub.api.models.BondCandles
 import io.finnhub.api.models.BondProfile
@@ -62,6 +63,9 @@ import io.finnhub.api.models.ForexCandles
 import io.finnhub.api.models.ForexSymbol
 import io.finnhub.api.models.Forexrates
 import io.finnhub.api.models.FundOwnership
+import io.finnhub.api.models.HistoricalCompanyESG
+import io.finnhub.api.models.HistoricalEmployeeCount
+import io.finnhub.api.models.HistoricalMarketCapData
 import io.finnhub.api.models.HistoricalNBBO
 import io.finnhub.api.models.IPOCalendar
 import io.finnhub.api.models.IndicesConstituents
@@ -185,6 +189,68 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/scan/technical-indicator",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Airline Price Index
+    * &lt;p&gt;The Flight Ticket Price Index API provides comprehensive data on airline ticket prices, including the average daily ticket price and its percentage change (price index). This data, collected weekly and projected two weeks ahead, aggregates daily prices and indexes from the 50 busiest and largest airports across the USA. The dataset includes detailed information on airlines, dates, and average ticket prices, offering valuable insights for market analysis and pricing strategies.&lt;/p&gt;&lt;p&gt;The price index is calculated as percentage change of average daily ticket price from the previous weekly reading. Raw ticket prices data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to inquire about the raw price data.&lt;/p&gt;
+    * @param airline Filter data by airline. Accepted values: &lt;code&gt;united&lt;/code&gt;,&lt;code&gt;delta&lt;/code&gt;,&lt;code&gt;american_airlines&lt;/code&gt;,&lt;code&gt;southwest&lt;/code&gt;,&lt;code&gt;southern_airways_express&lt;/code&gt;,&lt;code&gt;alaska_airlines&lt;/code&gt;,&lt;code&gt;frontier_airlines&lt;/code&gt;,&lt;code&gt;jetblue_airways&lt;/code&gt;,&lt;code&gt;spirit_airlines&lt;/code&gt;,&lt;code&gt;sun_country_airlines&lt;/code&gt;,&lt;code&gt;breeze_airways&lt;/code&gt;,&lt;code&gt;hawaiian_airlines&lt;/code&gt; 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return AirlinePriceIndexData
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun airlinePriceIndex(airline: kotlin.String, from: kotlin.String, to: kotlin.String) : AirlinePriceIndexData {
+        val localVariableConfig = airlinePriceIndexRequestConfig(airline = airline, from = from, to = to)
+
+        val localVarResponse = request<Unit, AirlinePriceIndexData>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AirlinePriceIndexData
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation airlinePriceIndex
+    *
+    * @param airline Filter data by airline. Accepted values: &lt;code&gt;united&lt;/code&gt;,&lt;code&gt;delta&lt;/code&gt;,&lt;code&gt;american_airlines&lt;/code&gt;,&lt;code&gt;southwest&lt;/code&gt;,&lt;code&gt;southern_airways_express&lt;/code&gt;,&lt;code&gt;alaska_airlines&lt;/code&gt;,&lt;code&gt;frontier_airlines&lt;/code&gt;,&lt;code&gt;jetblue_airways&lt;/code&gt;,&lt;code&gt;spirit_airlines&lt;/code&gt;,&lt;code&gt;sun_country_airlines&lt;/code&gt;,&lt;code&gt;breeze_airways&lt;/code&gt;,&lt;code&gt;hawaiian_airlines&lt;/code&gt; 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun airlinePriceIndexRequestConfig(airline: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("airline", listOf(airline.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/airline/price-index",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -809,7 +875,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Company ESG Scores
-    * &lt;p&gt;This endpoint provides ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;&lt;p&gt;Historical ESG data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to learn more.&lt;/p&gt;
+    * &lt;p&gt;This endpoint provides the latest ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;
     * @param symbol Symbol. 
     * @return CompanyESG
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -913,6 +979,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/executive",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Historical ESG Scores
+    * &lt;p&gt;This endpoint provides historical ESG scores and important indicators for 7000+ global companies. The data is collected through company&#39;s public ESG disclosure and public sources.&lt;/p&gt;&lt;p&gt;Our ESG scoring models takes into account more than 150 different inputs to calculate the level of ESG risks and how well a company is managing them. A higher score means lower ESG risk or better ESG management. ESG scores are in the the range of 0-100. Some key indicators might contain letter-grade score from C- to A+ with C- is the lowest score and A+ is the highest score.&lt;/p&gt;
+    * @param symbol Symbol. 
+    * @return HistoricalCompanyESG
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun companyHistoricalEsgScore(symbol: kotlin.String) : HistoricalCompanyESG {
+        val localVariableConfig = companyHistoricalEsgScoreRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, HistoricalCompanyESG>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HistoricalCompanyESG
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation companyHistoricalEsgScore
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun companyHistoricalEsgScoreRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/historical-esg",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -2194,8 +2316,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param cik CIK. (optional)
     * @param accessNumber Access number of a specific report you want to retrieve data from. (optional)
     * @param form Filter by form. You can use this value &lt;code&gt;NT 10-K&lt;/code&gt; to find non-timely filings for a company. (optional)
-    * @param from From date: 2020-03-15. (optional)
-    * @param to To date: 2020-03-16. (optional)
+    * @param from From date: 2023-03-15. (optional)
+    * @param to To date: 2023-03-16. (optional)
     * @return kotlin.collections.List<Filing>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -2232,8 +2354,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param cik CIK. (optional)
     * @param accessNumber Access number of a specific report you want to retrieve data from. (optional)
     * @param form Filter by form. You can use this value &lt;code&gt;NT 10-K&lt;/code&gt; to find non-timely filings for a company. (optional)
-    * @param from From date: 2020-03-15. (optional)
-    * @param to To date: 2020-03-16. (optional)
+    * @param from From date: 2023-03-15. (optional)
+    * @param to To date: 2023-03-16. (optional)
     * @return RequestConfig
     */
     fun filingsRequestConfig(symbol: kotlin.String?, cik: kotlin.String?, accessNumber: kotlin.String?, form: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
@@ -2768,6 +2890,130 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
+    * Historical Employee Count
+    * Get historical employee count for global companies.
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return HistoricalEmployeeCount
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun historicalEmployeeCount(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : HistoricalEmployeeCount {
+        val localVariableConfig = historicalEmployeeCountRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, HistoricalEmployeeCount>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HistoricalEmployeeCount
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation historicalEmployeeCount
+    *
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun historicalEmployeeCountRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/historical-employee-count",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Historical Market Cap
+    * Get historical market cap data for global companies.
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return HistoricalMarketCapData
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun historicalMarketCap(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : HistoricalMarketCapData {
+        val localVariableConfig = historicalMarketCapRequestConfig(symbol = symbol, from = from, to = to)
+
+        val localVarResponse = request<Unit, HistoricalMarketCapData>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HistoricalMarketCapData
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation historicalMarketCap
+    *
+    * @param symbol Company symbol. 
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. 
+    * @return RequestConfig
+    */
+    fun historicalMarketCapRequestConfig(symbol: kotlin.String, from: kotlin.String, to: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+                put("from", listOf(parseDateToQueryString(from)))
+                put("to", listOf(parseDateToQueryString(to)))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/historical-market-cap",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Indices Constituents
     * Get a list of index&#39;s constituents. A list of supported indices for this endpoint can be found &lt;a href&#x3D;\&quot;/api/v1/index/list?token&#x3D;\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
     * @param symbol symbol 
@@ -2943,7 +3189,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Insider Transactions
-    * Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&gt;, SEDI and relevant companies&#39; filings. This endpoint covers US, Canada, Australia, and selected EU companies. Limit to 100 transactions per API call.
+    * Company insider transactions data sourced from &lt;code&gt;Form 3,4,5&lt;/code&gt;, SEDI and relevant companies&#39; filings. This endpoint covers US, UK, Canada, Australia, India, and all major EU markets. Limit to 100 transactions per API call.
     * @param symbol Symbol of the company: AAPL. Leave this param blank to get the latest transactions. 
     * @param from From date: 2020-03-15. (optional)
     * @param to To date: 2020-03-16. (optional)
@@ -3194,9 +3440,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * International Filings
-    * List filings for international companies. Limit to 250 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
+    * List filings for international companies. Limit to 500 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
     * @param symbol Symbol. Leave empty to list latest filings. (optional)
     * @param country Filter by country using country&#39;s 2-letter code. (optional)
+    * @param from From date: 2023-01-15. (optional)
+    * @param to To date: 2023-12-16. (optional)
     * @return kotlin.collections.List<InternationalFiling>
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -3204,8 +3452,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun internationalFilings(symbol: kotlin.String?, country: kotlin.String?) : kotlin.collections.List<InternationalFiling> {
-        val localVariableConfig = internationalFilingsRequestConfig(symbol = symbol, country = country)
+    fun internationalFilings(symbol: kotlin.String?, country: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : kotlin.collections.List<InternationalFiling> {
+        val localVariableConfig = internationalFilingsRequestConfig(symbol = symbol, country = country, from = from, to = to)
 
         val localVarResponse = request<Unit, kotlin.collections.List<InternationalFiling>>(
             localVariableConfig
@@ -3231,9 +3479,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     *
     * @param symbol Symbol. Leave empty to list latest filings. (optional)
     * @param country Filter by country using country&#39;s 2-letter code. (optional)
+    * @param from From date: 2023-01-15. (optional)
+    * @param to To date: 2023-12-16. (optional)
     * @return RequestConfig
     */
-    fun internationalFilingsRequestConfig(symbol: kotlin.String?, country: kotlin.String?) : RequestConfig<Unit> {
+    fun internationalFilingsRequestConfig(symbol: kotlin.String?, country: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
@@ -3242,6 +3492,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
                 }
                 if (country != null) {
                     put("country", listOf(country.toString()))
+                }
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5196,7 +5452,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Tick Data
-    * &lt;p&gt;Get historical tick data for global exchanges. You can send the request directly to our tick server at &lt;a href&#x3D;\&quot;https://tick.finnhub.io/\&quot;&gt;https://tick.finnhub.io/&lt;/a&gt; with the same path and parameters or get redirected there if you call our main server.&lt;/p&gt;&lt;p&gt;For more historical tick data, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
+    * &lt;p&gt;Get historical tick data for global exchanges.&lt;/p&gt;&lt;p&gt;For more historical tick data, you can visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt; to speed up the download process.&lt;/p&gt;&lt;table class&#x3D;\&quot;table table-hover\&quot;&gt;   &lt;thead&gt;     &lt;tr&gt;       &lt;th&gt;Exchange&lt;/th&gt;       &lt;th&gt;Segment&lt;/th&gt;       &lt;th&gt;Delay&lt;/th&gt;     &lt;/tr&gt;   &lt;/thead&gt;   &lt;tbody&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;US CTA/UTP&lt;/th&gt;       &lt;td&gt;Full SIP&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;TSX&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;TSX&lt;/li&gt;&lt;li&gt;TSX Venture&lt;/li&gt;&lt;li&gt;Index&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;LSE&lt;/th&gt;       &lt;td&gt;&lt;ul&gt;&lt;li&gt;London Stock Exchange (L)&lt;/li&gt;&lt;li&gt;LSE International (L)&lt;/li&gt;&lt;li&gt;LSE European (L)&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;15 minute&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Euronext&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Euronext Paris (PA)&lt;/li&gt; &lt;li&gt;Euronext Amsterdam (AS)&lt;/li&gt; &lt;li&gt;Euronext Lisbon (LS)&lt;/li&gt; &lt;li&gt;Euronext Brussels (BR)&lt;/li&gt; &lt;li&gt;Euronext Oslo (OL)&lt;/li&gt; &lt;li&gt;Euronext London (LN)&lt;/li&gt; &lt;li&gt;Euronext Dublin (IR)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;     &lt;tr&gt;       &lt;td class&#x3D;\&quot;text-blue\&quot;&gt;Deutsche Börse&lt;/th&gt;       &lt;td&gt;&lt;ul&gt; &lt;li&gt;Frankfurt (F)&lt;/li&gt; &lt;li&gt;Xetra (DE)&lt;/li&gt; &lt;li&gt;Duesseldorf (DU)&lt;/li&gt; &lt;li&gt;Hamburg (HM)&lt;/li&gt; &lt;li&gt;Berlin (BE)&lt;/li&gt; &lt;li&gt;Hanover (HA)&lt;/li&gt; &lt;li&gt;Stoxx (SX)&lt;/li&gt; &lt;li&gt;TradeGate (TG)&lt;/li&gt; &lt;li&gt;Zertifikate (SC)&lt;/li&gt; &lt;li&gt;Index&lt;/li&gt; &lt;li&gt;Warrant&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;       &lt;td&gt;End-of-day&lt;/td&gt;     &lt;/tr&gt;   &lt;/tbody&gt; &lt;/table&gt;
     * @param symbol Symbol. 
     * @param date Date: 2020-04-02. 
     * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
@@ -5623,6 +5879,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * Symbol Lookup
     * Search for best-matching symbols based on your query. You can input anything from symbol, security&#39;s name to ISIN and Cusip.
     * @param q Query text can be symbol, name, isin, or cusip. 
+    * @param exchange Exchange limit. (optional)
     * @return SymbolLookup
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -5630,8 +5887,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun symbolSearch(q: kotlin.String) : SymbolLookup {
-        val localVariableConfig = symbolSearchRequestConfig(q = q)
+    fun symbolSearch(q: kotlin.String, exchange: kotlin.String?) : SymbolLookup {
+        val localVariableConfig = symbolSearchRequestConfig(q = q, exchange = exchange)
 
         val localVarResponse = request<Unit, SymbolLookup>(
             localVariableConfig
@@ -5656,13 +5913,17 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * To obtain the request config of the operation symbolSearch
     *
     * @param q Query text can be symbol, name, isin, or cusip. 
+    * @param exchange Exchange limit. (optional)
     * @return RequestConfig
     */
-    fun symbolSearchRequestConfig(q: kotlin.String) : RequestConfig<Unit> {
+    fun symbolSearchRequestConfig(q: kotlin.String, exchange: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 put("q", listOf(q.toString()))
+                if (exchange != null) {
+                    put("exchange", listOf(exchange.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 

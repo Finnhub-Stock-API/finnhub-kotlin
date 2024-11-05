@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **symbol** | [**kotlin.Any**](.md) | List of symbol associate with this filing |  [optional]
 **name** | **kotlin.String** | Filer name |  [optional]
 **acceptanceDate** | **kotlin.String** | Date the filing is submitted. |  [optional]
-**filedDate** | **kotlin.String** | Date the filing is make available to the public |  [optional]
+**filedDate** | **kotlin.String** | Date the filing is made available to the public |  [optional]
 **reportDate** | **kotlin.String** | Date as which the filing is reported |  [optional]
 **form** | **kotlin.String** | Filing Form |  [optional]
 **amend** | **kotlin.Boolean** | Amendment |  [optional]

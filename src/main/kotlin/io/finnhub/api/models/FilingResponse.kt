@@ -33,7 +33,7 @@ import java.io.Serializable
  * @param symbol List of symbol associate with this filing
  * @param name Filer name
  * @param acceptanceDate Date the filing is submitted.
- * @param filedDate Date the filing is make available to the public
+ * @param filedDate Date the filing is made available to the public
  * @param reportDate Date as which the filing is reported
  * @param form Filing Form
  * @param amend Amendment
@@ -68,7 +68,7 @@ data class FilingResponse (
     @Json(name = "acceptanceDate")
     val acceptanceDate: kotlin.String? = null,
 
-    /* Date the filing is make available to the public */
+    /* Date the filing is made available to the public */
     @Json(name = "filedDate")
     val filedDate: kotlin.String? = null,
 

@@ -383,7 +383,7 @@ class DefaultApiTest {
 
     @Test
     fun symbolSearch() {
-        println(apiClient.symbolSearch("AAPL"))
+        println(apiClient.symbolSearch("AAPL", "US"))
     }
 
     @Test
@@ -504,5 +504,25 @@ class DefaultApiTest {
     @Test
     fun marketStatus() {
         println(apiClient.marketStatus("US"))
+    }
+
+    @Test
+    fun historicalMarketCap() {
+        println(apiClient.historicalMarketCap("TSLA", from = "2023-06-01", to = "2023-09-10"))
+    }
+
+    @Test
+    fun employeeCount() {
+        println(apiClient.historicalEmployeeCount("TSLA", from = "2015-06-01", to = "2023-09-10"))
+    }
+
+    @Test
+    fun historicalEsg() {
+        println(apiClient.companyHistoricalEsgScore("AAPL"))
+    }
+
+    @Test
+    fun airlinePrice() {
+        println(apiClient.airlinePriceIndex("united", from = "2024-06-01", to = "2025-09-10"))
     }
 }

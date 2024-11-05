@@ -1,4 +1,6 @@
 docs/AggregateIndicators.md
+docs/AirlinePriceIndex.md
+docs/AirlinePriceIndexData.md
 docs/BasicFinancials.md
 docs/BondCandles.md
 docs/BondProfile.md
@@ -8,6 +10,7 @@ docs/BondYieldCurveInfo.md
 docs/BreakdownItem.md
 docs/Company.md
 docs/CompanyESG.md
+docs/CompanyESG2.md
 docs/CompanyEarningsQualityScore.md
 docs/CompanyEarningsQualityScoreData.md
 docs/CompanyExecutive.md
@@ -52,6 +55,7 @@ docs/EconomicCalendar.md
 docs/EconomicCode.md
 docs/EconomicData.md
 docs/EconomicDataInfo.md
+docs/EmployeeCount.md
 docs/ExcerptResponse.md
 docs/FDAComitteeMeeting.md
 docs/Filing.md
@@ -64,6 +68,9 @@ docs/ForexSymbol.md
 docs/Forexrates.md
 docs/FundOwnership.md
 docs/FundOwnershipInfo.md
+docs/HistoricalCompanyESG.md
+docs/HistoricalEmployeeCount.md
+docs/HistoricalMarketCapData.md
 docs/HistoricalNBBO.md
 docs/IPOCalendar.md
 docs/IPOEvent.md
@@ -94,6 +101,7 @@ docs/KeyCustomersSuppliers.md
 docs/LastBidAsk.md
 docs/LobbyingData.md
 docs/LobbyingResult.md
+docs/MarketCapData.md
 docs/MarketHoliday.md
 docs/MarketHolidayData.md
 docs/MarketNews.md
@@ -177,6 +185,8 @@ src/main/kotlin/io/finnhub/api/infrastructure/Serializer.kt
 src/main/kotlin/io/finnhub/api/infrastructure/URIAdapter.kt
 src/main/kotlin/io/finnhub/api/infrastructure/UUIDAdapter.kt
 src/main/kotlin/io/finnhub/api/models/AggregateIndicators.kt
+src/main/kotlin/io/finnhub/api/models/AirlinePriceIndex.kt
+src/main/kotlin/io/finnhub/api/models/AirlinePriceIndexData.kt
 src/main/kotlin/io/finnhub/api/models/BasicFinancials.kt
 src/main/kotlin/io/finnhub/api/models/BondCandles.kt
 src/main/kotlin/io/finnhub/api/models/BondProfile.kt
@@ -186,6 +196,7 @@ src/main/kotlin/io/finnhub/api/models/BondYieldCurveInfo.kt
 src/main/kotlin/io/finnhub/api/models/BreakdownItem.kt
 src/main/kotlin/io/finnhub/api/models/Company.kt
 src/main/kotlin/io/finnhub/api/models/CompanyESG.kt
+src/main/kotlin/io/finnhub/api/models/CompanyESG2.kt
 src/main/kotlin/io/finnhub/api/models/CompanyEarningsQualityScore.kt
 src/main/kotlin/io/finnhub/api/models/CompanyEarningsQualityScoreData.kt
 src/main/kotlin/io/finnhub/api/models/CompanyExecutive.kt
@@ -229,6 +240,7 @@ src/main/kotlin/io/finnhub/api/models/EconomicCode.kt
 src/main/kotlin/io/finnhub/api/models/EconomicData.kt
 src/main/kotlin/io/finnhub/api/models/EconomicDataInfo.kt
 src/main/kotlin/io/finnhub/api/models/EconomicEvent.kt
+src/main/kotlin/io/finnhub/api/models/EmployeeCount.kt
 src/main/kotlin/io/finnhub/api/models/ExcerptResponse.kt
 src/main/kotlin/io/finnhub/api/models/FDAComitteeMeeting.kt
 src/main/kotlin/io/finnhub/api/models/Filing.kt
@@ -241,6 +253,9 @@ src/main/kotlin/io/finnhub/api/models/ForexSymbol.kt
 src/main/kotlin/io/finnhub/api/models/Forexrates.kt
 src/main/kotlin/io/finnhub/api/models/FundOwnership.kt
 src/main/kotlin/io/finnhub/api/models/FundOwnershipInfo.kt
+src/main/kotlin/io/finnhub/api/models/HistoricalCompanyESG.kt
+src/main/kotlin/io/finnhub/api/models/HistoricalEmployeeCount.kt
+src/main/kotlin/io/finnhub/api/models/HistoricalMarketCapData.kt
 src/main/kotlin/io/finnhub/api/models/HistoricalNBBO.kt
 src/main/kotlin/io/finnhub/api/models/IPOCalendar.kt
 src/main/kotlin/io/finnhub/api/models/IPOEvent.kt
@@ -271,6 +286,7 @@ src/main/kotlin/io/finnhub/api/models/KeyCustomersSuppliers.kt
 src/main/kotlin/io/finnhub/api/models/LastBidMinusAsk.kt
 src/main/kotlin/io/finnhub/api/models/LobbyingData.kt
 src/main/kotlin/io/finnhub/api/models/LobbyingResult.kt
+src/main/kotlin/io/finnhub/api/models/MarketCapData.kt
 src/main/kotlin/io/finnhub/api/models/MarketHoliday.kt
 src/main/kotlin/io/finnhub/api/models/MarketHolidayData.kt
 src/main/kotlin/io/finnhub/api/models/MarketNews.kt

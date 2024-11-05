@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **gsubind** | **kotlin.String** | Sub-industry. |  [optional]
 **isin** | **kotlin.String** | ISIN number. |  [optional]
 **lei** | **kotlin.String** | LEI number. |  [optional]
+**irUrl** | **kotlin.String** | Investor relations website. |  [optional]
 **naicsNationalIndustry** | **kotlin.String** | NAICS national industry. |  [optional]
 **naics** | **kotlin.String** | NAICS industry. |  [optional]
 **naicsSector** | **kotlin.String** | NAICS sector. |  [optional]

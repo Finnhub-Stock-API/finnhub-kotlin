@@ -39,6 +39,7 @@ import java.io.Serializable
  * @param domicile ETF domicile.
  * @param inceptionDate Inception date.
  * @param website ETF's website.
+ * @param logo Logo.
  * @param isin ISIN.
  * @param cusip CUSIP.
  * @param priceToEarnings P/E.
@@ -99,6 +100,10 @@ data class ETFProfileData (
     /* ETF's website. */
     @Json(name = "website")
     val website: kotlin.String? = null,
+
+    /* Logo. */
+    @Json(name = "logo")
+    val logo: kotlin.String? = null,
 
     /* ISIN. */
     @Json(name = "isin")
