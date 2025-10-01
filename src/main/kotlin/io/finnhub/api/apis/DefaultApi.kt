@@ -22,6 +22,7 @@ package io.finnhub.api.apis
 
 import io.finnhub.api.models.AggregateIndicators
 import io.finnhub.api.models.AirlinePriceIndexData
+import io.finnhub.api.models.BankBranchRes
 import io.finnhub.api.models.BasicFinancials
 import io.finnhub.api.models.BondCandles
 import io.finnhub.api.models.BondProfile
@@ -47,6 +48,7 @@ import io.finnhub.api.models.ETFsProfile
 import io.finnhub.api.models.ETFsSectorExposure
 import io.finnhub.api.models.EarningResult
 import io.finnhub.api.models.EarningsCalendar
+import io.finnhub.api.models.EarningsCallLive
 import io.finnhub.api.models.EarningsCallTranscripts
 import io.finnhub.api.models.EarningsCallTranscriptsList
 import io.finnhub.api.models.EarningsEstimates
@@ -98,6 +100,7 @@ import io.finnhub.api.models.PriceTarget
 import io.finnhub.api.models.Quote
 import io.finnhub.api.models.RecommendationTrend
 import io.finnhub.api.models.RevenueBreakdown
+import io.finnhub.api.models.RevenueBreakdown2
 import io.finnhub.api.models.RevenueEstimates
 import io.finnhub.api.models.SECSentimentAnalysis
 import io.finnhub.api.models.SectorMetric
@@ -105,6 +108,7 @@ import io.finnhub.api.models.SimilarityIndex
 import io.finnhub.api.models.SocialSentiment
 import io.finnhub.api.models.Split
 import io.finnhub.api.models.StockCandles
+import io.finnhub.api.models.StockPresentation
 import io.finnhub.api.models.StockSymbol
 import io.finnhub.api.models.SupplyChainRelationships
 import io.finnhub.api.models.SupportResistance
@@ -251,6 +255,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/airline/price-index",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Bank Branch List
+    * Retrieve list of US bank branches information for a given symbol.
+    * @param symbol Symbol. 
+    * @return BankBranchRes
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun bankBranch(symbol: kotlin.Any) : BankBranchRes {
+        val localVariableConfig = bankBranchRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, BankBranchRes>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BankBranchRes
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation bankBranch
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun bankBranchRequestConfig(symbol: kotlin.Any) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/bank-branch",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -1827,6 +1887,74 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     }
 
     /**
+    * Earnings Call Audio Live
+    * &lt;p&gt;Stream live earnings calls with data provided in the calendar. The data will be available in m3u8 format. mp3 files will be available once the calls finish in the &lt;code&gt;recording&lt;/code&gt; field.&lt;/p&gt;
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param symbol Filter by symbol: AAPL. (optional)
+    * @return EarningsCallLive
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun earningsCallLive(from: kotlin.String?, to: kotlin.String?, symbol: kotlin.String?) : EarningsCallLive {
+        val localVariableConfig = earningsCallLiveRequestConfig(from = from, to = to, symbol = symbol)
+
+        val localVarResponse = request<Unit, EarningsCallLive>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EarningsCallLive
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation earningsCallLive
+    *
+    * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param to To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
+    * @param symbol Filter by symbol: AAPL. (optional)
+    * @return RequestConfig
+    */
+    fun earningsCallLiveRequestConfig(from: kotlin.String?, to: kotlin.String?, symbol: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                if (from != null) {
+                    put("from", listOf(parseDateToQueryString(from)))
+                }
+                if (to != null) {
+                    put("to", listOf(parseDateToQueryString(to)))
+                }
+                if (symbol != null) {
+                    put("symbol", listOf(symbol.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/earnings-call-live",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
     * Economic Calendar
     * &lt;p&gt;Get recent and upcoming economic releases.&lt;/p&gt;&lt;p&gt;Historical events and surprises are available for Enterprise clients.&lt;/p&gt;
     * @param from From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. (optional)
@@ -2454,6 +2582,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Symbol of the company: AAPL. 
     * @param statement Statement can take 1 of these values &lt;code&gt;bs, ic, cf&lt;/code&gt; for Balance Sheet, Income Statement, Cash Flow respectively. 
     * @param freq Frequency can take 1 of these values &lt;code&gt;annual, quarterly, ttm, ytd&lt;/code&gt;.  TTM (Trailing Twelve Months) option is available for Income Statement and Cash Flow. YTD (Year To Date) option is only available for Cash Flow. 
+    * @param preliminary If set to &lt;code&gt;true&lt;/code&gt;, it will return Preliminary financial statements which are usually available within an hour of the earnings announcement. The Preliminary data is subjected to changes later as our team review and standardize the data. This preliminary data is currently available for US companies and reserved for Enterprise users only. You will see &lt;code&gt;\&quot;preliminary\&quot;: true&lt;/code&gt; in the data if that period is using preliminary data. (optional)
     * @return FinancialStatements
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
@@ -2461,8 +2590,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun financials(symbol: kotlin.String, statement: kotlin.String, freq: kotlin.String) : FinancialStatements {
-        val localVariableConfig = financialsRequestConfig(symbol = symbol, statement = statement, freq = freq)
+    fun financials(symbol: kotlin.String, statement: kotlin.String, freq: kotlin.String, preliminary: kotlin.String?) : FinancialStatements {
+        val localVariableConfig = financialsRequestConfig(symbol = symbol, statement = statement, freq = freq, preliminary = preliminary)
 
         val localVarResponse = request<Unit, FinancialStatements>(
             localVariableConfig
@@ -2489,15 +2618,19 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
     * @param symbol Symbol of the company: AAPL. 
     * @param statement Statement can take 1 of these values &lt;code&gt;bs, ic, cf&lt;/code&gt; for Balance Sheet, Income Statement, Cash Flow respectively. 
     * @param freq Frequency can take 1 of these values &lt;code&gt;annual, quarterly, ttm, ytd&lt;/code&gt;.  TTM (Trailing Twelve Months) option is available for Income Statement and Cash Flow. YTD (Year To Date) option is only available for Cash Flow. 
+    * @param preliminary If set to &lt;code&gt;true&lt;/code&gt;, it will return Preliminary financial statements which are usually available within an hour of the earnings announcement. The Preliminary data is subjected to changes later as our team review and standardize the data. This preliminary data is currently available for US companies and reserved for Enterprise users only. You will see &lt;code&gt;\&quot;preliminary\&quot;: true&lt;/code&gt; in the data if that period is using preliminary data. (optional)
     * @return RequestConfig
     */
-    fun financialsRequestConfig(symbol: kotlin.String, statement: kotlin.String, freq: kotlin.String) : RequestConfig<Unit> {
+    fun financialsRequestConfig(symbol: kotlin.String, statement: kotlin.String, freq: kotlin.String, preliminary: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 put("symbol", listOf(symbol.toString()))
                 put("statement", listOf(statement.toString()))
                 put("freq", listOf(freq.toString()))
+                if (preliminary != null) {
+                    put("preliminary", listOf(preliminary.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
@@ -3071,7 +3204,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Indices Historical Constituents
-    * Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC&lt;/code&gt;, &lt;code&gt;^NDX&lt;/code&gt;, &lt;code&gt;^DJI&lt;/code&gt;
+    * Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. A list of supported indices for this endpoint can be found &lt;a href&#x3D;\&quot;/api/v1/index/historical-list?token&#x3D;\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
     * @param symbol symbol 
     * @return IndicesHistoricalConstituents
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3440,7 +3573,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * International Filings
-    * List filings for international companies. Limit to 500 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
+    * List filings for international companies. Limit to 500 documents at a time. These are the documents we use to source our fundamental data. Enterprise clients who need access to the full filings for global markets should contact us for the access.
     * @param symbol Symbol. Leave empty to list latest filings. (optional)
     * @param country Filter by country using country&#39;s 2-letter code. (optional)
     * @param from From date: 2023-01-15. (optional)
@@ -4700,7 +4833,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Revenue Breakdown
-    * Get revenue breakdown by product. This dataset is only available for US companies which disclose their revenue breakdown in the annual or quarterly reports.
+    * &lt;p&gt;Get revenue breakdown as-reporetd by product and geography. Users on personal plans can access data for US companies which disclose their revenue breakdown in the annual or quarterly reports.&lt;/p&gt;&lt;p&gt;Global standardized revenue breakdown/segments data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to inquire about the access for Global standardized data.&lt;/p&gt;
     * @param symbol Symbol. (optional)
     * @param cik CIK. (optional)
     * @return RevenueBreakdown
@@ -4755,6 +4888,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/revenue-breakdown",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Revenue Breakdown &amp; KPI
+    * &lt;p&gt;Get standardized revenue breakdown and KPIs data for 30,000+ global companies.&lt;/p&gt;
+    * @param symbol Symbol. 
+    * @return RevenueBreakdown2
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun revenueBreakdown2(symbol: kotlin.String) : RevenueBreakdown2 {
+        val localVariableConfig = revenueBreakdown2RequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, RevenueBreakdown2>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RevenueBreakdown2
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation revenueBreakdown2
+    *
+    * @param symbol Symbol. 
+    * @return RequestConfig
+    */
+    fun revenueBreakdown2RequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/revenue-breakdown2",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -5254,7 +5443,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
 
     /**
     * Historical NBBO
-    * &lt;p&gt;Get historical best bid and offer for US stocks, LSE, TSX, Euronext and Deutsche Borse.&lt;/p&gt;&lt;p&gt;For US market, this endpoint only serves historical NBBO from the beginning of 2020. To download more historical data, please visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt;.&lt;/p&gt;
+    * &lt;p&gt;Get historical best bid and offer for US stocks, LSE, TSX, Euronext and Deutsche Borse.&lt;/p&gt;&lt;p&gt;For US market, this endpoint only serves historical NBBO from the beginning of 2023. To download more historical data, please visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt;.&lt;/p&gt;
     * @param symbol Symbol. 
     * @param date Date: 2020-04-02. 
     * @param limit Limit number of ticks returned. Maximum value: &lt;code&gt;25000&lt;/code&gt; 
@@ -5311,6 +5500,62 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath) : ApiClient(basePath
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/stock/bbo",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * Company Presentation
+    * &lt;p&gt;Get presentations/slides data in PDF format that are usually used during earnings calls.&lt;/p&gt;
+    * @param symbol Company symbol. 
+    * @return StockPresentation
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun stockPresentation(symbol: kotlin.String) : StockPresentation {
+        val localVariableConfig = stockPresentationRequestConfig(symbol = symbol)
+
+        val localVarResponse = request<Unit, StockPresentation>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StockPresentation
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation stockPresentation
+    *
+    * @param symbol Company symbol. 
+    * @return RequestConfig
+    */
+    fun stockPresentationRequestConfig(symbol: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("symbol", listOf(symbol.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/stock/presentation",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

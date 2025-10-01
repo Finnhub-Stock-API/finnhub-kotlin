@@ -140,7 +140,7 @@ class DefaultApiTest {
 
     @Test
     fun financials() {
-        println(apiClient.financials("AAPL", "bs", "annual"))
+        println(apiClient.financials("AAPL", "bs", "annual", "false"))
     }
 
     @Test
@@ -524,5 +524,25 @@ class DefaultApiTest {
     @Test
     fun airlinePrice() {
         println(apiClient.airlinePriceIndex("united", from = "2024-06-01", to = "2025-09-10"))
+    }
+
+    @Test
+    fun bankBranch() {
+        println(apiClient.bankBranch("JPM"))
+    }
+
+    @Test
+    fun presentation() {
+        println(apiClient.stockPresentation("IBM"))
+    }
+
+    @Test
+    fun revenueBreakdown2() {
+        println(apiClient.revenueBreakdown2("AAPL"))
+    }
+
+    @Test
+    fun earningsCallLive() {
+        println(apiClient.earningsCallLive("2025-09-01", "2025-09-15", ""))
     }
 }

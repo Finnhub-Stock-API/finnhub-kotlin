@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**aggregateIndicator**](DefaultApi.md#aggregateIndicator) | **GET** /scan/technical-indicator | Aggregate Indicators
 [**airlinePriceIndex**](DefaultApi.md#airlinePriceIndex) | **GET** /airline/price-index | Airline Price Index
+[**bankBranch**](DefaultApi.md#bankBranch) | **GET** /bank-branch | Bank Branch List
 [**bondPrice**](DefaultApi.md#bondPrice) | **GET** /bond/price | Bond price data
 [**bondProfile**](DefaultApi.md#bondProfile) | **GET** /bond/profile | Bond Profile
 [**bondTick**](DefaultApi.md#bondTick) | **GET** /bond/tick | Bond Tick Data
@@ -32,6 +33,7 @@ Method | HTTP request | Description
 [**cryptoProfile**](DefaultApi.md#cryptoProfile) | **GET** /crypto/profile | Crypto Profile
 [**cryptoSymbols**](DefaultApi.md#cryptoSymbols) | **GET** /crypto/symbol | Crypto Symbol
 [**earningsCalendar**](DefaultApi.md#earningsCalendar) | **GET** /calendar/earnings | Earnings Calendar
+[**earningsCallLive**](DefaultApi.md#earningsCallLive) | **GET** /stock/earnings-call-live | Earnings Call Audio Live
 [**economicCalendar**](DefaultApi.md#economicCalendar) | **GET** /calendar/economic | Economic Calendar
 [**economicCode**](DefaultApi.md#economicCode) | **GET** /economic/code | Economic Code
 [**economicData**](DefaultApi.md#economicData) | **GET** /economic | Economic Data
@@ -80,6 +82,7 @@ Method | HTTP request | Description
 [**quote**](DefaultApi.md#quote) | **GET** /quote | Quote
 [**recommendationTrends**](DefaultApi.md#recommendationTrends) | **GET** /stock/recommendation | Recommendation Trends
 [**revenueBreakdown**](DefaultApi.md#revenueBreakdown) | **GET** /stock/revenue-breakdown | Revenue Breakdown
+[**revenueBreakdown2**](DefaultApi.md#revenueBreakdown2) | **GET** /stock/revenue-breakdown2 | Revenue Breakdown &amp; KPI
 [**sectorMetric**](DefaultApi.md#sectorMetric) | **GET** /sector/metrics | Sector Metrics
 [**similarityIndex**](DefaultApi.md#similarityIndex) | **GET** /stock/similarity-index | Similarity Index
 [**socialSentiment**](DefaultApi.md#socialSentiment) | **GET** /stock/social-sentiment | Social Sentiment
@@ -89,6 +92,7 @@ Method | HTTP request | Description
 [**stockDividends**](DefaultApi.md#stockDividends) | **GET** /stock/dividend | Dividends
 [**stockLobbying**](DefaultApi.md#stockLobbying) | **GET** /stock/lobbying | Senate Lobbying
 [**stockNbbo**](DefaultApi.md#stockNbbo) | **GET** /stock/bbo | Historical NBBO
+[**stockPresentation**](DefaultApi.md#stockPresentation) | **GET** /stock/presentation | Company Presentation
 [**stockSplits**](DefaultApi.md#stockSplits) | **GET** /stock/split | Splits
 [**stockSymbols**](DefaultApi.md#stockSymbols) | **GET** /stock/symbol | Stock Symbol
 [**stockTick**](DefaultApi.md#stockTick) | **GET** /stock/tick | Tick Data
@@ -198,6 +202,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AirlinePriceIndexData**](AirlinePriceIndexData.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="bankBranch"></a>
+# **bankBranch**
+> BankBranchRes bankBranch(symbol)
+
+Bank Branch List
+
+Retrieve list of US bank branches information for a given symbol.
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.Any =  // kotlin.Any | Symbol.
+try {
+    val result : BankBranchRes = apiInstance.bankBranch(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#bankBranch")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#bankBranch")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | [**kotlin.Any**](.md)| Symbol. |
+
+### Return type
+
+[**BankBranchRes**](BankBranchRes.md)
 
 ### Authorization
 
@@ -1559,6 +1613,60 @@ Configure api_key:
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="earningsCallLive"></a>
+# **earningsCallLive**
+> EarningsCallLive earningsCallLive(from, to, symbol)
+
+Earnings Call Audio Live
+
+&lt;p&gt;Stream live earnings calls with data provided in the calendar. The data will be available in m3u8 format. mp3 files will be available once the calls finish in the &lt;code&gt;recording&lt;/code&gt; field.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val from : kotlin.String = 2013-10-20 // kotlin.String | From date <code>YYYY-MM-DD</code>.
+val to : kotlin.String = 2013-10-20 // kotlin.String | To date <code>YYYY-MM-DD</code>.
+val symbol : kotlin.String = symbol_example // kotlin.String | Filter by symbol: AAPL.
+try {
+    val result : EarningsCallLive = apiInstance.earningsCallLive(from, to, symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#earningsCallLive")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#earningsCallLive")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **from** | **kotlin.String**| From date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. | [optional]
+ **to** | **kotlin.String**| To date &lt;code&gt;YYYY-MM-DD&lt;/code&gt;. | [optional]
+ **symbol** | **kotlin.String**| Filter by symbol: AAPL. | [optional]
+
+### Return type
+
+[**EarningsCallLive**](EarningsCallLive.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="economicCalendar"></a>
 # **economicCalendar**
 > EconomicCalendar economicCalendar(from, to)
@@ -2077,7 +2185,7 @@ Configure api_key:
 
 <a name="financials"></a>
 # **financials**
-> FinancialStatements financials(symbol, statement, freq)
+> FinancialStatements financials(symbol, statement, freq, preliminary)
 
 Financial Statements
 
@@ -2093,8 +2201,9 @@ val apiInstance = DefaultApi()
 val symbol : kotlin.String = symbol_example // kotlin.String | Symbol of the company: AAPL.
 val statement : kotlin.String = statement_example // kotlin.String | Statement can take 1 of these values <code>bs, ic, cf</code> for Balance Sheet, Income Statement, Cash Flow respectively.
 val freq : kotlin.String = freq_example // kotlin.String | Frequency can take 1 of these values <code>annual, quarterly, ttm, ytd</code>.  TTM (Trailing Twelve Months) option is available for Income Statement and Cash Flow. YTD (Year To Date) option is only available for Cash Flow.
+val preliminary : kotlin.String = preliminary_example // kotlin.String | If set to <code>true</code>, it will return Preliminary financial statements which are usually available within an hour of the earnings announcement. The Preliminary data is subjected to changes later as our team review and standardize the data. This preliminary data is currently available for US companies and reserved for Enterprise users only. You will see <code>\"preliminary\": true</code> in the data if that period is using preliminary data.
 try {
-    val result : FinancialStatements = apiInstance.financials(symbol, statement, freq)
+    val result : FinancialStatements = apiInstance.financials(symbol, statement, freq, preliminary)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DefaultApi#financials")
@@ -2112,6 +2221,7 @@ Name | Type | Description  | Notes
  **symbol** | **kotlin.String**| Symbol of the company: AAPL. |
  **statement** | **kotlin.String**| Statement can take 1 of these values &lt;code&gt;bs, ic, cf&lt;/code&gt; for Balance Sheet, Income Statement, Cash Flow respectively. |
  **freq** | **kotlin.String**| Frequency can take 1 of these values &lt;code&gt;annual, quarterly, ttm, ytd&lt;/code&gt;.  TTM (Trailing Twelve Months) option is available for Income Statement and Cash Flow. YTD (Year To Date) option is only available for Cash Flow. |
+ **preliminary** | **kotlin.String**| If set to &lt;code&gt;true&lt;/code&gt;, it will return Preliminary financial statements which are usually available within an hour of the earnings announcement. The Preliminary data is subjected to changes later as our team review and standardize the data. This preliminary data is currently available for US companies and reserved for Enterprise users only. You will see &lt;code&gt;\&quot;preliminary\&quot;: true&lt;/code&gt; in the data if that period is using preliminary data. | [optional]
 
 ### Return type
 
@@ -2609,7 +2719,7 @@ Configure api_key:
 
 Indices Historical Constituents
 
-Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. Currently support &lt;code&gt;^GSPC&lt;/code&gt;, &lt;code&gt;^NDX&lt;/code&gt;, &lt;code&gt;^DJI&lt;/code&gt;
+Get full history of index&#39;s constituents including symbols and dates of joining and leaving the Index. A list of supported indices for this endpoint can be found &lt;a href&#x3D;\&quot;/api/v1/index/historical-list?token&#x3D;\&quot; target&#x3D;\&quot;_blank\&quot;&gt;here&lt;/a&gt;.
 
 ### Example
 ```kotlin
@@ -2927,7 +3037,7 @@ Configure api_key:
 
 International Filings
 
-List filings for international companies. Limit to 500 documents at a time. These are the documents we use to source our fundamental data. Only support SEDAR and UK Companies House for normal usage. Enterprise clients who need access to the full filings for global markets should contact us for the access.
+List filings for international companies. Limit to 500 documents at a time. These are the documents we use to source our fundamental data. Enterprise clients who need access to the full filings for global markets should contact us for the access.
 
 ### Example
 ```kotlin
@@ -4009,7 +4119,7 @@ Configure api_key:
 
 Revenue Breakdown
 
-Get revenue breakdown by product. This dataset is only available for US companies which disclose their revenue breakdown in the annual or quarterly reports.
+&lt;p&gt;Get revenue breakdown as-reporetd by product and geography. Users on personal plans can access data for US companies which disclose their revenue breakdown in the annual or quarterly reports.&lt;/p&gt;&lt;p&gt;Global standardized revenue breakdown/segments data is available for Enterprise users. &lt;a href&#x3D;\&quot;mailto:support@finnhub.io\&quot;&gt;Contact us&lt;/a&gt; to inquire about the access for Global standardized data.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -4042,6 +4152,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RevenueBreakdown**](RevenueBreakdown.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="revenueBreakdown2"></a>
+# **revenueBreakdown2**
+> RevenueBreakdown2 revenueBreakdown2(symbol)
+
+Revenue Breakdown &amp; KPI
+
+&lt;p&gt;Get standardized revenue breakdown and KPIs data for 30,000+ global companies.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Symbol.
+try {
+    val result : RevenueBreakdown2 = apiInstance.revenueBreakdown2(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#revenueBreakdown2")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#revenueBreakdown2")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Symbol. |
+
+### Return type
+
+[**RevenueBreakdown2**](RevenueBreakdown2.md)
 
 ### Authorization
 
@@ -4483,7 +4643,7 @@ Configure api_key:
 
 Historical NBBO
 
-&lt;p&gt;Get historical best bid and offer for US stocks, LSE, TSX, Euronext and Deutsche Borse.&lt;/p&gt;&lt;p&gt;For US market, this endpoint only serves historical NBBO from the beginning of 2020. To download more historical data, please visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Get historical best bid and offer for US stocks, LSE, TSX, Euronext and Deutsche Borse.&lt;/p&gt;&lt;p&gt;For US market, this endpoint only serves historical NBBO from the beginning of 2023. To download more historical data, please visit our bulk download page in the Dashboard &lt;a target&#x3D;\&quot;_blank\&quot; href&#x3D;\&quot;/dashboard/download\&quot;,&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 ### Example
 ```kotlin
@@ -4520,6 +4680,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HistoricalNBBO**](HistoricalNBBO.md)
+
+### Authorization
+
+
+Configure api_key:
+    ApiClient.apiKey["token"] = ""
+    ApiClient.apiKeyPrefix["token"] = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="stockPresentation"></a>
+# **stockPresentation**
+> StockPresentation stockPresentation(symbol)
+
+Company Presentation
+
+&lt;p&gt;Get presentations/slides data in PDF format that are usually used during earnings calls.&lt;/p&gt;
+
+### Example
+```kotlin
+// Import classes:
+//import io.finnhub.api.infrastructure.*
+//import io.finnhub.api.models.*
+
+val apiInstance = DefaultApi()
+val symbol : kotlin.String = symbol_example // kotlin.String | Company symbol.
+try {
+    val result : StockPresentation = apiInstance.stockPresentation(symbol)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DefaultApi#stockPresentation")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DefaultApi#stockPresentation")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **symbol** | **kotlin.String**| Company symbol. |
+
+### Return type
+
+[**StockPresentation**](StockPresentation.md)
 
 ### Authorization
 

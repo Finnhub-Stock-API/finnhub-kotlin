@@ -49,6 +49,7 @@ import java.io.Serializable
  * @param isInverse Whether the ETF is inverse
  * @param isLeveraged Whether the ETF is leveraged
  * @param leverageFactor Leverage factor.
+ * @param dividendYield Dividend yield.
  */
 
 data class ETFProfileData (
@@ -139,7 +140,11 @@ data class ETFProfileData (
 
     /* Leverage factor. */
     @Json(name = "leverageFactor")
-    val leverageFactor: kotlin.Float? = null
+    val leverageFactor: kotlin.Float? = null,
+
+    /* Dividend yield. */
+    @Json(name = "dividendYield")
+    val dividendYield: kotlin.Float? = null
 
 ) : Serializable {
     companion object {

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **isInverse** | **kotlin.Boolean** | Whether the ETF is inverse |  [optional]
 **isLeveraged** | **kotlin.Boolean** | Whether the ETF is leveraged |  [optional]
 **leverageFactor** | **kotlin.Float** | Leverage factor. |  [optional]
+**dividendYield** | **kotlin.Float** | Dividend yield. |  [optional]
 
 
 

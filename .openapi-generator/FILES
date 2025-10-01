@@ -1,6 +1,11 @@
+docs/AIChatBody.md
+docs/AIChatMessage.md
+docs/AIChatResponse.md
 docs/AggregateIndicators.md
 docs/AirlinePriceIndex.md
 docs/AirlinePriceIndexData.md
+docs/BankBranchData.md
+docs/BankBranchRes.md
 docs/BasicFinancials.md
 docs/BondCandles.md
 docs/BondProfile.md
@@ -42,6 +47,8 @@ docs/ETFsSectorExposure.md
 docs/EarningRelease.md
 docs/EarningResult.md
 docs/EarningsCalendar.md
+docs/EarningsCallLive.md
+docs/EarningsCallLiveResult.md
 docs/EarningsCallTranscripts.md
 docs/EarningsCallTranscriptsList.md
 docs/EarningsEstimates.md
@@ -120,6 +127,7 @@ docs/NewsSentiment.md
 docs/Ownership.md
 docs/OwnershipInfo.md
 docs/PatternRecognition.md
+docs/PresentationData.md
 docs/PressRelease.md
 docs/PriceMetrics.md
 docs/PriceTarget.md
@@ -127,6 +135,7 @@ docs/Quote.md
 docs/RecommendationTrend.md
 docs/Report.md
 docs/RevenueBreakdown.md
+docs/RevenueBreakdown2.md
 docs/RevenueEstimates.md
 docs/RevenueEstimatesInfo.md
 docs/SECSentimentAnalysis.md
@@ -142,6 +151,7 @@ docs/SimilarityIndexInfo.md
 docs/SocialSentiment.md
 docs/Split.md
 docs/StockCandles.md
+docs/StockPresentation.md
 docs/StockSymbol.md
 docs/StockTranscripts.md
 docs/SupplyChainRelationships.md
@@ -184,9 +194,14 @@ src/main/kotlin/io/finnhub/api/infrastructure/ResponseExtensions.kt
 src/main/kotlin/io/finnhub/api/infrastructure/Serializer.kt
 src/main/kotlin/io/finnhub/api/infrastructure/URIAdapter.kt
 src/main/kotlin/io/finnhub/api/infrastructure/UUIDAdapter.kt
+src/main/kotlin/io/finnhub/api/models/AIChatBody.kt
+src/main/kotlin/io/finnhub/api/models/AIChatMessage.kt
+src/main/kotlin/io/finnhub/api/models/AIChatResponse.kt
 src/main/kotlin/io/finnhub/api/models/AggregateIndicators.kt
 src/main/kotlin/io/finnhub/api/models/AirlinePriceIndex.kt
 src/main/kotlin/io/finnhub/api/models/AirlinePriceIndexData.kt
+src/main/kotlin/io/finnhub/api/models/BankBranchData.kt
+src/main/kotlin/io/finnhub/api/models/BankBranchRes.kt
 src/main/kotlin/io/finnhub/api/models/BasicFinancials.kt
 src/main/kotlin/io/finnhub/api/models/BondCandles.kt
 src/main/kotlin/io/finnhub/api/models/BondProfile.kt
@@ -227,6 +242,8 @@ src/main/kotlin/io/finnhub/api/models/ETFsSectorExposure.kt
 src/main/kotlin/io/finnhub/api/models/EarningRelease.kt
 src/main/kotlin/io/finnhub/api/models/EarningResult.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCalendar.kt
+src/main/kotlin/io/finnhub/api/models/EarningsCallLive.kt
+src/main/kotlin/io/finnhub/api/models/EarningsCallLiveResult.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCallTranscripts.kt
 src/main/kotlin/io/finnhub/api/models/EarningsCallTranscriptsList.kt
 src/main/kotlin/io/finnhub/api/models/EarningsEstimates.kt
@@ -305,6 +322,7 @@ src/main/kotlin/io/finnhub/api/models/NewsSentiment.kt
 src/main/kotlin/io/finnhub/api/models/Ownership.kt
 src/main/kotlin/io/finnhub/api/models/OwnershipInfo.kt
 src/main/kotlin/io/finnhub/api/models/PatternRecognition.kt
+src/main/kotlin/io/finnhub/api/models/PresentationData.kt
 src/main/kotlin/io/finnhub/api/models/PressRelease.kt
 src/main/kotlin/io/finnhub/api/models/PriceMetrics.kt
 src/main/kotlin/io/finnhub/api/models/PriceTarget.kt
@@ -312,6 +330,7 @@ src/main/kotlin/io/finnhub/api/models/Quote.kt
 src/main/kotlin/io/finnhub/api/models/RecommendationTrend.kt
 src/main/kotlin/io/finnhub/api/models/Report.kt
 src/main/kotlin/io/finnhub/api/models/RevenueBreakdown.kt
+src/main/kotlin/io/finnhub/api/models/RevenueBreakdown2.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimates.kt
 src/main/kotlin/io/finnhub/api/models/RevenueEstimatesInfo.kt
 src/main/kotlin/io/finnhub/api/models/SECSentimentAnalysis.kt
@@ -327,6 +346,7 @@ src/main/kotlin/io/finnhub/api/models/SimilarityIndexInfo.kt
 src/main/kotlin/io/finnhub/api/models/SocialSentiment.kt
 src/main/kotlin/io/finnhub/api/models/Split.kt
 src/main/kotlin/io/finnhub/api/models/StockCandles.kt
+src/main/kotlin/io/finnhub/api/models/StockPresentation.kt
 src/main/kotlin/io/finnhub/api/models/StockSymbol.kt
 src/main/kotlin/io/finnhub/api/models/StockTranscripts.kt
 src/main/kotlin/io/finnhub/api/models/SupplyChainRelationships.kt
